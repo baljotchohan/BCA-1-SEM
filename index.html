@@ -257,10 +257,37 @@
             </div>
         </header>
 
+        <!-- DEBUG AREA -->
+        <div id="debug" class="fixed bottom-4 right-4 text-xs text-red-500 font-mono z-50"></div>
+
         <!-- CONTENT AREA -->
         <main class="content-area">
+            <!-- Paper Grid (Default View) -->
             <div class="paper-grid" id="paper-grid">
                 <!-- Papers injected by JS -->
+            </div>
+
+            <!-- Paper Detail View (Hidden by default) -->
+            <div id="paper-view" class="hidden">
+                <button onclick="closePaper()"
+                    class="mb-6 flex items-center gap-2 text-[var(--terminal-green)] hover:text-white transition-colors">
+                    <i class="fas fa-arrow-left"></i> BACK_TO_GRID
+                </button>
+
+                <div class="paper-header mb-8 border-b border-[var(--border-color)] pb-4">
+                    <h2 id="view-title" class="text-2xl font-bold mb-2"></h2>
+                    <div class="flex gap-4 text-sm text-gray-500 font-mono">
+                        <span id="view-date"></span>
+                        <span>|</span>
+                        <span>MAX_MARKS: 100</span>
+                        <span>|</span>
+                        <span>TIME: 3 HRS</span>
+                    </div>
+                </div>
+
+                <div id="view-content" class="space-y-8">
+                    <!-- Questions injected here -->
+                </div>
             </div>
         </main>
     </div>
@@ -277,14 +304,15 @@
             if (charIndex < textToType.length) {
                 typingElement.textContent += textToType.charAt(charIndex);
                 charIndex++;
-                setTimeout(typeText, 100); // Typing speed
+                setTimeout(typeText, 50); // Faster typing speed
             } else {
-                setTimeout(finishIntro, 2000); // Wait before fading out
+                setTimeout(finishIntro, 500); // Shorter wait before fading out
             }
         }
 
         function finishIntro() {
             overlay.style.opacity = '0';
+            overlay.style.pointerEvents = 'none'; // Ensure clicks pass through during fade
             setTimeout(() => {
                 overlay.style.display = 'none';
                 dashboard.style.opacity = '1';
@@ -308,8 +336,8 @@
         }
 
         // --- DATA & RENDERING ---
-        // (Preserving original data structure for future use, but rendering dummy list for now as requested "10 question paper")
 
+        // Mock Data for 10 Papers
         const papers = Array.from({ length: 10 }, (_, i) => ({
             id: i + 1,
             title: `Question Paper Set ${String(i + 1).padStart(2, '0')}`,
@@ -317,10 +345,41 @@
             status: 'AVAILABLE'
         }));
 
+        // Original Question Bank Data
+        const qBank = {
+            short: [
+                { t: "Define WWW and its full form.", p: "High" },
+                { t: "What is a Web Server? Give 2 examples.", p: "High" },
+                { t: "Define URL and its components.", p: "High" },
+                { t: "Diff. between Container and Empty tags.", p: "Med" },
+                { t: "Use of <PRE> tag.", p: "Low" }
+            ],
+            u1: [
+                { t: "Explain the Client-Server model of the Internet with a neat diagram.", p: "High" },
+                { t: "Explain the structure of an HTML document. Discuss <HEAD>, <TITLE>, <BODY>.", p: "High" }
+            ],
+            u2: [
+                { t: "Explain different types of CSS (Inline, Internal, External) with examples.", p: "High" },
+                { t: "What are Frames? Explain attributes of <FRAMESET>.", p: "Med" }
+            ],
+            u3: [
+                { t: "Explain features of JavaScript. How is it different from Java?", p: "High" },
+                { t: "Explain Conditional Statements in JS (If, Switch) with examples.", p: "High" }
+            ],
+            u4: [
+                { t: "Explain the String Object and its methods (length, charAt, etc).", p: "High" },
+                { t: "Explain the Math Object and its methods (round, random, etc).", p: "Med" }
+            ]
+        };
+
         function renderPapers() {
             const grid = document.getElementById('paper-grid');
-            grid.innerHTML = papers.map(paper => `
-                <div class="paper-card">
+            grid.innerHTML = ''; // Clear existing
+
+            papers.forEach(paper => {
+                const card = document.createElement('div');
+                card.className = 'paper-card';
+                card.innerHTML = `
                     <div class="card-title">
                         <i class="far fa-file-code mr-2"></i> ${paper.title}
                     </div>
@@ -328,18 +387,72 @@
                         <span><i class="far fa-calendar-alt"></i> ${paper.date}</span>
                         <span class="text-[var(--terminal-green)]">${paper.status}</span>
                     </div>
-                </div>
-            `).join('');
+                `;
+
+                // Direct event listener
+                card.addEventListener('click', () => openPaper(paper.id));
+
+                grid.appendChild(card);
+            });
         }
 
-        // Original Data (Preserved)
-        const qBank = {
-            short: [
-                { t: "Define WWW and its full form.", p: "High" },
-                { t: "What is a Web Server? Give 2 examples.", p: "High" },
-                // ... (rest of data would go here if needed)
-            ]
-        };
+        // Expose to window to ensure inline onclick works
+        window.openPaper = function (id) {
+            document.getElementById('debug').textContent = `OPENING PAPER ${id}`;
+            console.log("Opening paper:", id);
+            const paper = papers.find(p => p.id === id);
+            if (!paper) return;
+
+            // Switch Views
+            const grid = document.getElementById('paper-grid');
+            const view = document.getElementById('paper-view');
+
+            grid.classList.add('hidden');
+            view.classList.remove('hidden');
+
+            // Set Header Info
+            document.getElementById('view-title').textContent = paper.title;
+            document.getElementById('view-date').textContent = `DATE: ${paper.date}`;
+
+            // Render Questions (Mixing random questions for demo)
+            const contentDiv = document.getElementById('view-content');
+
+            // Helper to generate section HTML
+            const renderSection = (title, questions) => `
+                <div class="section">
+                    <h3 class="text-xl text-[var(--terminal-green)] border-b border-gray-800 pb-2 mb-4 font-bold">
+                        // ${title}
+                    </h3>
+                    <div class="space-y-4">
+                        ${questions.map((q, idx) => `
+                            <div class="flex gap-4 p-4 bg-[rgba(255,255,255,0.02)] rounded border border-[var(--border-color)] hover:border-[var(--terminal-green)] transition-colors">
+                                <span class="font-mono text-gray-500">Q${idx + 1}</span>
+                                <div>
+                                    <p class="text-gray-300 mb-2">${q.t}</p>
+                                    <span class="text-xs px-2 py-1 rounded border border-gray-700 text-gray-500">
+                                        PRIORITY: ${q.p}
+                                    </span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+
+            contentDiv.innerHTML = `
+                ${renderSection('SECTION A (Short Answer)', qBank.short)}
+                ${renderSection('SECTION B (Unit I)', qBank.u1)}
+                ${renderSection('SECTION C (Unit II)', qBank.u2)}
+                ${renderSection('SECTION D (Unit III)', qBank.u3)}
+                ${renderSection('SECTION E (Unit IV)', qBank.u4)}
+            `;
+        }
+
+        function closePaper() {
+            document.getElementById('paper-view').classList.add('hidden');
+            document.getElementById('paper-grid').classList.remove('hidden');
+            document.getElementById('debug').textContent = '';
+        }
     </script>
 </body>
 
