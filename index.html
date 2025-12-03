@@ -449,10 +449,79 @@
             height: 30px;
             cursor: pointer;
         }
+
+        /* Hacking Intro Overlay */
+        #intro-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Courier New', Courier, monospace;
+            color: #0f0;
+            font-size: 24px;
+            flex-direction: column;
+        }
+
+        .typing-text {
+            border-right: 2px solid #0f0;
+            white-space: nowrap;
+            overflow: hidden;
+            animation: blink-caret 0.75s step-end infinite;
+        }
+
+        .cursor {
+            display: none;
+        }
+
+        @keyframes blink-caret {
+
+            from,
+            to {
+                border-color: transparent
+            }
+
+            50% {
+                border-color: #0f0;
+            }
+        }
+
+        @media (max-width: 600px) {
+            #intro-overlay {
+                font-size: 18px;
+                padding: 20px;
+                text-align: center;
+            }
+
+            .typing-text {
+                white-space: normal;
+                /* Allow wrapping on mobile */
+                border-right: none;
+                /* Remove cursor for wrapped text */
+            }
+
+            .cursor {
+                display: inline-block;
+                width: 10px;
+                height: 1.2em;
+                background-color: #0f0;
+                animation: blink-caret 0.75s step-end infinite;
+                vertical-align: bottom;
+            }
+        }
     </style>
 </head>
 
 <body>
+    <!-- Hacking Intro Overlay -->
+    <div id="intro-overlay">
+        <div id="intro-text" class="typing-text"></div>
+    </div>
 
     <!-- HEADER -->
     <!-- SYSTEM STATUS HEADER -->
@@ -490,6 +559,15 @@
             </div>
             <div id="web-tech-dir" class="dir-content open">
                 <!-- Papers injected here -->
+            </div>
+
+            <!-- Solutions Directory -->
+            <div class="dir-item" onclick="toggleDir('solutions-dir')">
+                <i class="fas fa-key text-purple-500"></i>
+                <span>solutions</span>
+            </div>
+            <div id="solutions-dir" class="dir-content">
+                <!-- Solutions injected here -->
             </div>
 
             <!-- System Tools -->
@@ -708,6 +786,210 @@
             ]
         };
 
+        // --- SOLUTION BANK ---
+        const solutionBank = {
+            short: [
+                {
+                    q: "Define WWW and its full form.",
+                    ans: "The World Wide Web (WWW) is an information system where documents and other web resources are identified by Uniform Resource Locators (URLs), which may be interlinked by hyperlinks, and are accessible over the Internet. It was invented by Tim Berners-Lee in 1989.",
+                    code: "<!-- No code, conceptual definition -->"
+                },
+                {
+                    q: "What is a Web Server? Give 2 examples.",
+                    ans: "A web server is computer software and underlying hardware that accepts requests via HTTP (the network protocol created to distribute web content) or its secure variant HTTPS. A user agent, commonly a web browser or web crawler, initiates communication by making a request for a web page or other resource, and the server responds with the content of that resource or an error message.",
+                    code: "Examples:\\n1. Apache HTTP Server\\n2. Nginx\\n3. Microsoft IIS"
+                },
+                {
+                    q: "Define URL and its components.",
+                    ans: "A Uniform Resource Locator (URL), colloquially termed a web address, is a reference to a web resource that specifies its location on a computer network and a mechanism for retrieving it.",
+                    code: "https://www.example.com:80/path/to/myfile.html?key1=value1#SomewhereInTheDocument\\n\\nComponents:\\n- Scheme: https\\n- Domain Name: www.example.com\\n- Port: 80\\n- Path: /path/to/myfile.html\\n- Parameters: ?key1=value1\\n- Anchor: #SomewhereInTheDocument"
+                },
+                {
+                    q: "Diff. between Container and Empty tags.",
+                    ans: "Container tags require a starting and ending tag (e.g., <html>...</html>). They usually wrap content. Empty tags (or self-closing tags) do not have a closing tag and do not wrap content (e.g., <br>, <img>).",
+                    code: "<!-- Container Tag -->\\n<p>This is a paragraph.</p>\\n\\n<!-- Empty Tag -->\\n<br> <!-- Line break -->\\n<hr> <!-- Horizontal Rule -->"
+                },
+                {
+                    q: "Use of <PRE> tag.",
+                    ans: "The <pre> tag defines preformatted text. Text in a <pre> element is displayed in a fixed-width font, and the text preserves both spaces and line breaks. The text will be displayed exactly as written in the HTML source code.",
+                    code: "<pre>\\n  Text in a pre element\\n  is displayed in a fixed-width\\n  font, and it preserves\\n  both      spaces and\\n  line breaks\\n</pre>"
+                },
+                {
+                    q: "Explain 'Cellpadding' vs 'Cellspacing'.",
+                    ans: "Cellpadding is the space between the cell wall and the cell content. Cellspacing is the space between cells.",
+                    code: "<table border=\"1\" cellpadding=\"10\" cellspacing=\"5\">\\n  <tr>\\n    <td>Cell 1</td>\\n    <td>Cell 2</td>\\n  </tr>\\n</table>"
+                },
+                {
+                    q: "What is Inline CSS?",
+                    ans: "Inline CSS is used to apply a unique style for a single element. To use inline styles, add the style attribute to the relevant element. The style attribute can contain any CSS property.",
+                    code: "<h1 style=\"color:blue;text-align:center;\">This is a heading</h1>\\n<p style=\"color:red;\">This is a paragraph.</p>"
+                },
+                {
+                    q: "What is a Hyperlink?",
+                    ans: "A hyperlink, or simply a link, is a reference to data that the user can follow by clicking or tapping. A hyperlink points to a whole document or to a specific element within a document. Hypertext is text with hyperlinks.",
+                    code: "<a href=\"https://www.google.com\">Visit Google</a>"
+                },
+                {
+                    q: "Define JavaScript.",
+                    ans: "JavaScript is a lightweight, interpreted, or just-in-time compiled programming language with first-class functions. While it is most well-known as the scripting language for Web pages, many non-browser environments also use it, such as Node.js, Apache CouchDB and Adobe Acrobat.",
+                    code: "<script>\\n  document.getElementById(\"demo\").innerHTML = \"Hello JavaScript!\";\\n<\\/script>"
+                },
+                {
+                    q: "What is the 'OnLoad' event?",
+                    ans: "The onload event occurs when an object has been loaded. Onload is most often used within the <body> element to execute a script once a web page has completely loaded all content (including images, script files, CSS files, etc.).",
+                    code: "<body onload=\"myFunction()\">\\n\\n<script>\\nfunction myFunction() {\\n  alert(\"Page is loaded\");\\n}\\n<\\/script>"
+                },
+                {
+                    q: "What is a Frameset?",
+                    ans: "The <frameset> tag was used to define a frameset. It replaced the <body> tag in pages that used frames. The <frameset> element defines how to divide the window into frames. Note: Not supported in HTML5.",
+                    code: "<frameset cols=\"25%,*,25%\">\\n  <frame src=\"frame_a.htm\">\\n  <frame src=\"frame_b.htm\">\\n  <frame src=\"frame_c.htm\">\\n</frameset>"
+                },
+                {
+                    q: "What is Dreamweaver?",
+                    ans: "Adobe Dreamweaver is a proprietary web development tool from Adobe Inc. It is an Integrated Development Environment (IDE) that supports both a visual design surface (WYSIWYG) and a code editor with standard features such as syntax highlighting, code completion, and real-time syntax checking.",
+                    code: "<!-- Dreamweaver is a tool, not code. -->"
+                },
+                {
+                    q: "Explain the 'Alert' box.",
+                    ans: "An alert box is often used if you want to make sure information comes through to the user. When an alert box pops up, the user will have to click 'OK' to proceed.",
+                    code: "<script>\\nfunction myFunction() {\\n  alert(\"I am an alert box!\");\\n}\\n<\\/script>"
+                },
+                {
+                    q: "What is Intranet?",
+                    ans: "An intranet is a private network contained within an enterprise that is used to securely share company information and computing resources among employees. It can also be used for working in groups and for teleconferences.",
+                    code: "<!-- Concept -->"
+                },
+                {
+                    q: "Use of 'ALT' attribute in IMG tag.",
+                    ans: "The required alt attribute specifies an alternate text for an image, if the image cannot be displayed. The alt attribute provides alternative information for an image if a user for some reason cannot view it (because of slow connection, an error in the src attribute, or if the user uses a screen reader).",
+                    code: "<img src=\"img_girl.jpg\" alt=\"Girl in a jacket\" width=\"500\" height=\"600\">"
+                },
+                {
+                    q: "What is the use of 'TARGET' attribute?",
+                    ans: "The target attribute specifies where to open the linked document. Common values are _blank (new window/tab), _self (same frame), _parent (parent frame), _top (full body of the window).",
+                    code: "<a href=\"https://www.w3schools.com\" target=\"_blank\">Visit W3Schools!</a>"
+                },
+                {
+                    q: "Define 'External Link'.",
+                    ans: "An external link is a hyperlink that points to a domain other than the domain the link exists on (source domain). In simpler terms, if another website links to you, this is considered an external link to your site. Similarly, if you link out to another website, this is also considered an external link.",
+                    code: "<a href=\"https://www.wikipedia.org\">External Link to Wikipedia</a>"
+                },
+                {
+                    q: "What is a 'Prompt Box'?",
+                    ans: "A prompt box is often used if you want the user to input a value before entering a page. When a prompt box pops up, the user will have to click either 'OK' or 'Cancel' to proceed after entering an input value.",
+                    code: "<script>\\nlet person = prompt(\"Please enter your name\", \"Harry Potter\");\\n<\\/script>"
+                }
+            ],
+            u1: [
+                {
+                    q: "Explain the Client-Server model of the Internet with a neat diagram.",
+                    ans: "The client-server model is a distributed application structure that partitions tasks or workloads between the providers of a resource or service, called servers, and service requesters, called clients. \\n\\n1. Client: A computer or software that requests a service (e.g., Web Browser).\\n2. Server: A computer or software that provides the service (e.g., Web Server like Apache).\\n3. Network: The medium through which they communicate (Internet).\\n\\nProcess:\\n- Client sends Request -> Internet -> Server processes request -> Server sends Response -> Internet -> Client displays result.",
+                    code: "   +--------+      Request       +--------+\\n   | Client | -----------------> | Server |\\n   | (User) | <----------------- | (Data) |\\n   +--------+      Response      +--------+"
+                },
+                {
+                    q: "Explain the structure of an HTML document. Discuss <HEAD>, <TITLE>, <BODY>.",
+                    ans: "An HTML document is structured as a tree of elements. \\n\\n- <!DOCTYPE html>: Declares the document type and version (HTML5).\\n- <html>: The root element of the page.\\n- <head>: Contains meta-information about the document (not displayed directly).\\n  - <title>: Sets the title of the page (shown in browser tab).\\n  - <meta>: Character set, viewport settings.\\n  - <link>: Links to external resources like CSS.\\n  - <script>: Internal or external scripts.\\n- <body>: Contains the visible page content (headings, paragraphs, images, etc.).",
+                    code: "<!DOCTYPE html>\\n<html>\\n<head>\\n    <title>Page Title</title>\\n    <meta charset=\"UTF-8\">\\n</head>\\n<body>\\n    <h1>This is a Heading</h1>\\n    <p>This is a paragraph.</p>\\n</body>\\n</html>"
+                },
+                {
+                    q: "Explain 3 types of Lists in HTML with syntax and examples.",
+                    ans: "1. Unordered List (<ul>): Items are marked with bullets.\\n2. Ordered List (<ol>): Items are marked with numbers or letters.\\n3. Description List (<dl>): A list of terms, with a description of each term.",
+                    code: "<!-- Unordered List -->\\n<ul>\\n  <li>Coffee</li>\\n  <li>Tea</li>\\n</ul>\\n\\n<!-- Ordered List -->\\n<ol>\\n  <li>First</li>\\n  <li>Second</li>\\n</ol>\\n\\n<!-- Description List -->\\n<dl>\\n  <dt>Coffee</dt>\\n  <dd>- black hot drink</dd>\\n  <dt>Milk</dt>\\n  <dd>- white cold drink</dd>\\n</dl>"
+                },
+                {
+                    q: "Explain the Table tag and its major attributes (Rowspan, Colspan).",
+                    ans: "The <table> tag defines an HTML table. \\n- <tr>: Table Row\\n- <th>: Table Header (bold, centered)\\n- <td>: Table Data (regular cell)\\n\\nAttributes:\\n- border: Specifies the width of the border.\\n- cellpadding: Space inside cells.\\n- cellspacing: Space between cells.\\n- colspan: Merges cells horizontally.\\n- rowspan: Merges cells vertically.",
+                    code: "<table border=\"1\">\\n  <tr>\\n    <th>Name</th>\\n    <th colspan=\"2\">Telephone</th>\\n  </tr>\\n  <tr>\\n    <td>Bill Gates</td>\\n    <td>55577854</td>\\n    <td>55577855</td>\\n  </tr>\\n</table>"
+                },
+                {
+                    q: "How are images inserted in HTML? Explain attributes of <IMG>.",
+                    ans: "Images are inserted using the <img> tag. It is an empty tag (no closing tag).\\n\\nAttributes:\\n- src (Source): URL of the image (Required).\\n- alt (Alternative Text): Text if image fails to load (Required for accessibility).\\n- width/height: Size of the image in pixels.\\n- title: Tooltip text on hover.",
+                    code: "<img src=\"logo.png\" alt=\"Company Logo\" width=\"200\" height=\"100\" title=\"Our Logo\">"
+                }
+            ],
+            u2: [
+                {
+                    q: "Explain different types of CSS (Inline, Internal, External) with examples.",
+                    ans: "1. Inline CSS: Applied to a specific element using the style attribute.\\n2. Internal CSS: Defined within the <style> element in the <head> section.\\n3. External CSS: Defined in a separate .css file and linked using <link>.",
+                    code: "<!-- Inline -->\\n<h1 style=\"color:blue;\">Blue Heading</h1>\\n\\n<!-- Internal -->\\n<head>\\n<style>\\n  body {background-color: linen;}\\n</style>\\n</head>\\n\\n<!-- External -->\\n<head>\\n  <link rel=\"stylesheet\" href=\"styles.css\">\\n</head>"
+                },
+                {
+                    q: "What are Frames? Explain attributes of <FRAMESET>.",
+                    ans: "Frames allow a browser window to be split into multiple sections, each loading a separate HTML document. The <frameset> tag replaces <body>.\\n\\nAttributes:\\n- cols: Defines vertical columns (e.g., \"20%, 80%\").\\n- rows: Defines horizontal rows.\\n- border: Width of the border between frames.\\n- frameborder: 0 to hide borders, 1 to show.",
+                    code: "<frameset cols=\"25%,75%\">\\n   <frame src=\"menu.html\">\\n   <frame src=\"content.html\">\\n</frameset>"
+                },
+                {
+                    q: "Design a Registration Form using HTML Form controls (Text, Radio, Submit).",
+                    ans: "A form is created using the <form> tag. Input controls are created using <input>, <select>, <textarea>.",
+                    code: "<form action=\"/submit_page.php\">\\n  <label for=\"fname\">First name:</label><br>\\n  <input type=\"text\" id=\"fname\" name=\"fname\"><br>\\n  \\n  <p>Gender:</p>\\n  <input type=\"radio\" id=\"male\" name=\"gender\" value=\"male\">\\n  <label for=\"male\">Male</label><br>\\n  <input type=\"radio\" id=\"female\" name=\"gender\" value=\"female\">\\n  <label for=\"female\">Female</label><br><br>\\n  \\n  <input type=\"submit\" value=\"Submit\">\\n</form>"
+                },
+                {
+                    q: "Explain the Anchor Tag <A> and its attributes in detail.",
+                    ans: "The <a> tag defines a hyperlink. \\n\\nAttributes:\\n- href: The URL of the page the link goes to.\\n- target: Where to open the link (_blank, _self).\\n- download: Specifies that the target will be downloaded.\\n- title: Tooltip text.",
+                    code: "<a href=\"https://www.w3schools.com\" target=\"_blank\" title=\"Go to W3Schools\">Visit W3Schools</a>"
+                },
+                {
+                    q: "What is an Image Map? Explain with example.",
+                    ans: "An image map is an image with clickable areas. It is defined by the <map> tag and linked to an <img> using the usemap attribute. The <area> tag defines the clickable regions.",
+                    code: "<img src=\"workplace.jpg\" alt=\"Workplace\" usemap=\"#workmap\">\\n\\n<map name=\"workmap\">\\n  <area shape=\"rect\" coords=\"34,44,270,350\" href=\"computer.htm\">\\n  <area shape=\"rect\" coords=\"290,172,333,250\" href=\"phone.htm\">\\n  <area shape=\"circle\" coords=\"337,300,44\" href=\"coffee.htm\">\\n</map>"
+                }
+            ],
+            u3: [
+                {
+                    q: "Explain features of JavaScript. How is it different from Java?",
+                    ans: "Features:\\n1. Lightweight Scripting Language.\\n2. Client-side validation.\\n3. Dynamic typing.\\n4. Object-based (not fully object-oriented like Java).\\n\\nDifferences:\\n- Java is a compiled language; JS is interpreted.\\n- Java is strongly typed; JS is loosely typed.\\n- Java runs in a JVM; JS runs in the browser.",
+                    code: "// JavaScript\\nlet x = 10;\\nx = \"Hello\"; // Valid in JS, Error in Java"
+                },
+                {
+                    q: "Explain Conditional Statements in JS (If, Switch) with examples.",
+                    ans: "Conditional statements perform different actions based on different conditions.\\n1. if...else: Executes code if a condition is true.\\n2. switch: Selects one of many blocks of code to be executed.",
+                    code: "// If-Else\\nif (hour < 18) {\\n  greeting = \"Good day\";\\n} else {\\n  greeting = \"Good evening\";\\n}\\n\\n// Switch\\nswitch(new Date().getDay()) {\\n  case 0:\\n    day = \"Sunday\";\\n    break;\\n  case 1:\\n    day = \"Monday\";\\n    break;\\n  default:\\n    day = \"Weekday\";\\n}"
+                },
+                {
+                    q: "Explain Looping structures in JS (For, While) with syntax.",
+                    ans: "Loops execute a block of code a number of times.\\n1. for: Loops through a block of code a number of times.\\n2. while: Loops through a block of code while a specified condition is true.",
+                    code: "// For Loop\\nfor (let i = 0; i < 5; i++) {\\n  text += \"The number is \" + i + \"<br>\";\\n}\\n\\n// While Loop\\nwhile (i < 10) {\\n  text += \"The number is \" + i;\\n  i++;\\n}"
+                },
+                {
+                    q: "What are Functions in JS? Explain with an example.",
+                    ans: "A JavaScript function is a block of code designed to perform a particular task. A function is executed when 'something' invokes it (calls it).",
+                    code: "function myFunction(p1, p2) {\\n  return p1 * p2;   // The function returns the product of p1 and p2\\n}\\n\\nlet result = myFunction(4, 3); // result will be 12"
+                },
+                {
+                    q: "Explain Event Handling in JS (onClick, onMouseOver).",
+                    ans: "HTML events are 'things' that happen to HTML elements. JavaScript can react to these events.\\n- onclick: The user clicks an HTML element.\\n- onmouseover: The user moves the mouse over an HTML element.",
+                    code: "<button onclick=\"alert('Hello')\">Click Me</button>\\n\\n<div onmouseover=\"this.style.backgroundColor='red'\">Hover Me</div>"
+                }
+            ],
+            u4: [
+                {
+                    q: "Explain the String Object and its methods (length, charAt, etc).",
+                    ans: "The String object is used to manipulate a sequence of characters.\\nMethods:\\n- length: Returns the length of a string.\\n- charAt(index): Returns the character at the specified index.\\n- toUpperCase(): Converts to upper case.\\n- indexOf(str): Returns the index of the first occurrence.",
+                    code: "let txt = \"Hello World\";\\nlet len = txt.length; // 11\\nlet char = txt.charAt(0); // \"H\""
+                },
+                {
+                    q: "Explain the Math Object and its methods (round, random, etc).",
+                    ans: "The Math object allows you to perform mathematical tasks on numbers.\\nMethods:\\n- Math.PI: Returns PI.\\n- Math.round(x): Rounds x to the nearest integer.\\n- Math.pow(x, y): Returns the value of x to the power of y.\\n- Math.random(): Returns a random number between 0 and 1.",
+                    code: "Math.round(4.7);    // 5\\nMath.pow(8, 2);      // 64\\nMath.floor(Math.random() * 10); // Random 0-9"
+                },
+                {
+                    q: "Explain the Date Object and how to manipulate dates in JS.",
+                    ans: "The Date object is used to work with dates and times.\\nMethods:\\n- new Date(): Creates a new date object with the current date and time.\\n- getFullYear(): Get the year.\\n- setFullYear(): Set the year.",
+                    code: "const d = new Date();\\nlet year = d.getFullYear();"
+                },
+                {
+                    q: "Describe the Dreamweaver Workspace and its components.",
+                    ans: "The Dreamweaver workspace lets you view documents and object properties. The workspace also places many of the most common operations in toolbars so that you can quickly make changes to your documents.\\nComponents:\\n- Document window: Displays the current document.\\n- Document toolbar: Contains buttons that provide options for different views (Code, Split, Design).\\n- Files panel: Manage files and folders.\\n- Property inspector: View and edit properties for the selected object.",
+                    code: "<!-- Concept -->"
+                },
+                {
+                    q: "Steps to create a new Site in Dreamweaver.",
+                    ans: "1. Click Site > New Site.\\n2. In the Site Setup dialog box, select the Site category.\\n3. Enter a name for the site in the Site Name text box.\\n4. Click the folder icon next to the Local Site Folder text box to browse to and select the folder where you want to store your site files.\\n5. Click Save.",
+                    code: "<!-- Procedure -->"
+                }
+            ]
+        };
+
         // Helper to generate random papers
         const getQs = (arr, n) => [...arr].sort(() => 0.5 - Math.random()).slice(0, n);
 
@@ -729,8 +1011,14 @@
                 type: "directory",
                 name: "Web Technology Sem-1",
                 files: webTechPapers
+            },
+            "solutions": {
+                type: "directory",
+                name: "Solutions & Keys",
+                files: [
+                    { title: "Web Tech Master Key", type: "solution", id: "sol-master", subject: "Web Technology" }
+                ]
             }
-            // Future subjects can be added here
         };
 
         // --- STATE ---
@@ -750,30 +1038,111 @@
         }
 
         function renderFileSystem() {
+            // Render Web Tech Papers
             const dirContainer = document.getElementById('web-tech-dir');
             dirContainer.innerHTML = '';
-
-            // Render Web Tech Papers
             fileSystem['web-tech-sem1'].files.forEach((p, i) => {
                 const fileDiv = document.createElement('div');
                 const isActive = currentFile.subject === 'web-tech-sem1' && currentFile.index === i;
                 fileDiv.className = `dir-item ${isActive ? 'active' : ''}`;
                 fileDiv.innerHTML = `
-                    <i class="fas fa-file-alt text-gray-500"></i>
-                    <span>paper_set_0${p.id}.txt</span>
-                `;
+                                                                                        <i class="fas fa-file-alt text-gray-500"></i>
+                                                                                        <span>paper_set_0${p.id}.txt</span>
+                                                                                        `;
                 fileDiv.onclick = () => openFile('web-tech-sem1', i);
                 dirContainer.appendChild(fileDiv);
+            });
+
+            // Render Solutions
+            const solContainer = document.getElementById('solutions-dir');
+            solContainer.innerHTML = '';
+            fileSystem['solutions'].files.forEach((p, i) => {
+                const fileDiv = document.createElement('div');
+                const isActive = currentFile.subject === 'solutions' && currentFile.index === i;
+                fileDiv.className = `dir-item ${isActive ? 'active' : ''}`;
+                fileDiv.innerHTML = `
+                                                                                        <i class="fas fa-key text-purple-500"></i>
+                                                                                        <span>${p.title}.sol</span>
+                                                                                        `;
+                fileDiv.onclick = () => openFile('solutions', i);
+                solContainer.appendChild(fileDiv);
             });
         }
 
         function openFile(subject, index) {
             currentFile = { subject, index };
             renderFileSystem(); // Update active state
-            renderPaper(fileSystem[subject].files[index]);
+
+            const file = fileSystem[subject].files[index];
+            if (file.type === 'solution') {
+                renderSolution(file);
+            } else {
+                renderPaper(file);
+            }
 
             // Save state
             localStorage.setItem('alphaTerminalState', JSON.stringify(currentFile));
+        }
+
+        function renderSolution(file) {
+            paperContent.innerHTML = '';
+
+            let html = `
+                                                                                        <div class="exam-header">
+                                                                                            <h1>MASTER SOLUTION KEY</h1>
+                                                                                            <div class="text-purple-500">> SUBJECT: ${file.subject.toUpperCase()}</div>
+                                                                                            <div class="exam-details mt-2">
+                                                                                                <span>[TYPE::FULL_SOLUTION]</span>
+                                                                                                <span>[STATUS::VERIFIED]</span>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                        <div class="typing-text mb-6 text-sm text-gray-400">
+                    > SYSTEM_MSG: Loading detailed answers and code examples...
+                                                                                        </div>
+                                                                                        `;
+
+            // Helper to render a section
+            const renderSection = (title, questions) => {
+                let sectionHtml = `<div class="section-header"><span>>> ${title}</span></div>`;
+                questions.forEach((item, idx) => {
+                    sectionHtml += `
+                        <div class="mb-8 border-b border-gray-800 pb-6">
+                            <div class="flex gap-3 mb-3">
+                                <span class="text-purple-400 font-bold">Q${idx + 1}.</span>
+                                <span class="font-bold text-gray-200">${item.q}</span>
+                            </div>
+                            
+                            <div class="ml-8">
+                                <div class="text-gray-400 mb-4 text-sm leading-relaxed border-l-2 border-gray-700 pl-3">
+                                    ${item.ans.replace(/\n/g, '<br>')}
+                                </div>
+                                
+                                <div class="bg-gray-900 border border-gray-700 rounded p-3 relative group">
+                                    <div class="absolute top-0 right-0 bg-gray-800 text-xs px-2 py-1 text-gray-400 rounded-bl">CODE</div>
+                                    <pre class="text-green-400 font-mono text-sm overflow-x-auto"><code>${item.code.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                return sectionHtml;
+            };
+
+            html += renderSection("SHORT ANSWER QUESTIONS", solutionBank.short);
+            html += renderSection("UNIT 1", solutionBank.u1);
+            html += renderSection("UNIT 2", solutionBank.u2);
+            html += renderSection("UNIT 3", solutionBank.u3);
+            html += renderSection("UNIT 4", solutionBank.u4);
+
+            html += `
+                                                                                        <div class="mt-12 text-center text-gray-500 text-sm">
+                                                                                            *** END OF SOLUTION KEY ***
+                                                                                        </div>
+                                                                                        `;
+
+            paperContent.innerHTML = html;
+            viewport.scrollTop = 0;
         }
 
         function renderPaper(p) {
@@ -781,104 +1150,104 @@
             paperContent.innerHTML = '';
 
             const html = `
-            <div class="exam-header">
-                <h1>Panjab University // BCA-SEM-1</h1>
-                <div class="text-green-500">> SUBJECT: ${p.title.toUpperCase()}</div>
-                <div class="exam-details mt-2">
-                    <span>[CODE::${p.code}]</span>
-                    <span>[MAX_MARKS::45]</span>
-                    <span>[TIME::3H]</span>
-                </div>
-            </div>
+                                                                                        <div class="exam-header">
+                                                                                            <h1>Panjab University // BCA-SEM-1</h1>
+                                                                                            <div class="text-green-500">> SUBJECT: ${p.title.toUpperCase()}</div>
+                                                                                            <div class="exam-details mt-2">
+                                                                                                <span>[CODE::${p.code}]</span>
+                                                                                                <span>[MAX_MARKS::45]</span>
+                                                                                                <span>[TIME::3H]</span>
+                                                                                            </div>
+                                                                                        </div>
 
-            <div class="typing-text mb-6 text-sm text-gray-400">
+                                                                                        <div class="typing-text mb-6 text-sm text-gray-400">
                 > SYSTEM_MSG: Attempt 9 questions total. Section A is mandatory. Select 1 from each Unit.
-            </div>
+                                                                                        </div>
 
-            <!-- SECTION A -->
-            <div class="section-header">
-                <span>>> SECTION_A [COMPULSORY]</span>
-                <span>[09_MARKS]</span>
-            </div>
-            <div class="question-row">
-                <div class="q-num">01.</div>
-                <div class="q-text">
-                    <span>EXECUTE ANY 9 SUB-ROUTINES:</span>
-                    <ol class="sub-q-list mt-2">
-                        ${p.short.map(q => `
+                                                                                        <!-- SECTION A -->
+                                                                                        <div class="section-header">
+                                                                                            <span>>> SECTION_A [COMPULSORY]</span>
+                                                                                            <span>[09_MARKS]</span>
+                                                                                        </div>
+                                                                                        <div class="question-row">
+                                                                                            <div class="q-num">01.</div>
+                                                                                            <div class="q-text">
+                                                                                                <span>EXECUTE ANY 9 SUB-ROUTINES:</span>
+                                                                                                <ol class="sub-q-list mt-2">
+                                                                                                    ${p.short.map(q => `
                             <li>
                                 ${q.t} ${renderTag(q.p)}
                             </li>
                         `).join('')}
-                    </ol>
-                </div>
-            </div>
+                                                                                                </ol>
+                                                                                            </div>
+                                                                                        </div>
 
-            <!-- UNIT I -->
-            <div class="section-header">
-                <span>>> UNIT_I</span>
-                <span>[09_MARKS]</span>
-            </div>
-            <div class="question-row">
-                <div class="q-num">02.</div>
-                <div class="q-text">${p.u1[0].t} ${renderTag(p.u1[0].p)}</div>
-            </div>
-            <div class="text-center text-xs text-gray-600 my-2">-- OR --</div>
-            <div class="question-row">
-                <div class="q-num">03.</div>
-                <div class="q-text">${p.u1[1].t} ${renderTag(p.u1[1].p)}</div>
-            </div>
+                                                                                        <!-- UNIT I -->
+                                                                                        <div class="section-header">
+                                                                                            <span>>> UNIT_I</span>
+                                                                                            <span>[09_MARKS]</span>
+                                                                                        </div>
+                                                                                        <div class="question-row">
+                                                                                            <div class="q-num">02.</div>
+                                                                                            <div class="q-text">${p.u1[0].t} ${renderTag(p.u1[0].p)}</div>
+                                                                                        </div>
+                                                                                        <div class="text-center text-xs text-gray-600 my-2">-- OR --</div>
+                                                                                        <div class="question-row">
+                                                                                            <div class="q-num">03.</div>
+                                                                                            <div class="q-text">${p.u1[1].t} ${renderTag(p.u1[1].p)}</div>
+                                                                                        </div>
 
-            <!-- UNIT II -->
-            <div class="section-header">
-                <span>>> UNIT_II</span>
-                <span>[09_MARKS]</span>
-            </div>
-            <div class="question-row">
-                <div class="q-num">04.</div>
-                <div class="q-text">${p.u2[0].t} ${renderTag(p.u2[0].p)}</div>
-            </div>
-            <div class="text-center text-xs text-gray-600 my-2">-- OR --</div>
-            <div class="question-row">
-                <div class="q-num">05.</div>
-                <div class="q-text">${p.u2[1].t} ${renderTag(p.u2[1].p)}</div>
-            </div>
+                                                                                        <!-- UNIT II -->
+                                                                                        <div class="section-header">
+                                                                                            <span>>> UNIT_II</span>
+                                                                                            <span>[09_MARKS]</span>
+                                                                                        </div>
+                                                                                        <div class="question-row">
+                                                                                            <div class="q-num">04.</div>
+                                                                                            <div class="q-text">${p.u2[0].t} ${renderTag(p.u2[0].p)}</div>
+                                                                                        </div>
+                                                                                        <div class="text-center text-xs text-gray-600 my-2">-- OR --</div>
+                                                                                        <div class="question-row">
+                                                                                            <div class="q-num">05.</div>
+                                                                                            <div class="q-text">${p.u2[1].t} ${renderTag(p.u2[1].p)}</div>
+                                                                                        </div>
 
-            <!-- UNIT III -->
-            <div class="section-header">
-                <span>>> UNIT_III</span>
-                <span>[09_MARKS]</span>
-            </div>
-            <div class="question-row">
-                <div class="q-num">06.</div>
-                <div class="q-text">${p.u3[0].t} ${renderTag(p.u3[0].p)}</div>
-            </div>
-            <div class="text-center text-xs text-gray-600 my-2">-- OR --</div>
-            <div class="question-row">
-                <div class="q-num">07.</div>
-                <div class="q-text">${p.u3[1].t} ${renderTag(p.u3[1].p)}</div>
-            </div>
+                                                                                        <!-- UNIT III -->
+                                                                                        <div class="section-header">
+                                                                                            <span>>> UNIT_III</span>
+                                                                                            <span>[09_MARKS]</span>
+                                                                                        </div>
+                                                                                        <div class="question-row">
+                                                                                            <div class="q-num">06.</div>
+                                                                                            <div class="q-text">${p.u3[0].t} ${renderTag(p.u3[0].p)}</div>
+                                                                                        </div>
+                                                                                        <div class="text-center text-xs text-gray-600 my-2">-- OR --</div>
+                                                                                        <div class="question-row">
+                                                                                            <div class="q-num">07.</div>
+                                                                                            <div class="q-text">${p.u3[1].t} ${renderTag(p.u3[1].p)}</div>
+                                                                                        </div>
 
-            <!-- UNIT IV -->
-            <div class="section-header">
-                <span>>> UNIT_IV</span>
-                <span>[09_MARKS]</span>
-            </div>
-            <div class="question-row">
-                <div class="q-num">08.</div>
-                <div class="q-text">${p.u4[0].t} ${renderTag(p.u4[0].p)}</div>
-            </div>
-            <div class="text-center text-xs text-gray-600 my-2">-- OR --</div>
-            <div class="question-row">
-                <div class="q-num">09.</div>
-                <div class="q-text">${p.u4[1].t} ${renderTag(p.u4[1].p)}</div>
-            </div>
-            
-            <div class="mt-8 text-center text-gray-500">
+                                                                                        <!-- UNIT IV -->
+                                                                                        <div class="section-header">
+                                                                                            <span>>> UNIT_IV</span>
+                                                                                            <span>[09_MARKS]</span>
+                                                                                        </div>
+                                                                                        <div class="question-row">
+                                                                                            <div class="q-num">08.</div>
+                                                                                            <div class="q-text">${p.u4[0].t} ${renderTag(p.u4[0].p)}</div>
+                                                                                        </div>
+                                                                                        <div class="text-center text-xs text-gray-600 my-2">-- OR --</div>
+                                                                                        <div class="question-row">
+                                                                                            <div class="q-num">09.</div>
+                                                                                            <div class="q-text">${p.u4[1].t} ${renderTag(p.u4[1].p)}</div>
+                                                                                        </div>
+
+                                                                                        <div class="mt-8 text-center text-gray-500">
                 > END_OF_FILE
-                <span class="blink">_</span>
-            </div>
-            `;
+                                                                                            <span class="blink">_</span>
+                                                                                        </div>
+                                                                                        `;
 
             paperContent.innerHTML = html;
         }
@@ -1085,13 +1454,13 @@
                     const activeClass = isCurrent ? 'text-green-400' : 'text-gray-400 group-hover:text-green-300';
 
                     item.innerHTML = `
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs font-bold ${activeClass}">SET_0${paper.id}</span>
-                            <span class="text-[10px] text-gray-600">${subject.name}</span>
-                        </div>
-                        <div class="text-[10px] text-gray-500 mt-1 truncate">
-                            ${paper.short[0].t.substring(0, 30)}...
-                        </div>
+                                                                                        <div class="flex justify-between items-center">
+                                                                                            <span class="text-xs font-bold ${activeClass}">SET_0${paper.id}</span>
+                                                                                            <span class="text-[10px] text-gray-600">${subject.name}</span>
+                                                                                        </div>
+                                                                                        <div class="text-[10px] text-gray-500 mt-1 truncate">
+                                                                                            ${paper.short[0].t.substring(0, 30)}...
+                                                                                        </div>
                     `;
                     listContainer.appendChild(item);
                 });
@@ -1108,7 +1477,72 @@
             document.querySelector('.sidebar').classList.remove('active');
         }
 
-    </script>
-</body>
+        // Hacking Intro Animation
+        const introOverlay = document.getElementById('intro-overlay');
+        const introText = document.getElementById('intro-text');
 
-</html>
+        const texts = [
+            "Initializing System...",
+            "kive a singhhh....",
+            "akaalll....",
+            "Access Granted."
+        ];
+
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typeSpeed = 100;
+
+        function type() {
+            const currentText = texts[textIndex];
+            let displayedText = "";
+
+            if (isDeleting) {
+                displayedText = currentText.substring(0, charIndex - 1);
+                charIndex--;
+                typeSpeed = 50;
+            } else {
+                displayedText = currentText.substring(0, charIndex + 1);
+                charIndex++;
+                typeSpeed = 100;
+            }
+
+            // Update text and add cursor span for mobile
+            introText.innerHTML = displayedText + '<span class="cursor"></span>';
+
+            if (!isDeleting && charIndex === currentText.length) {
+                // Finished typing current line
+                if (textIndex === texts.length - 1) {
+                    // Last line, finish
+                    setTimeout(finishIntro, 1000);
+                    return;
+                }
+                // Pause before deleting
+                isDeleting = true;
+                typeSpeed = 1000;
+            } else if (isDeleting && charIndex === 0) {
+                // Finished deleting
+                isDeleting = false;
+                textIndex++;
+                typeSpeed = 500;
+            }
+
+            setTimeout(type, typeSpeed);
+        }
+
+        function finishIntro() {
+            introOverlay.style.transition = "opacity 1s ease";
+            introOverlay.style.opacity = "0";
+            setTimeout(() => {
+                introOverlay.style.display = "none";
+            }, 1000);
+        }
+
+        // Start animation on load
+        window.addEventListener('load', () => {
+            // Ensure overlay is visible
+            introOverlay.style.display = 'flex';
+            setTimeout(type, 500);
+        });
+
+    </script>
