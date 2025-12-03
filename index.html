@@ -219,6 +219,90 @@
         ::-webkit-scrollbar-thumb:hover {
             background: var(--terminal-green);
         }
+
+        /* --- PAPER VIEW (Real Paper Style) --- */
+        #paper-view {
+            background-color: #ffffff;
+            color: #000000;
+            font-family: 'Times New Roman', Times, serif;
+            padding: 4rem;
+            min-height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .paper-header-real {
+            text-align: center;
+            border-bottom: 2px solid #000;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .paper-title-real {
+            font-size: 2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .paper-meta-real {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: 0.9rem;
+            border-top: 1px solid #000;
+            border-bottom: 1px solid #000;
+            padding: 0.5rem 0;
+            margin-top: 1rem;
+        }
+
+        .section-real {
+            margin-bottom: 2rem;
+        }
+
+        .section-title-real {
+            font-weight: bold;
+            text-align: center;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            text-decoration: underline;
+        }
+
+        .question-real {
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .q-num-real {
+            font-weight: bold;
+            min-width: 30px;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            background: #000;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border: none;
+            cursor: pointer;
+            font-family: sans-serif;
+            font-size: 0.8rem;
+            z-index: 101;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-radius: 4px;
+        }
+
+        .back-btn:hover {
+            background: #333;
+        }
     </style>
 </head>
 
@@ -269,24 +353,12 @@
 
             <!-- Paper Detail View (Hidden by default) -->
             <div id="paper-view" class="hidden">
-                <button onclick="closePaper()"
-                    class="mb-6 flex items-center gap-2 text-[var(--terminal-green)] hover:text-white transition-colors">
-                    <i class="fas fa-arrow-left"></i> BACK_TO_GRID
+                <button onclick="closePaper()" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> DASHBOARD
                 </button>
 
-                <div class="paper-header mb-8 border-b border-[var(--border-color)] pb-4">
-                    <h2 id="view-title" class="text-2xl font-bold mb-2"></h2>
-                    <div class="flex gap-4 text-sm text-gray-500 font-mono">
-                        <span id="view-date"></span>
-                        <span>|</span>
-                        <span>MAX_MARKS: 100</span>
-                        <span>|</span>
-                        <span>TIME: 3 HRS</span>
-                    </div>
-                </div>
-
-                <div id="view-content" class="space-y-8">
-                    <!-- Questions injected here -->
+                <div id="paper-content-container">
+                    <!-- Content injected here -->
                 </div>
             </div>
         </main>
@@ -398,7 +470,6 @@
 
         // Expose to window to ensure inline onclick works
         window.openPaper = function (id) {
-            document.getElementById('debug').textContent = `OPENING PAPER ${id}`;
             console.log("Opening paper:", id);
             const paper = papers.find(p => p.id === id);
             if (!paper) return;
@@ -410,36 +481,34 @@
             grid.classList.add('hidden');
             view.classList.remove('hidden');
 
-            // Set Header Info
-            document.getElementById('view-title').textContent = paper.title;
-            document.getElementById('view-date').textContent = `DATE: ${paper.date}`;
+            // Render Content with Real Paper Style
+            const container = document.getElementById('paper-content-container');
 
-            // Render Questions (Mixing random questions for demo)
-            const contentDiv = document.getElementById('view-content');
-
-            // Helper to generate section HTML
             const renderSection = (title, questions) => `
-                <div class="section">
-                    <h3 class="text-xl text-[var(--terminal-green)] border-b border-gray-800 pb-2 mb-4 font-bold">
-                        // ${title}
-                    </h3>
-                    <div class="space-y-4">
+                <div class="section-real">
+                    <div class="section-title-real">${title}</div>
+                    <div>
                         ${questions.map((q, idx) => `
-                            <div class="flex gap-4 p-4 bg-[rgba(255,255,255,0.02)] rounded border border-[var(--border-color)] hover:border-[var(--terminal-green)] transition-colors">
-                                <span class="font-mono text-gray-500">Q${idx + 1}</span>
-                                <div>
-                                    <p class="text-gray-300 mb-2">${q.t}</p>
-                                    <span class="text-xs px-2 py-1 rounded border border-gray-700 text-gray-500">
-                                        PRIORITY: ${q.p}
-                                    </span>
-                                </div>
+                            <div class="question-real">
+                                <span class="q-num-real">Q${idx + 1}.</span>
+                                <div>${q.t}</div>
                             </div>
                         `).join('')}
                     </div>
                 </div>
             `;
 
-            contentDiv.innerHTML = `
+            container.innerHTML = `
+                <div class="paper-header-real">
+                    <div class="paper-title-real">${paper.title}</div>
+                    <div>BCA SEMESTER I EXAMINATION</div>
+                    <div class="paper-meta-real">
+                        <span>DATE: ${paper.date}</span>
+                        <span>MAX MARKS: 100</span>
+                        <span>TIME: 3 HOURS</span>
+                    </div>
+                </div>
+
                 ${renderSection('SECTION A (Short Answer)', qBank.short)}
                 ${renderSection('SECTION B (Unit I)', qBank.u1)}
                 ${renderSection('SECTION C (Unit II)', qBank.u2)}
@@ -451,7 +520,6 @@
         function closePaper() {
             document.getElementById('paper-view').classList.add('hidden');
             document.getElementById('paper-grid').classList.remove('hidden');
-            document.getElementById('debug').textContent = '';
         }
     </script>
 </body>
