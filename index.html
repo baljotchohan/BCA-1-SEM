@@ -450,7 +450,7 @@
             cursor: pointer;
         }
 
-        /* Hacking Intro Overlay */
+        /* Intro Loader */
         #intro-overlay {
             position: fixed;
             top: 0;
@@ -460,82 +460,47 @@
             background-color: #000;
             z-index: 9999;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            font-family: 'Courier New', Courier, monospace;
-            color: #0f0;
-            font-size: 24px;
-            flex-direction: column;
-        }
-
-        .intro-typing-text {
-            white-space: pre-wrap;
-            /* Allow newlines */
-            text-align: center;
-            margin-bottom: 20px;
         }
 
         #intro-img {
-            display: none;
             width: 300px;
-            /* Medium rectangle */
             height: auto;
-            border: 2px solid #0f0;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
-            opacity: 0;
-            transition: opacity 1s ease;
+            border: 2px solid #00ff41;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+            margin-bottom: 1.5rem;
         }
 
-        .cursor {
-            display: inline-block;
-            width: 10px;
-            height: 1.2em;
-            background-color: #0f0;
-            animation: blink-caret 0.75s step-end infinite;
-            vertical-align: bottom;
+        .intro-text {
+            font-family: 'VT323', monospace;
+            color: #00ff41;
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: pulse 1.5s infinite;
         }
 
-        @keyframes blink-caret {
+        @keyframes pulse {
 
-            from,
-            to {
-                opacity: 0
+            0%,
+            100% {
+                opacity: 1;
             }
 
             50% {
-                opacity: 1;
-            }
-        }
-
-        @media (max-width: 600px) {
-            #intro-overlay {
-                font-size: 18px;
-                padding: 20px;
-                text-align: center;
-            }
-
-            .intro-typing-text {
-                white-space: pre-wrap;
-                border-right: none;
-            }
-
-            .cursor {
-                display: inline-block;
-                width: 10px;
-                height: 1.2em;
-                background-color: #0f0;
-                animation: blink-caret 0.75s step-end infinite;
-                vertical-align: bottom;
+                opacity: 0.5;
             }
         }
     </style>
 </head>
 
 <body>
-    <!-- Hacking Intro Overlay -->
+    <!-- Intro Loader -->
     <div id="intro-overlay">
-        <div id="intro-text" class="intro-typing-text"></div>
         <img id="intro-img" src="assets/intro_img.jpg" alt="Intro Image">
+        <div class="intro-text">kive a singh...</div>
     </div>
 
     <!-- HEADER -->
@@ -1441,88 +1406,20 @@
             document.querySelector('.sidebar').classList.remove('active');
         }
 
-        // Hacking Intro Animation
-        const introOverlay = document.getElementById('intro-overlay');
-        const introText = document.getElementById('intro-text');
-        const introImg = document.getElementById('intro-img');
-
-        const texts = [
-            "kive a singhhh....",
-            "akaalll...."
-        ];
-
-        let textIndex = 0;
-        let charIndex = 0;
-        let typeSpeed = 100;
-        let currentHTML = ""; // To store the accumulated HTML
-
-        function type() {
-            if (textIndex >= texts.length) {
-                // Animation sequence complete
-                setTimeout(showImage, 500);
-                return;
+        // Simple Intro Loader
+        (function () {
+            const overlay = document.getElementById('intro-overlay');
+            if (overlay) {
+                // Wait 2.5 seconds then fade out
+                setTimeout(() => {
+                    overlay.style.transition = 'opacity 0.5s ease';
+                    overlay.style.opacity = '0';
+                    setTimeout(() => {
+                        overlay.style.display = 'none';
+                        if (overlay.parentNode) {
+                            overlay.parentNode.removeChild(overlay);
+                        }
+                    }, 500);
+                }, 2500);
             }
-
-            const currentLine = texts[textIndex];
-
-            // Append current character to the accumulated HTML
-            // We use a temporary string for the current line being typed
-            const displayedLine = currentLine.substring(0, charIndex + 1);
-
-            // Construct the full HTML: previous lines + current line + cursor
-            let fullHTML = currentHTML + displayedLine;
-
-            introText.innerHTML = fullHTML + '<span class="cursor"></span>';
-
-            charIndex++;
-
-            if (charIndex === currentLine.length) {
-                // Finished typing current line
-                textIndex++;
-                charIndex = 0;
-                currentHTML += currentLine + "<br>"; // Add line break for next line
-                typeSpeed = 500; // Pause between lines
-            } else {
-                typeSpeed = 100; // Normal typing speed
-            }
-
-            setTimeout(type, typeSpeed);
-        }
-
-        function showImage() {
-            if (introImg) {
-                introImg.style.display = 'block';
-                // Trigger reflow
-                void introImg.offsetWidth;
-                introImg.style.opacity = '1';
-
-                // Wait longer before finishing to let user see the image
-                setTimeout(finishIntro, 3000);
-            } else {
-                finishIntro();
-            }
-        }
-
-        function finishIntro() {
-            introOverlay.style.transition = "opacity 1s ease";
-            introOverlay.style.opacity = "0";
-            setTimeout(() => {
-                introOverlay.style.display = "none";
-            }, 1000);
-        }
-
-        // Start animation on load
-        function startIntro() {
-            // Ensure overlay is visible
-            if (introOverlay) {
-                introOverlay.style.display = 'flex';
-                setTimeout(type, 500);
-            }
-        }
-
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', startIntro);
-        } else {
-            startIntro();
-        }
-    </script>
+        })();
