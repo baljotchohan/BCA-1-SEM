@@ -1225,9 +1225,13 @@
                 });
             });
 
-            document.getElementById('total-questions').textContent = qCount;
-            document.getElementById('high-prob').textContent = hCount;
-            document.getElementById('med-prob').textContent = mCount;
+            const elTotal = document.getElementById('total-questions');
+            const elHigh = document.getElementById('high-prob');
+            const elMed = document.getElementById('med-prob');
+
+            if (elTotal) elTotal.textContent = qCount;
+            if (elHigh) elHigh.textContent = hCount;
+            if (elMed) elMed.textContent = mCount;
         }
 
         // --- NAVIGATION & UTILS ---
@@ -1292,30 +1296,11 @@
             }
         });
 
-        // --- INITIALIZATION ---
-        // Load saved state
-        const savedState = localStorage.getItem('alphaTerminalState');
-        if (savedState) {
-            try {
-                currentFile = JSON.parse(savedState);
-            } catch (e) {
-                console.error("State load error", e);
-            }
-        }
-
-        renderFileSystem();
-        openFile(currentFile.subject, currentFile.index);
-        calculateAnalytics();
-        renderPaperList(); // Populate the side panel list
-
-        // --- MISSING FUNCTIONS IMPLEMENTATION ---
-
+        // --- HELPER FUNCTIONS ---
         function zoomPaper(amount) {
             currentZoom += amount;
-            // Clamp zoom level between 0.5 and 2.0
             if (currentZoom < 0.5) currentZoom = 0.5;
             if (currentZoom > 2.0) currentZoom = 2.0;
-
             applyZoom();
         }
 
@@ -1325,7 +1310,6 @@
         }
 
         function applyZoom() {
-            // Apply scale transform to the paper
             paperContent.style.transform = `scale(${currentZoom})`;
             paperContent.style.transformOrigin = 'top center';
             document.getElementById('zoom-display').innerText = `${Math.round(currentZoom * 100)}%`;
@@ -1334,7 +1318,7 @@
         function toggleFullscreen() {
             if (!document.fullscreenElement) {
                 document.documentElement.requestFullscreen().catch(err => {
-                    console.log(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+                    console.log(`Error attempting to enable full-screen mode: ${err.message}`);
                 });
             } else {
                 if (document.exitFullscreen) {
@@ -1352,11 +1336,6 @@
                 html2canvas: { scale: 2 },
                 jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
             };
-
-            // Temporarily remove dark mode/styles for cleaner PDF if needed, 
-            // but for now we keep the terminal look as requested by "SAVE" context.
-            // If print style is preferred, we could toggle classes.
-
             html2pdf().set(opt).from(element).save();
             showToast('Generating PDF...');
         }
@@ -1370,26 +1349,22 @@
         function renderPaperList() {
             const listContainer = document.getElementById('paper-list');
             listContainer.innerHTML = '';
-
-            // Flatten all papers from all subjects for the "Paper Bank"
             Object.keys(fileSystem).forEach(subjectKey => {
                 const subject = fileSystem[subjectKey];
                 subject.files.forEach((paper, index) => {
                     const item = document.createElement('div');
                     item.className = 'p-2 border-b border-gray-800 hover:bg-gray-800/50 cursor-pointer transition group';
                     item.onclick = () => openFile(subjectKey, index);
-
                     const isCurrent = currentFile.subject === subjectKey && currentFile.index === index;
                     const activeClass = isCurrent ? 'text-green-400' : 'text-gray-400 group-hover:text-green-300';
-
                     item.innerHTML = `
-                                                                                        <div class="flex justify-between items-center">
-                                                                                            <span class="text-xs font-bold ${activeClass}">SET_0${paper.id}</span>
-                                                                                            <span class="text-[10px] text-gray-600">${subject.name}</span>
-                                                                                        </div>
-                                                                                        <div class="text-[10px] text-gray-500 mt-1 truncate">
-                                                                                            ${paper.type === 'solution' ? 'Master Solution Key' : paper.short[0].t.substring(0, 30) + '...'}
-                                                                                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold ${activeClass}">SET_0${paper.id}</span>
+                            <span class="text-[10px] text-gray-600">${subject.name}</span>
+                        </div>
+                        <div class="text-[10px] text-gray-500 mt-1 truncate">
+                            ${paper.type === 'solution' ? 'Master Solution Key' : paper.short[0].t.substring(0, 30) + '...'}
+                        </div>
                     `;
                     listContainer.appendChild(item);
                 });
@@ -1406,20 +1381,55 @@
             document.querySelector('.sidebar').classList.remove('active');
         }
 
-        // Simple Intro Loader
+        // Simple Intro Loader - Direct & Reliable
         (function () {
             const overlay = document.getElementById('intro-overlay');
-            if (overlay) {
-                // Wait 2.5 seconds then fade out
+
+            const removeOverlay = () => {
+                if (!overlay) return;
+                overlay.style.transition = 'opacity 0.5s ease';
+                overlay.style.opacity = '0';
+                overlay.style.pointerEvents = 'none'; // Allow clicking through immediately
+
                 setTimeout(() => {
-                    overlay.style.transition = 'opacity 0.5s ease';
-                    overlay.style.opacity = '0';
-                    setTimeout(() => {
-                        overlay.style.display = 'none';
-                        if (overlay.parentNode) {
-                            overlay.parentNode.removeChild(overlay);
-                        }
-                    }, 500);
-                }, 2500);
-            }
+                    overlay.style.display = 'none';
+                    if (overlay.parentNode) {
+                        overlay.parentNode.removeChild(overlay);
+                    }
+                }, 500);
+            };
+
+            // Force remove after 2.5 seconds
+            setTimeout(removeOverlay, 2500);
+
+            // Backup: Ensure pointer events are removed even if visual removal fails
+            setTimeout(() => {
+                if (overlay) overlay.style.pointerEvents = 'none';
+            }, 3000);
         })();
+
+        // --- INITIALIZATION ---
+        try {
+            // Load saved state
+            const savedState = localStorage.getItem('alphaTerminalState');
+            if (savedState) {
+                try {
+                    currentFile = JSON.parse(savedState);
+                } catch (e) {
+                    console.error("State load error", e);
+                }
+            }
+
+            renderFileSystem();
+            openFile(currentFile.subject, currentFile.index);
+            calculateAnalytics();
+            renderPaperList();
+        } catch (e) {
+            console.error("App Init Error:", e);
+            // Fallback: show error on screen if app fails
+            document.body.insertAdjacentHTML('beforeend', `<div style="color:red; position:fixed; top:0; left:0; z-index:10000; background:black; padding:20px;">App Error: ${e.message}</div>`);
+        }
+    </script>
+</body>
+
+</html>
