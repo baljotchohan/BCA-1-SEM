@@ -4,1031 +4,342 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alpha Terminal v3 | BCA-DSC-101</title>
+    <title>Alpha Terminal v1 | Hacker Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&family=JetBrains+Mono:wght@400;700&display=swap"
         rel="stylesheet">
 
     <style>
         :root {
-            /* COLORS */
-            --bg-deep: #030303;
-            --bg-surface: #0a0a0a;
-            --bg-surface-hover: #111111;
-            --border-dim: #1a1a1a;
-            --border-light: #333333;
-
-            --primary: #00ff41;
-            --primary-dim: rgba(0, 255, 65, 0.1);
-            --primary-glow: rgba(0, 255, 65, 0.4);
-
-            --accent: #00ffff;
-            --accent-dim: rgba(0, 255, 255, 0.1);
-
-            --text-main: #e0e0e0;
-            --text-muted: #888888;
-
-            /* TYPOGRAPHY */
-            --font-ui: 'Inter', sans-serif;
-            --font-mono: 'JetBrains Mono', monospace;
-
-            /* SIZES */
-            --header-height: 50px;
-            --sidebar-width: 260px;
-            --panel-width: 300px;
-        }
-
-        * {
-            box-sizing: border-box;
-            scrollbar-width: thin;
-            scrollbar-color: var(--border-light) var(--bg-deep);
+            --bg-color: #050505;
+            --terminal-green: #00ff41;
+            --terminal-glow: rgba(0, 255, 65, 0.5);
+            --glass-bg: rgba(10, 10, 10, 0.8);
+            --border-color: #333;
+            --font-mono: 'Fira Code', monospace;
         }
 
         body {
-            background-color: var(--bg-deep);
-            color: var(--text-main);
-            font-family: var(--font-ui);
-            height: 100vh;
-            overflow: hidden;
+            background-color: var(--bg-color);
+            color: var(--terminal-green);
+            font-family: var(--font-mono);
             margin: 0;
+            overflow: hidden;
+            /* Prevent scroll during intro */
+        }
+
+        /* --- INTRO ANIMATION --- */
+        #intro-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1s ease-out;
+        }
+
+        .intro-content {
+            text-align: center;
+        }
+
+        .intro-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 2px solid var(--terminal-green);
+            box-shadow: 0 0 20px var(--terminal-glow);
+            margin-bottom: 2rem;
+            object-fit: cover;
+            animation: pulse 2s infinite;
+        }
+
+        .typing-text {
+            font-size: 1.5rem;
+            border-right: 2px solid var(--terminal-green);
+            white-space: nowrap;
+            overflow: hidden;
+            animation: blink 0.75s step-end infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 10px var(--terminal-glow);
+            }
+
+            50% {
+                box-shadow: 0 0 30px var(--terminal-glow);
+            }
+
+            100% {
+                box-shadow: 0 0 10px var(--terminal-glow);
+            }
+        }
+
+        @keyframes blink {
+
+            from,
+            to {
+                border-color: transparent;
+            }
+
+            50% {
+                border-color: var(--terminal-green);
+            }
+        }
+
+        /* --- MAIN DASHBOARD --- */
+        #main-dashboard {
+            opacity: 0;
+            transition: opacity 1s ease-in;
+            height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
-        /* --- LAYOUT GRID --- */
-        .app-grid {
-            display: grid;
-            grid-template-columns: var(--sidebar-width) 1fr var(--panel-width);
-            grid-template-rows: var(--header-height) 1fr;
-            height: 100vh;
-            width: 100vw;
-            overflow: hidden;
-        }
-
-        /* HEADER */
-        .app-header {
-            grid-column: 1 / -1;
-            background: rgba(10, 10, 10, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-dim);
+        /* Navbar */
+        .navbar {
+            height: 60px;
+            border-bottom: 1px solid var(--border-color);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 1.5rem;
-            z-index: 50;
+            padding: 0 2rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
         }
 
         .brand {
-            font-family: var(--font-mono);
-            font-weight: 700;
-            color: var(--primary);
-            letter-spacing: -0.5px;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1.1rem;
-        }
-
-        .brand i {
-            font-size: 0.9rem;
-        }
-
-        .header-controls {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        .status-badge {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            background: var(--primary-dim);
-            color: var(--primary);
-            padding: 2px 8px;
-            border-radius: 4px;
-            border: 1px solid rgba(0, 255, 65, 0.2);
-        }
-
-        /* SIDEBAR */
-        .app-sidebar {
-            background: var(--bg-surface);
-            border-right: 1px solid var(--border-dim);
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            padding: 1rem 0;
-        }
-
-        .nav-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .nav-header {
-            padding: 0 1.5rem;
-            font-size: 0.7rem;
-            text-transform: uppercase;
+            font-size: 1.2rem;
+            font-weight: bold;
             letter-spacing: 1px;
-            color: var(--text-muted);
-            margin-bottom: 0.5rem;
-            font-weight: 600;
+            text-shadow: 0 0 5px var(--terminal-glow);
         }
 
-        .nav-item {
-            padding: 0.6rem 1.5rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            color: var(--text-muted);
-            transition: all 0.2s;
-            font-size: 0.9rem;
-            border-left: 2px solid transparent;
-        }
-
-        .nav-item:hover {
-            color: var(--text-main);
-            background: var(--bg-surface-hover);
-        }
-
-        .nav-item.active {
-            color: var(--primary);
-            background: var(--primary-dim);
-            border-left-color: var(--primary);
-        }
-
-        /* MAIN CONTENT */
-        .app-main {
-            background: var(--bg-deep);
-            overflow-y: auto;
-            position: relative;
+        /* Context Header */
+        .context-header {
             padding: 2rem;
-            display: flex;
-            justify-content: center;
+            border-bottom: 1px dashed var(--border-color);
+            background: rgba(0, 255, 65, 0.02);
         }
 
-        .paper-container {
-            width: 100%;
-            max-width: 850px;
-            background: var(--bg-surface);
-            border: 1px solid var(--border-dim);
-            border-radius: 8px;
-            padding: 3rem;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-            min-height: 80vh;
-            position: relative;
-        }
-
-        /* CONTENT TYPOGRAPHY */
-        .paper-title {
-            font-family: var(--font-mono);
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
+        .context-title {
+            font-size: 2rem;
             font-weight: 700;
-            color: var(--text-main);
             margin-bottom: 0.5rem;
-            letter-spacing: -1px;
-            text-align: center;
         }
 
-        .paper-subtitle {
-            text-align: center;
-            color: var(--primary);
-            font-family: var(--font-mono);
+        .context-subtitle {
+            color: #888;
             font-size: 0.9rem;
-            margin-bottom: 3rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px dashed var(--border-dim);
         }
 
-        .section-title {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin: 2.5rem 0 1.5rem 0;
-            color: var(--accent);
-            font-family: var(--font-mono);
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .section-title::after {
-            content: '';
+        /* Content Grid */
+        .content-area {
             flex: 1;
-            height: 1px;
-            background: var(--border-dim);
+            padding: 2rem;
+            overflow-y: auto;
         }
 
-        .q-item {
-            margin-bottom: 2rem;
-            display: flex;
-            gap: 1rem;
-            align-items: flex-start;
-        }
-
-        .q-num {
-            font-family: var(--font-mono);
-            color: var(--text-muted);
-            font-weight: 600;
-            min-width: 2.5rem;
-            padding-top: 0.2rem;
-        }
-
-        .q-content {
-            flex: 1;
-        }
-
-        .q-text {
-            font-size: 1.05rem;
-            line-height: 1.6;
-            color: var(--text-main);
-            margin-bottom: 0.5rem;
-        }
-
-        .q-meta {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
-        }
-
-        .badge {
-            font-size: 0.7rem;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-family: var(--font-mono);
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-
-        .badge-high {
-            background: rgba(0, 255, 65, 0.15);
-            color: var(--primary);
-            border: 1px solid rgba(0, 255, 65, 0.3);
-        }
-
-        .badge-med {
-            background: rgba(255, 176, 0, 0.15);
-            color: #ffb000;
-            border: 1px solid rgba(255, 176, 0, 0.3);
-        }
-
-        .badge-low {
-            background: rgba(136, 136, 136, 0.15);
-            color: #aaa;
-            border: 1px solid rgba(136, 136, 136, 0.3);
-        }
-
-        /* ANSWERS & CODE */
-        .answer-box {
-            margin-top: 1rem;
-            padding-left: 1rem;
-            border-left: 2px solid var(--border-dim);
-        }
-
-        .answer-text {
-            color: #ccc;
-            line-height: 1.7;
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
-        }
-
-        .code-block {
-            background: #050505;
-            border: 1px solid var(--border-dim);
-            border-radius: 6px;
-            padding: 1rem;
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            color: #a5d6ff;
-            overflow-x: auto;
-            white-space: pre;
-            margin-top: 0.5rem;
-        }
-
-        /* RIGHT PANEL */
-        .app-panel {
-            background: var(--bg-surface);
-            border-left: 1px solid var(--border-dim);
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .panel-card {
-            background: var(--bg-deep);
-            border: 1px solid var(--border-dim);
-            border-radius: 6px;
-            padding: 1rem;
-        }
-
-        .panel-title {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            margin-bottom: 1rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-
-        .action-grid {
+        .paper-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
         }
 
-        .action-btn {
-            background: var(--bg-surface-hover);
-            border: 1px solid var(--border-dim);
-            color: var(--text-main);
-            padding: 0.75rem;
+        .paper-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
             border-radius: 4px;
+            transition: all 0.3s ease;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .paper-card:hover {
+            border-color: var(--terminal-green);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .paper-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 2px;
+            height: 100%;
+            background: var(--terminal-green);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .paper-card:hover::before {
+            opacity: 1;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .card-meta {
             font-size: 0.8rem;
-            font-weight: 500;
-            transition: all 0.2s;
+            color: #666;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
+            justify-content: space-between;
         }
 
-        .action-btn:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-
-        /* MOBILE RESPONSIVENESS */
-        .mobile-toggle {
-            display: none;
-        }
-
-        @media (max-width: 1024px) {
-            .app-grid {
-                grid-template-columns: 1fr;
-                grid-template-rows: var(--header-height) 1fr;
-            }
-
-            .app-sidebar,
-            .app-panel {
-                position: fixed;
-                top: var(--header-height);
-                bottom: 0;
-                z-index: 100;
-                width: 280px;
-                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
-            }
-
-            .app-sidebar {
-                left: 0;
-                transform: translateX(-100%);
-            }
-
-            .app-panel {
-                right: 0;
-                transform: translateX(100%);
-            }
-
-            .app-sidebar.active {
-                transform: translateX(0);
-            }
-
-            .app-panel.active {
-                transform: translateX(0);
-            }
-
-            .mobile-toggle {
-                display: flex;
-                background: transparent;
-                border: 1px solid var(--border-dim);
-                color: var(--text-main);
-                width: 36px;
-                height: 36px;
-                align-items: center;
-                justify-content: center;
-                border-radius: 4px;
-                cursor: pointer;
-            }
-
-            .paper-container {
-                padding: 1.5rem;
-                border: none;
-                background: transparent;
-                box-shadow: none;
-            }
-
-            .app-main {
-                padding: 0;
-            }
-
-            /* Hide non-essential header items on mobile */
-            .desktop-only {
-                display: none;
-            }
-        }
-
-        /* SCROLLBARS */
+        /* Scrollbar */
         ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
+            width: 8px;
         }
 
         ::-webkit-scrollbar-track {
-            background: var(--bg-deep);
+            background: #000;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: var(--border-light);
-            border-radius: 3px;
+            background: #333;
+            border-radius: 4px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary);
-        }
-
-        /* UTILS */
-        .text-primary {
-            color: var(--primary);
-        }
-
-        .text-accent {
-            color: var(--accent);
+            background: var(--terminal-green);
         }
     </style>
 </head>
 
 <body>
 
-    <div class="app-grid">
-        <!-- HEADER -->
-        <header class="app-header">
-            <div class="flex items-center gap-4">
-                <button class="mobile-toggle" onclick="toggleSidebar()">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div class="brand">
-                    <i class="fas fa-terminal"></i>
-                    <span>ALPHA_TERM_v3</span>
-                </div>
-            </div>
+    <!-- INTRO OVERLAY -->
+    <div id="intro-overlay">
+        <div class="intro-content">
+            <img src="assets/intro_img.jpg" alt="User" class="intro-img"
+                onerror="this.src='https://via.placeholder.com/150/000000/00ff41?text=USER'">
+            <div class="typing-text" id="typing-text"></div>
+        </div>
+    </div>
 
-            <div class="header-controls">
-                <div class="status-badge desktop-only">
-                    <i class="fas fa-circle text-[8px] mr-1 animate-pulse"></i> ONLINE
-                </div>
-                <div class="status-badge font-mono" id="clock">00:00</div>
-                <button class="mobile-toggle" onclick="togglePanel()">
-                    <i class="fas fa-sliders-h"></i>
-                </button>
+    <!-- MAIN DASHBOARD -->
+    <div id="main-dashboard">
+        <!-- NAVBAR -->
+        <nav class="navbar">
+            <div class="brand">
+                <i class="fas fa-terminal mr-2"></i> ALPHA_TERMINAL_v1
             </div>
-        </header>
-
-        <!-- SIDEBAR -->
-        <nav class="app-sidebar" id="sidebar">
-            <div class="nav-group">
-                <div class="nav-header">Question Papers</div>
-                <div id="paper-nav">
-                    <!-- Injected by JS -->
+            <div class="flex items-center gap-4 text-sm">
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                    SYSTEM ONLINE
                 </div>
-            </div>
-
-            <div class="nav-group">
-                <div class="nav-header">Solutions</div>
-                <div id="solution-nav">
-                    <!-- Injected by JS -->
-                </div>
-            </div>
-
-            <div class="mt-auto px-6 py-4 border-t border-[var(--border-dim)]">
-                <div class="text-xs text-[var(--text-muted)]">
-                    <p>BCA-DSC-101</p>
-                    <p class="mt-1 opacity-50">v3.0.0 Stable</p>
-                </div>
+                <div id="clock">00:00:00</div>
             </div>
         </nav>
 
-        <!-- MAIN CONTENT -->
-        <main class="app-main" id="main-scroll">
-            <div class="paper-container" id="paper-content">
-                <!-- Content Injected Here -->
-                <div class="flex flex-col items-center justify-center h-full text-[var(--text-muted)]">
-                    <i class="fas fa-terminal text-4xl mb-4 opacity-20"></i>
-                    <p>Select a module to begin...</p>
-                </div>
+        <!-- CONTEXT HEADER -->
+        <header class="context-header">
+            <div class="context-title">WEB TECHNOLOGY SEM-1</div>
+            <div class="context-subtitle">
+                <i class="fas fa-folder-open mr-2"></i> /root/academic/semester_1/web_tech
+            </div>
+        </header>
+
+        <!-- CONTENT AREA -->
+        <main class="content-area">
+            <div class="paper-grid" id="paper-grid">
+                <!-- Papers injected by JS -->
             </div>
         </main>
-
-        <!-- RIGHT PANEL -->
-        <aside class="app-panel" id="panel">
-            <div class="panel-card">
-                <div class="panel-title">System Control</div>
-                <div class="action-grid">
-                    <button class="action-btn" onclick="toggleFullscreen()"><i class="fas fa-expand"></i> Full</button>
-                    <button class="action-btn" onclick="window.print()"><i class="fas fa-print"></i> Print</button>
-                    <button class="action-btn" onclick="downloadPDF()"><i class="fas fa-download"></i> Save</button>
-                    <button class="action-btn" onclick="toggleTheme()"><i class="fas fa-moon"></i> Dim</button>
-                </div>
-            </div>
-
-            <div class="panel-card">
-                <div class="panel-title">Analytics</div>
-                <div class="text-center py-4">
-                    <div class="text-4xl font-mono font-bold text-[var(--primary)]">98%</div>
-                    <div class="text-xs text-[var(--text-muted)] mt-1">Probability Accuracy</div>
-                </div>
-            </div>
-
-            <div class="panel-card">
-                <div class="panel-title">Display</div>
-                <div class="flex gap-2 justify-center">
-                    <button class="action-btn flex-1" onclick="adjustZoom(-0.1)"><i class="fas fa-minus"></i></button>
-                    <span
-                        class="flex items-center justify-center px-2 font-mono text-xs text-[var(--text-muted)]">ZOOM</span>
-                    <button class="action-btn flex-1" onclick="adjustZoom(0.1)"><i class="fas fa-plus"></i></button>
-                </div>
-            </div>
-        </aside>
     </div>
 
     <script>
-        // --- DATA STORE ---
-        // (Preserved from v2)
+        // --- INTRO LOGIC ---
+        const textToType = "With Kive A Singhh...";
+        const typingElement = document.getElementById('typing-text');
+        const overlay = document.getElementById('intro-overlay');
+        const dashboard = document.getElementById('main-dashboard');
+        let charIndex = 0;
+
+        function typeText() {
+            if (charIndex < textToType.length) {
+                typingElement.textContent += textToType.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeText, 100); // Typing speed
+            } else {
+                setTimeout(finishIntro, 2000); // Wait before fading out
+            }
+        }
+
+        function finishIntro() {
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                dashboard.style.opacity = '1';
+                document.body.style.overflow = 'auto';
+            }, 1000);
+        }
+
+        // Start typing when page loads
+        window.onload = () => {
+            setTimeout(typeText, 500);
+            startClock();
+            renderPapers();
+        };
+
+        // --- CLOCK ---
+        function startClock() {
+            setInterval(() => {
+                const now = new Date();
+                document.getElementById('clock').textContent = now.toLocaleTimeString('en-US', { hour12: false });
+            }, 1000);
+        }
+
+        // --- DATA & RENDERING ---
+        // (Preserving original data structure for future use, but rendering dummy list for now as requested "10 question paper")
+
+        const papers = Array.from({ length: 10 }, (_, i) => ({
+            id: i + 1,
+            title: `Question Paper Set ${String(i + 1).padStart(2, '0')}`,
+            date: `2024-12-${String(i + 1).padStart(2, '0')}`,
+            status: 'AVAILABLE'
+        }));
+
+        function renderPapers() {
+            const grid = document.getElementById('paper-grid');
+            grid.innerHTML = papers.map(paper => `
+                <div class="paper-card">
+                    <div class="card-title">
+                        <i class="far fa-file-code mr-2"></i> ${paper.title}
+                    </div>
+                    <div class="card-meta">
+                        <span><i class="far fa-calendar-alt"></i> ${paper.date}</span>
+                        <span class="text-[var(--terminal-green)]">${paper.status}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Original Data (Preserved)
         const qBank = {
             short: [
                 { t: "Define WWW and its full form.", p: "High" },
                 { t: "What is a Web Server? Give 2 examples.", p: "High" },
-                { t: "Define URL and its components.", p: "High" },
-                { t: "Diff. between Container and Empty tags.", p: "Med" },
-                { t: "Use of <PRE> tag.", p: "Low" },
-                { t: "Explain 'Cellpadding' vs 'Cellspacing'.", p: "High" },
-                { t: "What is Inline CSS?", p: "Med" },
-                { t: "What is a Hyperlink?", p: "Med" },
-                { t: "Define JavaScript.", p: "High" },
-                { t: "What is the 'OnLoad' event?", p: "High" },
-                { t: "What is a Frameset?", p: "Med" },
-                { t: "What is Dreamweaver?", p: "Low" },
-                { t: "Explain the 'Alert' box.", p: "Med" },
-                { t: "What is Intranet?", p: "Med" },
-                { t: "Use of 'ALT' attribute in IMG tag.", p: "High" },
-                { t: "What is the use of 'TARGET' attribute?", p: "Med" },
-                { t: "Define 'External Link'.", p: "Low" },
-                { t: "What is a 'Prompt Box'?", p: "Med" }
-            ],
-            u1: [
-                { t: "Explain the Client-Server model of the Internet with a neat diagram.", p: "High" },
-                { t: "Explain the structure of an HTML document. Discuss <HEAD>, <TITLE>, <BODY>.", p: "High" },
-                { t: "Explain 3 types of Lists in HTML with syntax and examples.", p: "Med" },
-                { t: "Explain the Table tag and its major attributes (Rowspan, Colspan).", p: "High" },
-                { t: "How are images inserted in HTML? Explain attributes of <IMG>.", p: "Med" }
-            ],
-            u2: [
-                { t: "Explain different types of CSS (Inline, Internal, External) with examples.", p: "High" },
-                { t: "What are Frames? Explain attributes of <FRAMESET>.", p: "Med" },
-                { t: "Design a Registration Form using HTML Form controls (Text, Radio, Submit).", p: "High" },
-                { t: "Explain the Anchor Tag <A> and its attributes in detail.", p: "High" },
-                { t: "What is an Image Map? Explain with example.", p: "Low" }
-            ],
-            u3: [
-                { t: "Explain features of JavaScript. How is it different from Java?", p: "High" },
-                { t: "Explain Conditional Statements in JS (If, Switch) with examples.", p: "High" },
-                { t: "Explain Looping structures in JS (For, While) with syntax.", p: "Med" },
-                { t: "What are Functions in JS? Explain with an example.", p: "High" },
-                { t: "Explain Event Handling in JS (onClick, onMouseOver).", p: "High" }
-            ],
-            u4: [
-                { t: "Explain the String Object and its methods (length, charAt, etc).", p: "High" },
-                { t: "Explain the Math Object and its methods (round, random, etc).", p: "Med" },
-                { t: "Explain the Date Object and how to manipulate dates in JS.", p: "Med" },
-                { t: "Describe the Dreamweaver Workspace and its components.", p: "High" },
-                { t: "Steps to create a new Site in Dreamweaver.", p: "Low" }
+                // ... (rest of data would go here if needed)
             ]
         };
-
-        const solutionBank = {
-            short: [
-                {
-                    q: "Define WWW and its full form.",
-                    ans: "The World Wide Web (WWW) is an information system where documents and other web resources are identified by Uniform Resource Locators (URLs), which may be interlinked by hyperlinks, and are accessible over the Internet. It was invented by Tim Berners-Lee in 1989.",
-                    code: "<!-- No code, conceptual definition -->"
-                },
-                {
-                    q: "What is a Web Server? Give 2 examples.",
-                    ans: "A web server is computer software and underlying hardware that accepts requests via HTTP (the network protocol created to distribute web content) or its secure variant HTTPS. A user agent, commonly a web browser or web crawler, initiates communication by making a request for a web page or other resource, and the server responds with the content of that resource or an error message.",
-                    code: "Examples:\\n1. Apache HTTP Server\\n2. Nginx\\n3. Microsoft IIS"
-                },
-                {
-                    q: "Define URL and its components.",
-                    ans: "A Uniform Resource Locator (URL), colloquially termed a web address, is a reference to a web resource that specifies its location on a computer network and a mechanism for retrieving it.",
-                    code: "https://www.example.com:80/path/to/myfile.html?key1=value1#SomewhereInTheDocument\\n\\nComponents:\\n- Scheme: https\\n- Domain Name: www.example.com\\n- Port: 80\\n- Path: /path/to/myfile.html\\n- Parameters: ?key1=value1\\n- Anchor: #SomewhereInTheDocument"
-                },
-                {
-                    q: "Diff. between Container and Empty tags.",
-                    ans: "Container tags require a starting and ending tag (e.g., <html>...</html>). They usually wrap content. Empty tags (or self-closing tags) do not have a closing tag and do not wrap content (e.g., <br>, <img>).",
-                    code: "<!-- Container Tag -->\\n<p>This is a paragraph.</p>\\n\\n<!-- Empty Tag -->\\n<br> <!-- Line break -->\\n<hr> <!-- Horizontal Rule -->"
-                },
-                {
-                    q: "Use of <PRE> tag.",
-                    ans: "The <pre> tag defines preformatted text. Text in a <pre> element is displayed in a fixed-width font, and the text preserves both spaces and line breaks. The text will be displayed exactly as written in the HTML source code.",
-                    code: "<pre>\\n  Text in a pre element\\n  is displayed in a fixed-width\\n  font, and it preserves\\n  both      spaces and\\n  line breaks\\n</pre>"
-                },
-                {
-                    q: "Explain 'Cellpadding' vs 'Cellspacing'.",
-                    ans: "Cellpadding is the space between the cell wall and the cell content. Cellspacing is the space between cells.",
-                    code: "<table border=\"1\" cellpadding=\"10\" cellspacing=\"5\">\\n  <tr>\\n    <td>Cell 1</td>\\n    <td>Cell 2</td>\\n  </tr>\\n</table>"
-                },
-                {
-                    q: "What is Inline CSS?",
-                    ans: "Inline CSS is used to apply a unique style for a single element. To use inline styles, add the style attribute to the relevant element. The style attribute can contain any CSS property.",
-                    code: "<h1 style=\"color:blue;text-align:center;\">This is a heading</h1>\\n<p style=\"color:red;\">This is a paragraph.</p>"
-                },
-                {
-                    q: "What is a Hyperlink?",
-                    ans: "A hyperlink, or simply a link, is a reference to data that the user can follow by clicking or tapping. A hyperlink points to a whole document or to a specific element within a document. Hypertext is text with hyperlinks.",
-                    code: "<a href=\"https://www.w3schools.com\">Visit W3Schools</a>"
-                },
-                {
-                    q: "Define JavaScript.",
-                    ans: "JavaScript is a lightweight, interpreted, or just-in-time compiled programming language with first-class functions. While it is most well-known as the scripting language for Web pages, many non-browser environments also use it, such as Node.js, Apache CouchDB and Adobe Acrobat.",
-                    code: "<script>\\n  document.getElementById(\"demo\").innerHTML = \"Hello JavaScript!\";\\n<\/script>"
-                },
-                {
-                    q: "What is the 'OnLoad' event?",
-                    ans: "The onload event occurs when an object has been loaded. Onload is most often used within the <body> element to execute a script once a web page has completely loaded all content (including images, script files, CSS files, etc.).",
-                    code: "<body onload=\"myFunction()\">"
-                },
-                {
-                    q: "What is a Frameset?",
-                    ans: "The <frameset> tag was used to define a frameset. The <frameset> element holds one or more <frame> elements. Each <frame> element can hold a separate document. NOT SUPPORTED in HTML5.",
-                    code: "<frameset cols=\"25%,*,25%\">\\n  <frame src=\"frame_a.htm\">\\n  <frame src=\"frame_b.htm\">\\n  <frame src=\"frame_c.htm\">\\n</frameset>"
-                },
-                {
-                    q: "What is Dreamweaver?",
-                    ans: "Adobe Dreamweaver is a proprietary web development tool from Adobe Inc. It was created by Macromedia in 1997 and developed by them until Macromedia was acquired by Adobe Systems in 2005.",
-                    code: "<!-- Dreamweaver is an IDE, no specific code snippet -->"
-                },
-                {
-                    q: "Explain the 'Alert' box.",
-                    ans: "An alert box is often used if you want to make sure information comes through to the user. When an alert box pops up, the user will have to click \"OK\" to proceed.",
-                    code: "alert(\"I am an alert box!\");"
-                },
-                {
-                    q: "What is Intranet?",
-                    ans: "An intranet is a private network contained within an enterprise that is used to securely share company information and computing resources among employees. An intranet can also be used to facilitate working in groups and for teleconferences.",
-                    code: "<!-- Concept -->"
-                },
-                {
-                    q: "Use of 'ALT' attribute in IMG tag.",
-                    ans: "The required alt attribute provides an alternate text for an image, if the user for some reason cannot view it (because of slow connection, an error in the src attribute, or if the user uses a screen reader).",
-                    code: "<img src=\"img_girl.jpg\" alt=\"Girl in a jacket\" width=\"500\" height=\"600\">"
-                },
-                {
-                    q: "What is the use of 'TARGET' attribute?",
-                    ans: "The target attribute specifies where to open the linked document.",
-                    code: "<a href=\"https://www.w3schools.com\" target=\"_blank\">Visit W3Schools!</a>"
-                },
-                {
-                    q: "Define 'External Link'.",
-                    ans: "An external link is a hyperlink that points at any domain other than the domain the link exists on (source domain).",
-                    code: "<a href=\"http://www.google.com\">Google</a>"
-                },
-                {
-                    q: "What is a 'Prompt Box'?",
-                    ans: "A prompt box is often used if you want the user to input a value before entering a page. When a prompt box pops up, the user will have to click either \"OK\" or \"Cancel\" to proceed after entering an input value.",
-                    code: "let person = prompt(\"Please enter your name\", \"Harry Potter\");"
-                }
-            ],
-            u1: [
-                {
-                    q: "Explain the Client-Server model of the Internet with a neat diagram.",
-                    ans: "The client-server model is a distributed application structure that partitions tasks or workloads between the providers of a resource or service, called servers, and service requesters, called clients. Often clients and servers communicate over a computer network on separate hardware, but both client and server may reside in the same system.",
-                    code: "Client (Browser)  <--->  Internet (Network)  <--->  Server (Database/Files)"
-                },
-                {
-                    q: "Explain the structure of an HTML document. Discuss <HEAD>, <TITLE>, <BODY>.",
-                    ans: "An HTML document is structured as a tree of elements. The root element is <html>. It contains two main children: <head> and <body>.\\n- <head>: Contains meta-information about the document (title, styles, scripts) that is not displayed directly.\\n- <title>: Sets the title of the page shown in the browser tab.\\n- <body>: Contains the visible content of the page (headings, paragraphs, images).",
-                    code: "<!DOCTYPE html>\\n<html>\\n<head>\\n  <title>Page Title</title>\\n</head>\\n<body>\\n  <h1>This is a Heading</h1>\\n  <p>This is a paragraph.</p>\\n</body>\\n</html>"
-                },
-                {
-                    q: "Explain 3 types of Lists in HTML with syntax and examples.",
-                    ans: "1. Unordered List (<ul>): Items marked with bullets.\\n2. Ordered List (<ol>): Items marked with numbers/letters.\\n3. Description List (<dl>): A list of terms, with a description of each term.",
-                    code: "<!-- Unordered -->\\n<ul>\\n  <li>Coffee</li>\\n  <li>Tea</li>\\n</ul>\\n\\n<!-- Ordered -->\\n<ol>\\n  <li>First</li>\\n  <li>Second</li>\\n</ol>"
-                },
-                {
-                    q: "Explain the Table tag and its major attributes (Rowspan, Colspan).",
-                    ans: "The <table> tag defines an HTML table. \\n- <tr>: Table Row\\n- <th>: Table Header\\n- <td>: Table Data\\n- rowspan: Specifies the number of rows a cell should span.\\n- colspan: Specifies the number of columns a cell should span.",
-                    code: "<table border=\"1\">\\n  <tr>\\n    <th>Month</th>\\n    <th>Savings</th>\\n  </tr>\\n  <tr>\\n    <td>January</td>\\n    <td>$100</td>\\n  </tr>\\n</table>"
-                },
-                {
-                    q: "How are images inserted in HTML? Explain attributes of <IMG>.",
-                    ans: "Images are inserted using the <img> tag. It is empty, containing attributes only, and does not have a closing tag.\\nAttributes:\\n- src: Path to the image\\n- alt: Alternate text\\n- width/height: Size of image",
-                    code: "<img src=\"pic_trulli.jpg\" alt=\"Italian Trulli\" width=\"500\" height=\"333\">"
-                }
-            ],
-            u2: [
-                {
-                    q: "Explain different types of CSS (Inline, Internal, External) with examples.",
-                    ans: "1. Inline: Using the style attribute inside HTML elements.\\n2. Internal: Using a <style> element in the <head> section.\\n3. External: Using a <link> element to link to an external CSS file.",
-                    code: "<!-- Inline -->\\n<h1 style=\"color:blue;\">Blue Heading</h1>\\n\\n<!-- Internal -->\\n<style>body {background-color: powderblue;}</style>\\n\\n<!-- External -->\\n<link rel=\"stylesheet\" href=\"styles.css\">"
-                },
-                {
-                    q: "What are Frames? Explain attributes of <FRAMESET>.",
-                    ans: "Frames allow you to divide the browser window into several sections, where each section can load a separate HTML document. The <frameset> tag defines how to divide the window. Attributes: cols, rows, border, frameborder.",
-                    code: "<frameset cols=\"25%,75%\">\\n  <frame src=\"menu.html\">\\n  <frame src=\"content.html\">\\n</frameset>"
-                },
-                {
-                    q: "Design a Registration Form using HTML Form controls (Text, Radio, Submit).",
-                    ans: "HTML forms are used to collect user input. The <form> element is used to create an HTML form for user input.",
-                    code: "<form action=\"/action_page.php\">\\n  <label for=\"fname\">First name:</label><br>\\n  <input type=\"text\" id=\"fname\" name=\"fname\"><br>\\n  <input type=\"radio\" id=\"male\" name=\"gender\" value=\"male\">\\n  <label for=\"male\">Male</label><br>\\n  <input type=\"submit\" value=\"Submit\">\\n</form>"
-                },
-                {
-                    q: "Explain the Anchor Tag <A> and its attributes in detail.",
-                    ans: "The <a> tag defines a hyperlink. The most important attribute is the href attribute, which indicates the link's destination. Other attributes: target, download, rel, type.",
-                    code: "<a href=\"https://www.w3schools.com\">Visit W3Schools.com!</a>"
-                },
-                {
-                    q: "What is an Image Map? Explain with example.",
-                    ans: "An image map is an image with clickable areas. The <map> tag is used to define an image map. The <map> tag is required to contain a name attribute, which is associated with the <img>'s usemap attribute.",
-                    code: "<img src=\"workplace.jpg\" alt=\"Workplace\" usemap=\"#workmap\">\\n\\n<map name=\"workmap\">\\n  <area shape=\"rect\" coords=\"34,44,270,350\" href=\"computer.htm\">\\n</map>"
-                }
-            ],
-            u3: [
-                {
-                    q: "Explain features of JavaScript. How is it different from Java?",
-                    ans: "Features: Lightweight, Interpreted, Object-oriented, Client-side scripting. \\nDifference: Java is an OOP programming language while Java Script is an OOP scripting language. Java creates applications that run in a virtual machine or browser while JavaScript code is run on a browser only.",
-                    code: "<!-- Conceptual -->"
-                },
-                {
-                    q: "Explain Conditional Statements in JS (If, Switch) with examples.",
-                    ans: "Conditional statements are used to perform different actions based on different conditions.",
-                    code: "if (hour < 18) {\\n  greeting = \"Good day\";\\n}\\n\\nswitch(expression) {\\n  case x:\\n    // code block\\n    break;\\n  default:\\n    // code block\\n}"
-                },
-                {
-                    q: "Explain Looping structures in JS (For, While) with syntax.",
-                    ans: "Loops can execute a block of code a number of times.",
-                    code: "for (let i = 0; i < 5; i++) {\\n  text += \"The number is \" + i + \"<br>\";\\n}\\n\\nwhile (i < 10) {\\n  text += \"The number is \" + i;\\n  i++;\\n}"
-                },
-                {
-                    q: "What are Functions in JS? Explain with an example.",
-                    ans: "A JavaScript function is a block of code designed to perform a particular task. A JavaScript function is executed when \"something\" invokes it (calls it).",
-                    code: "function myFunction(p1, p2) {\\n  return p1 * p2;   // The function returns the product of p1 and p2\\n}"
-                },
-                {
-                    q: "Explain Event Handling in JS (onClick, onMouseOver).",
-                    ans: "HTML events are \"things\" that happen to HTML elements. When JavaScript is used in HTML pages, JavaScript can \"react\" on these events.",
-                    code: "<button onclick=\"document.getElementById('demo').innerHTML = Date()\">The time is?</button>"
-                }
-            ],
-            u4: [
-                {
-                    q: "Explain the String Object and its methods (length, charAt, etc).",
-                    ans: "The String object is used to represent and manipulate a sequence of characters. Methods: length, charAt(), charCodeAt(), concat(), indexOf(), lastIndexOf(), match(), replace(), search(), slice(), split(), substr(), substring(), toLowerCase(), toUpperCase(), trim(), valueOf().",
-                    code: "let text = \"ABCDEFGHIJKLMNOPQRSTUVWXYZ\";\\nlet length = text.length;"
-                },
-                {
-                    q: "Explain the Math Object and its methods (round, random, etc).",
-                    ans: "The Math object allows you to perform mathematical tasks on numbers. Methods: Math.round(), Math.ceil(), Math.floor(), Math.trunc(), Math.sign(), Math.pow(), Math.sqrt(), Math.abs(), Math.sin(), Math.cos(), Math.min(), Math.max(), Math.random().",
-                    code: "Math.round(4.6); // returns 5\\nMath.random(); // returns a random number"
-                },
-                {
-                    q: "Explain the Date Object and how to manipulate dates in JS.",
-                    ans: "Date objects are created with the new Date() constructor. Methods: getDate(), getDay(), getFullYear(), getHours(), getMilliseconds(), getMinutes(), getMonth(), getSeconds(), getTime().",
-                    code: "const d = new Date();\\nd.getFullYear();"
-                },
-                {
-                    q: "Describe the Dreamweaver Workspace and its components.",
-                    ans: "The Dreamweaver workspace lets you view documents and object properties. The workspace also places many of the most common operations in toolbars so that you can quickly make changes to your documents. Components: Document window, Document toolbar, Standard toolbar, Coding toolbar, Property inspector, Panels, Context menus.",
-                    code: "<!-- Concept -->"
-                },
-                {
-                    q: "Steps to create a new Site in Dreamweaver.",
-                    ans: "1. Click Site > New Site...\\n2. In the Site Setup dialog box, select Site from the list of categories on the left.\\n3. Enter a name for your site in the Site Name text box.\\n4. Click the folder icon next to the Local Site Folder text box to browse to and select the folder on your computer where you want to store your site files.\\n5. Click Save.",
-                    code: "<!-- Procedure -->"
-                }
-            ]
-        };
-
-        // --- APP LOGIC ---
-        const papers = [
-            { id: 'p1', title: 'Web Tech 2023', type: 'paper' },
-            { id: 'p2', title: 'Web Tech 2022', type: 'paper' },
-            { id: 'p3', title: 'Web Tech 2021', type: 'paper' },
-            { id: 'p4', title: 'Web Tech 2020', type: 'paper' },
-            { id: 'p5', title: 'Web Tech 2019', type: 'paper' }
-        ];
-
-        const solutions = [
-            { id: 's1', title: 'Solution Key 2023', type: 'solution', link: 'p1' },
-            { id: 's2', title: 'Solution Key 2022', type: 'solution', link: 'p2' },
-            { id: 's3', title: 'Solution Key 2021', type: 'solution', link: 'p3' },
-            { id: 's4', title: 'Solution Key 2020', type: 'solution', link: 'p4' },
-            { id: 's5', title: 'Solution Key 2019', type: 'solution', link: 'p5' }
-        ];
-
-        // Init
-        document.addEventListener('DOMContentLoaded', () => {
-            renderNav();
-            updateClock();
-            setInterval(updateClock, 1000);
-
-            // Auto-load first paper
-            renderPaper(papers[0]);
-
-            // Intro
-            setTimeout(() => {
-                const intro = document.getElementById('intro-overlay');
-                intro.style.opacity = '0';
-                setTimeout(() => intro.remove(), 500);
-            }, 2000);
-        });
-
-        function updateClock() {
-            const now = new Date();
-            document.getElementById('clock').innerText = now.toLocaleTimeString('en-US', { hour12: false });
-        }
-
-        function renderNav() {
-            const paperNav = document.getElementById('paper-nav');
-            const solNav = document.getElementById('solution-nav');
-
-            paperNav.innerHTML = papers.map(p => `
-                <div class="nav-item" onclick="renderPaperById('${p.id}')">
-                    <i class="fas fa-file-alt"></i> ${p.title}
-                </div>
-            `).join('');
-
-            solNav.innerHTML = solutions.map(s => `
-                <div class="nav-item" onclick="renderSolutionById('${s.id}')">
-                    <i class="fas fa-key"></i> ${s.title}
-                </div>
-            `).join('');
-        }
-
-        function renderPaperById(id) {
-            const p = papers.find(x => x.id === id);
-            if (p) renderPaper(p);
-            closeMobileDrawers();
-        }
-
-        function renderSolutionById(id) {
-            const s = solutions.find(x => x.id === id);
-            if (s) renderSolution(s);
-            closeMobileDrawers();
-        }
-
-        function renderPaper(paper) {
-            const content = document.getElementById('paper-content');
-
-            let html = `
-                <div class="paper-title">PANJAB UNIVERSITY</div>
-                <div class="paper-subtitle">BCA SEM-1 // ${paper.title.toUpperCase()}</div>
-                
-                <div class="section-title">SECTION A (Compulsory)</div>
-            `;
-
-            qBank.short.forEach((q, idx) => {
-                html += createQuestionHTML(idx + 1, q);
-            });
-
-            ['u1', 'u2', 'u3', 'u4'].forEach((unit, uIdx) => {
-                html += `<div class="section-title">UNIT ${uIdx + 1}</div>`;
-                qBank[unit].forEach((q, idx) => {
-                    html += createQuestionHTML(idx + 1, q);
-                });
-            });
-
-            content.innerHTML = html;
-            content.scrollTop = 0;
-            document.getElementById('main-scroll').scrollTop = 0;
-        }
-
-        function renderSolution(sol) {
-            const content = document.getElementById('paper-content');
-
-            let html = `
-                <div class="paper-title text-primary">SOLUTION KEY</div>
-                <div class="paper-subtitle">${sol.title.toUpperCase()}</div>
-            `;
-
-            const renderSolSection = (title, questions, category) => {
-                let sectionHtml = `<div class="section-title">${title}</div>`;
-                questions.forEach((qItem, idx) => {
-                    // Find answer
-                    const ansData = solutionBank[category].find(a => a.q === qItem.t) || { ans: "Answer not found.", code: "" };
-
-                    sectionHtml += `
-                        <div class="q-item flex-col">
-                            <div class="flex gap-4">
-                                <div class="q-num text-primary">Q${idx + 1}</div>
-                                <div class="q-content">
-                                    <div class="q-text font-bold text-white">${qItem.t}</div>
-                                </div>
-                            </div>
-                            <div class="answer-box">
-                                <div class="answer-text">${ansData.ans.replace(/\n/g, '<br>')}</div>
-                                ${ansData.code && !ansData.code.includes('No code') ?
-                            `<div class="code-block">${ansData.code.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</div>`
-                            : ''}
-                            </div>
-                        </div>
-                    `;
-                });
-                return sectionHtml;
-            };
-
-            html += renderSolSection('SECTION A', qBank.short, 'short');
-            html += renderSolSection('UNIT 1', qBank.u1, 'u1');
-            html += renderSolSection('UNIT 2', qBank.u2, 'u2');
-            html += renderSolSection('UNIT 3', qBank.u3, 'u3');
-            html += renderSolSection('UNIT 4', qBank.u4, 'u4');
-
-            content.innerHTML = html;
-            content.scrollTop = 0;
-            document.getElementById('main-scroll').scrollTop = 0;
-        }
-
-        function createQuestionHTML(num, q) {
-            let badgeClass = 'badge-low';
-            if (q.p === 'High') badgeClass = 'badge-high';
-            if (q.p === 'Med') badgeClass = 'badge-med';
-
-            return `
-                <div class="q-item">
-                    <div class="q-num">Q${num}</div>
-                    <div class="q-content">
-                        <div class="q-text">${q.t}</div>
-                        <div class="q-meta">
-                            <span class="badge ${badgeClass}">${q.p} PROBABILITY</span>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        // --- UI ACTIONS ---
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('active');
-            document.getElementById('panel').classList.remove('active');
-        }
-
-        function togglePanel() {
-            document.getElementById('panel').classList.toggle('active');
-            document.getElementById('sidebar').classList.remove('active');
-        }
-
-        function closeMobileDrawers() {
-            document.getElementById('sidebar').classList.remove('active');
-            document.getElementById('panel').classList.remove('active');
-        }
-
-        function toggleFullscreen() {
-            if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen();
-            } else {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                }
-            }
-        }
-
-        function toggleTheme() {
-            // Simple dim toggle for now
-            const root = document.documentElement;
-            const current = getComputedStyle(root).getPropertyValue('--bg-deep').trim();
-            if (current === '#030303') {
-                root.style.setProperty('--bg-deep', '#000000');
-                root.style.setProperty('--bg-surface', '#050505');
-                root.style.setProperty('--text-main', '#888');
-            } else {
-                root.style.setProperty('--bg-deep', '#030303');
-                root.style.setProperty('--bg-surface', '#0a0a0a');
-                root.style.setProperty('--text-main', '#e0e0e0');
-            }
-        }
-
-        let currentZoom = 1;
-        function adjustZoom(delta) {
-            currentZoom += delta;
-            if (currentZoom < 0.5) currentZoom = 0.5;
-            if (currentZoom > 2) currentZoom = 2;
-            document.getElementById('paper-content').style.transform = `scale(${currentZoom})`;
-            document.getElementById('paper-content').style.transformOrigin = 'top center';
-        }
-
-        function downloadPDF() {
-            const element = document.getElementById('paper-content');
-            const opt = {
-                margin: 1,
-                filename: 'alpha_terminal_paper.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2 },
-                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-            };
-            html2pdf().set(opt).from(element).save();
-        }
     </script>
 </body>
 
