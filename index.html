@@ -232,19 +232,21 @@
             left: 0;
             width: 100%;
             z-index: 100;
+            overflow-y: auto;
         }
 
         .paper-header-real {
             text-align: center;
             border-bottom: 2px solid #000;
-            padding-bottom: 1rem;
-            margin-bottom: 2rem;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
         }
 
         .paper-title-real {
-            font-size: 2rem;
-            font-weight: bold;
+            font-size: 1.4rem;
+            font-weight: 900;
             text-transform: uppercase;
+            letter-spacing: 1px;
             margin-bottom: 0.5rem;
         }
 
@@ -253,33 +255,80 @@
             justify-content: space-between;
             font-weight: bold;
             font-size: 0.9rem;
-            border-top: 1px solid #000;
-            border-bottom: 1px solid #000;
-            padding: 0.5rem 0;
-            margin-top: 1rem;
+            margin-top: 5px;
         }
 
-        .section-real {
-            margin-bottom: 2rem;
-        }
-
-        .section-title-real {
+        .section-header {
+            background: #f0f0f0;
+            padding: 5px 10px;
             font-weight: bold;
-            text-align: center;
             text-transform: uppercase;
-            margin-bottom: 1rem;
-            text-decoration: underline;
-        }
-
-        .question-real {
-            margin-bottom: 1rem;
+            border-bottom: 1px solid #999;
+            margin: 20px 0 10px 0;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
             display: flex;
-            gap: 1rem;
+            justify-content: space-between;
         }
 
-        .q-num-real {
+        .question-row {
+            display: flex;
+            margin-bottom: 12px;
+            align-items: baseline;
+            line-height: 1.5;
+        }
+
+        .q-num {
+            width: 30px;
             font-weight: bold;
-            min-width: 30px;
+            flex-shrink: 0;
+        }
+
+        .q-text {
+            flex: 1;
+        }
+
+        /* Probability Tags */
+        .prob-badge {
+            font-size: 0.65rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-left: 8px;
+            vertical-align: middle;
+            font-family: 'Inter', sans-serif;
+            display: inline-block;
+        }
+
+        .prob-high {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #065f46;
+        }
+
+        .prob-med {
+            background: #dbeafe;
+            color: #1e40af;
+            border: 1px solid #1e40af;
+        }
+
+        .prob-low {
+            background: #f3f4f6;
+            color: #374151;
+            border: 1px solid #374151;
+        }
+
+        .sub-q-list {
+            list-style-type: lower-roman;
+            padding-left: 1.5rem;
+            margin-top: 5px;
+        }
+
+        .sub-q-list li {
+            margin-bottom: 4px;
+            padding-left: 5px;
         }
 
         .back-btn {
@@ -302,6 +351,23 @@
 
         .back-btn:hover {
             background: #333;
+        }
+
+        @media print {
+
+            .back-btn,
+            #debug {
+                display: none !important;
+            }
+
+            #paper-view {
+                padding: 0;
+                position: static;
+            }
+
+            body {
+                overflow: visible;
+            }
         }
     </style>
 </head>
@@ -365,7 +431,7 @@
     </div>
 
     <script>
-        // --- INTRO LOGIC ---
+        // ... (Intro logic preserved) ...
         const textToType = "With Kive A Singhh...";
         const typingElement = document.getElementById('typing-text');
         const overlay = document.getElementById('intro-overlay');
@@ -376,15 +442,15 @@
             if (charIndex < textToType.length) {
                 typingElement.textContent += textToType.charAt(charIndex);
                 charIndex++;
-                setTimeout(typeText, 50); // Faster typing speed
+                setTimeout(typeText, 50);
             } else {
-                setTimeout(finishIntro, 500); // Shorter wait before fading out
+                setTimeout(finishIntro, 500);
             }
         }
 
         function finishIntro() {
             overlay.style.opacity = '0';
-            overlay.style.pointerEvents = 'none'; // Ensure clicks pass through during fade
+            overlay.style.pointerEvents = 'none';
             setTimeout(() => {
                 overlay.style.display = 'none';
                 dashboard.style.opacity = '1';
@@ -392,14 +458,12 @@
             }, 1000);
         }
 
-        // Start typing when page loads
         window.onload = () => {
             setTimeout(typeText, 500);
             startClock();
             renderPapers();
         };
 
-        // --- CLOCK ---
         function startClock() {
             setInterval(() => {
                 const now = new Date();
@@ -407,42 +471,75 @@
             }, 1000);
         }
 
-        // --- DATA & RENDERING ---
+        // --- DATA ---
+        const paperCode = "BCA-DSC-1(Maj)-101";
 
-        // Mock Data for 10 Papers
-        const papers = Array.from({ length: 10 }, (_, i) => ({
-            id: i + 1,
-            title: `Question Paper Set ${String(i + 1).padStart(2, '0')}`,
-            date: `2024-12-${String(i + 1).padStart(2, '0')}`,
-            status: 'AVAILABLE'
-        }));
-
-        // Original Question Bank Data
         const qBank = {
             short: [
                 { t: "Define WWW and its full form.", p: "High" },
                 { t: "What is a Web Server? Give 2 examples.", p: "High" },
                 { t: "Define URL and its components.", p: "High" },
                 { t: "Diff. between Container and Empty tags.", p: "Med" },
-                { t: "Use of <PRE> tag.", p: "Low" }
+                { t: "Use of &lt;PRE&gt; tag.", p: "Low" },
+                { t: "Explain 'Cellpadding' vs 'Cellspacing'.", p: "High" },
+                { t: "What is Inline CSS?", p: "Med" },
+                { t: "What is a Hyperlink?", p: "Med" },
+                { t: "Define JavaScript.", p: "High" },
+                { t: "What is the 'OnLoad' event?", p: "High" },
+                { t: "What is a Frameset?", p: "Med" },
+                { t: "What is Dreamweaver?", p: "Low" },
+                { t: "Explain the 'Alert' box.", p: "Med" },
+                { t: "What is Intranet?", p: "Med" },
+                { t: "Use of 'ALT' attribute in IMG tag.", p: "High" },
+                { t: "What is the use of 'TARGET' attribute?", p: "Med" },
+                { t: "Define 'External Link'.", p: "Low" },
+                { t: "What is a 'Prompt Box'?", p: "Med" }
             ],
             u1: [
                 { t: "Explain the Client-Server model of the Internet with a neat diagram.", p: "High" },
-                { t: "Explain the structure of an HTML document. Discuss <HEAD>, <TITLE>, <BODY>.", p: "High" }
+                { t: "Explain the structure of an HTML document. Discuss &lt;HEAD&gt;, &lt;TITLE&gt;, &lt;BODY&gt;.", p: "High" },
+                { t: "Explain 3 types of Lists in HTML with syntax and examples.", p: "Med" },
+                { t: "Explain the Table tag and its major attributes (Rowspan, Colspan).", p: "High" },
+                { t: "How are images inserted in HTML? Explain attributes of &lt;IMG&gt;.", p: "Med" }
             ],
             u2: [
                 { t: "Explain different types of CSS (Inline, Internal, External) with examples.", p: "High" },
-                { t: "What are Frames? Explain attributes of <FRAMESET>.", p: "Med" }
+                { t: "What are Frames? Explain attributes of &lt;FRAMESET&gt;.", p: "Med" },
+                { t: "Design a Registration Form using HTML Form controls (Text, Radio, Submit).", p: "High" },
+                { t: "Explain the Anchor Tag &lt;A&gt; and its attributes in detail.", p: "High" },
+                { t: "What is an Image Map? Explain with example.", p: "Low" }
             ],
             u3: [
                 { t: "Explain features of JavaScript. How is it different from Java?", p: "High" },
-                { t: "Explain Conditional Statements in JS (If, Switch) with examples.", p: "High" }
+                { t: "Explain Conditional Statements in JS (If, Switch) with examples.", p: "High" },
+                { t: "Explain Looping structures in JS (For, While) with syntax.", p: "Med" },
+                { t: "What are Functions in JS? Explain with an example.", p: "High" },
+                { t: "Explain Event Handling in JS (onClick, onMouseOver).", p: "High" }
             ],
             u4: [
                 { t: "Explain the String Object and its methods (length, charAt, etc).", p: "High" },
-                { t: "Explain the Math Object and its methods (round, random, etc).", p: "Med" }
+                { t: "Explain the Math Object and its methods (round, random, etc).", p: "Med" },
+                { t: "Explain the Date Object and how to manipulate dates in JS.", p: "Med" },
+                { t: "Describe the Dreamweaver Workspace and its components.", p: "High" },
+                { t: "Steps to create a new Site in Dreamweaver.", p: "Low" }
             ]
         };
+
+        // Shuffle & Pick Helper
+        const getQs = (arr, n) => [...arr].sort(() => 0.5 - Math.random()).slice(0, n);
+
+        // Generate 10 Unique Sets
+        const papers = Array.from({ length: 10 }, (_, i) => ({
+            id: i + 1,
+            title: `Question Paper Set ${String(i + 1).padStart(2, '0')}`,
+            date: `2024-12-${String(i + 1).padStart(2, '0')}`,
+            status: 'AVAILABLE',
+            short: getQs(qBank.short, 9),
+            u1: getQs(qBank.u1, 2),
+            u2: getQs(qBank.u2, 2),
+            u3: getQs(qBank.u3, 2),
+            u4: getQs(qBank.u4, 2)
+        }));
 
         function renderPapers() {
             const grid = document.getElementById('paper-grid');
@@ -468,8 +565,15 @@
             });
         }
 
+        // Helper to render probability badge
+        function renderTag(prob) {
+            const cls = prob === 'High' ? 'prob-high' : (prob === 'Med' ? 'prob-med' : 'prob-low');
+            return `<span class="prob-badge ${cls}">${prob}</span>`;
+        }
+
         // Expose to window to ensure inline onclick works
         window.openPaper = function (id) {
+            document.getElementById('debug').textContent = `OPENING PAPER ${id}`;
             console.log("Opening paper:", id);
             const paper = papers.find(p => p.id === id);
             if (!paper) return;
@@ -484,36 +588,104 @@
             // Render Content with Real Paper Style
             const container = document.getElementById('paper-content-container');
 
-            const renderSection = (title, questions) => `
-                <div class="section-real">
-                    <div class="section-title-real">${title}</div>
-                    <div>
-                        ${questions.map((q, idx) => `
-                            <div class="question-real">
-                                <span class="q-num-real">Q${idx + 1}.</span>
-                                <div>${q.t}</div>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            `;
-
             container.innerHTML = `
                 <div class="paper-header-real">
-                    <div class="paper-title-real">${paper.title}</div>
-                    <div>BCA SEMESTER I EXAMINATION</div>
+                    <h1>Panjab University</h1>
+                    <div style="font-size: 1.1rem; margin-top: 5px;">Bachelor of Computer Applications (Semester I)</div>
+                    <div style="font-size: 1rem; font-weight: bold; margin-top: 5px;">INTRODUCTION TO WEB TECHNOLOGIES</div>
                     <div class="paper-meta-real">
-                        <span>DATE: ${paper.date}</span>
-                        <span>MAX MARKS: 100</span>
-                        <span>TIME: 3 HOURS</span>
+                        <span>Paper Code: ${paperCode}</span>
+                        <span>Max Marks: 45</span>
+                    </div>
+                    <div class="paper-meta-real">
+                        <span>Time Allowed: 3 Hours</span>
                     </div>
                 </div>
 
-                ${renderSection('SECTION A (Short Answer)', qBank.short)}
-                ${renderSection('SECTION B (Unit I)', qBank.u1)}
-                ${renderSection('SECTION C (Unit II)', qBank.u2)}
-                ${renderSection('SECTION D (Unit III)', qBank.u3)}
-                ${renderSection('SECTION E (Unit IV)', qBank.u4)}
+                <p style="font-style: italic; font-size: 0.9rem; margin-bottom: 20px;">
+                    <strong>Note:</strong> Attempt <strong>nine</strong> questions in all. 
+                    <strong>Section A</strong> is compulsory. 
+                    Attempt <strong>one</strong> question from each Unit.
+                </p>
+
+                <!-- SECTION A -->
+                <div class="section-header">
+                    <span>Section - A (Compulsory)</span>
+                    <span>[9 Marks]</span>
+                </div>
+                <div class="question-row">
+                    <div class="q-num">1.</div>
+                    <div class="q-text">
+                        Attempt any nine of the following:
+                        <ol class="sub-q-list">
+                            ${paper.short.map(q => `
+                                <li>
+                                    ${q.t} ${renderTag(q.p)}
+                                </li>
+                            `).join('')}
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- UNIT I -->
+                <div class="section-header">
+                    <span>Unit - I</span>
+                    <span>[9 Marks]</span>
+                </div>
+                <div class="question-row">
+                    <div class="q-num">2.</div>
+                    <div class="q-text">${paper.u1[0].t} ${renderTag(paper.u1[0].p)}</div>
+                </div>
+                <div style="text-align: center; font-weight: bold; font-size: 0.8rem; margin: 10px 0;">OR</div>
+                <div class="question-row">
+                    <div class="q-num">3.</div>
+                    <div class="q-text">${paper.u1[1].t} ${renderTag(paper.u1[1].p)}</div>
+                </div>
+
+                <!-- UNIT II -->
+                <div class="section-header">
+                    <span>Unit - II</span>
+                    <span>[9 Marks]</span>
+                </div>
+                <div class="question-row">
+                    <div class="q-num">4.</div>
+                    <div class="q-text">${paper.u2[0].t} ${renderTag(paper.u2[0].p)}</div>
+                </div>
+                <div style="text-align: center; font-weight: bold; font-size: 0.8rem; margin: 10px 0;">OR</div>
+                <div class="question-row">
+                    <div class="q-num">5.</div>
+                    <div class="q-text">${paper.u2[1].t} ${renderTag(paper.u2[1].p)}</div>
+                </div>
+
+                <!-- UNIT III -->
+                <div class="section-header">
+                    <span>Unit - III</span>
+                    <span>[9 Marks]</span>
+                </div>
+                <div class="question-row">
+                    <div class="q-num">6.</div>
+                    <div class="q-text">${paper.u3[0].t} ${renderTag(paper.u3[0].p)}</div>
+                </div>
+                <div style="text-align: center; font-weight: bold; font-size: 0.8rem; margin: 10px 0;">OR</div>
+                <div class="question-row">
+                    <div class="q-num">7.</div>
+                    <div class="q-text">${paper.u3[1].t} ${renderTag(paper.u3[1].p)}</div>
+                </div>
+
+                <!-- UNIT IV -->
+                <div class="section-header">
+                    <span>Unit - IV</span>
+                    <span>[9 Marks]</span>
+                </div>
+                <div class="question-row">
+                    <div class="q-num">8.</div>
+                    <div class="q-text">${paper.u4[0].t} ${renderTag(paper.u4[0].p)}</div>
+                </div>
+                <div style="text-align: center; font-weight: bold; font-size: 0.8rem; margin: 10px 0;">OR</div>
+                <div class="question-row">
+                    <div class="q-num">9.</div>
+                    <div class="q-text">${paper.u4[1].t} ${renderTag(paper.u4[1].p)}</div>
+                </div>
             `;
         }
 
