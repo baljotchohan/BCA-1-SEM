@@ -4,741 +4,559 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alpha Terminal v2 | BCA-DSC-101</title>
+    <title>Alpha Terminal v3 | BCA-DSC-101</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=VT323&family=Fira+Code:wght@400;700&display=swap');
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
 
+    <style>
         :root {
-            --bg-main: #0d0208;
-            --bg-panel: #001100;
-            --terminal-green: #00ff41;
-            --terminal-dim: #008f11;
-            --terminal-alert: #ff0000;
-            --terminal-warn: #ffb000;
-            --scan-line: rgba(0, 255, 65, 0.04);
+            /* COLORS */
+            --bg-deep: #030303;
+            --bg-surface: #0a0a0a;
+            --bg-surface-hover: #111111;
+            --border-dim: #1a1a1a;
+            --border-light: #333333;
+
+            --primary: #00ff41;
+            --primary-dim: rgba(0, 255, 65, 0.1);
+            --primary-glow: rgba(0, 255, 65, 0.4);
+
+            --accent: #00ffff;
+            --accent-dim: rgba(0, 255, 255, 0.1);
+
+            --text-main: #e0e0e0;
+            --text-muted: #888888;
+
+            /* TYPOGRAPHY */
+            --font-ui: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+
+            /* SIZES */
+            --header-height: 50px;
+            --sidebar-width: 260px;
+            --panel-width: 300px;
+        }
+
+        * {
+            box-sizing: border-box;
+            scrollbar-width: thin;
+            scrollbar-color: var(--border-light) var(--bg-deep);
         }
 
         body {
-            background-color: var(--bg-main);
-            color: var(--terminal-green);
-            font-family: 'VT323', monospace;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: var(--font-ui);
             height: 100vh;
             overflow: hidden;
+            margin: 0;
             display: flex;
             flex-direction: column;
-            position: relative;
-            font-size: 1.2rem;
-            text-shadow: 0 0 2px var(--terminal-dim);
         }
 
-        /* CRT SCANLINE EFFECT */
-        body::before {
-            content: " ";
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            z-index: 999;
-            background-size: 100% 2px, 3px 100%;
-            pointer-events: none;
-        }
-
-        /* TERMINAL SCROLLBAR */
-        ::-webkit-scrollbar {
-            width: 10px;
-            background: #000;
-            border-left: 1px solid var(--terminal-dim);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--terminal-dim);
-            border: 1px solid var(--terminal-green);
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--terminal-green);
-        }
-
-        /* --- HEADER (SYSTEM STATUS) --- */
-        .terminal-header {
-            height: 40px;
-            background: #000;
-            border-bottom: 1px solid var(--terminal-green);
-            display: flex;
-            align-items: center;
-            padding: 0 1rem;
-            justify-content: space-between;
-            z-index: 50;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.9rem;
-        }
-
-        .status-item {
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
-        }
-
-        .blink {
-            animation: blinker 1s linear infinite;
-        }
-
-        @keyframes blinker {
-            50% {
-                opacity: 0;
-            }
-        }
-
-        /* --- WORKSPACE --- */
-        .workspace {
-            display: flex;
-            flex: 1;
-            overflow: hidden;
-            height: calc(100vh - 40px);
-        }
-
-        /* SIDEBAR (DIRECTORY TREE) */
-        .sidebar {
-            width: 250px;
-            background: #000;
-            border-right: 1px solid var(--terminal-green);
-            display: flex;
-            flex-direction: column;
-            padding: 1rem;
-            gap: 0.5rem;
-            z-index: 40;
-            overflow-y: auto;
-            transition: transform 0.3s ease;
-        }
-
-        .dir-item {
-            cursor: pointer;
-            padding: 4px 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.1s;
-            border-radius: 2px;
-        }
-
-        .dir-item:hover {
-            background: var(--terminal-dim);
-            color: #000;
-        }
-
-        .dir-item.active {
-            background: var(--terminal-green);
-            color: #000;
-            font-weight: bold;
-        }
-
-        .dir-content {
-            margin-left: 1.5rem;
-            border-left: 1px dashed var(--terminal-dim);
-            padding-left: 0.5rem;
-            display: none;
-        }
-
-        .dir-content.open {
-            display: block;
-        }
-
-        /* PAPER VIEWPORT (TERMINAL OUTPUT) */
-        .paper-viewport {
-            flex: 1;
-            background: #0d0208;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            overflow-y: auto;
-            padding: 2rem;
-            position: relative;
-        }
-
-        .paper {
-            width: 100%;
-            max-width: 900px;
-            min-height: 80vh;
-            background: #000;
-            color: var(--terminal-green);
-            padding: 3rem;
-            border: 1px solid var(--terminal-green);
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
-            font-family: 'VT323', monospace;
-            position: relative;
-            margin: 0 auto;
-        }
-
-        /* EXAM CONTENT STYLING */
-        .exam-header {
-            text-align: center;
-            border-bottom: 2px dashed var(--terminal-green);
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-        }
-
-        .exam-header h1 {
-            font-size: 2.5rem;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            margin-bottom: 10px;
-        }
-
-        .section-header {
-            background: var(--terminal-dim);
-            color: #000;
-            padding: 8px 15px;
-            font-weight: bold;
-            text-transform: uppercase;
-            margin: 30px 0 20px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-left: 5px solid var(--terminal-green);
-        }
-
-        .question-row {
-            display: flex;
-            margin-bottom: 20px;
-            align-items: baseline;
-            line-height: 1.6;
-        }
-
-        .q-num {
-            width: 50px;
-            font-weight: bold;
-            flex-shrink: 0;
-            color: var(--terminal-warn);
-            font-size: 1.3rem;
-        }
-
-        .q-text {
-            flex: 1;
-            font-size: 1.3rem;
-        }
-
-        /* TYPING ANIMATION CLASS */
-        .typing-text {
-            overflow: hidden;
-            white-space: pre-wrap;
-            border-right: .15em solid var(--terminal-green);
-            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
-        }
-
-        /* PROBABILITY TAGS */
-        .prob-badge {
-            font-size: 0.9rem;
-            padding: 2px 6px;
-            border: 1px solid;
-            margin-left: 10px;
-            text-transform: uppercase;
-            vertical-align: middle;
-            display: inline-block;
-        }
-
-        .prob-high {
-            color: #000;
-            background: var(--terminal-green);
-            border-color: var(--terminal-green);
-        }
-
-        .prob-med {
-            color: var(--terminal-warn);
-            border-color: var(--terminal-warn);
-        }
-
-        /* VIEW PANELS */
-        .view-panel {
-            position: fixed;
-            top: 40px;
-            left: 250px;
-            right: 0;
-            bottom: 0;
-            background: rgba(13, 2, 8, 0.98);
-            z-index: 200;
-            display: none;
-            padding: 3rem;
-            border-left: 1px solid var(--terminal-green);
-        }
-
-        .view-panel.active {
-            display: block;
-        }
-
-        .panel-header {
-            border-bottom: 1px dashed var(--terminal-green);
-            padding-bottom: 1rem;
-            margin-bottom: 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .panel-title {
-            font-size: 2.5rem;
-            color: var(--terminal-green);
-        }
-
-        .close-panel {
-            background: transparent;
-            border: 1px solid var(--terminal-alert);
-            color: var(--terminal-alert);
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-        }
-
-        .close-panel:hover {
-            background: var(--terminal-alert);
-            color: #000;
-        }
-
-        /* ANALYTICS GRID */
-        .analytics-grid {
+        /* --- LAYOUT GRID --- */
+        .app-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: var(--sidebar-width) 1fr var(--panel-width);
+            grid-template-rows: var(--header-height) 1fr;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
         }
 
-        .stat-card {
-            border: 1px solid var(--terminal-dim);
-            padding: 2rem;
-            position: relative;
-            background: rgba(0, 255, 65, 0.02);
-            transition: all 0.3s;
+        /* HEADER */
+        .app-header {
+            grid-column: 1 / -1;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-dim);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1.5rem;
+            z-index: 50;
         }
 
-        .stat-card:hover {
-            border-color: var(--terminal-green);
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
-            transform: translateY(-5px);
+        .brand {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.1rem;
         }
 
-        .stat-value {
-            font-size: 4rem;
-            color: var(--terminal-green);
-            font-family: 'VT323', monospace;
-            line-height: 1;
-            margin-top: 1rem;
-        }
-
-        /* UTILS */
-        .btn {
-            background: transparent;
-            border: 1px solid var(--terminal-green);
-            color: var(--terminal-green);
-            padding: 10px 20px;
-            cursor: pointer;
-            font-family: 'Fira Code', monospace;
-            text-transform: uppercase;
-            transition: all 0.2s;
+        .brand i {
             font-size: 0.9rem;
         }
 
-        .btn:hover {
-            background: var(--terminal-green);
-            color: #000;
-            box-shadow: 0 0 15px var(--terminal-green);
-        }
-
-        .toast {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: #000;
-            border: 1px solid var(--terminal-green);
-            padding: 1rem 2rem;
-            color: var(--terminal-green);
-            font-family: 'Fira Code', monospace;
-            z-index: 1000;
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
-        }
-
-        /* PRINT STYLES */
-        @media print {
-            body {
-                background: white;
-                color: black;
-                text-shadow: none;
-            }
-
-            body::before {
-                display: none;
-            }
-
-            .terminal-header,
-            .sidebar,
-            .view-panel,
-            .control-panel,
-            .mobile-controls {
-                display: none !important;
-            }
-
-            .paper-viewport {
-                padding: 0;
-                overflow: visible;
-            }
-
-            .paper {
-                border: none;
-                box-shadow: none;
-                color: black;
-                width: 100%;
-                max-width: none;
-                padding: 0;
-                margin: 0;
-            }
-
-            .q-num {
-                color: black;
-            }
-
-            .prob-badge {
-                border-color: black;
-                color: black;
-            }
-
-            .prob-high {
-                background: #ddd;
-            }
-        }
-
-        /* CONTROL PANEL */
-        .control-panel {
-            width: 280px;
-            background: #000;
-            border-left: 1px solid var(--terminal-green);
+        .header-controls {
             display: flex;
-            flex-direction: column;
-            padding: 1rem;
             gap: 1rem;
-            z-index: 40;
-            overflow-y: auto;
-            transition: transform 0.3s ease;
-        }
-
-        /* MOBILE STYLES */
-        @media (max-width: 1024px) {
-            .sidebar {
-                position: fixed;
-                left: 0;
-                top: 40px;
-                bottom: 0;
-                width: 85%;
-                max-width: 300px;
-                transform: translateX(-100%);
-                box-shadow: 2px 0 20px rgba(0, 255, 65, 0.2);
-                z-index: 100;
-            }
-
-            .sidebar.active {
-                transform: translateX(0);
-            }
-
-            .control-panel {
-                position: fixed;
-                right: 0;
-                top: 40px;
-                bottom: 0;
-                width: 85%;
-                max-width: 300px;
-                transform: translateX(100%);
-                box-shadow: -2px 0 20px rgba(0, 255, 65, 0.2);
-                z-index: 100;
-            }
-
-            .control-panel.active {
-                transform: translateX(0);
-            }
-
-            .paper-viewport {
-                padding: 0;
-                overflow-x: hidden;
-            }
-
-            .paper {
-                padding: 1rem;
-                min-height: 100vh;
-                width: 100%;
-                border: none;
-                border-top: 1px solid var(--terminal-green);
-                overflow-x: hidden;
-            }
-
-            /* Ensure code blocks don't overflow */
-            pre {
-                max-width: 100%;
-                overflow-x: auto;
-                white-space: pre;
-            }
-
-            .mobile-controls {
-                display: flex !important;
-            }
-
-            .desktop-only {
-                display: none !important;
-            }
-
-            .status-item span {
-                font-size: 0.75rem;
-            }
-
-            /* Hide User Status on very small screens */
-            @media (max-width: 400px) {
-                .status-item:nth-child(2) {
-                    display: none;
-                }
-
-                .terminal-header {
-                    padding: 0 0.5rem;
-                }
-            }
-
-            .exam-header h1 {
-                font-size: 1.5rem;
-                letter-spacing: 2px;
-            }
-
-            .q-num {
-                width: 30px;
-                font-size: 1rem;
-            }
-
-            .q-text {
-                font-size: 1rem;
-            }
-
-            .view-panel {
-                left: 0;
-                padding: 1rem;
-                z-index: 150;
-            }
-
-            .stat-value {
-                font-size: 3rem;
-            }
-        }
-
-        .mobile-controls {
-            display: none;
             align-items: center;
-            justify-content: center;
-            gap: 8px;
         }
 
-        .mobile-btn {
-            background: transparent;
-            border: 1px solid var(--terminal-green);
-            color: var(--terminal-green);
-            width: 32px;
-            height: 32px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .status-badge {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            background: var(--primary-dim);
+            color: var(--primary);
+            padding: 2px 8px;
             border-radius: 4px;
+            border: 1px solid rgba(0, 255, 65, 0.2);
         }
 
-        /* Intro Loader */
-        #intro-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #000;
-            z-index: 9999;
+        /* SIDEBAR */
+        .app-sidebar {
+            background: var(--bg-surface);
+            border-right: 1px solid var(--border-dim);
+            overflow-y: auto;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            padding: 1rem 0;
         }
 
-        #intro-img {
-            width: 300px;
-            height: auto;
-            border: 2px solid #00ff41;
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+        .nav-group {
             margin-bottom: 1.5rem;
         }
 
-        .intro-text {
-            font-family: 'VT323', monospace;
-            color: #00ff41;
-            font-size: 2rem;
+        .nav-header {
+            padding: 0 1.5rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            animation: pulse 1.5s infinite;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
         }
 
-        @keyframes pulse {
+        .nav-item {
+            padding: 0.6rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text-muted);
+            transition: all 0.2s;
+            font-size: 0.9rem;
+            border-left: 2px solid transparent;
+        }
 
-            0%,
-            100% {
-                opacity: 1;
+        .nav-item:hover {
+            color: var(--text-main);
+            background: var(--bg-surface-hover);
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+            background: var(--primary-dim);
+            border-left-color: var(--primary);
+        }
+
+        /* MAIN CONTENT */
+        .app-main {
+            background: var(--bg-deep);
+            overflow-y: auto;
+            position: relative;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .paper-container {
+            width: 100%;
+            max-width: 850px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-dim);
+            border-radius: 8px;
+            padding: 3rem;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            min-height: 80vh;
+            position: relative;
+        }
+
+        /* CONTENT TYPOGRAPHY */
+        .paper-title {
+            font-family: var(--font-mono);
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+            text-align: center;
+        }
+
+        .paper-subtitle {
+            text-align: center;
+            color: var(--primary);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            margin-bottom: 3rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px dashed var(--border-dim);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 2.5rem 0 1.5rem 0;
+            color: var(--accent);
+            font-family: var(--font-mono);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-dim);
+        }
+
+        .q-item {
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .q-num {
+            font-family: var(--font-mono);
+            color: var(--text-muted);
+            font-weight: 600;
+            min-width: 2.5rem;
+            padding-top: 0.2rem;
+        }
+
+        .q-content {
+            flex: 1;
+        }
+
+        .q-text {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
+
+        .q-meta {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .badge {
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .badge-high {
+            background: rgba(0, 255, 65, 0.15);
+            color: var(--primary);
+            border: 1px solid rgba(0, 255, 65, 0.3);
+        }
+
+        .badge-med {
+            background: rgba(255, 176, 0, 0.15);
+            color: #ffb000;
+            border: 1px solid rgba(255, 176, 0, 0.3);
+        }
+
+        .badge-low {
+            background: rgba(136, 136, 136, 0.15);
+            color: #aaa;
+            border: 1px solid rgba(136, 136, 136, 0.3);
+        }
+
+        /* ANSWERS & CODE */
+        .answer-box {
+            margin-top: 1rem;
+            padding-left: 1rem;
+            border-left: 2px solid var(--border-dim);
+        }
+
+        .answer-text {
+            color: #ccc;
+            line-height: 1.7;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .code-block {
+            background: #050505;
+            border: 1px solid var(--border-dim);
+            border-radius: 6px;
+            padding: 1rem;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: #a5d6ff;
+            overflow-x: auto;
+            white-space: pre;
+            margin-top: 0.5rem;
+        }
+
+        /* RIGHT PANEL */
+        .app-panel {
+            background: var(--bg-surface);
+            border-left: 1px solid var(--border-dim);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .panel-card {
+            background: var(--bg-deep);
+            border: 1px solid var(--border-dim);
+            border-radius: 6px;
+            padding: 1rem;
+        }
+
+        .panel-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .action-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            background: var(--bg-surface-hover);
+            border: 1px solid var(--border-dim);
+            color: var(--text-main);
+            padding: 0.75rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .action-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* MOBILE RESPONSIVENESS */
+        .mobile-toggle {
+            display: none;
+        }
+
+        @media (max-width: 1024px) {
+            .app-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: var(--header-height) 1fr;
             }
 
-            50% {
-                opacity: 0.5;
+            .app-sidebar,
+            .app-panel {
+                position: fixed;
+                top: var(--header-height);
+                bottom: 0;
+                z-index: 100;
+                width: 280px;
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
             }
+
+            .app-sidebar {
+                left: 0;
+                transform: translateX(-100%);
+            }
+
+            .app-panel {
+                right: 0;
+                transform: translateX(100%);
+            }
+
+            .app-sidebar.active {
+                transform: translateX(0);
+            }
+
+            .app-panel.active {
+                transform: translateX(0);
+            }
+
+            .mobile-toggle {
+                display: flex;
+                background: transparent;
+                border: 1px solid var(--border-dim);
+                color: var(--text-main);
+                width: 36px;
+                height: 36px;
+                align-items: center;
+                justify-content: center;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+
+            .paper-container {
+                padding: 1.5rem;
+                border: none;
+                background: transparent;
+                box-shadow: none;
+            }
+
+            .app-main {
+                padding: 0;
+            }
+
+            /* Hide non-essential header items on mobile */
+            .desktop-only {
+                display: none;
+            }
+        }
+
+        /* SCROLLBARS */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-deep);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-light);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+
+        /* UTILS */
+        .text-primary {
+            color: var(--primary);
+        }
+
+        .text-accent {
+            color: var(--accent);
         }
     </style>
 </head>
 
 <body>
-    <!-- Intro Loader -->
-    <div id="intro-overlay">
-        <img id="intro-img" src="assets/intro_img.jpg" alt="Intro Image">
-        <div class="intro-text">kive a singh...</div>
-    </div>
 
-    <!-- HEADER -->
-    <!-- SYSTEM STATUS HEADER -->
-    <header class="terminal-header">
-        <div class="status-item">
-            <span class="status-label">SYSTEM:</span>
-            <span class="status-value">ONLINE</span>
-        </div>
-        <div class="status-item">
-            <span class="status-label">USER:</span>
-            <span class="status-value">ADMIN</span>
-        </div>
-        <div class="status-item">
-            <span class="status-label">TIME:</span>
-            <span class="status-value" id="system-time">00:00:00</span>
-        </div>
-        <!-- Mobile Toggle Buttons -->
-        <div class="mobile-controls">
-            <button class="mobile-btn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
-            <button class="mobile-btn" onclick="toggleControlPanel()"><i class="fas fa-cog"></i></button>
-        </div>
-    </header>
+    <div class="app-grid">
+        <!-- HEADER -->
+        <header class="app-header">
+            <div class="flex items-center gap-4">
+                <button class="mobile-toggle" onclick="toggleSidebar()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="brand">
+                    <i class="fas fa-terminal"></i>
+                    <span>ALPHA_TERM_v3</span>
+                </div>
+            </div>
 
-    <div class="workspace">
+            <div class="header-controls">
+                <div class="status-badge desktop-only">
+                    <i class="fas fa-circle text-[8px] mr-1 animate-pulse"></i> ONLINE
+                </div>
+                <div class="status-badge font-mono" id="clock">00:00</div>
+                <button class="mobile-toggle" onclick="togglePanel()">
+                    <i class="fas fa-sliders-h"></i>
+                </button>
+            </div>
+        </header>
+
         <!-- SIDEBAR -->
-        <div class="sidebar">
-            <div class="sidebar-header">
-                <i class="fas fa-terminal text-green-500"></i>
-                <span>FILE_SYSTEM</span>
-            </div>
-
-            <!-- Web Tech Directory -->
-            <div class="dir-header" onclick="toggleDir('web-tech-dir')">
-                <i class="fas fa-folder text-yellow-500"></i>
-                <span>Web Technology Sem-1</span>
-            </div>
-            <div id="web-tech-dir" class="dir-content open">
-                <!-- Files injected by JS -->
-            </div>
-
-            <!-- Solutions Directory -->
-            <div class="dir-header" onclick="toggleDir('solutions-dir')">
-                <i class="fas fa-folder text-purple-500"></i>
-                <span>Solutions & Keys</span>
-            </div>
-            <div id="solutions-dir" class="dir-content">
-                <!-- Files injected by JS -->
-            </div>
-
-            <div class="mt-auto">
-                <label class="setting-label"><i class="fas fa-info-circle"></i> About</label>
-                <div class="text-sm space-y-2">
-                    <p><strong class="text-cyan-400">Alpha Terminal v2.0</strong></p>
-                    <p class="text-gray-400">Intelligent Exam Simulator for BCA-DSC-101</p>
-                    <p class="text-gray-400">Generated with high-probability question analysis</p>
-                    <button class="btn btn-secondary w-full mt-3" onclick="showToast('All settings saved!')">
-                        <i class="fas fa-save"></i> Save Preferences
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- PAPER VIEWPORT -->
-        <div id="viewport" class="paper-viewport">
-            <div id="paper-content" class="paper">
-                <!-- Content injected by JS -->
-            </div>
-        </div>
-
-        <!-- RIGHT CONTROL PANEL -->
-        <div class="control-panel">
-
-            <!-- Zoom Controls -->
-            <div class="zoom-controls">
-                <button class="zoom-btn" onclick="zoomPaper(-0.1)" title="Zoom Out">
-                    <i class="fas fa-minus"></i>
-                </button>
-                <div class="zoom-value" id="zoom-display">100%</div>
-                <button class="zoom-btn" onclick="zoomPaper(0.1)" title="Zoom In">
-                    <i class="fas fa-plus"></i>
-                </button>
-                <button class="zoom-btn" onclick="resetZoom()" title="Reset Zoom">
-                    <i class="fas fa-redo"></i>
-                </button>
-            </div>
-
-            <!-- Actions -->
-            <div class="p-4 bg-[#0b0c10] border border-gray-800 rounded-lg">
-                <h3 class="text-xs text-cyan-400 font-bold mb-3 uppercase tracking-wider">Control Deck</h3>
-                <div class="grid grid-cols-2 gap-2">
-                    <button onclick="toggleFullscreen()"
-                        class="bg-purple-500/10 hover:bg-purple-500/20 text-purple-400 border border-purple-500/50 py-2 rounded text-xs font-bold transition flex items-center justify-center gap-2 hover:scale-105">
-                        <i class="fas fa-expand"></i> FULL
-                    </button>
-                    <button onclick="downloadPaper()"
-                        class="bg-green-500/10 hover:bg-green-500/20 text-green-400 border border-green-500/50 py-2 rounded text-xs font-bold transition flex items-center justify-center gap-2 hover:scale-105">
-                        <i class="fas fa-download"></i> SAVE
-                    </button>
-                    <button onclick="window.print()"
-                        class="bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/50 py-2 rounded text-xs font-bold transition flex items-center justify-center gap-2 hover:scale-105">
-                        <i class="fas fa-print"></i> PRINT
-                    </button>
-                    <button onclick="toggleProb()"
-                        class="bg-gray-800 hover:bg-gray-700 text-gray-300 border border-gray-600 py-2 rounded text-xs font-bold transition flex items-center justify-center gap-2 hover:scale-105">
-                        <i class="fas fa-eye"></i> TAGS
-                    </button>
+        <nav class="app-sidebar" id="sidebar">
+            <div class="nav-group">
+                <div class="nav-header">Question Papers</div>
+                <div id="paper-nav">
+                    <!-- Injected by JS -->
                 </div>
             </div>
 
-            <!-- Paper Selector -->
-            <div class="flex-1 overflow-hidden flex flex-col">
-                <h3
-                    class="text-xs text-gray-500 font-bold mb-3 uppercase tracking-wider flex justify-between items-center">
-                    Paper Bank
-                    <span class="bg-gray-800 text-gray-300 px-2 py-0.5 rounded text-[10px]">10 SETS</span>
-                </h3>
-                <div class="paper-list custom-scroll" id="paper-list">
-                    <!-- List Items Injected Here -->
+            <div class="nav-group">
+                <div class="nav-header">Solutions</div>
+                <div id="solution-nav">
+                    <!-- Injected by JS -->
                 </div>
             </div>
 
-            <!-- Stats Mini -->
-            <div class="p-3 bg-gray-800/50 rounded border border-gray-700">
-                <div class="flex justify-between items-end">
-                    <div>
-                        <div class="text-[10px] text-gray-400 uppercase">Probability Score</div>
-                        <div class="text-xl font-bold text-green-400 mono">94.2%</div>
-                    </div>
-                    <i class="fas fa-chart-line text-green-500/20 text-3xl"></i>
+            <div class="mt-auto px-6 py-4 border-t border-[var(--border-dim)]">
+                <div class="text-xs text-[var(--text-muted)]">
+                    <p>BCA-DSC-101</p>
+                    <p class="mt-1 opacity-50">v3.0.0 Stable</p>
+                </div>
+            </div>
+        </nav>
+
+        <!-- MAIN CONTENT -->
+        <main class="app-main" id="main-scroll">
+            <div class="paper-container" id="paper-content">
+                <!-- Content Injected Here -->
+                <div class="flex flex-col items-center justify-center h-full text-[var(--text-muted)]">
+                    <i class="fas fa-terminal text-4xl mb-4 opacity-20"></i>
+                    <p>Select a module to begin...</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- RIGHT PANEL -->
+        <aside class="app-panel" id="panel">
+            <div class="panel-card">
+                <div class="panel-title">System Control</div>
+                <div class="action-grid">
+                    <button class="action-btn" onclick="toggleFullscreen()"><i class="fas fa-expand"></i> Full</button>
+                    <button class="action-btn" onclick="window.print()"><i class="fas fa-print"></i> Print</button>
+                    <button class="action-btn" onclick="downloadPDF()"><i class="fas fa-download"></i> Save</button>
+                    <button class="action-btn" onclick="toggleTheme()"><i class="fas fa-moon"></i> Dim</button>
                 </div>
             </div>
 
-        </div>
+            <div class="panel-card">
+                <div class="panel-title">Analytics</div>
+                <div class="text-center py-4">
+                    <div class="text-4xl font-mono font-bold text-[var(--primary)]">98%</div>
+                    <div class="text-xs text-[var(--text-muted)] mt-1">Probability Accuracy</div>
+                </div>
+            </div>
+
+            <div class="panel-card">
+                <div class="panel-title">Display</div>
+                <div class="flex gap-2 justify-center">
+                    <button class="action-btn flex-1" onclick="adjustZoom(-0.1)"><i class="fas fa-minus"></i></button>
+                    <span
+                        class="flex items-center justify-center px-2 font-mono text-xs text-[var(--text-muted)]">ZOOM</span>
+                    <button class="action-btn flex-1" onclick="adjustZoom(0.1)"><i class="fas fa-plus"></i></button>
+                </div>
+            </div>
+        </aside>
     </div>
 
     <script>
-        // --- DATA: FILE SYSTEM STRUCTURE ---
+        // --- DATA STORE ---
+        // (Preserved from v2)
         const qBank = {
             short: [
                 { t: "Define WWW and its full form.", p: "High" },
@@ -790,7 +608,6 @@
             ]
         };
 
-        // --- SOLUTION BANK ---
         const solutionBank = {
             short: [
                 {
@@ -831,326 +648,290 @@
                 {
                     q: "What is a Hyperlink?",
                     ans: "A hyperlink, or simply a link, is a reference to data that the user can follow by clicking or tapping. A hyperlink points to a whole document or to a specific element within a document. Hypertext is text with hyperlinks.",
-                    code: "<a href=\"https://www.google.com\">Visit Google</a>"
+                    code: "<a href=\"https://www.w3schools.com\">Visit W3Schools</a>"
                 },
                 {
                     q: "Define JavaScript.",
                     ans: "JavaScript is a lightweight, interpreted, or just-in-time compiled programming language with first-class functions. While it is most well-known as the scripting language for Web pages, many non-browser environments also use it, such as Node.js, Apache CouchDB and Adobe Acrobat.",
-                    code: "<script>\\n  document.getElementById(\"demo\").innerHTML = \"Hello JavaScript!\";\\n<\\/script>"
+                    code: "<script>\\n  document.getElementById(\"demo\").innerHTML = \"Hello JavaScript!\";\\n<\/script>"
                 },
                 {
                     q: "What is the 'OnLoad' event?",
                     ans: "The onload event occurs when an object has been loaded. Onload is most often used within the <body> element to execute a script once a web page has completely loaded all content (including images, script files, CSS files, etc.).",
-                    code: "<body onload=\"myFunction()\">\\n\\n<script>\\nfunction myFunction() {\\n  alert(\"Page is loaded\");\\n}\\n<\\/script>"
+                    code: "<body onload=\"myFunction()\">"
                 },
                 {
                     q: "What is a Frameset?",
-                    ans: "The <frameset> tag was used to define a frameset. It replaced the <body> tag in pages that used frames. The <frameset> element defines how to divide the window into frames. Note: Not supported in HTML5.",
+                    ans: "The <frameset> tag was used to define a frameset. The <frameset> element holds one or more <frame> elements. Each <frame> element can hold a separate document. NOT SUPPORTED in HTML5.",
                     code: "<frameset cols=\"25%,*,25%\">\\n  <frame src=\"frame_a.htm\">\\n  <frame src=\"frame_b.htm\">\\n  <frame src=\"frame_c.htm\">\\n</frameset>"
                 },
                 {
                     q: "What is Dreamweaver?",
-                    ans: "Adobe Dreamweaver is a proprietary web development tool from Adobe Inc. It is an Integrated Development Environment (IDE) that supports both a visual design surface (WYSIWYG) and a code editor with standard features such as syntax highlighting, code completion, and real-time syntax checking.",
-                    code: "<!-- Dreamweaver is a tool, not code. -->"
+                    ans: "Adobe Dreamweaver is a proprietary web development tool from Adobe Inc. It was created by Macromedia in 1997 and developed by them until Macromedia was acquired by Adobe Systems in 2005.",
+                    code: "<!-- Dreamweaver is an IDE, no specific code snippet -->"
                 },
                 {
                     q: "Explain the 'Alert' box.",
-                    ans: "An alert box is often used if you want to make sure information comes through to the user. When an alert box pops up, the user will have to click 'OK' to proceed.",
-                    code: "<script>\\nfunction myFunction() {\\n  alert(\"I am an alert box!\");\\n}\\n<\\/script>"
+                    ans: "An alert box is often used if you want to make sure information comes through to the user. When an alert box pops up, the user will have to click \"OK\" to proceed.",
+                    code: "alert(\"I am an alert box!\");"
                 },
                 {
                     q: "What is Intranet?",
-                    ans: "An intranet is a private network contained within an enterprise that is used to securely share company information and computing resources among employees. It can also be used for working in groups and for teleconferences.",
+                    ans: "An intranet is a private network contained within an enterprise that is used to securely share company information and computing resources among employees. An intranet can also be used to facilitate working in groups and for teleconferences.",
                     code: "<!-- Concept -->"
                 },
                 {
                     q: "Use of 'ALT' attribute in IMG tag.",
-                    ans: "The required alt attribute specifies an alternate text for an image, if the image cannot be displayed. The alt attribute provides alternative information for an image if a user for some reason cannot view it (because of slow connection, an error in the src attribute, or if the user uses a screen reader).",
+                    ans: "The required alt attribute provides an alternate text for an image, if the user for some reason cannot view it (because of slow connection, an error in the src attribute, or if the user uses a screen reader).",
                     code: "<img src=\"img_girl.jpg\" alt=\"Girl in a jacket\" width=\"500\" height=\"600\">"
                 },
                 {
                     q: "What is the use of 'TARGET' attribute?",
-                    ans: "The target attribute specifies where to open the linked document. Common values are _blank (new window/tab), _self (same frame), _parent (parent frame), _top (full body of the window).",
+                    ans: "The target attribute specifies where to open the linked document.",
                     code: "<a href=\"https://www.w3schools.com\" target=\"_blank\">Visit W3Schools!</a>"
                 },
                 {
                     q: "Define 'External Link'.",
-                    ans: "An external link is a hyperlink that points to a domain other than the domain the link exists on (source domain). In simpler terms, if another website links to you, this is considered an external link to your site. Similarly, if you link out to another website, this is also considered an external link.",
-                    code: "<a href=\"https://www.wikipedia.org\">External Link to Wikipedia</a>"
+                    ans: "An external link is a hyperlink that points at any domain other than the domain the link exists on (source domain).",
+                    code: "<a href=\"http://www.google.com\">Google</a>"
                 },
                 {
                     q: "What is a 'Prompt Box'?",
-                    ans: "A prompt box is often used if you want the user to input a value before entering a page. When a prompt box pops up, the user will have to click either 'OK' or 'Cancel' to proceed after entering an input value.",
-                    code: "<script>\\nlet person = prompt(\"Please enter your name\", \"Harry Potter\");\\n<\\/script>"
+                    ans: "A prompt box is often used if you want the user to input a value before entering a page. When a prompt box pops up, the user will have to click either \"OK\" or \"Cancel\" to proceed after entering an input value.",
+                    code: "let person = prompt(\"Please enter your name\", \"Harry Potter\");"
                 }
             ],
             u1: [
                 {
                     q: "Explain the Client-Server model of the Internet with a neat diagram.",
-                    ans: "The client-server model is a distributed application structure that partitions tasks or workloads between the providers of a resource or service, called servers, and service requesters, called clients. \\n\\n1. Client: A computer or software that requests a service (e.g., Web Browser).\\n2. Server: A computer or software that provides the service (e.g., Web Server like Apache).\\n3. Network: The medium through which they communicate (Internet).\\n\\nProcess:\\n- Client sends Request -> Internet -> Server processes request -> Server sends Response -> Internet -> Client displays result.",
-                    code: "   +--------+      Request       +--------+\\n   | Client | -----------------> | Server |\\n   | (User) | <----------------- | (Data) |\\n   +--------+      Response      +--------+"
+                    ans: "The client-server model is a distributed application structure that partitions tasks or workloads between the providers of a resource or service, called servers, and service requesters, called clients. Often clients and servers communicate over a computer network on separate hardware, but both client and server may reside in the same system.",
+                    code: "Client (Browser)  <--->  Internet (Network)  <--->  Server (Database/Files)"
                 },
                 {
                     q: "Explain the structure of an HTML document. Discuss <HEAD>, <TITLE>, <BODY>.",
-                    ans: "An HTML document is structured as a tree of elements. \\n\\n- <!DOCTYPE html>: Declares the document type and version (HTML5).\\n- <html>: The root element of the page.\\n- <head>: Contains meta-information about the document (not displayed directly).\\n  - <title>: Sets the title of the page (shown in browser tab).\\n  - <meta>: Character set, viewport settings.\\n  - <link>: Links to external resources like CSS.\\n  - <script>: Internal or external scripts.\\n- <body>: Contains the visible page content (headings, paragraphs, images, etc.).",
-                    code: "<!DOCTYPE html>\\n<html>\\n<head>\\n    <title>Page Title</title>\\n    <meta charset=\"UTF-8\">\\n</head>\\n<body>\\n    <h1>This is a Heading</h1>\\n    <p>This is a paragraph.</p>\\n</body>\\n</html>"
+                    ans: "An HTML document is structured as a tree of elements. The root element is <html>. It contains two main children: <head> and <body>.\\n- <head>: Contains meta-information about the document (title, styles, scripts) that is not displayed directly.\\n- <title>: Sets the title of the page shown in the browser tab.\\n- <body>: Contains the visible content of the page (headings, paragraphs, images).",
+                    code: "<!DOCTYPE html>\\n<html>\\n<head>\\n  <title>Page Title</title>\\n</head>\\n<body>\\n  <h1>This is a Heading</h1>\\n  <p>This is a paragraph.</p>\\n</body>\\n</html>"
                 },
                 {
                     q: "Explain 3 types of Lists in HTML with syntax and examples.",
-                    ans: "1. Unordered List (<ul>): Items are marked with bullets.\\n2. Ordered List (<ol>): Items are marked with numbers or letters.\\n3. Description List (<dl>): A list of terms, with a description of each term.",
-                    code: "<!-- Unordered List -->\\n<ul>\\n  <li>Coffee</li>\\n  <li>Tea</li>\\n</ul>\\n\\n<!-- Ordered List -->\\n<ol>\\n  <li>First</li>\\n  <li>Second</li>\\n</ol>\\n\\n<!-- Description List -->\\n<dl>\\n  <dt>Coffee</dt>\\n  <dd>- black hot drink</dd>\\n  <dt>Milk</dt>\\n  <dd>- white cold drink</dd>\\n</dl>"
+                    ans: "1. Unordered List (<ul>): Items marked with bullets.\\n2. Ordered List (<ol>): Items marked with numbers/letters.\\n3. Description List (<dl>): A list of terms, with a description of each term.",
+                    code: "<!-- Unordered -->\\n<ul>\\n  <li>Coffee</li>\\n  <li>Tea</li>\\n</ul>\\n\\n<!-- Ordered -->\\n<ol>\\n  <li>First</li>\\n  <li>Second</li>\\n</ol>"
                 },
                 {
                     q: "Explain the Table tag and its major attributes (Rowspan, Colspan).",
-                    ans: "The <table> tag defines an HTML table. \\n- <tr>: Table Row\\n- <th>: Table Header (bold, centered)\\n- <td>: Table Data (regular cell)\\n\\nAttributes:\\n- border: Specifies the width of the border.\\n- cellpadding: Space inside cells.\\n- cellspacing: Space between cells.\\n- colspan: Merges cells horizontally.\\n- rowspan: Merges cells vertically.",
-                    code: "<table border=\"1\">\\n  <tr>\\n    <th>Name</th>\\n    <th colspan=\"2\">Telephone</th>\\n  </tr>\\n  <tr>\\n    <td>Bill Gates</td>\\n    <td>55577854</td>\\n    <td>55577855</td>\\n  </tr>\\n</table>"
+                    ans: "The <table> tag defines an HTML table. \\n- <tr>: Table Row\\n- <th>: Table Header\\n- <td>: Table Data\\n- rowspan: Specifies the number of rows a cell should span.\\n- colspan: Specifies the number of columns a cell should span.",
+                    code: "<table border=\"1\">\\n  <tr>\\n    <th>Month</th>\\n    <th>Savings</th>\\n  </tr>\\n  <tr>\\n    <td>January</td>\\n    <td>$100</td>\\n  </tr>\\n</table>"
                 },
                 {
                     q: "How are images inserted in HTML? Explain attributes of <IMG>.",
-                    ans: "Images are inserted using the <img> tag. It is an empty tag (no closing tag).\\n\\nAttributes:\\n- src (Source): URL of the image (Required).\\n- alt (Alternative Text): Text if image fails to load (Required for accessibility).\\n- width/height: Size of the image in pixels.\\n- title: Tooltip text on hover.",
-                    code: "<img src=\"logo.png\" alt=\"Company Logo\" width=\"200\" height=\"100\" title=\"Our Logo\">"
+                    ans: "Images are inserted using the <img> tag. It is empty, containing attributes only, and does not have a closing tag.\\nAttributes:\\n- src: Path to the image\\n- alt: Alternate text\\n- width/height: Size of image",
+                    code: "<img src=\"pic_trulli.jpg\" alt=\"Italian Trulli\" width=\"500\" height=\"333\">"
                 }
             ],
             u2: [
                 {
                     q: "Explain different types of CSS (Inline, Internal, External) with examples.",
-                    ans: "1. Inline CSS: Applied to a specific element using the style attribute.\\n2. Internal CSS: Defined within the <style> element in the <head> section.\\n3. External CSS: Defined in a separate .css file and linked using <link>.",
-                    code: "<!-- Inline -->\\n<h1 style=\"color:blue;\">Blue Heading</h1>\\n\\n<!-- Internal -->\\n<head>\\n<style>\\n  body {background-color: linen;}\\n</style>\\n</head>\\n\\n<!-- External -->\\n<head>\\n  <link rel=\"stylesheet\" href=\"styles.css\">\\n</head>"
+                    ans: "1. Inline: Using the style attribute inside HTML elements.\\n2. Internal: Using a <style> element in the <head> section.\\n3. External: Using a <link> element to link to an external CSS file.",
+                    code: "<!-- Inline -->\\n<h1 style=\"color:blue;\">Blue Heading</h1>\\n\\n<!-- Internal -->\\n<style>body {background-color: powderblue;}</style>\\n\\n<!-- External -->\\n<link rel=\"stylesheet\" href=\"styles.css\">"
                 },
                 {
                     q: "What are Frames? Explain attributes of <FRAMESET>.",
-                    ans: "Frames allow a browser window to be split into multiple sections, each loading a separate HTML document. The <frameset> tag replaces <body>.\\n\\nAttributes:\\n- cols: Defines vertical columns (e.g., \"20%, 80%\").\\n- rows: Defines horizontal rows.\\n- border: Width of the border between frames.\\n- frameborder: 0 to hide borders, 1 to show.",
-                    code: "<frameset cols=\"25%,75%\">\\n   <frame src=\"menu.html\">\\n   <frame src=\"content.html\">\\n</frameset>"
+                    ans: "Frames allow you to divide the browser window into several sections, where each section can load a separate HTML document. The <frameset> tag defines how to divide the window. Attributes: cols, rows, border, frameborder.",
+                    code: "<frameset cols=\"25%,75%\">\\n  <frame src=\"menu.html\">\\n  <frame src=\"content.html\">\\n</frameset>"
                 },
                 {
                     q: "Design a Registration Form using HTML Form controls (Text, Radio, Submit).",
-                    ans: "A form is created using the <form> tag. Input controls are created using <input>, <select>, <textarea>.",
-                    code: "<form action=\"/submit_page.php\">\\n  <label for=\"fname\">First name:</label><br>\\n  <input type=\"text\" id=\"fname\" name=\"fname\"><br>\\n  \\n  <p>Gender:</p>\\n  <input type=\"radio\" id=\"male\" name=\"gender\" value=\"male\">\\n  <label for=\"male\">Male</label><br>\\n  <input type=\"radio\" id=\"female\" name=\"gender\" value=\"female\">\\n  <label for=\"female\">Female</label><br><br>\\n  \\n  <input type=\"submit\" value=\"Submit\">\\n</form>"
+                    ans: "HTML forms are used to collect user input. The <form> element is used to create an HTML form for user input.",
+                    code: "<form action=\"/action_page.php\">\\n  <label for=\"fname\">First name:</label><br>\\n  <input type=\"text\" id=\"fname\" name=\"fname\"><br>\\n  <input type=\"radio\" id=\"male\" name=\"gender\" value=\"male\">\\n  <label for=\"male\">Male</label><br>\\n  <input type=\"submit\" value=\"Submit\">\\n</form>"
                 },
                 {
                     q: "Explain the Anchor Tag <A> and its attributes in detail.",
-                    ans: "The <a> tag defines a hyperlink. \\n\\nAttributes:\\n- href: The URL of the page the link goes to.\\n- target: Where to open the link (_blank, _self).\\n- download: Specifies that the target will be downloaded.\\n- title: Tooltip text.",
-                    code: "<a href=\"https://www.w3schools.com\" target=\"_blank\" title=\"Go to W3Schools\">Visit W3Schools</a>"
+                    ans: "The <a> tag defines a hyperlink. The most important attribute is the href attribute, which indicates the link's destination. Other attributes: target, download, rel, type.",
+                    code: "<a href=\"https://www.w3schools.com\">Visit W3Schools.com!</a>"
                 },
                 {
                     q: "What is an Image Map? Explain with example.",
-                    ans: "An image map is an image with clickable areas. It is defined by the <map> tag and linked to an <img> using the usemap attribute. The <area> tag defines the clickable regions.",
-                    code: "<img src=\"workplace.jpg\" alt=\"Workplace\" usemap=\"#workmap\">\\n\\n<map name=\"workmap\">\\n  <area shape=\"rect\" coords=\"34,44,270,350\" href=\"computer.htm\">\\n  <area shape=\"rect\" coords=\"290,172,333,250\" href=\"phone.htm\">\\n  <area shape=\"circle\" coords=\"337,300,44\" href=\"coffee.htm\">\\n</map>"
+                    ans: "An image map is an image with clickable areas. The <map> tag is used to define an image map. The <map> tag is required to contain a name attribute, which is associated with the <img>'s usemap attribute.",
+                    code: "<img src=\"workplace.jpg\" alt=\"Workplace\" usemap=\"#workmap\">\\n\\n<map name=\"workmap\">\\n  <area shape=\"rect\" coords=\"34,44,270,350\" href=\"computer.htm\">\\n</map>"
                 }
             ],
             u3: [
                 {
                     q: "Explain features of JavaScript. How is it different from Java?",
-                    ans: "Features:\\n1. Lightweight Scripting Language.\\n2. Client-side validation.\\n3. Dynamic typing.\\n4. Object-based (not fully object-oriented like Java).\\n\\nDifferences:\\n- Java is a compiled language; JS is interpreted.\\n- Java is strongly typed; JS is loosely typed.\\n- Java runs in a JVM; JS runs in the browser.",
-                    code: "// JavaScript\\nlet x = 10;\\nx = \"Hello\"; // Valid in JS, Error in Java"
+                    ans: "Features: Lightweight, Interpreted, Object-oriented, Client-side scripting. \\nDifference: Java is an OOP programming language while Java Script is an OOP scripting language. Java creates applications that run in a virtual machine or browser while JavaScript code is run on a browser only.",
+                    code: "<!-- Conceptual -->"
                 },
                 {
                     q: "Explain Conditional Statements in JS (If, Switch) with examples.",
-                    ans: "Conditional statements perform different actions based on different conditions.\\n1. if...else: Executes code if a condition is true.\\n2. switch: Selects one of many blocks of code to be executed.",
-                    code: "// If-Else\\nif (hour < 18) {\\n  greeting = \"Good day\";\\n} else {\\n  greeting = \"Good evening\";\\n}\\n\\n// Switch\\nswitch(new Date().getDay()) {\\n  case 0:\\n    day = \"Sunday\";\\n    break;\\n  case 1:\\n    day = \"Monday\";\\n    break;\\n  default:\\n    day = \"Weekday\";\\n}"
+                    ans: "Conditional statements are used to perform different actions based on different conditions.",
+                    code: "if (hour < 18) {\\n  greeting = \"Good day\";\\n}\\n\\nswitch(expression) {\\n  case x:\\n    // code block\\n    break;\\n  default:\\n    // code block\\n}"
                 },
                 {
                     q: "Explain Looping structures in JS (For, While) with syntax.",
-                    ans: "Loops execute a block of code a number of times.\\n1. for: Loops through a block of code a number of times.\\n2. while: Loops through a block of code while a specified condition is true.",
-                    code: "// For Loop\\nfor (let i = 0; i < 5; i++) {\\n  text += \"The number is \" + i + \"<br>\";\\n}\\n\\n// While Loop\\nwhile (i < 10) {\\n  text += \"The number is \" + i;\\n  i++;\\n}"
+                    ans: "Loops can execute a block of code a number of times.",
+                    code: "for (let i = 0; i < 5; i++) {\\n  text += \"The number is \" + i + \"<br>\";\\n}\\n\\nwhile (i < 10) {\\n  text += \"The number is \" + i;\\n  i++;\\n}"
                 },
                 {
                     q: "What are Functions in JS? Explain with an example.",
-                    ans: "A JavaScript function is a block of code designed to perform a particular task. A function is executed when 'something' invokes it (calls it).",
-                    code: "function myFunction(p1, p2) {\\n  return p1 * p2;   // The function returns the product of p1 and p2\\n}\\n\\nlet result = myFunction(4, 3); // result will be 12"
+                    ans: "A JavaScript function is a block of code designed to perform a particular task. A JavaScript function is executed when \"something\" invokes it (calls it).",
+                    code: "function myFunction(p1, p2) {\\n  return p1 * p2;   // The function returns the product of p1 and p2\\n}"
                 },
                 {
                     q: "Explain Event Handling in JS (onClick, onMouseOver).",
-                    ans: "HTML events are 'things' that happen to HTML elements. JavaScript can react to these events.\\n- onclick: The user clicks an HTML element.\\n- onmouseover: The user moves the mouse over an HTML element.",
-                    code: "<button onclick=\"alert('Hello')\">Click Me</button>\\n\\n<div onmouseover=\"this.style.backgroundColor='red'\">Hover Me</div>"
+                    ans: "HTML events are \"things\" that happen to HTML elements. When JavaScript is used in HTML pages, JavaScript can \"react\" on these events.",
+                    code: "<button onclick=\"document.getElementById('demo').innerHTML = Date()\">The time is?</button>"
                 }
             ],
             u4: [
                 {
                     q: "Explain the String Object and its methods (length, charAt, etc).",
-                    ans: "The String object is used to manipulate a sequence of characters.\\nMethods:\\n- length: Returns the length of a string.\\n- charAt(index): Returns the character at the specified index.\\n- toUpperCase(): Converts to upper case.\\n- indexOf(str): Returns the index of the first occurrence.",
-                    code: "let txt = \"Hello World\";\\nlet len = txt.length; // 11\\nlet char = txt.charAt(0); // \"H\""
+                    ans: "The String object is used to represent and manipulate a sequence of characters. Methods: length, charAt(), charCodeAt(), concat(), indexOf(), lastIndexOf(), match(), replace(), search(), slice(), split(), substr(), substring(), toLowerCase(), toUpperCase(), trim(), valueOf().",
+                    code: "let text = \"ABCDEFGHIJKLMNOPQRSTUVWXYZ\";\\nlet length = text.length;"
                 },
                 {
                     q: "Explain the Math Object and its methods (round, random, etc).",
-                    ans: "The Math object allows you to perform mathematical tasks on numbers.\\nMethods:\\n- Math.PI: Returns PI.\\n- Math.round(x): Rounds x to the nearest integer.\\n- Math.pow(x, y): Returns the value of x to the power of y.\\n- Math.random(): Returns a random number between 0 and 1.",
-                    code: "Math.round(4.7);    // 5\\nMath.pow(8, 2);      // 64\\nMath.floor(Math.random() * 10); // Random 0-9"
+                    ans: "The Math object allows you to perform mathematical tasks on numbers. Methods: Math.round(), Math.ceil(), Math.floor(), Math.trunc(), Math.sign(), Math.pow(), Math.sqrt(), Math.abs(), Math.sin(), Math.cos(), Math.min(), Math.max(), Math.random().",
+                    code: "Math.round(4.6); // returns 5\\nMath.random(); // returns a random number"
                 },
                 {
                     q: "Explain the Date Object and how to manipulate dates in JS.",
-                    ans: "The Date object is used to work with dates and times.\\nMethods:\\n- new Date(): Creates a new date object with the current date and time.\\n- getFullYear(): Get the year.\\n- setFullYear(): Set the year.",
-                    code: "const d = new Date();\\nlet year = d.getFullYear();"
+                    ans: "Date objects are created with the new Date() constructor. Methods: getDate(), getDay(), getFullYear(), getHours(), getMilliseconds(), getMinutes(), getMonth(), getSeconds(), getTime().",
+                    code: "const d = new Date();\\nd.getFullYear();"
                 },
                 {
                     q: "Describe the Dreamweaver Workspace and its components.",
-                    ans: "The Dreamweaver workspace lets you view documents and object properties. The workspace also places many of the most common operations in toolbars so that you can quickly make changes to your documents.\\n\\nComponents:\\n1. Document Window: Displays the current document as you create and edit it.\\n2. Document Toolbar: Contains buttons that provide options for different views of the Document window (such as Code, Split, and Design view).\\n3. Files Panel: Lets you manage your files and folders, whether they are part of a Dreamweaver site or on a remote server.\\n4. Property Inspector: Lets you view and edit a variety of properties for the selected object or text.\\n5. Insert Panel: Contains buttons for creating and inserting objects such as tables, images, and links.",
-                    code: "<!-- Concept: Workspace UI -->"
+                    ans: "The Dreamweaver workspace lets you view documents and object properties. The workspace also places many of the most common operations in toolbars so that you can quickly make changes to your documents. Components: Document window, Document toolbar, Standard toolbar, Coding toolbar, Property inspector, Panels, Context menus.",
+                    code: "<!-- Concept -->"
                 },
                 {
                     q: "Steps to create a new Site in Dreamweaver.",
-                    ans: "1. Click Site > New Site.\\n2. In the Site Setup dialog box, select the Site category.\\n3. Enter a name for the site in the Site Name text box.\\n4. Click the folder icon next to the Local Site Folder text box to browse to and select the folder where you want to store your site files.\\n5. Click Save to complete the setup.",
-                    code: "<!-- Procedure: Site Setup -->"
+                    ans: "1. Click Site > New Site...\\n2. In the Site Setup dialog box, select Site from the list of categories on the left.\\n3. Enter a name for your site in the Site Name text box.\\n4. Click the folder icon next to the Local Site Folder text box to browse to and select the folder on your computer where you want to store your site files.\\n5. Click Save.",
+                    code: "<!-- Procedure -->"
                 }
             ]
         };
 
-        // Helper to generate random papers
-        const getQs = (arr, n) => [...arr].sort(() => 0.5 - Math.random()).slice(0, n);
+        // --- APP LOGIC ---
+        const papers = [
+            { id: 'p1', title: 'Web Tech 2023', type: 'paper' },
+            { id: 'p2', title: 'Web Tech 2022', type: 'paper' },
+            { id: 'p3', title: 'Web Tech 2021', type: 'paper' },
+            { id: 'p4', title: 'Web Tech 2020', type: 'paper' },
+            { id: 'p5', title: 'Web Tech 2019', type: 'paper' }
+        ];
 
-        // Generate 10 Unique Sets
-        const webTechPapers = Array.from({ length: 10 }, (_, i) => ({
-            id: i + 1,
-            code: "BCA-DSC-101",
-            title: "Web Technology",
-            short: getQs(qBank.short, 9),
-            u1: getQs(qBank.u1, 2),
-            u2: getQs(qBank.u2, 2),
-            u3: getQs(qBank.u3, 2),
-            u4: getQs(qBank.u4, 2)
-        }));
+        const solutions = [
+            { id: 's1', title: 'Solution Key 2023', type: 'solution', link: 'p1' },
+            { id: 's2', title: 'Solution Key 2022', type: 'solution', link: 'p2' },
+            { id: 's3', title: 'Solution Key 2021', type: 'solution', link: 'p3' },
+            { id: 's4', title: 'Solution Key 2020', type: 'solution', link: 'p4' },
+            { id: 's5', title: 'Solution Key 2019', type: 'solution', link: 'p5' }
+        ];
 
-        // Generate Solutions for each Paper
-        const webTechSolutions = webTechPapers.map(paper => ({
-            title: `Solution Key - Set 0${paper.id}`,
-            type: "solution",
-            id: `sol-${paper.id}`,
-            subject: "solutions",
-            linkedPaperId: paper.id
-        }));
+        // Init
+        document.addEventListener('DOMContentLoaded', () => {
+            renderNav();
+            updateClock();
+            setInterval(updateClock, 1000);
 
-        // FILE SYSTEM STRUCTURE
-        const fileSystem = {
-            "web-tech-sem1": {
-                type: "directory",
-                name: "Web Technology Sem-1",
-                files: webTechPapers
-            },
-            "solutions": {
-                type: "directory",
-                name: "Solutions & Keys",
-                files: webTechSolutions
-            }
-        };
+            // Auto-load first paper
+            renderPaper(papers[0]);
 
-        // --- STATE ---
-        const paperContent = document.getElementById('paper-content');
-        const viewport = document.getElementById('viewport');
-        let showTags = true;
-        let currentZoom = 1.0;
-        let currentFile = { subject: 'web-tech-sem1', index: 0 };
-        let currentView = 'exam';
+            // Intro
+            setTimeout(() => {
+                const intro = document.getElementById('intro-overlay');
+                intro.style.opacity = '0';
+                setTimeout(() => intro.remove(), 500);
+            }, 2000);
+        });
 
-        // --- RENDER FUNCTIONS ---
-        function renderTag(prob) {
-            if (!showTags) return '';
-            const cls = prob === 'High' ? 'prob-high' : (prob === 'Med' ? 'prob-med' : 'hidden');
-            if (cls === 'hidden') return '';
-            return `<span class="prob-badge ${cls}">[${prob}]</span>`;
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('clock').innerText = now.toLocaleTimeString('en-US', { hour12: false });
         }
 
-        function renderFileSystem() {
-            // Render Web Tech Papers
-            const dirContainer = document.getElementById('web-tech-dir');
-            dirContainer.innerHTML = '';
-            fileSystem['web-tech-sem1'].files.forEach((p, i) => {
-                const fileDiv = document.createElement('div');
-                const isActive = currentFile.subject === 'web-tech-sem1' && currentFile.index === i;
-                fileDiv.className = `dir-item ${isActive ? 'active' : ''}`;
-                fileDiv.innerHTML = `
-                                                                                        <i class="fas fa-file-alt text-gray-500"></i>
-                                                                                        <span>paper_set_0${p.id}.txt</span>
-                                                                                        `;
-                fileDiv.onclick = () => openFile('web-tech-sem1', i);
-                dirContainer.appendChild(fileDiv);
-            });
+        function renderNav() {
+            const paperNav = document.getElementById('paper-nav');
+            const solNav = document.getElementById('solution-nav');
 
-            // Render Solutions
-            const solContainer = document.getElementById('solutions-dir');
-            solContainer.innerHTML = '';
-            fileSystem['solutions'].files.forEach((p, i) => {
-                const fileDiv = document.createElement('div');
-                const isActive = currentFile.subject === 'solutions' && currentFile.index === i;
-                fileDiv.className = `dir-item ${isActive ? 'active' : ''}`;
-                fileDiv.innerHTML = `
-                                                                                        <i class="fas fa-key text-purple-500"></i>
-                                                                                        <span>${p.title}.sol</span>
-                                                                                        `;
-                fileDiv.onclick = () => openFile('solutions', i);
-                solContainer.appendChild(fileDiv);
-            });
+            paperNav.innerHTML = papers.map(p => `
+                <div class="nav-item" onclick="renderPaperById('${p.id}')">
+                    <i class="fas fa-file-alt"></i> ${p.title}
+                </div>
+            `).join('');
+
+            solNav.innerHTML = solutions.map(s => `
+                <div class="nav-item" onclick="renderSolutionById('${s.id}')">
+                    <i class="fas fa-key"></i> ${s.title}
+                </div>
+            `).join('');
         }
 
-        function openFile(subject, index) {
-            currentFile = { subject, index };
-            renderFileSystem(); // Update active state
-
-            const file = fileSystem[subject].files[index];
-            if (file.type === 'solution') {
-                renderSolution(file);
-            } else {
-                renderPaper(file);
-            }
-
-            // Save state
-            localStorage.setItem('alphaTerminalState', JSON.stringify(currentFile));
+        function renderPaperById(id) {
+            const p = papers.find(x => x.id === id);
+            if (p) renderPaper(p);
+            closeMobileDrawers();
         }
 
-        function renderSolution(file) {
-            paperContent.innerHTML = '';
+        function renderSolutionById(id) {
+            const s = solutions.find(x => x.id === id);
+            if (s) renderSolution(s);
+            closeMobileDrawers();
+        }
 
-            // Find the linked paper to get the specific questions
-            const linkedPaper = webTechPapers.find(p => p.id === file.linkedPaperId);
-            if (!linkedPaper) {
-                paperContent.innerHTML = '<div class="text-red-500">Error: Linked paper not found.</div>';
-                return;
-            }
+        function renderPaper(paper) {
+            const content = document.getElementById('paper-content');
 
             let html = `
-                <div class="exam-header">
-                    <h1>SOLUTION KEY // SET 0${linkedPaper.id}</h1>
-                    <div class="text-purple-500">> SUBJECT: ${linkedPaper.title.toUpperCase()}</div>
-                    <div class="exam-details mt-2">
-                        <span>[TYPE::FULL_SOLUTION]</span>
-                        <span>[STATUS::VERIFIED]</span>
-                        <span>[REF::${linkedPaper.code}]</span>
-                    </div>
-                </div>
-
-                <div class="intro-typing-text mb-6 text-sm text-gray-400">
-                    > SYSTEM_MSG: Loading detailed answers and code examples for Set 0${linkedPaper.id}...
-                </div>
+                <div class="paper-title">PANJAB UNIVERSITY</div>
+                <div class="paper-subtitle">BCA SEM-1 // ${paper.title.toUpperCase()}</div>
+                
+                <div class="section-title">SECTION A (Compulsory)</div>
             `;
 
-            // Helper to find answer in solutionBank
-            const getAnswer = (questionText, category) => {
-                const solCat = solutionBank[category];
-                if (!solCat) return { ans: "Answer not found.", code: "" };
-                const found = solCat.find(s => s.q === questionText);
-                return found || { ans: "Answer not found.", code: "" };
-            };
+            qBank.short.forEach((q, idx) => {
+                html += createQuestionHTML(idx + 1, q);
+            });
 
-            // Helper to render a section
-            const renderSection = (title, questions, category) => {
-                let sectionHtml = `<div class="section-header"><span>>> ${title}</span></div>`;
+            ['u1', 'u2', 'u3', 'u4'].forEach((unit, uIdx) => {
+                html += `<div class="section-title">UNIT ${uIdx + 1}</div>`;
+                qBank[unit].forEach((q, idx) => {
+                    html += createQuestionHTML(idx + 1, q);
+                });
+            });
+
+            content.innerHTML = html;
+            content.scrollTop = 0;
+            document.getElementById('main-scroll').scrollTop = 0;
+        }
+
+        function renderSolution(sol) {
+            const content = document.getElementById('paper-content');
+
+            let html = `
+                <div class="paper-title text-primary">SOLUTION KEY</div>
+                <div class="paper-subtitle">${sol.title.toUpperCase()}</div>
+            `;
+
+            const renderSolSection = (title, questions, category) => {
+                let sectionHtml = `<div class="section-title">${title}</div>`;
                 questions.forEach((qItem, idx) => {
-                    const answerData = getAnswer(qItem.t, category);
+                    // Find answer
+                    const ansData = solutionBank[category].find(a => a.q === qItem.t) || { ans: "Answer not found.", code: "" };
 
                     sectionHtml += `
-                        <div class="mb-8 border-b border-gray-800 pb-6">
-                            <div class="flex gap-3 mb-3">
-                                <span class="text-purple-400 font-bold">Q${idx + 1}.</span>
-                                <span class="font-bold text-gray-200 text-justify">${qItem.t}</span>
+                        <div class="q-item flex-col">
+                            <div class="flex gap-4">
+                                <div class="q-num text-primary">Q${idx + 1}</div>
+                                <div class="q-content">
+                                    <div class="q-text font-bold text-white">${qItem.t}</div>
+                                </div>
                             </div>
-                            
-                            <div class="ml-8">
-                                <div class="text-gray-400 mb-4 text-sm leading-relaxed border-l-2 border-gray-700 pl-3 text-justify">
-                                    <span class="text-green-500 font-bold">ANS: </span>${answerData.ans.replace(/\n/g, '<br>')}
-                                </div>
-                                
-                                <div class="bg-gray-900 border border-gray-700 rounded p-3 relative group mt-2">
-                                    <div class="absolute top-0 right-0 bg-gray-800 text-xs px-2 py-1 text-gray-400 rounded-bl">CODE</div>
-                                    <pre class="text-green-400 font-mono text-sm overflow-x-auto whitespace-pre-wrap"><code>${answerData.code.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code></pre>
-                                </div>
+                            <div class="answer-box">
+                                <div class="answer-text">${ansData.ans.replace(/\n/g, '<br>')}</div>
+                                ${ansData.code && !ansData.code.includes('No code') ?
+                            `<div class="code-block">${ansData.code.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</div>`
+                            : ''}
                             </div>
                         </div>
                     `;
@@ -1158,268 +939,54 @@
                 return sectionHtml;
             };
 
-            html += renderSection("SHORT ANSWER QUESTIONS", linkedPaper.short, 'short');
-            html += renderSection("UNIT 1", linkedPaper.u1, 'u1');
-            html += renderSection("UNIT 2", linkedPaper.u2, 'u2');
-            html += renderSection("UNIT 3", linkedPaper.u3, 'u3');
-            html += renderSection("UNIT 4", linkedPaper.u4, 'u4');
+            html += renderSolSection('SECTION A', qBank.short, 'short');
+            html += renderSolSection('UNIT 1', qBank.u1, 'u1');
+            html += renderSolSection('UNIT 2', qBank.u2, 'u2');
+            html += renderSolSection('UNIT 3', qBank.u3, 'u3');
+            html += renderSolSection('UNIT 4', qBank.u4, 'u4');
 
-            html += `
-                <div class="mt-12 text-center text-gray-500 text-sm">
-                    *** END OF SOLUTION KEY ***
+            content.innerHTML = html;
+            content.scrollTop = 0;
+            document.getElementById('main-scroll').scrollTop = 0;
+        }
+
+        function createQuestionHTML(num, q) {
+            let badgeClass = 'badge-low';
+            if (q.p === 'High') badgeClass = 'badge-high';
+            if (q.p === 'Med') badgeClass = 'badge-med';
+
+            return `
+                <div class="q-item">
+                    <div class="q-num">Q${num}</div>
+                    <div class="q-content">
+                        <div class="q-text">${q.t}</div>
+                        <div class="q-meta">
+                            <span class="badge ${badgeClass}">${q.p} PROBABILITY</span>
+                        </div>
+                    </div>
                 </div>
             `;
-
-            paperContent.innerHTML = html;
-            viewport.scrollTop = 0;
         }
 
-        function renderPaper(p) {
-            // Typing effect reset
-            paperContent.innerHTML = '';
-
-            const html = `
-                                                                                        <div class="exam-header">
-                                                                                            <h1>Panjab University // BCA-SEM-1</h1>
-                                                                                            <div class="text-green-500">> SUBJECT: ${p.title.toUpperCase()}</div>
-                                                                                            <div class="exam-details mt-2">
-                                                                                                <span>[CODE::${p.code}]</span>
-                                                                                                <span>[MAX_MARKS::45]</span>
-                                                                                                <span>[TIME::3H]</span>
-                                                                                            </div>
-                                                                                        </div>
-
-                                                                                        <div class="typing-text mb-6 text-sm text-gray-400">
-                > SYSTEM_MSG: Attempt 9 questions total. Section A is mandatory. Select 1 from each Unit.
-                                                                                        </div>
-
-                                                                                        <!-- SECTION A -->
-                                                                                        <div class="section-header">
-                                                                                            <span>>> SECTION_A [COMPULSORY]</span>
-                                                                                            <span>[09_MARKS]</span>
-                                                                                        </div>
-                                                                                        <div class="question-row">
-                                                                                            <div class="q-num">01.</div>
-                                                                                            <div class="q-text">
-                                                                                                <span>EXECUTE ANY 9 SUB-ROUTINES:</span>
-                                                                                                <ol class="sub-q-list mt-2">
-                                                                                                    ${p.short.map(q => `
-                            <li>
-                                ${q.t} ${renderTag(q.p)}
-                            </li>
-                        `).join('')}
-                                                                                                </ol>
-                                                                                            </div>
-                                                                                        </div>
-
-                                                                                        <!-- UNIT I -->
-                                                                                        <div class="section-header">
-                                                                                            <span>>> UNIT_I</span>
-                                                                                            <span>[09_MARKS]</span>
-                                                                                        </div>
-                                                                                        <div class="question-row">
-                                                                                            <div class="q-num">02.</div>
-                                                                                            <div class="q-text">${p.u1[0].t} ${renderTag(p.u1[0].p)}</div>
-                                                                                        </div>
-                                                                                        <div class="text-center text-xs text-gray-600 my-2">-- OR --</div>
-                                                                                        <div class="question-row">
-                                                                                            <div class="q-num">03.</div>
-                                                                                            <div class="q-text">${p.u1[1].t} ${renderTag(p.u1[1].p)}</div>
-                                                                                        </div>
-
-                                                                                        <!-- UNIT II -->
-                                                                                        <div class="section-header">
-                                                                                            <span>>> UNIT_II</span>
-                                                                                            <span>[09_MARKS]</span>
-                                                                                        </div>
-                                                                                        <div class="question-row">
-                                                                                            <div class="q-num">04.</div>
-                                                                                            <div class="q-text">${p.u2[0].t} ${renderTag(p.u2[0].p)}</div>
-                                                                                        </div>
-                                                                                        <div class="text-center text-xs text-gray-600 my-2">-- OR --</div>
-                                                                                        <div class="question-row">
-                                                                                            <div class="q-num">05.</div>
-                                                                                            <div class="q-text">${p.u2[1].t} ${renderTag(p.u2[1].p)}</div>
-                                                                                        </div>
-
-                                                                                        <!-- UNIT III -->
-                                                                                        <div class="section-header">
-                                                                                            <span>>> UNIT_III</span>
-                                                                                            <span>[09_MARKS]</span>
-                                                                                        </div>
-                                                                                        <div class="question-row">
-                                                                                            <div class="q-num">06.</div>
-                                                                                            <div class="q-text">${p.u3[0].t} ${renderTag(p.u3[0].p)}</div>
-                                                                                        </div>
-                                                                                        <div class="text-center text-xs text-gray-600 my-2">-- OR --</div>
-                                                                                        <div class="question-row">
-                                                                                            <div class="q-num">07.</div>
-                                                                                            <div class="q-text">${p.u3[1].t} ${renderTag(p.u3[1].p)}</div>
-                                                                                        </div>
-
-                                                                                        <!-- UNIT IV -->
-                                                                                        <div class="section-header">
-                                                                                            <span>>> UNIT_IV</span>
-                                                                                            <span>[09_MARKS]</span>
-                                                                                        </div>
-                                                                                        <div class="question-row">
-                                                                                            <div class="q-num">08.</div>
-                                                                                            <div class="q-text">${p.u4[0].t} ${renderTag(p.u4[0].p)}</div>
-                                                                                        </div>
-                                                                                        <div class="text-center text-xs text-gray-600 my-2">-- OR --</div>
-                                                                                        <div class="question-row">
-                                                                                            <div class="q-num">09.</div>
-                                                                                            <div class="q-text">${p.u4[1].t} ${renderTag(p.u4[1].p)}</div>
-                                                                                        </div>
-
-                                                                                        <div class="mt-8 text-center text-gray-500">
-                > END_OF_FILE
-                                                                                            <span class="blink">_</span>
-                                                                                        </div>
-                                                                                        `;
-
-            paperContent.innerHTML = html;
+        // --- UI ACTIONS ---
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+            document.getElementById('panel').classList.remove('active');
         }
 
-        function toggleDir(id) {
-            const el = document.getElementById(id);
-            el.classList.toggle('open');
+        function togglePanel() {
+            document.getElementById('panel').classList.toggle('active');
+            document.getElementById('sidebar').classList.remove('active');
         }
 
-        // --- SYSTEM FUNCTIONS ---
-        function updateTime() {
-            const now = new Date();
-            document.getElementById('system-time').innerText = now.toLocaleTimeString('en-US', { hour12: false });
-        }
-        setInterval(updateTime, 1000);
-        updateTime();
-
-        // --- ANALYTICS ---
-        function calculateAnalytics() {
-            let totalQuestions = 0;
-            let highProb = 0;
-            let medProb = 0;
-
-            // Calculate across all files in fileSystem
-            Object.values(fileSystem).forEach(dir => {
-                dir.files.forEach(paper => {
-                    // Count questions in this paper
-                    // Note: This is a simplified count based on the generated paper structure
-                    // In a real app, we'd iterate through the questions
-                    totalQuestions += 9 + 8; // 9 short + 8 long
-
-                    // Estimate probabilities based on qBank distribution (simplified for demo)
-                    // Since we're regenerating papers, we'll just count from the qBank directly for accuracy
-                });
-            });
-
-            // Recalculate from qBank for accurate stats
-            let qCount = 0;
-            let hCount = 0;
-            let mCount = 0;
-            Object.values(qBank).forEach(cat => {
-                cat.forEach(q => {
-                    qCount++;
-                    if (q.p === 'High') hCount++;
-                    if (q.p === 'Med') mCount++;
-                });
-            });
-
-            const elTotal = document.getElementById('total-questions');
-            const elHigh = document.getElementById('high-prob');
-            const elMed = document.getElementById('med-prob');
-
-            if (elTotal) elTotal.textContent = qCount;
-            if (elHigh) elHigh.textContent = hCount;
-            if (elMed) elMed.textContent = mCount;
-        }
-
-        // --- NAVIGATION & UTILS ---
-        function switchView(view) {
-            currentView = view;
-
-            // Close all panels
-            document.querySelectorAll('.view-panel').forEach(p => p.classList.remove('active'));
-
-            if (view === 'analytics') {
-                document.getElementById('analytics-panel').classList.add('active');
-                calculateAnalytics();
-            } else if (view === 'settings') {
-                document.getElementById('settings-panel').classList.add('active');
-            }
-        }
-
-        function closePanel(id) {
-            document.getElementById(id).classList.remove('active');
-            currentView = 'exam';
-        }
-
-        function updateFontSize(size) {
-            paperContent.style.fontSize = `${size}px`;
-            document.getElementById('font-size-value').innerText = `${size}px`;
-        }
-
-        function showToast(msg) {
-            const t = document.createElement('div');
-            t.className = 'toast';
-            t.innerHTML = `> ${msg}`;
-            document.body.appendChild(t);
-            setTimeout(() => t.remove(), 3000);
-        }
-
-        // --- KEYBOARD SHORTCUTS ---
-        document.addEventListener('keydown', (e) => {
-            if (e.target.tagName === 'INPUT') return;
-
-            const files = fileSystem[currentFile.subject].files;
-
-            switch (e.key) {
-                case 'ArrowRight':
-                    if (currentFile.index < files.length - 1) {
-                        openFile(currentFile.subject, currentFile.index + 1);
-                    }
-                    break;
-                case 'ArrowLeft':
-                    if (currentFile.index > 0) {
-                        openFile(currentFile.subject, currentFile.index - 1);
-                    }
-                    break;
-                case 't':
-                case 'T':
-                    showTags = !showTags;
-                    renderPaper(files[currentFile.index]);
-                    showToast(showTags ? 'TAGS::VISIBLE' : 'TAGS::HIDDEN');
-                    break;
-                case 'Escape':
-                    if (currentView !== 'exam') closePanel(currentView === 'analytics' ? 'analytics-panel' : 'settings-panel');
-                    break;
-            }
-        });
-
-        // --- HELPER FUNCTIONS ---
-        function zoomPaper(amount) {
-            currentZoom += amount;
-            if (currentZoom < 0.5) currentZoom = 0.5;
-            if (currentZoom > 2.0) currentZoom = 2.0;
-            applyZoom();
-        }
-
-        function resetZoom() {
-            currentZoom = 1.0;
-            applyZoom();
-        }
-
-        function applyZoom() {
-            paperContent.style.transform = `scale(${currentZoom})`;
-            paperContent.style.transformOrigin = 'top center';
-            document.getElementById('zoom-display').innerText = `${Math.round(currentZoom * 100)}%`;
+        function closeMobileDrawers() {
+            document.getElementById('sidebar').classList.remove('active');
+            document.getElementById('panel').classList.remove('active');
         }
 
         function toggleFullscreen() {
             if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen().catch(err => {
-                    console.log(`Error attempting to enable full-screen mode: ${err.message}`);
-                });
+                document.documentElement.requestFullscreen();
             } else {
                 if (document.exitFullscreen) {
                     document.exitFullscreen();
@@ -1427,107 +994,40 @@
             }
         }
 
-        function downloadPaper() {
+        function toggleTheme() {
+            // Simple dim toggle for now
+            const root = document.documentElement;
+            const current = getComputedStyle(root).getPropertyValue('--bg-deep').trim();
+            if (current === '#030303') {
+                root.style.setProperty('--bg-deep', '#000000');
+                root.style.setProperty('--bg-surface', '#050505');
+                root.style.setProperty('--text-main', '#888');
+            } else {
+                root.style.setProperty('--bg-deep', '#030303');
+                root.style.setProperty('--bg-surface', '#0a0a0a');
+                root.style.setProperty('--text-main', '#e0e0e0');
+            }
+        }
+
+        let currentZoom = 1;
+        function adjustZoom(delta) {
+            currentZoom += delta;
+            if (currentZoom < 0.5) currentZoom = 0.5;
+            if (currentZoom > 2) currentZoom = 2;
+            document.getElementById('paper-content').style.transform = `scale(${currentZoom})`;
+            document.getElementById('paper-content').style.transformOrigin = 'top center';
+        }
+
+        function downloadPDF() {
             const element = document.getElementById('paper-content');
             const opt = {
-                margin: 0.5,
-                filename: `Alpha_Terminal_Paper_${currentFile.subject}_${currentFile.index + 1}.pdf`,
+                margin: 1,
+                filename: 'alpha_terminal_paper.pdf',
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2 },
                 jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
             };
             html2pdf().set(opt).from(element).save();
-            showToast('Generating PDF...');
-        }
-
-        function toggleProb() {
-            showTags = !showTags;
-            renderPaper(fileSystem[currentFile.subject].files[currentFile.index]);
-            showToast(showTags ? 'TAGS::VISIBLE' : 'TAGS::HIDDEN');
-        }
-
-        function renderPaperList() {
-            const listContainer = document.getElementById('paper-list');
-            listContainer.innerHTML = '';
-            Object.keys(fileSystem).forEach(subjectKey => {
-                const subject = fileSystem[subjectKey];
-                subject.files.forEach((paper, index) => {
-                    const item = document.createElement('div');
-                    item.className = 'p-2 border-b border-gray-800 hover:bg-gray-800/50 cursor-pointer transition group';
-                    item.onclick = () => openFile(subjectKey, index);
-                    const isCurrent = currentFile.subject === subjectKey && currentFile.index === index;
-                    const activeClass = isCurrent ? 'text-green-400' : 'text-gray-400 group-hover:text-green-300';
-                    item.innerHTML = `
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs font-bold ${activeClass}">SET_0${paper.id}</span>
-                            <span class="text-[10px] text-gray-600">${subject.name}</span>
-                        </div>
-                        <div class="text-[10px] text-gray-500 mt-1 truncate">
-                            ${paper.type === 'solution' ? 'Master Solution Key' : paper.short[0].t.substring(0, 30) + '...'}
-                        </div>
-                    `;
-                    listContainer.appendChild(item);
-                });
-            });
-        }
-
-        function toggleSidebar() {
-            document.querySelector('.sidebar').classList.toggle('active');
-            document.querySelector('.control-panel').classList.remove('active');
-        }
-
-        function toggleControlPanel() {
-            document.querySelector('.control-panel').classList.toggle('active');
-            document.querySelector('.sidebar').classList.remove('active');
-        }
-
-        // Simple Intro Loader - Direct & Reliable
-        (function () {
-            const overlay = document.getElementById('intro-overlay');
-
-            const removeOverlay = () => {
-                if (!overlay) return;
-                overlay.style.transition = 'opacity 0.5s ease';
-                overlay.style.opacity = '0';
-                overlay.style.pointerEvents = 'none'; // Allow clicking through immediately
-
-                setTimeout(() => {
-                    overlay.style.display = 'none';
-                    if (overlay.parentNode) {
-                        overlay.parentNode.removeChild(overlay);
-                    }
-                }, 500);
-            };
-
-            // Force remove after 2.5 seconds
-            setTimeout(removeOverlay, 2500);
-
-            // Backup: Ensure pointer events are removed even if visual removal fails
-            setTimeout(() => {
-                if (overlay) overlay.style.pointerEvents = 'none';
-            }, 3000);
-        })();
-
-        // --- INITIALIZATION ---
-        try {
-            // Load saved state
-            const savedState = localStorage.getItem('alphaTerminalState');
-            if (savedState) {
-                try {
-                    currentFile = JSON.parse(savedState);
-                } catch (e) {
-                    console.error("State load error", e);
-                }
-            }
-
-            renderFileSystem();
-            openFile(currentFile.subject, currentFile.index);
-            calculateAnalytics();
-            renderPaperList();
-        } catch (e) {
-            console.error("App Init Error:", e);
-            // Fallback: show error on screen if app fails
-            document.body.insertAdjacentHTML('beforeend', `<div style="color:red; position:fixed; top:0; left:0; z-index:10000; background:black; padding:20px;">App Error: ${e.message}</div>`);
         }
     </script>
 </body>
