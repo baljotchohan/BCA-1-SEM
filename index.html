@@ -118,6 +118,20 @@
             backdrop-filter: blur(10px);
         }
 
+        @media (max-width: 640px) {
+            .navbar {
+                height: auto;
+                padding: 1rem;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .navbar .flex {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+
         .brand {
             font-size: 1.2rem;
             font-weight: bold;
