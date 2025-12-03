@@ -434,8 +434,11 @@
                 left: 0;
                 top: 40px;
                 bottom: 0;
+                width: 85%;
+                max-width: 300px;
                 transform: translateX(-100%);
-                box-shadow: 2px 0 10px rgba(0, 255, 65, 0.1);
+                box-shadow: 2px 0 20px rgba(0, 255, 65, 0.2);
+                z-index: 100;
             }
 
             .sidebar.active {
@@ -447,8 +450,11 @@
                 right: 0;
                 top: 40px;
                 bottom: 0;
+                width: 85%;
+                max-width: 300px;
                 transform: translateX(100%);
-                box-shadow: -2px 0 10px rgba(0, 255, 65, 0.1);
+                box-shadow: -2px 0 20px rgba(0, 255, 65, 0.2);
+                z-index: 100;
             }
 
             .control-panel.active {
@@ -457,6 +463,7 @@
 
             .paper-viewport {
                 padding: 0;
+                overflow-x: hidden;
             }
 
             .paper {
@@ -465,6 +472,14 @@
                 width: 100%;
                 border: none;
                 border-top: 1px solid var(--terminal-green);
+                overflow-x: hidden;
+            }
+
+            /* Ensure code blocks don't overflow */
+            pre {
+                max-width: 100%;
+                overflow-x: auto;
+                white-space: pre;
             }
 
             .mobile-controls {
@@ -476,25 +491,42 @@
             }
 
             .status-item span {
-                font-size: 0.8rem;
+                font-size: 0.75rem;
+            }
+
+            /* Hide User Status on very small screens */
+            @media (max-width: 400px) {
+                .status-item:nth-child(2) {
+                    display: none;
+                }
+
+                .terminal-header {
+                    padding: 0 0.5rem;
+                }
             }
 
             .exam-header h1 {
-                font-size: 1.8rem;
+                font-size: 1.5rem;
+                letter-spacing: 2px;
             }
 
             .q-num {
-                width: 35px;
-                font-size: 1.1rem;
+                width: 30px;
+                font-size: 1rem;
             }
 
             .q-text {
-                font-size: 1.1rem;
+                font-size: 1rem;
             }
 
             .view-panel {
                 left: 0;
                 padding: 1rem;
+                z-index: 150;
+            }
+
+            .stat-value {
+                font-size: 3rem;
             }
         }
 
@@ -502,15 +534,15 @@
             display: none;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .mobile-btn {
             background: transparent;
             border: 1px solid var(--terminal-green);
             color: var(--terminal-green);
-            width: 35px;
-            height: 35px;
+            width: 32px;
+            height: 32px;
             cursor: pointer;
             display: flex;
             align-items: center;
