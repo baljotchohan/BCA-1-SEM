@@ -373,6 +373,82 @@
                 max-width: none;
             }
         }
+
+        /* CONTROL PANEL */
+        .control-panel {
+            width: 280px;
+            background: #000;
+            border-left: 1px solid var(--terminal-green);
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            gap: 1rem;
+            z-index: 40;
+            overflow-y: auto;
+        }
+
+        /* MOBILE STYLES */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                left: -250px;
+                top: 40px;
+                bottom: 0;
+                transition: left 0.3s ease;
+                box-shadow: 2px 0 10px rgba(0, 255, 65, 0.1);
+            }
+
+            .sidebar.active {
+                left: 0;
+            }
+
+            .control-panel {
+                position: fixed;
+                right: -280px;
+                top: 40px;
+                bottom: 0;
+                transition: right 0.3s ease;
+                box-shadow: -2px 0 10px rgba(0, 255, 65, 0.1);
+            }
+
+            .control-panel.active {
+                right: 0;
+            }
+
+            .paper-viewport {
+                padding: 0.5rem;
+            }
+
+            .paper {
+                padding: 1rem;
+                min-height: 60vh;
+                width: 100%;
+            }
+
+            .mobile-controls {
+                display: flex !important;
+            }
+
+            .desktop-only {
+                display: none !important;
+            }
+
+            .status-item span {
+                font-size: 0.8rem;
+            }
+        }
+
+        .mobile-controls {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: 1px solid var(--terminal-green);
+            color: var(--terminal-green);
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -382,17 +458,23 @@
     <!-- SYSTEM STATUS HEADER -->
     <header class="terminal-header">
         <div class="status-item">
+            <button class="mobile-controls mr-2" onclick="toggleSidebar()">
+                <i class="fas fa-bars"></i>
+            </button>
             <i class="fas fa-terminal text-green-500"></i>
-            <span class="font-bold">ALPHA_TERMINAL_V2.0</span>
+            <span class="font-bold hidden md:inline">ALPHA_TERMINAL_V2.0</span>
+            <span class="font-bold md:hidden">ALPHA_V2</span>
         </div>
-        <div class="status-item">
+        <div class="status-item desktop-only">
             <span>[SYSTEM::ONLINE]</span>
             <span class="blink">_</span>
         </div>
         <div class="status-item">
-            <span>USER::ROOT</span>
-            <span>|</span>
+            <span class="desktop-only">USER::ROOT | </span>
             <span id="system-time">14:00:00</span>
+            <button class="mobile-controls ml-2" onclick="toggleControlPanel()">
+                <i class="fas fa-sliders-h"></i>
+            </button>
         </div>
     </header>
 
@@ -926,6 +1008,105 @@
         renderFileSystem();
         openFile(currentFile.subject, currentFile.index);
         calculateAnalytics();
+        renderPaperList(); // Populate the side panel list
+
+        // --- MISSING FUNCTIONS IMPLEMENTATION ---
+
+        function zoomPaper(amount) {
+            currentZoom += amount;
+            // Clamp zoom level between 0.5 and 2.0
+            if (currentZoom < 0.5) currentZoom = 0.5;
+            if (currentZoom > 2.0) currentZoom = 2.0;
+
+            applyZoom();
+        }
+
+        function resetZoom() {
+            currentZoom = 1.0;
+            applyZoom();
+        }
+
+        function applyZoom() {
+            // Apply scale transform to the paper
+            paperContent.style.transform = `scale(${currentZoom})`;
+            paperContent.style.transformOrigin = 'top center';
+            document.getElementById('zoom-display').innerText = `${Math.round(currentZoom * 100)}%`;
+        }
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.log(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+                });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
+        function downloadPaper() {
+            const element = document.getElementById('paper-content');
+            const opt = {
+                margin: 0.5,
+                filename: `Alpha_Terminal_Paper_${currentFile.subject}_${currentFile.index + 1}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+
+            // Temporarily remove dark mode/styles for cleaner PDF if needed, 
+            // but for now we keep the terminal look as requested by "SAVE" context.
+            // If print style is preferred, we could toggle classes.
+
+            html2pdf().set(opt).from(element).save();
+            showToast('Generating PDF...');
+        }
+
+        function toggleProb() {
+            showTags = !showTags;
+            renderPaper(fileSystem[currentFile.subject].files[currentFile.index]);
+            showToast(showTags ? 'TAGS::VISIBLE' : 'TAGS::HIDDEN');
+        }
+
+        function renderPaperList() {
+            const listContainer = document.getElementById('paper-list');
+            listContainer.innerHTML = '';
+
+            // Flatten all papers from all subjects for the "Paper Bank"
+            Object.keys(fileSystem).forEach(subjectKey => {
+                const subject = fileSystem[subjectKey];
+                subject.files.forEach((paper, index) => {
+                    const item = document.createElement('div');
+                    item.className = 'p-2 border-b border-gray-800 hover:bg-gray-800/50 cursor-pointer transition group';
+                    item.onclick = () => openFile(subjectKey, index);
+
+                    const isCurrent = currentFile.subject === subjectKey && currentFile.index === index;
+                    const activeClass = isCurrent ? 'text-green-400' : 'text-gray-400 group-hover:text-green-300';
+
+                    item.innerHTML = `
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold ${activeClass}">SET_0${paper.id}</span>
+                            <span class="text-[10px] text-gray-600">${subject.name}</span>
+                        </div>
+                        <div class="text-[10px] text-gray-500 mt-1 truncate">
+                            ${paper.short[0].t.substring(0, 30)}...
+                        </div>
+                    `;
+                    listContainer.appendChild(item);
+                });
+            });
+        }
+
+        function toggleSidebar() {
+            document.querySelector('.sidebar').classList.toggle('active');
+            document.querySelector('.control-panel').classList.remove('active');
+        }
+
+        function toggleControlPanel() {
+            document.querySelector('.control-panel').classList.toggle('active');
+            document.querySelector('.sidebar').classList.remove('active');
+        }
 
     </script>
 </body>
