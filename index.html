@@ -468,7 +468,7 @@
             flex-direction: column;
         }
 
-        .typing-text {
+        .intro-typing-text {
             border-right: 2px solid #0f0;
             white-space: nowrap;
             overflow: hidden;
@@ -498,7 +498,7 @@
                 text-align: center;
             }
 
-            .typing-text {
+            .intro-typing-text {
                 white-space: normal;
                 /* Allow wrapping on mobile */
                 border-right: none;
@@ -520,7 +520,7 @@
 <body>
     <!-- Hacking Intro Overlay -->
     <div id="intro-overlay">
-        <div id="intro-text" class="typing-text"></div>
+        <div id="intro-text" class="intro-typing-text"></div>
     </div>
 
     <!-- HEADER -->
@@ -1005,6 +1005,15 @@
             u4: getQs(qBank.u4, 2)
         }));
 
+        // Generate Solutions for each Paper
+        const webTechSolutions = webTechPapers.map(paper => ({
+            title: `Solution Key - Set 0${paper.id}`,
+            type: "solution",
+            id: `sol-${paper.id}`,
+            subject: "solutions",
+            linkedPaperId: paper.id
+        }));
+
         // FILE SYSTEM STRUCTURE
         const fileSystem = {
             "web-tech-sem1": {
@@ -1015,9 +1024,7 @@
             "solutions": {
                 type: "directory",
                 name: "Solutions & Keys",
-                files: [
-                    { title: "Web Tech Master Key", type: "solution", id: "sol-master", subject: "Web Technology" }
-                ]
+                files: webTechSolutions
             }
         };
 
@@ -1087,40 +1094,58 @@
         function renderSolution(file) {
             paperContent.innerHTML = '';
 
-            let html = `
-                                                                                        <div class="exam-header">
-                                                                                            <h1>MASTER SOLUTION KEY</h1>
-                                                                                            <div class="text-purple-500">> SUBJECT: ${file.subject.toUpperCase()}</div>
-                                                                                            <div class="exam-details mt-2">
-                                                                                                <span>[TYPE::FULL_SOLUTION]</span>
-                                                                                                <span>[STATUS::VERIFIED]</span>
-                                                                                            </div>
-                                                                                        </div>
+            // Find the linked paper to get the specific questions
+            const linkedPaper = webTechPapers.find(p => p.id === file.linkedPaperId);
+            if (!linkedPaper) {
+                paperContent.innerHTML = '<div class="text-red-500">Error: Linked paper not found.</div>';
+                return;
+            }
 
-                                                                                        <div class="typing-text mb-6 text-sm text-gray-400">
-                    > SYSTEM_MSG: Loading detailed answers and code examples...
-                                                                                        </div>
-                                                                                        `;
+            let html = `
+                <div class="exam-header">
+                    <h1>SOLUTION KEY // SET 0${linkedPaper.id}</h1>
+                    <div class="text-purple-500">> SUBJECT: ${linkedPaper.title.toUpperCase()}</div>
+                    <div class="exam-details mt-2">
+                        <span>[TYPE::FULL_SOLUTION]</span>
+                        <span>[STATUS::VERIFIED]</span>
+                        <span>[REF::${linkedPaper.code}]</span>
+                    </div>
+                </div>
+
+                <div class="intro-typing-text mb-6 text-sm text-gray-400">
+                    > SYSTEM_MSG: Loading detailed answers and code examples for Set 0${linkedPaper.id}...
+                </div>
+            `;
+
+            // Helper to find answer in solutionBank
+            const getAnswer = (questionText, category) => {
+                const solCat = solutionBank[category];
+                if (!solCat) return { ans: "Answer not found.", code: "" };
+                const found = solCat.find(s => s.q === questionText);
+                return found || { ans: "Answer not found.", code: "" };
+            };
 
             // Helper to render a section
-            const renderSection = (title, questions) => {
+            const renderSection = (title, questions, category) => {
                 let sectionHtml = `<div class="section-header"><span>>> ${title}</span></div>`;
-                questions.forEach((item, idx) => {
+                questions.forEach((qItem, idx) => {
+                    const answerData = getAnswer(qItem.t, category);
+
                     sectionHtml += `
                         <div class="mb-8 border-b border-gray-800 pb-6">
                             <div class="flex gap-3 mb-3">
                                 <span class="text-purple-400 font-bold">Q${idx + 1}.</span>
-                                <span class="font-bold text-gray-200">${item.q}</span>
+                                <span class="font-bold text-gray-200 text-justify">${qItem.t}</span>
                             </div>
                             
                             <div class="ml-8">
-                                <div class="text-gray-400 mb-4 text-sm leading-relaxed border-l-2 border-gray-700 pl-3">
-                                    ${item.ans.replace(/\n/g, '<br>')}
+                                <div class="text-gray-400 mb-4 text-sm leading-relaxed border-l-2 border-gray-700 pl-3 text-justify">
+                                    <span class="text-green-500 font-bold">ANS: </span>${answerData.ans.replace(/\n/g, '<br>')}
                                 </div>
                                 
-                                <div class="bg-gray-900 border border-gray-700 rounded p-3 relative group">
+                                <div class="bg-gray-900 border border-gray-700 rounded p-3 relative group mt-2">
                                     <div class="absolute top-0 right-0 bg-gray-800 text-xs px-2 py-1 text-gray-400 rounded-bl">CODE</div>
-                                    <pre class="text-green-400 font-mono text-sm overflow-x-auto"><code>${item.code.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code></pre>
+                                    <pre class="text-green-400 font-mono text-sm overflow-x-auto whitespace-pre-wrap"><code>${answerData.code.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code></pre>
                                 </div>
                             </div>
                         </div>
@@ -1129,17 +1154,17 @@
                 return sectionHtml;
             };
 
-            html += renderSection("SHORT ANSWER QUESTIONS", solutionBank.short);
-            html += renderSection("UNIT 1", solutionBank.u1);
-            html += renderSection("UNIT 2", solutionBank.u2);
-            html += renderSection("UNIT 3", solutionBank.u3);
-            html += renderSection("UNIT 4", solutionBank.u4);
+            html += renderSection("SHORT ANSWER QUESTIONS", linkedPaper.short, 'short');
+            html += renderSection("UNIT 1", linkedPaper.u1, 'u1');
+            html += renderSection("UNIT 2", linkedPaper.u2, 'u2');
+            html += renderSection("UNIT 3", linkedPaper.u3, 'u3');
+            html += renderSection("UNIT 4", linkedPaper.u4, 'u4');
 
             html += `
-                                                                                        <div class="mt-12 text-center text-gray-500 text-sm">
-                                                                                            *** END OF SOLUTION KEY ***
-                                                                                        </div>
-                                                                                        `;
+                <div class="mt-12 text-center text-gray-500 text-sm">
+                    *** END OF SOLUTION KEY ***
+                </div>
+            `;
 
             paperContent.innerHTML = html;
             viewport.scrollTop = 0;
@@ -1459,7 +1484,7 @@
                                                                                             <span class="text-[10px] text-gray-600">${subject.name}</span>
                                                                                         </div>
                                                                                         <div class="text-[10px] text-gray-500 mt-1 truncate">
-                                                                                            ${paper.short[0].t.substring(0, 30)}...
+                                                                                            ${paper.type === 'solution' ? 'Master Solution Key' : paper.short[0].t.substring(0, 30) + '...'}
                                                                                         </div>
                     `;
                     listContainer.appendChild(item);
@@ -1539,10 +1564,18 @@
         }
 
         // Start animation on load
-        window.addEventListener('load', () => {
+        // Start animation on load
+        function startIntro() {
             // Ensure overlay is visible
-            introOverlay.style.display = 'flex';
-            setTimeout(type, 500);
-        });
+            if (introOverlay) {
+                introOverlay.style.display = 'flex';
+                setTimeout(type, 500);
+            }
+        }
 
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', startIntro);
+        } else {
+            startIntro();
+        }
     </script>
