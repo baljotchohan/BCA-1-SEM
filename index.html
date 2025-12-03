@@ -553,9 +553,14 @@
             <span class="status-label">TIME:</span>
             <span class="status-value" id="system-time">00:00:00</span>
         </div>
+        <!-- Mobile Toggle Buttons -->
+        <div class="mobile-controls">
+            <button onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+            <button onclick="toggleControlPanel()"><i class="fas fa-cog"></i></button>
+        </div>
     </header>
 
-    <div class="app-container">
+    <div class="workspace">
         <!-- SIDEBAR -->
         <div class="sidebar">
             <div class="sidebar-header">
@@ -573,81 +578,98 @@
             </div>
 
             <!-- Solutions Directory -->
-            <label class="setting-label"><i class="fas fa-info-circle"></i> About</label>
-            <div class="text-sm space-y-2">
-                <p><strong class="text-cyan-400">Alpha Terminal v2.0</strong></p>
-                <p class="text-gray-400">Intelligent Exam Simulator for BCA-DSC-101</p>
-                <p class="text-gray-400">Generated with high-probability question analysis</p>
-                <button class="btn btn-secondary w-full mt-3" onclick="showToast('All settings saved!')">
-                    <i class="fas fa-save"></i> Save Preferences
-                </button>
+            <div class="dir-header" onclick="toggleDir('solutions-dir')">
+                <i class="fas fa-folder text-purple-500"></i>
+                <span>Solutions & Keys</span>
             </div>
-        </div>
-    </div>
-
-    <!-- RIGHT CONTROL PANEL -->
-    <div class="control-panel">
-
-        <!-- Zoom Controls -->
-        <div class="zoom-controls">
-            <button class="zoom-btn" onclick="zoomPaper(-0.1)" title="Zoom Out">
-                <i class="fas fa-minus"></i>
-            </button>
-            <div class="zoom-value" id="zoom-display">100%</div>
-            <button class="zoom-btn" onclick="zoomPaper(0.1)" title="Zoom In">
-                <i class="fas fa-plus"></i>
-            </button>
-            <button class="zoom-btn" onclick="resetZoom()" title="Reset Zoom">
-                <i class="fas fa-redo"></i>
-            </button>
-        </div>
-
-        <!-- Actions -->
-        <div class="p-4 bg-[#0b0c10] border border-gray-800 rounded-lg">
-            <h3 class="text-xs text-cyan-400 font-bold mb-3 uppercase tracking-wider">Control Deck</h3>
-            <div class="grid grid-cols-2 gap-2">
-                <button onclick="toggleFullscreen()"
-                    class="bg-purple-500/10 hover:bg-purple-500/20 text-purple-400 border border-purple-500/50 py-2 rounded text-xs font-bold transition flex items-center justify-center gap-2 hover:scale-105">
-                    <i class="fas fa-expand"></i> FULL
-                </button>
-                <button onclick="downloadPaper()"
-                    class="bg-green-500/10 hover:bg-green-500/20 text-green-400 border border-green-500/50 py-2 rounded text-xs font-bold transition flex items-center justify-center gap-2 hover:scale-105">
-                    <i class="fas fa-download"></i> SAVE
-                </button>
-                <button onclick="window.print()"
-                    class="bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/50 py-2 rounded text-xs font-bold transition flex items-center justify-center gap-2 hover:scale-105">
-                    <i class="fas fa-print"></i> PRINT
-                </button>
-                <button onclick="toggleProb()"
-                    class="bg-gray-800 hover:bg-gray-700 text-gray-300 border border-gray-600 py-2 rounded text-xs font-bold transition flex items-center justify-center gap-2 hover:scale-105">
-                    <i class="fas fa-eye"></i> TAGS
-                </button>
+            <div id="solutions-dir" class="dir-content">
+                <!-- Files injected by JS -->
             </div>
-        </div>
 
-        <!-- Paper Selector -->
-        <div class="flex-1 overflow-hidden flex flex-col">
-            <h3 class="text-xs text-gray-500 font-bold mb-3 uppercase tracking-wider flex justify-between items-center">
-                Paper Bank
-                <span class="bg-gray-800 text-gray-300 px-2 py-0.5 rounded text-[10px]">10 SETS</span>
-            </h3>
-            <div class="paper-list custom-scroll" id="paper-list">
-                <!-- List Items Injected Here -->
-            </div>
-        </div>
-
-        <!-- Stats Mini -->
-        <div class="p-3 bg-gray-800/50 rounded border border-gray-700">
-            <div class="flex justify-between items-end">
-                <div>
-                    <div class="text-[10px] text-gray-400 uppercase">Probability Score</div>
-                    <div class="text-xl font-bold text-green-400 mono">94.2%</div>
+            <div class="mt-auto">
+                <label class="setting-label"><i class="fas fa-info-circle"></i> About</label>
+                <div class="text-sm space-y-2">
+                    <p><strong class="text-cyan-400">Alpha Terminal v2.0</strong></p>
+                    <p class="text-gray-400">Intelligent Exam Simulator for BCA-DSC-101</p>
+                    <p class="text-gray-400">Generated with high-probability question analysis</p>
+                    <button class="btn btn-secondary w-full mt-3" onclick="showToast('All settings saved!')">
+                        <i class="fas fa-save"></i> Save Preferences
+                    </button>
                 </div>
-                <i class="fas fa-chart-line text-green-500/20 text-3xl"></i>
             </div>
         </div>
 
-    </div>
+        <!-- PAPER VIEWPORT -->
+        <div id="viewport" class="paper-viewport">
+            <div id="paper-content" class="paper">
+                <!-- Content injected by JS -->
+            </div>
+        </div>
+
+        <!-- RIGHT CONTROL PANEL -->
+        <div class="control-panel">
+
+            <!-- Zoom Controls -->
+            <div class="zoom-controls">
+                <button class="zoom-btn" onclick="zoomPaper(-0.1)" title="Zoom Out">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <div class="zoom-value" id="zoom-display">100%</div>
+                <button class="zoom-btn" onclick="zoomPaper(0.1)" title="Zoom In">
+                    <i class="fas fa-plus"></i>
+                </button>
+                <button class="zoom-btn" onclick="resetZoom()" title="Reset Zoom">
+                    <i class="fas fa-redo"></i>
+                </button>
+            </div>
+
+            <!-- Actions -->
+            <div class="p-4 bg-[#0b0c10] border border-gray-800 rounded-lg">
+                <h3 class="text-xs text-cyan-400 font-bold mb-3 uppercase tracking-wider">Control Deck</h3>
+                <div class="grid grid-cols-2 gap-2">
+                    <button onclick="toggleFullscreen()"
+                        class="bg-purple-500/10 hover:bg-purple-500/20 text-purple-400 border border-purple-500/50 py-2 rounded text-xs font-bold transition flex items-center justify-center gap-2 hover:scale-105">
+                        <i class="fas fa-expand"></i> FULL
+                    </button>
+                    <button onclick="downloadPaper()"
+                        class="bg-green-500/10 hover:bg-green-500/20 text-green-400 border border-green-500/50 py-2 rounded text-xs font-bold transition flex items-center justify-center gap-2 hover:scale-105">
+                        <i class="fas fa-download"></i> SAVE
+                    </button>
+                    <button onclick="window.print()"
+                        class="bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/50 py-2 rounded text-xs font-bold transition flex items-center justify-center gap-2 hover:scale-105">
+                        <i class="fas fa-print"></i> PRINT
+                    </button>
+                    <button onclick="toggleProb()"
+                        class="bg-gray-800 hover:bg-gray-700 text-gray-300 border border-gray-600 py-2 rounded text-xs font-bold transition flex items-center justify-center gap-2 hover:scale-105">
+                        <i class="fas fa-eye"></i> TAGS
+                    </button>
+                </div>
+            </div>
+
+            <!-- Paper Selector -->
+            <div class="flex-1 overflow-hidden flex flex-col">
+                <h3
+                    class="text-xs text-gray-500 font-bold mb-3 uppercase tracking-wider flex justify-between items-center">
+                    Paper Bank
+                    <span class="bg-gray-800 text-gray-300 px-2 py-0.5 rounded text-[10px]">10 SETS</span>
+                </h3>
+                <div class="paper-list custom-scroll" id="paper-list">
+                    <!-- List Items Injected Here -->
+                </div>
+            </div>
+
+            <!-- Stats Mini -->
+            <div class="p-3 bg-gray-800/50 rounded border border-gray-700">
+                <div class="flex justify-between items-end">
+                    <div>
+                        <div class="text-[10px] text-gray-400 uppercase">Probability Score</div>
+                        <div class="text-xl font-bold text-green-400 mono">94.2%</div>
+                    </div>
+                    <i class="fas fa-chart-line text-green-500/20 text-3xl"></i>
+                </div>
+            </div>
+
+        </div>
     </div>
 
     <script>
