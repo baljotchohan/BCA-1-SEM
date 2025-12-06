@@ -628,88 +628,10 @@
         const answerPapers = [
             {
                 id: 'master_001',
-                title: 'COMPLETE QUESTION BANK + SOLUTIONS',
+                title: 'COMPLETE SOLVED QUESTION BANK',
                 date: 'MASTER',
                 status: 'ALL-IN-ONE',
                 content: masterContent
-            },
-            {
-                id: 'ans_001',
-                title: 'Model Answer Key (2024)',
-                date: '2024-12-01',
-                status: 'SOLVED',
-                content: {
-                    short: [
-                        { q: "Define WWW and its full form.", a: "<strong>WWW (World Wide Web)</strong> is a system of interlinked hypertext documents accessed via the Internet. It is an information space where documents and other web resources are identified by URLs. <strong>Full Form:</strong> World Wide Web." },
-                        { q: "What is a Web Server? Give 2 examples.", a: "A <strong>Web Server</strong> is software or hardware that stores website files (HTML, CSS, JS) and serves them to users' browsers upon request via HTTP. <strong>Examples:</strong> Apache HTTP Server, Nginx, Microsoft IIS." },
-                        { q: "Define URL and its components.", a: "<strong>URL (Uniform Resource Locator)</strong> is a reference (an address) to a web resource. <strong>Components:</strong> Protocol (http://), Domain Name (www.example.com), and Path (/page.html)." },
-                        { q: "Diff. between Container and Empty tags.", a: "<strong>Container Tags:</strong> Have both opening and closing tags (e.g., &lt;HTML&gt;...&lt;/HTML&gt;) and contain content. <strong>Empty Tags:</strong> Have only an opening tag (e.g., &lt;BR&gt;, &lt;HR&gt;) and do not enclose content." },
-                        { q: "Use of &lt;PRE&gt; tag.", a: "The <strong>&lt;PRE&gt;</strong> (Preformatted Text) tag preserves both spaces and line breaks in the text exactly as they are written in the HTML source code, displaying it in a fixed-width font." }
-                    ],
-                    u1: [
-                        {
-                            q: "Explain the structure of an HTML document. Discuss &lt;HEAD&gt;, &lt;TITLE&gt;, &lt;BODY&gt;.",
-                            a: "<p>The structure of an HTML document is defined by a tree of tags that organize content for the browser.</p><br><strong>1. &lt;HTML&gt; Tag:</strong><p>The root element that wraps all content on the page.</p><br><strong>2. &lt;HEAD&gt; Section:</strong><p>Contains meta-information about the document that is not displayed directly on the page, such as:</p><ul class='sub-q-list'><li>Meta tags for character set and viewport.</li><li>Links to external stylesheets (CSS).</li><li>Scripts (JavaScript).</li></ul><br><strong>3. &lt;TITLE&gt; Tag:</strong><p>Placed inside the &lt;HEAD&gt;, it defines the title shown in the browser tab and search engine results.</p><br><strong>4. &lt;BODY&gt; Section:</strong><p>Contains the visible content of the webpage, including text, images, videos, and links. All visual elements reside here.</p>"
-                        }
-                    ],
-                    u2: [
-                        {
-                            q: "Explain different types of CSS (Inline, Internal, External) with examples.",
-                            a: "<p>CSS (Cascading Style Sheets) can be applied in three ways:</p><br><strong>1. Inline CSS:</strong><p>Applied directly within an HTML element using the 'style' attribute.</p><em>Example:</em> &lt;h1 style='color:red;'&gt;Hello&lt;/h1&gt;<br><br><strong>2. Internal CSS:</strong><p>Defined within the &lt;style&gt; tag in the &lt;head&gt; section. unique to a single page.</p><em>Example:</em><br>&lt;style&gt;<br> h1 { color: blue; }<br>&lt;/style&gt;<br><br><strong>3. External CSS:</strong><p>Styles are saved in a separate '.css' file and linked using the &lt;link&gt; tag. Best for multi-page sites.</p><em>Example:</em> &lt;link rel='stylesheet' href='style.css'&gt;"
-                        }
-                    ],
-                    u3: [
-                        {
-                            q: "Explain Conditional Statements in JS (If, Switch) with examples.",
-                            a: "<p>Conditional statements perform different actions based on different conditions.</p><br><strong>1. If Statement:</strong><p>Executes a block of code if a specified condition is true.</p><em>Syntax:</em><br>if (condition) { // code }<br><br><strong>2. If-Else Statement:</strong><p>Executes one block if true, another if false.</p><br><strong>3. Switch Statement:</strong><p>Selects one of many code blocks to be executed. usage eliminates long else-if chains.</p><em>Example:</em><br>switch(expression) {<br> case x: // code block<br> break;<br> default: // code block<br>}"
-                        }
-                    ],
-                    u4: [
-                        {
-                            q: "Explain the String Object and its methods (length, charAt, etc).",
-                            a: "<p>The JS <strong>String Object</strong> is used to store and manipulate text.</p><br><strong>Common Methods:</strong><ul class='sub-q-list'><li><strong>length:</strong> Property that returns the number of characters. <em>'Hello'.length // 5</em></li><li><strong>charAt(index):</strong> Returns the character at the specified index. <em>'Msg'.charAt(0) // 'M'</em></li><li><strong>toUpperCase():</strong> Converts string to upper case.</li><li><strong>indexOf(str):</strong> Returns the index of the first occurrence of a text.</li><li><strong>substring(start, end):</strong> Extracts a part of the string.</li></ul>"
-                        }
-                    ]
-                }
-            },
-            {
-                id: 'ans_002',
-                title: 'Solved Question Bank (Imp)',
-                date: '2024-11-20',
-                status: 'REVISION',
-                content: {
-                    short: [
-                        { q: "Define JavaScript.", a: "<strong>JavaScript</strong> is a lightweight, interpreted programming language primarily used to create dynamic and interactive content on websites. It runs on the client-side (browser)." },
-                        { q: "What is an Intranet?", a: "An <strong>Intranet</strong> is a private network restricted to an organization. It uses internet technologies (TCP/IP, HTTP) to share information and resources among internal staff." },
-                        { q: "What is Inline CSS?", a: "<strong>Inline CSS</strong> is a method of applying styles to a specific HTML element using the <code>style</code> attribute. It overrides internal and external styles." },
-                        { q: "What is a Hyperlink?", a: "A <strong>Hyperlink</strong> is a reference to data that the user can follow by clicking or tapping. It points to a whole document or to a specific element within a document." },
-                        { q: "Explain 'Alert' box.", a: "An <strong>Alert box</strong> in JavaScript is a simple dialog box using `window.alert('msg')` that displays a message and an OK button. It pauses script execution until closed." }
-                    ],
-                    u1: [
-                        {
-                            q: "Explain the Client-Server model of the Internet.",
-                            a: "<p>The <strong>Client-Server model</strong> is a distributed application structure that partitions tasks or workloads between the providers of a resource or service, called servers, and service requesters, called clients.</p><br><strong>1. Client:</strong><p>The device (PC, phone) or software (Browser) that requests data. It provides the user interface.</p><br><strong>2. Server:</strong><p>A powerful computer that stores data (web pages, files) and responds to client requests.</p><br><strong>3. The Internet:</strong><p>Acts as the communication medium connecting clients and servers globally.</p>"
-                        }
-                    ],
-                    u2: [
-                        {
-                            q: "Design a Registration Form using HTML Form controls.",
-                            a: "<p>A Registration form collects user data using the &lt;FORM&gt; tag.</p><br><strong>Key Controls:</strong><ul class='sub-q-list'><li><strong>Text Input:</strong> &lt;input type='text'&gt; for names.</li><li><strong>Password:</strong> &lt;input type='password'&gt; for security.</li><li><strong>Radio Buttons:</strong> &lt;input type='radio'&gt; for gender selection.</li><li><strong>Checkboxes:</strong> &lt;input type='checkbox'&gt; for interests.</li><li><strong>Submit Button:</strong> &lt;input type='submit'&gt; to send data.</li></ul>"
-                        }
-                    ],
-                    u3: [
-                        {
-                            q: "Explain Looping structures in JS (For, While).",
-                            a: "<p>Loops are used to execute a block of code repeatedly.</p><br><strong>1. For Loop:</strong><p>Best when the number of iterations is known.</p><em>Syntax:</em> for (init; condition; increment) { ... }<br><br><strong>2. While Loop:</strong><p>Loops through a block of code as long as a specified condition is true.</p><em>Syntax:</em> while (condition) { ... }<br><br><strong>3. Do-While Loop:</strong><p>Executes the block once, before checking the condition.</p>"
-                        }
-                    ],
-                    u4: [
-                        {
-                            q: "Describe the Dreamweaver Workspace and its components.",
-                            a: "<p>Adobe Dreamweaver workspace consists of several panels and bars:</p><br><strong>1. Document Window:</strong><p>The main area showing the current page. Has Code, Design, and Split views.</p><br><strong>2. Property Inspector:</strong><p>Bottom panel that shows and edits properties of the selected object (text, image).</p><br><strong>3. Files Panel:</strong><p>Manages files and folders in your local site.</p><br><strong>4. Insert Panel:</strong><p>Buttons for inserting common HTML elements (Images, Tables).</p>"
-                        }
-                    ]
-                }
             }
         ];
 
