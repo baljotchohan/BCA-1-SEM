@@ -57,10 +57,8 @@
             height: 150px;
             border-radius: 50%;
             border: 2px solid var(--terminal-green);
-            box-shadow: 0 0 20px var(--terminal-glow);
             margin-bottom: 2rem;
             object-fit: cover;
-            animation: pulse 2s infinite;
         }
 
         .typing-text {
@@ -71,19 +69,7 @@
             animation: blink 0.75s step-end infinite;
         }
 
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 10px var(--terminal-glow);
-            }
 
-            50% {
-                box-shadow: 0 0 30px var(--terminal-glow);
-            }
-
-            100% {
-                box-shadow: 0 0 10px var(--terminal-glow);
-            }
-        }
 
         @keyframes blink {
 
@@ -446,7 +432,7 @@
 
     <script>
         // ... (Intro logic preserved) ...
-        const textToType = "With Kive A Singhh...";
+        const textToType = "Kive A Singhh...";
         const typingElement = document.getElementById('typing-text');
         const overlay = document.getElementById('intro-overlay');
         const dashboard = document.getElementById('main-dashboard');
