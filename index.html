@@ -427,6 +427,18 @@
                 </div>
             </div>
 
+            <!-- ANSWERS SECTION -->
+            <div class="mb-12">
+                <h2
+                    class="text-xl font-bold mb-4 text-[var(--terminal-green)] border-b border-[var(--border-color)] pb-2 flex items-center">
+                    <i class="fas fa-book-open mr-2"></i> WEB TECHNOLOGIES - SOLVED
+                    <span class="text-xs ml-auto text-gray-500 font-normal">/answers</span>
+                </h2>
+                <div class="paper-grid" id="answer-grid">
+                    <!-- Answer Papers injected by JS -->
+                </div>
+            </div>
+
             <!-- MATH SECTION -->
             <div class="mb-8">
                 <h2
@@ -445,18 +457,6 @@
                         > System.out.println("Coming Soon...");<br>
                         > Upload Pending...
                     </div>
-                </div>
-            </div>
-
-            <!-- ANSWERS SECTION -->
-            <div class="mb-12">
-                <h2
-                    class="text-xl font-bold mb-4 text-[var(--terminal-green)] border-b border-[var(--border-color)] pb-2 flex items-center">
-                    <i class="fas fa-book-open mr-2"></i> WEB TECHNOLOGIES - SOLVED
-                    <span class="text-xs ml-auto text-gray-500 font-normal">/answers</span>
-                </h2>
-                <div class="paper-grid" id="answer-grid">
-                    <!-- Answer Papers injected by JS -->
                 </div>
             </div>
 
@@ -537,52 +537,52 @@
 
         const qBank = {
             short: [
-                { t: "Define WWW and its full form.", p: "High" },
-                { t: "What is a Web Server? Give 2 examples.", p: "High" },
-                { t: "Define URL and its components.", p: "High" },
-                { t: "Diff. between Container and Empty tags.", p: "Med" },
-                { t: "Use of &lt;PRE&gt; tag.", p: "Low" },
-                { t: "Explain 'Cellpadding' vs 'Cellspacing'.", p: "High" },
-                { t: "What is Inline CSS?", p: "Med" },
-                { t: "What is a Hyperlink?", p: "Med" },
-                { t: "Define JavaScript.", p: "High" },
-                { t: "What is the 'OnLoad' event?", p: "High" },
-                { t: "What is a Frameset?", p: "Med" },
-                { t: "What is Dreamweaver?", p: "Low" },
-                { t: "Explain the 'Alert' box.", p: "Med" },
-                { t: "What is Intranet?", p: "Med" },
-                { t: "Use of 'ALT' attribute in IMG tag.", p: "High" },
-                { t: "What is the use of 'TARGET' attribute?", p: "Med" },
-                { t: "Define 'External Link'.", p: "Low" },
-                { t: "What is a 'Prompt Box'?", p: "Med" }
+                { t: "Define WWW and its full form.", p: "High", a: "<strong>WWW (World Wide Web)</strong> is an information system where documents and other web resources are identified by URLs, interlinked by hypertext links, and accessible over the Internet. <strong>Full Form:</strong> World Wide Web." },
+                { t: "What is a Web Server? Give 2 examples.", p: "High", a: "A <strong>Web Server</strong> is a computer system that hosts websites. It runs web server software (like Apache or Nginx) to store web page files and serve them to users over the Internet via HTTP. <strong>Examples:</strong> Apache HTTP Server, Microsoft IIS." },
+                { t: "Define URL and its components.", p: "High", a: "<strong>URL (Uniform Resource Locator)</strong> is a reference to a web resource that specifies its location on a computer network and a mechanism for retrieving it. <strong>Components:</strong> Protocol (http), Domain Name (www.example.com), Path (/index.html)." },
+                { t: "Diff. between Container and Empty tags.", p: "Med", a: "<strong>Container Tags:</strong> Require both opening and closing tags (e.g., &lt;p&gt;...&lt;/p&gt;) and can hold content. <strong>Empty Tags:</strong> Have only an opening tag (e.g., &lt;br&gt;, &lt;img&gt;) and do not hold content." },
+                { t: "Use of &lt;PRE&gt; tag.", p: "Low", a: "The <strong>&lt;PRE&gt;</strong> tag defines preformatted text. Text inside this tag is displayed in a fixed-width font, and the element preserves both spaces and line breaks exactly as they are written in the source code." },
+                { t: "Explain 'Cellpadding' vs 'Cellspacing'.", p: "High", a: "<strong>Cellpadding:</strong> The space between the cell wall and the cell content. <strong>Cellspacing:</strong> The space between individual cells." },
+                { t: "What is Inline CSS?", p: "Med", a: "<strong>Inline CSS</strong> is used to apply a unique style to a single HTML element. It uses the <code>style</code> attribute of an HTML element." },
+                { t: "What is a Hyperlink?", p: "Med", a: "A <strong>Hyperlink</strong> is an element in an electronic document that links to another place in the same document or to an entirely different document. Clicking it navigates the user to the target." },
+                { t: "Define JavaScript.", p: "High", a: "<strong>JavaScript</strong> is a high-level, interpreted programming language used to make web pages interactive. It allows for dynamic content updates, multimedia control, and animation." },
+                { t: "What is the 'OnLoad' event?", p: "High", a: "The <strong>onLoad</strong> event occurs when an object has been loaded. It is most often used within the &lt;body&gt; element to execute a script once a web page has completely finished loading all content (including images, script files, etc.)." },
+                { t: "What is a Frameset?", p: "Med", a: "A <strong>Frameset</strong> is an HTML element used to define the layout of a web page that uses frames. It replaces the &lt;body&gt; tag and defines rows and columns of frames." },
+                { t: "What is Dreamweaver?", p: "Low", a: "<strong>Adobe Dreamweaver</strong> is a proprietary web development tool from Adobe. It provides a visual interface (WYSIWYG) for designing and coding websites." },
+                { t: "Explain the 'Alert' box.", p: "Med", a: "An <strong>Alert box</strong> is a dialog box that pops up on the screen to display a message to the user. It is created using <code>window.alert('message')</code> and requires the user to click 'OK' to proceed." },
+                { t: "What is Intranet?", p: "Med", a: "An <strong>Intranet</strong> is a private network accessible only to an organization's staff. It uses internet technologies to share information and tools securely within the organization." },
+                { t: "Use of 'ALT' attribute in IMG tag.", p: "High", a: "The <strong>ALT</strong> attribute specifies an alternate text for an image, if the image cannot be displayed. It is crucial for accessibility (screen readers) and SEO." },
+                { t: "What is the use of 'TARGET' attribute?", p: "Med", a: "The <strong>TARGET</strong> attribute in an anchor &lt;a&gt; tag specifies where to open the linked document (e.g., <code>_blank</code> opens in a new tab, <code>_self</code> in the same frame)." },
+                { t: "Define 'External Link'.", p: "Low", a: "An <strong>External Link</strong> is a hyperlink that points to a specific page or resource on a different domain or website." },
+                { t: "What is a 'Prompt Box'?", p: "Med", a: "A <strong>Prompt Box</strong> is a dialog box that asks the user for input. It returns the input value if the user clicks 'OK', or null if they click 'Cancel'. Syntax: <code>prompt('text', 'default')</code>." }
             ],
             u1: [
-                { t: "Explain the Client-Server model of the Internet with a neat diagram.", p: "High" },
-                { t: "Explain the structure of an HTML document. Discuss &lt;HEAD&gt;, &lt;TITLE&gt;, &lt;BODY&gt;.", p: "High" },
-                { t: "Explain 3 types of Lists in HTML with syntax and examples.", p: "Med" },
-                { t: "Explain the Table tag and its major attributes (Rowspan, Colspan).", p: "High" },
-                { t: "How are images inserted in HTML? Explain attributes of &lt;IMG&gt;.", p: "Med" }
+                { t: "Explain the Client-Server model of the Internet with a neat diagram.", p: "High", a: "<p>The <strong>Client-Server model</strong> is a collaborative architecture where:</p><ul class='sub-q-list'><li><strong>Client:</strong> A device or program (like a Browser) that requests a service or resource.</li><li><strong>Server:</strong> A powerful computer or program that provides the requested service or resource.</li><li><strong>Network (Internet):</strong> The medium through which the request and response travel.</li></ul><p>When you type a URL, your browser (Client) sends a request to the Web Server, which processes it and sends back the HTML page (Response).</p>" },
+                { t: "Explain the structure of an HTML document. Discuss &lt;HEAD&gt;, &lt;TITLE&gt;, &lt;BODY&gt;.", p: "High", a: "<p>An HTML document follows a tree structure:</p><br><strong>&lt;HTML&gt;:</strong> The root element.<br><strong>&lt;HEAD&gt;:</strong> Contains metadata (charset, viewport), title, and links to scripts/styles. It is not displayed in the viewport.<br><strong>&lt;TITLE&gt;:</strong> Inside Head. Sets the tab title.<br><strong>&lt;BODY&gt;:</strong> Contains all visible content (headings, paragraphs, images)." },
+                { t: "Explain 3 types of Lists in HTML with syntax and examples.", p: "Med", a: "<p><strong>1. Ordered List (&lt;ol&gt;):</strong> items are numbered. Uses &lt;li&gt;. <br><strong>2. Unordered List (&lt;ul&gt;):</strong> items have bullets. Uses &lt;li&gt;. <br><strong>3. Definition List (&lt;dl&gt;):</strong> list of terms and descriptions. Uses &lt;dt&gt; (term) and &lt;dd&gt; (desc).</p>" },
+                { t: "Explain the Table tag and its major attributes (Rowspan, Colspan).", p: "High", a: "<p><strong>&lt;TABLE&gt;</strong> creates a grid of rows (&lt;tr&gt;) and cells (&lt;td&gt; or &lt;th&gt;).</p><ul class='sub-q-list'><li><strong>Border:</strong> Thickness of border.</li><li><strong>Cellpadding/Cellspacing:</strong> Spacing control.</li><li><strong>Rowspan:</strong> Merges cells vertically (across rows).</li><li><strong>Colspan:</strong> Merges cells horizontally (across columns).</li></ul>" },
+                { t: "How are images inserted in HTML? Explain attributes of &lt;IMG&gt;.", p: "Med", a: "<p>Using the <strong>&lt;IMG&gt;</strong> empty tag.</p><p>Syntax: <code>&lt;img src='url' alt='text'&gt;</code></p><ul class='sub-q-list'><li><strong>SRC:</strong> Source path of the image.</li><li><strong>ALT:</strong> Alternate text.</li><li><strong>WIDTH/HEIGHT:</strong> Dimensions of the image.</li></ul>" }
             ],
             u2: [
-                { t: "Explain different types of CSS (Inline, Internal, External) with examples.", p: "High" },
-                { t: "What are Frames? Explain attributes of &lt;FRAMESET&gt;.", p: "Med" },
-                { t: "Design a Registration Form using HTML Form controls (Text, Radio, Submit).", p: "High" },
-                { t: "Explain the Anchor Tag &lt;A&gt; and its attributes in detail.", p: "High" },
-                { t: "What is an Image Map? Explain with example.", p: "Low" }
+                { t: "Explain different types of CSS (Inline, Internal, External) with examples.", p: "High", a: "<p><strong>1. Inline:</strong> Inside HTML tag using <code>style</code> attribute. High priority, low reusability.<br><strong>2. Internal:</strong> In <code>&lt;head&gt;</code> using <code>&lt;style&gt;</code> tag. Good for single-page styling.<br><strong>3. External:</strong> In a separate <code>.css</code> file linked via <code>&lt;link&gt;</code>. Best for consistency across detailed websites.</p>" },
+                { t: "What are Frames? Explain attributes of &lt;FRAMESET&gt;.", p: "Med", a: "<p><strong>Frames</strong> divide the browser window into multiple sections, each loading a separate HTML document.</p><p><strong>&lt;FRAMESET&gt;</strong> attributes:</p><ul class='sub-q-list'><li><strong>COLS:</strong> Defines vertical columns (e.g., '20%, 80%').</li><li><strong>ROWS:</strong> Defines horizontal rows.</li><li><strong>BORDER:</strong> Width of frame borders.</li></ul>" },
+                { t: "Design a Registration Form using HTML Form controls (Text, Radio, Submit).", p: "High", a: "<p>A form collects user input.</p><ul><li><code>&lt;input type='text'&gt;</code>: Name fields.</li><li><code>&lt;input type='radio'&gt;</code>: Single choice (Gender).</li><li><code>&lt;input type='checkbox'&gt;</code>: Multiple choices.</li><li><code>&lt;select&gt;</code>: Dropdown menu.</li><li><code>&lt;textarea&gt;</code>: Multi-line text.</li><li><code>&lt;input type='submit'&gt;</code>: Send data.</li></ul>" },
+                { t: "Explain the Anchor Tag &lt;A&gt; and its attributes in detail.", p: "High", a: "<p>The <strong>&lt;a&gt;</strong> tag creates hyperlinks.</p><ul class='sub-q-list'><li><strong>HREF:</strong> The destination URL.</li><li><strong>TARGET:</strong> Where to open (_blank, _self).</li><li><strong>TITLE:</strong> Tooltip text on hover.</li><li><strong>NAME:</strong> Defines a named anchor for internal bookmarking.</li></ul>" },
+                { t: "What is an Image Map? Explain with example.", p: "Low", a: "<p>An <strong>Image Map</strong> allows different parts of an image to be clickable links.</p><p>It uses <code>&lt;map&gt;</code> and <code>&lt;area&gt;</code> tags linked to an image via the <code>usemap</code> attribute. Areas can be rect, circle, or poly.</p>" }
             ],
             u3: [
-                { t: "Explain features of JavaScript. How is it different from Java?", p: "High" },
-                { t: "Explain Conditional Statements in JS (If, Switch) with examples.", p: "High" },
-                { t: "Explain Looping structures in JS (For, While) with syntax.", p: "Med" },
-                { t: "What are Functions in JS? Explain with an example.", p: "High" },
-                { t: "Explain Event Handling in JS (onClick, onMouseOver).", p: "High" }
+                { t: "Explain features of JavaScript. How is it different from Java?", p: "High", a: "<p><strong>Features:</strong> Lightweight, Interpreted, Object-based, Client-side validation, Dynamic typing.</p><p><strong>Diff from Java:</strong></p><ul><li>JS is interpreted, Java is compiled.</li><li>JS is weakly typed, Java is strongly typed.</li><li>JS runs in browser, Java runs in JVM.</li></ul>" },
+                { t: "Explain Conditional Statements in JS (If, Switch) with examples.", p: "High", a: "<p><strong>If-Else:</strong> Executes code blocks based on boolean condition.</p><p><strong>Switch:</strong> Selects one block to execute from many based on variable matching.</p>" },
+                { t: "Explain Looping structures in JS (For, While) with syntax.", p: "Med", a: "<p><strong>For Loop:</strong> <code>for(init; cond; inc) { }</code> - Use when iterations known.</p><p><strong>While Loop:</strong> <code>while(cond) { }</code> - Use when iterations unknown.</p>" },
+                { t: "What are Functions in JS? Explain with an example.", p: "High", a: "<p><strong>Functions</strong> are reusable blocks of code.</p><p>Defined using <code>function name(params) { ... }</code>. Called using <code>name(args)</code>. They help in modularity and reducing code redundancy.</p>" },
+                { t: "Explain Event Handling in JS (onClick, onMouseOver).", p: "High", a: "<p><strong>Event Handling</strong> allows JS to respond to user actions.</p><ul><li><code>onClick</code>: Triggered when element clicked.</li><li><code>onMouseOver</code>: Triggered when cursor hovers.</li><li><code>onLoad</code>: When page loads.</li></ul>" }
             ],
             u4: [
-                { t: "Explain the String Object and its methods (length, charAt, etc).", p: "High" },
-                { t: "Explain the Math Object and its methods (round, random, etc).", p: "Med" },
-                { t: "Explain the Date Object and how to manipulate dates in JS.", p: "Med" },
-                { t: "Describe the Dreamweaver Workspace and its components.", p: "High" },
-                { t: "Steps to create a new Site in Dreamweaver.", p: "Low" }
+                { t: "Explain the String Object and its methods (length, charAt, etc).", p: "High", a: "<p><strong>String Object</strong> manages text.</p><ul><li><code>length</code>: Returns size.</li><li><code>charAt(i)</code>: Returns char at index.</li><li><code>concat()</code>: Joins strings.</li><li><code>toLowerCase()</code>: Converts case.</li></ul>" },
+                { t: "Explain the Math Object and its methods (round, random, etc).", p: "Med", a: "<p><strong>Math Object</strong> performs mathematical tasks.</p><ul><li><code>Math.PI</code>: Returns Pi.</li><li><code>Math.round(x)</code>: Rounds to nearest integer.</li><li><code>Math.random()</code>: Returns random 0-1.</li><li><code>Math.sqrt(x)</code>: Square root.</li></ul>" },
+                { t: "Explain the Date Object and how to manipulate dates in JS.", p: "Med", a: "<p><strong>Date Object</strong> handles dates and times. <code>new Date()</code> creates current date.</p><ul><li><code>getDate()</code>, <code>getDay()</code>, <code>getFullYear()</code>: Getters.</li><li><code>setDate()</code>, <code>setFullYear()</code>: Setters to modify date.</li></ul>" },
+                { t: "Describe the Dreamweaver Workspace and its components.", p: "High", a: "<p><strong>Components:</strong></p><ul><li><strong>Document Window:</strong> Design/Code view.</li><li><strong>Toolbar:</strong> Common tools (File, Save).</li><li><strong>Insert Panel:</strong> Add HTML elements.</li><li><strong>Property Inspector:</strong> Edit selected element.</li><li><strong>Files Panel:</strong> Manage site files.</li></ul>" },
+                { t: "Steps to create a new Site in Dreamweaver.", p: "Low", a: "<ol><li>Site &gt; New Site.</li><li>Enter Site Name and Local Root Folder.</li><li>Set up Server (optional).</li><li>Save.</li></ol>" }
             ]
         };
 
@@ -616,7 +616,23 @@
         }));
 
         // --- ANSWER DATA ---
+        // Construct Master Content dynamically
+        const masterContent = {
+            short: qBank.short.map(q => ({ q: q.t, a: q.a })),
+            u1: qBank.u1.map(q => ({ q: q.t, a: q.a })),
+            u2: qBank.u2.map(q => ({ q: q.t, a: q.a })),
+            u3: qBank.u3.map(q => ({ q: q.t, a: q.a })),
+            u4: qBank.u4.map(q => ({ q: q.t, a: q.a })),
+        };
+
         const answerPapers = [
+            {
+                id: 'master_001',
+                title: 'COMPLETE QUESTION BANK + SOLUTIONS',
+                date: 'MASTER',
+                status: 'ALL-IN-ONE',
+                content: masterContent
+            },
             {
                 id: 'ans_001',
                 title: 'Model Answer Key (2024)',
