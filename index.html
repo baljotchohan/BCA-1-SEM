@@ -467,7 +467,13 @@
         function startClock() {
             setInterval(() => {
                 const now = new Date();
-                document.getElementById('clock').textContent = now.toLocaleTimeString('en-US', { hour12: false });
+                document.getElementById('clock').textContent = now.toLocaleTimeString('en-US', {
+                    timeZone: 'Asia/Kolkata',
+                    hour12: true,
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
+                });
             }, 1000);
         }
 
