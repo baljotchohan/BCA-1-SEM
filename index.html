@@ -814,108 +814,115 @@
         }
 
         window.openAnswer = function (id) {
-            const paper = answerPapers.find(p => p.id === id);
-            if (!paper) return;
-
-            // Switch Views
             const view = document.getElementById('answer-view');
             view.classList.remove('hidden');
-
             const container = document.getElementById('answer-content-container');
 
-            container.innerHTML = `
-                <div class="paper-header-real">
-                    <h1>Panjab University</h1>
-                    <div style="font-size: 1.1rem; margin-top: 5px;">Bachelor of Computer Applications (Semester I)</div>
-                    <div style="font-size: 1rem; font-weight: bold; margin-top: 5px;">WEB TECHNOLOGIES - SOLUTION KEY</div>
-                     <div class="paper-meta-real">
-                        <span>Paper ID: ${paper.id}</span>
-                        <span>Max Marks: 45</span>
+            if (id === 'master_001') {
+                let html = `
+                    <div style="text-align: center; font-family: 'Inter', sans-serif; margin-bottom: 50px;">
+                        <h1 style="font-size: 2.5rem; font-weight: 800; color: #222;">COMPLETE SOLVED BANK</h1>
+                        <p style="color: #666;">Compendium of 10 Solved Practice Sets</p>
                     </div>
-                </div>
+                `;
 
-                <div style="border: 2px solid #000; padding: 15px; margin-bottom: 30px; background: #f9f9f9;">
-                    <p style="text-align:center; font-weight:bold; margin-bottom:10px;">INSTRUCTIONS</p>
-                    <p>This document contains suggested model answers for the Web Technologies examination. Key points are highlighted.</p>
-                </div>
+                // Table of Contents
+                html += `
+                    <div style="background: #f8f9fa; border: 1px solid #e9ecef; padding: 20px; margin-bottom: 40px; border-radius: 8px; font-family: 'Inter', sans-serif;">
+                        <h3 style="font-weight: bold; margin-bottom: 15px; border-bottom: 2px solid #ddd; padding-bottom: 5px;">TABLE OF CONTENTS</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px;">
+                `;
+                papers.forEach(p => {
+                    html += `<a href="#${p.id}" style="text-decoration: none; color: #000; font-size: 0.9rem; padding: 5px; display: block; hover:background: #eee;">📄 ${p.title}</a>`;
+                });
+                html += `</div></div>`;
 
-                <!-- SECTION A -->
-                <div class="section-header">
-                    <span>Section - A (Short Answer)</span>
-                    <span>[Compulsory]</span>
-                </div>
-                <div class="question-row">
-                    <div class="q-num">1.</div>
-                    <div class="q-text">
-                        <ol class="sub-q-list" style="list-style: none; padding-left: 0;">
-                            ${paper.content.short.map((q, idx) => `
-                                <li style="margin-bottom: 15px; border-bottom: 1px dashed #ccc; padding-bottom: 10px;">
-                                    <div style="font-weight: bold; margin-bottom: 5px;">(${String.fromCharCode(97 + idx)}) ${q.q}</div>
-                                    <div style="font-family: 'Arial', sans-serif; color: #333; font-size: 0.95rem;">
-                                        <span style="font-weight:bold; text-decoration: underline;">Ans:</span> ${q.a}
+                // Render Each Paper
+                papers.forEach((p, index) => {
+                    html += `<div id="${p.id}" style="margin-bottom: 80px; page-break-after: always; padding-top: 20px; border-top: 5px solid #000;">`;
+
+                    // Header
+                    html += `
+                        <div class="paper-header-real">
+                            <h1>Panjab University</h1>
+                            <div style="font-size: 1.1rem; margin-top: 5px;">Bachelor of Computer Applications (Semester I)</div>
+                            <div style="font-size: 1rem; font-weight: bold; margin-top: 5px;">WEB TECHNOLOGIES - SOLVED SET ${String(index + 1).padStart(2, '0')}</div>
+                            <div class="paper-meta-real">
+                                <span>Code: BCA-101</span>
+                                <span>Date: ${p.date}</span>
+                            </div>
+                        </div>
+                    `;
+
+                    // Section A
+                    html += `
+                        <div class="section-header">
+                            <span>Section - A (Short Answer)</span>
+                            <span>[Compulsory]</span>
+                        </div>
+                        <div class="question-row">
+                            <div class="q-num">1.</div>
+                            <div class="q-text">
+                                <ol class="sub-q-list" style="list-style: none; padding-left: 0;">
+                    `;
+
+                    p.short.forEach((q, idx) => {
+                        html += `
+                            <li style="margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px dashed #eee;">
+                                <div style="font-weight: bold; margin-bottom: 5px;">(${String.fromCharCode(97 + idx)}) ${q.t}</div>
+                                <div style="font-family: 'Arial', sans-serif; color: #444; font-size: 0.95rem; line-height: 1.4; padding-left: 10px; border-left: 3px solid #00ff41;">
+                                    <span style="font-weight:bold; color: #000;">Ans:</span> ${q.a}
+                                </div>
+                            </li>
+                         `;
+                    });
+
+                    html += `</ol></div></div>`;
+
+                    // Units
+                    const units = [
+                        { name: 'Unit - I', qs: p.u1 },
+                        { name: 'Unit - II', qs: p.u2 },
+                        { name: 'Unit - III', qs: p.u3 },
+                        { name: 'Unit - IV', qs: p.u4 }
+                    ];
+
+                    units.forEach(u => {
+                        html += `
+                             <div class="section-header">
+                                <span>${u.name}</span>
+                            </div>
+                        `;
+                        u.qs.forEach((q, qIdx) => {
+                            html += `
+                                <div class="question-row" style="display:block; margin-bottom: 25px;">
+                                    <div style="font-weight: bold; font-size: 1.05rem; margin-bottom: 8px;">Q. ${q.t}</div>
+                                    <div style="font-family: 'Arial', sans-serif; line-height: 1.6; text-align: justify; background: #fafafa; padding: 15px; border-radius: 4px; border: 1px solid #eee;">
+                                        ${q.a}
                                     </div>
-                                </li>
-                            `).join('')}
-                        </ol>
-                    </div>
-                </div>
+                                </div>
+                            `;
+                            if (qIdx === 0 && u.qs.length > 1) {
+                                html += `<div style="text-align: center; font-weight: bold; font-size: 0.8rem; margin: 15px 0; color: #999;">— OR —</div>`;
+                            }
+                        });
+                    });
 
-                <!-- UNIT I -->
-                <div class="section-header">
-                    <span>Unit - I</span>
-                </div>
-                ${paper.content.u1.map((item, idx) => `
-                    <div class="question-row" style="display:block;">
-                        <div style="font-weight: bold; font-size: 1.05rem; margin-bottom: 10px;">Q. ${item.q}</div>
-                        <div style="font-family: 'Arial', sans-serif; line-height: 1.6; text-align: justify;">
-                            ${item.a}
-                        </div>
-                    </div>
-                `).join('')}
+                    html += `</div>`; // End paper div
+                });
 
-                <!-- UNIT II -->
-                <div class="section-header">
-                    <span>Unit - II</span>
-                </div>
-                ${paper.content.u2.map((item, idx) => `
-                    <div class="question-row" style="display:block;">
-                        <div style="font-weight: bold; font-size: 1.05rem; margin-bottom: 10px;">Q. ${item.q}</div>
-                        <div style="font-family: 'Arial', sans-serif; line-height: 1.6; text-align: justify;">
-                            ${item.a}
-                        </div>
+                html += `
+                    <div style="text-align: center; padding: 40px; color: #666; font-style: italic;">
+                        *** End of Master Document ***
                     </div>
-                `).join('')}
+                `;
 
-                 <!-- UNIT III -->
-                <div class="section-header">
-                    <span>Unit - III</span>
-                </div>
-                ${paper.content.u3.map((item, idx) => `
-                    <div class="question-row" style="display:block;">
-                        <div style="font-weight: bold; font-size: 1.05rem; margin-bottom: 10px;">Q. ${item.q}</div>
-                        <div style="font-family: 'Arial', sans-serif; line-height: 1.6; text-align: justify;">
-                            ${item.a}
-                        </div>
-                    </div>
-                `).join('')}
+                container.innerHTML = html;
+                return;
+            }
 
-                 <!-- UNIT IV -->
-                <div class="section-header">
-                    <span>Unit - IV</span>
-                </div>
-                ${paper.content.u4.map((item, idx) => `
-                    <div class="question-row" style="display:block;">
-                        <div style="font-weight: bold; font-size: 1.05rem; margin-bottom: 10px;">Q. ${item.q}</div>
-                        <div style="font-family: 'Arial', sans-serif; line-height: 1.6; text-align: justify;">
-                            ${item.a}
-                        </div>
-                    </div>
-                `).join('')}
-
-                <div style="text-align: center; margin-top: 50px; border-top: 1px solid #000; padding-top: 10px;">
-                    *** END OF ANSWER KEY ***
-                </div>
-             `;
+            // Fallback (though we removed other buttons)
+            container.innerHTML = '<div>Document not found.</div>';
         }
 
         function closeAnswer() {
