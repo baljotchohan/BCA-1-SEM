@@ -525,8 +525,21 @@
             ]
         };
 
+        // Deterministic Random Helper
+        const getSeededRandom = (seed) => {
+            let state = seed % 2147483647;
+            if (state <= 0) state += 2147483646;
+            return () => {
+                state = (state * 16807) % 2147483647;
+                return (state - 1) / 2147483646;
+            };
+        };
+
         // Shuffle & Pick Helper
-        const getQs = (arr, n) => [...arr].sort(() => 0.5 - Math.random()).slice(0, n);
+        const getQs = (arr, n, seed) => {
+            const rng = getSeededRandom(seed);
+            return [...arr].sort(() => 0.5 - rng()).slice(0, n);
+        };
 
         // Generate 10 Unique Sets
         const papers = Array.from({ length: 10 }, (_, i) => ({
@@ -534,11 +547,11 @@
             title: `Question Paper Set ${String(i + 1).padStart(2, '0')}`,
             date: `2024-12-${String(i + 1).padStart(2, '0')}`,
             status: 'AVAILABLE',
-            short: getQs(qBank.short, 9),
-            u1: getQs(qBank.u1, 2),
-            u2: getQs(qBank.u2, 2),
-            u3: getQs(qBank.u3, 2),
-            u4: getQs(qBank.u4, 2)
+            short: getQs(qBank.short, 9, (i + 1) * 101),
+            u1: getQs(qBank.u1, 2, (i + 1) * 202),
+            u2: getQs(qBank.u2, 2, (i + 1) * 303),
+            u3: getQs(qBank.u3, 2, (i + 1) * 404),
+            u4: getQs(qBank.u4, 2, (i + 1) * 505)
         }));
 
         function renderPapers() {
