@@ -32,6 +32,102 @@
             /* Prevent scroll during intro */
         }
 
+        /* --- EXAM TOPICS MODAL --- */
+        #exam-topics-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        #exam-topics-modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .topics-content {
+            background: linear-gradient(135deg, #0a0a0a 0%, #151515 100%);
+            border: 1px solid var(--terminal-green);
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.2);
+            padding: 2rem;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            border-radius: 8px;
+            position: relative;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+
+        #exam-topics-modal.active .topics-content {
+            transform: scale(1);
+        }
+
+        .topics-header {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--terminal-green);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            border-bottom: 1px dashed #333;
+            padding-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .topics-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .topics-list li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: flex-start;
+            color: #ccc;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .topics-list li::before {
+            content: '>';
+            color: var(--terminal-green);
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .close-topics-btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            background: rgba(0, 255, 65, 0.1);
+            border: 1px solid var(--terminal-green);
+            color: var(--terminal-green);
+            font-family: var(--font-mono);
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .close-topics-btn:hover {
+            background: var(--terminal-green);
+            color: #000;
+        }
+
         /* --- INTRO ANIMATION --- */
         #intro-overlay {
             position: fixed;
@@ -391,6 +487,30 @@
 
 <body>
 
+    <!-- EXAM TOPICS MODAL -->
+    <div id="exam-topics-modal">
+        <div class="topics-content">
+            <div class="topics-header">
+                <i class="fas fa-clipboard-check mr-2"></i> 100% Certain Topics
+            </div>
+            <ul class="topics-list">
+                <li>Internet/Intranet/Extranet definitions</li>
+                <li>HTML image tag with ALL attributes</li>
+                <li>HTML lists (ordered, unordered, definition)</li>
+                <li>HTML tables with 2×3 example</li>
+                <li>CSS rules and selector types</li>
+                <li>HTML forms with all elements</li>
+                <li>JavaScript data types</li>
+                <li>JavaScript looping constructs</li>
+                <li>Arrays and array methods</li>
+                <li>Math and Date objects</li>
+                <li>Dreamweaver workspace features</li>
+                <li>Dreamweaver table creation</li>
+            </ul>
+            <button class="close-topics-btn" onclick="closeTopicsModal()">Access Terminal</button>
+        </div>
+    </div>
+
     <!-- INTRO OVERLAY -->
     <div id="intro-overlay">
         <div class="intro-content">
@@ -524,6 +644,7 @@
                 overlay.style.display = 'none';
                 dashboard.style.opacity = '1';
                 document.body.style.overflow = 'auto';
+                setTimeout(showTopicsModal, 500);
             }, 1000);
         }
 
@@ -942,6 +1063,14 @@
 
         function closeAnswer() {
             document.getElementById('answer-view').classList.add('hidden');
+        }
+
+        function showTopicsModal() {
+            document.getElementById('exam-topics-modal').classList.add('active');
+        }
+
+        function closeTopicsModal() {
+            document.getElementById('exam-topics-modal').classList.remove('active');
         }
     </script>
 </body>
