@@ -493,8 +493,16 @@
             <div class="mb-8">
                 <h2
                     class="text-xl font-bold mb-4 text-[var(--terminal-green)] border-b border-[var(--border-color)] pb-2 flex items-center opacity-70">
-                    <i class="fas fa-calculator mr-2"></i> MATHEMATICS
-                    <span class="text-xs ml-auto text-gray-500 font-normal">/mathematics</span>
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-calculator"></i> MATHEMATICS
+                    </div>
+                    <div class="ml-auto flex items-center gap-3">
+                        <button onclick="showTopicsModal()"
+                            class="text-xs bg-[rgba(0,255,65,0.1)] hover:bg-[var(--terminal-green)] hover:text-black border border-[var(--terminal-green)] px-2 py-1 rounded transition-colors uppercase tracking-wider font-bold">
+                            <i class="fas fa-star mr-1"></i> Guaranteed Topics
+                        </button>
+                        <span class="text-xs text-gray-500 font-normal">/mathematics</span>
+                    </div>
                 </h2>
                 <div class="paper-grid" id="math-grid">
                     <!-- Math Papers injected by JS -->
@@ -550,7 +558,6 @@
                 overlay.style.display = 'none';
                 dashboard.style.opacity = '1';
                 document.body.style.overflow = 'auto';
-                setTimeout(showTopicsModal, 500);
             }, 1000);
         }
 
@@ -560,7 +567,6 @@
             renderPapers();
             renderAnswerPapers();
             renderMathPapers();
-            setTimeout(showTopicsModal, 3500); // Show popup after intro
         };
 
         function startClock() {
