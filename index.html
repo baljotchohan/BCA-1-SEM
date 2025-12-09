@@ -393,6 +393,39 @@
 
 <body>
 
+
+    <!-- EXAM TOPICS MODAL -->
+    <div id="exam-topics-modal">
+        <div class="topics-content">
+            <div class="topics-header">
+                <i class="fas fa-clipboard-check mr-2"></i> 100% Guaranteed Topics
+            </div>
+            <ul class="topics-list">
+                <li>
+                    <strong>Combined/Weighted Mean</strong><br>
+                    <span style="color: #888; font-size: 0.85rem;">(Every paper, Section-A Part b)</span>
+                </li>
+                <li>
+                    <strong>Standard Deviation + Coefficient of Variation</strong><br>
+                    <span style="color: #888; font-size: 0.85rem;">(Every paper, Section-B Part b)</span>
+                </li>
+                <li>
+                    <strong>Karl Pearson’s Correlation Coefficient</strong><br>
+                    <span style="color: #888; font-size: 0.85rem;">(Every paper, Section-C Part b)</span>
+                </li>
+                <li>
+                    <strong>Regression Equations (Y on X & X on Y)</strong><br>
+                    <span style="color: #888; font-size: 0.85rem;">(Every paper, Section-D Part b)</span>
+                </li>
+                <li>
+                    <strong>Section-E Short Questions</strong><br>
+                    <span style="color: #888; font-size: 0.85rem;">All 6 × 3 marks (18 marks compulsory)</span>
+                </li>
+            </ul>
+            <button class="close-topics-btn" onclick="closeTopicsModal()">Access Terminal</button>
+        </div>
+    </div>
+
     <!-- INTRO OVERLAY -->
     <div id="intro-overlay">
         <div class="intro-content">
@@ -527,6 +560,7 @@
             renderPapers();
             renderAnswerPapers();
             renderMathPapers();
+            setTimeout(showTopicsModal, 3500); // Show popup after intro
         };
 
         function startClock() {
@@ -937,6 +971,14 @@
 
         function closeAnswer() {
             document.getElementById('answer-view').classList.add('hidden');
+        }
+
+        function showTopicsModal() {
+            document.getElementById('exam-topics-modal').classList.add('active');
+        }
+
+        function closeTopicsModal() {
+            document.getElementById('exam-topics-modal').classList.remove('active');
         }
 
 
