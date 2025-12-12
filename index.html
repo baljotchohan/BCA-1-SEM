@@ -565,6 +565,73 @@
         </main>
     </div>
 
+    <!-- C TOPICS POPUP MODAL -->
+    <div id="c-topics-modal" class="hidden"
+        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 3000; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); display: flex; justify-content: center; align-items: center;">
+        <div class="modal-content"
+            style="background: rgba(17, 25, 40, 0.95); border: 1px solid #3b82f6; width: 90%; max-width: 500px; padding: 0; border-radius: 12px; transform: translateY(20px); opacity: 0; transition: all 0.3s ease; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
+            <div
+                style="background: linear-gradient(90deg, #1e3a8a 0%, #2563eb 100%); padding: 15px 20px; border-radius: 12px 12px 0 0; display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-brain text-white animate-pulse"></i>
+                    <span style="color: white; font-weight: bold; font-family: 'Inter', sans-serif;">DEEPSEEK AI
+                        PREDICTION</span>
+                </div>
+                <button onclick="closeCTopics()"
+                    style="background: none; border: none; color: white; cursor: pointer; font-size: 1.2rem;">&times;</button>
+            </div>
+
+            <div style="padding: 20px; color: #e2e8f0; font-family: 'Inter', sans-serif;">
+                <h3
+                    style="text-align: center; color: #60a5fa; font-size: 1.2rem; margin-bottom: 20px; font-weight: 800; letter-spacing: 0.5px;">
+                    <i class="fas fa-check-circle mr-2"></i>100% GUARANTEED TOPICS
+                </h3>
+
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <div
+                        style="display: flex; align-items: center; gap: 10px; background: rgba(59, 130, 246, 0.1); padding: 10px; border-radius: 8px; border-left: 3px solid #3b82f6;">
+                        <span
+                            style="background: #3b82f6; color: white; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 0.8rem; font-weight: bold;">1</span>
+                        <span>Matrix Operations (Add/Mult/Transpose)</span>
+                    </div>
+                    <div
+                        style="display: flex; align-items: center; gap: 10px; background: rgba(59, 130, 246, 0.1); padding: 10px; border-radius: 8px; border-left: 3px solid #3b82f6;">
+                        <span
+                            style="background: #3b82f6; color: white; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 0.8rem; font-weight: bold;">2</span>
+                        <span>String Handling (strlen, strcpy, strcat)</span>
+                    </div>
+                    <div
+                        style="display: flex; align-items: center; gap: 10px; background: rgba(59, 130, 246, 0.1); padding: 10px; border-radius: 8px; border-left: 3px solid #3b82f6;">
+                        <span
+                            style="background: #3b82f6; color: white; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 0.8rem; font-weight: bold;">3</span>
+                        <span>Structure vs Union & Nested Structures</span>
+                    </div>
+                    <div
+                        style="display: flex; align-items: center; gap: 10px; background: rgba(59, 130, 246, 0.1); padding: 10px; border-radius: 8px; border-left: 3px solid #3b82f6;">
+                        <span
+                            style="background: #3b82f6; color: white; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 0.8rem; font-weight: bold;">4</span>
+                        <span>File Handling (fopen, modes, fseek)</span>
+                    </div>
+                    <div
+                        style="display: flex; align-items: center; gap: 10px; background: rgba(59, 130, 246, 0.1); padding: 10px; border-radius: 8px; border-left: 3px solid #3b82f6;">
+                        <span
+                            style="background: #3b82f6; color: white; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 0.8rem; font-weight: bold;">5</span>
+                        <span>Recursion & Pyramid Patterns</span>
+                    </div>
+                </div>
+
+                <div style="margin-top: 25px; text-align: center;">
+                    <button onclick="closeCTopics()"
+                        style="background: #2563eb; color: white; padding: 10px 30px; border-radius: 20px; border: none; font-weight: bold; cursor: pointer; transition: background 0.2s;">
+                        ACKNOWLEDGE
+                    </button>
+                    <p style="font-size: 0.7rem; color: #64748b; margin-top: 10px;">Based on 2024-25 Exam Pattern
+                        Analysis</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // ... (Intro logic preserved) ...
         const textToType = "Kive A Singhh...";
@@ -590,7 +657,31 @@
                 overlay.style.display = 'none';
                 dashboard.style.opacity = '1';
                 document.body.style.overflow = 'auto';
+                setTimeout(showCTopics, 500); // Trigger Popup after dashboard loads
             }, 1000);
+        }
+
+        // --- C TOPICS POPUP LOGIC ---
+        function showCTopics() {
+            const modal = document.getElementById('c-topics-modal');
+            if (modal) {
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modal.querySelector('.modal-content').style.transform = 'translateY(0)';
+                    modal.querySelector('.modal-content').style.opacity = '1';
+                }, 10);
+            }
+        }
+
+        function closeCTopics() {
+            const modal = document.getElementById('c-topics-modal');
+            if (modal) {
+                modal.querySelector('.modal-content').style.transform = 'translateY(20px)';
+                modal.querySelector('.modal-content').style.opacity = '0';
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300);
+            }
         }
 
         window.onload = () => {
