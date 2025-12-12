@@ -523,6 +523,24 @@
                 </div>
             </div>
 
+            <!-- C PROGRAMMING SECTION -->
+            <div class="mb-12">
+                <div class="flex items-center justify-between mb-4 border-b border-[var(--border-color)] pb-2">
+                    <h2 class="text-xl font-bold text-[var(--terminal-green)] flex items-center">
+                        <i class="fas fa-terminal mr-2"></i> PROBLEM SOLVING THROUGH C
+                    </h2>
+                    <div
+                        class="flex items-center gap-2 text-xs font-mono text-blue-400 bg-blue-900/20 px-3 py-1 rounded border border-blue-500/30">
+                        <i class="fas fa-brain"></i>
+                        <span>Analyzed & Researched by DeepSeek AI</span>
+                    </div>
+                </div>
+
+                <div class="paper-grid" id="c-grid">
+                    <!-- C Papers injected by JS -->
+                </div>
+            </div>
+
             <!-- Paper Detail View (Hidden by default) -->
             <div id="paper-view" class="hidden">
                 <button onclick="closePaper()" class="back-btn">
@@ -581,6 +599,7 @@
             renderPapers();
             renderAnswerPapers();
             renderMathPapers();
+            renderCPapers();
         };
 
         function startClock() {
@@ -1246,6 +1265,282 @@
             });
 
             html += `</ol></div></div>`;
+
+            container.innerHTML = html;
+        };
+
+        // ... (existing code) ...
+
+        // --- C PROGRAMMING DATA ---
+        const cPapers = [
+            {
+                id: 'c_01',
+                title: 'Practice Paper 1',
+                date: 'DEEPSEEK-AI',
+                units: {
+                    I: [
+                        "(a) Explain the basic structure of a C program with a suitable example.",
+                        "(b) Write a program to calculate and print the area and circumference of a circle. Take radius as input."
+                    ],
+                    II: [
+                        "(a) Differentiate between while, do-while, and for loop with examples.",
+                        "(b) Write a program to print the following pattern using nested loops:<br>1<br>22<br>333<br>4444"
+                    ],
+                    III: [
+                        "(a) What is an array? Write a program to accept 10 numbers in an array and sort them in ascending order using Bubble Sort technique.",
+                        "(b) Explain how linear search is performed on an array."
+                    ],
+                    IV: [
+                        "(a) Explain any four standard string handling library functions (strlen, strcpy, strcat, strcmp) with examples.",
+                        "(b) Write a program to read a string and count the number of vowels in it."
+                    ],
+                    Compulsory: [
+                        "(a) List any five keywords in C.",
+                        "(b) What is the purpose of the break statement?",
+                        "(c) How is a two-dimensional array int arr[3][4] stored in memory?",
+                        "(d) What is the use of the typedef keyword?",
+                        "(e) Which function is used to open a file in C?"
+                    ]
+                }
+            },
+            {
+                id: 'c_02',
+                title: 'Practice Paper 2',
+                date: 'DEEPSEEK-AI',
+                units: {
+                    I: [
+                        "(a) Explain the fundamental data types in C with their size and range.",
+                        "(b) What is type conversion? Explain implicit and explicit type conversion with examples."
+                    ],
+                    II: [
+                        "(a) Write a program to find the roots of a quadratic equation. Consider all cases (real & distinct, real & equal, imaginary).",
+                        "(b) Explain the switch-case statement with its syntax and a simple example (e.g., a calculator menu)."
+                    ],
+                    III: [
+                        "(a) Write a program to add two 3x3 matrices.",
+                        "(b) What is the relationship between an array name and a pointer? Illustrate with an example."
+                    ],
+                    IV: [
+                        "(a) Define a structure named Student with members: Roll_no, Name, Marks. Write a program to read data for 5 students and display details of the student who scored highest.",
+                        "(b) What is a nested structure? Give an example."
+                    ],
+                    Compulsory: [
+                        "(a) Differentiate between a compiler and an interpreter.",
+                        "(b) What is an infinite loop? How can it be created unintentionally?",
+                        "(c) What does int *ptr declare?",
+                        "(d) State one key difference between a structure and a union.",
+                        "(e) Name the function used to close a file."
+                    ]
+                }
+            },
+            {
+                id: 'c_03',
+                title: 'Practice Paper 3',
+                date: 'DEEPSEEK-AI',
+                units: {
+                    I: [
+                        "(a) Explain the hierarchy/priority of operators in C. Evaluate: z = 5 * 2 / 5 + 3 * 4 % 2 - 1.",
+                        "(b) Differentiate between formatted (printf, scanf) and unformatted (getchar, putchar) console I/O functions with examples."
+                    ],
+                    II: [
+                        "(a) Write a program to print the following pyramid pattern:<br>&nbsp;&nbsp;*<br>&nbsp;***<br>*****",
+                        "(b) What is an infinite loop? Write an example and explain how to avoid it."
+                    ],
+                    III: [
+                        "(a) How are arrays passed to a function? Write a program to find the smallest element in an array by passing the array to a function.",
+                        "(b) What is an address operator (&)? Explain its use with an example."
+                    ],
+                    IV: [
+                        "(a) Explain any two string handling functions: strlen() and strcat() with syntax and example programs.",
+                        "(b) Write a program to read a line of text from the user and count the number of words in it."
+                    ],
+                    Compulsory: [
+                        "(a) What is the purpose of header files like stdio.h?",
+                        "(b) Differentiate between Assignment (=) and Equality (==) operator.",
+                        "(c) Can a default case be placed in the middle of a switch statement?",
+                        "(d) What will ptr++ do if ptr is an integer pointer?",
+                        "(e) Name two modes for opening a text file for reading and writing."
+                    ]
+                }
+            },
+            {
+                id: 'c_04',
+                title: 'Practice Paper 4',
+                date: 'DEEPSEEK-AI',
+                units: {
+                    I: [
+                        "(a) What is an algorithm? Write an algorithm to find whether a given number is positive, negative, or zero.",
+                        "(b) Draw a flowchart to represent the logic for finding the factorial of a number."
+                    ],
+                    II: [
+                        "(a) What is recursion? Write a recursive function to calculate the sum of first N natural numbers.",
+                        "(b) Differentiate between call by value and call by reference with suitable C code examples."
+                    ],
+                    III: [
+                        "(a) Explain the memory representation of a two-dimensional array (int a[3][4]) in row-major order.",
+                        "(b) Write a program to find the transpose of a 3x3 matrix."
+                    ],
+                    IV: [
+                        "(a) What is a file? Explain the basic operations (fopen, fclose, fprintf, fscanf) performed on files in C.",
+                        "(b) Write a program to read numbers from a text file named input.txt and write their squares to another file output.txt."
+                    ],
+                    Compulsory: [
+                        "(a) Name the different phases of program compilation.",
+                        "(b) What is the use of the static storage class specifier for a variable inside a function?",
+                        "(c) What is a Null Pointer?",
+                        "(d) Why is the gets() function considered dangerous to use?",
+                        "(e) What is the purpose of the fseek() function?"
+                    ]
+                }
+            },
+            {
+                id: 'c_05',
+                title: 'Practice Paper 5',
+                date: 'DEEPSEEK-AI',
+                units: {
+                    I: [
+                        "(a) Explain the basic data types (int, float, char, double) in C with their typical sizes and ranges.",
+                        "(b) Explain the format specifiers used in printf() and scanf() for the basic data types."
+                    ],
+                    II: [
+                        "(a) Explain the switch statement with its syntax and rules. How is it different from a nested if-else ladder?",
+                        "(b) What is the purpose of the goto statement? Discuss why its use is generally discouraged."
+                    ],
+                    III: [
+                        "(a) What is a pointer? Demonstrate with a program how pointers can be used to swap the values of two variables.",
+                        "(b) How can you access elements of a 1-D array using a pointer? Write a code snippet to illustrate."
+                    ],
+                    IV: [
+                        "(a) Define a structure named Book with members: title, author, price. Write a program to read details for 3 books and display them.",
+                        "(b) Explain the key difference between a structure and a union with a memory layout example."
+                    ],
+                    Compulsory: [
+                        "(a) List any five keywords in C (other than int, float).",
+                        "(b) What is the function of the continue statement in a loop?",
+                        "(c) What does int (*ptr)[5]; declare?",
+                        "(d) Which function would you use to compare two strings?",
+                        "(e) Which function is used to close a file?"
+                    ]
+                }
+            }
+        ];
+
+        function renderCPapers() {
+            const grid = document.getElementById('c-grid');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            cPapers.forEach(paper => {
+                const card = document.createElement('div');
+                card.className = 'paper-card';
+                card.style.borderColor = '#3b82f6'; // Blue border hint
+                card.innerHTML = `
+                    <div class="card-title">
+                        <i class="fas fa-file-code mr-2 text-blue-400"></i> ${paper.title}
+                    </div>
+                    <div class="card-meta">
+                         <span class="flex items-center gap-2"><i class="fas fa-brain text-blue-400"></i> <span class="text-xs">DeepSeek AI</span></span>
+                        <span class="text-blue-400 font-bold">C-PROG</span>
+                    </div>
+                `;
+                card.addEventListener('click', () => openCPaper(paper.id));
+                grid.appendChild(card);
+            });
+        }
+
+        window.openCPaper = function (id) {
+            const paper = cPapers.find(p => p.id === id);
+            if (!paper) return;
+
+            const view = document.getElementById('paper-view');
+            view.classList.remove('hidden');
+            const container = document.getElementById('paper-content-container');
+
+            let html = `
+                <!-- DEEPSEEK BRANDING BANNER -->
+                 <div style="background: linear-gradient(90deg, #1e3a8a 0%, #172554 100%); color: white; padding: 15px; border-radius: 8px; margin-bottom: 30px; display: flex; align-items: center; justify-content: space-between; border: 1px solid #3b82f6;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <div style="background: white; padding: 8px; border-radius: 6px;">
+                           <i class="fas fa-brain" style="color: #2563eb; font-size: 24px;"></i>
+                        </div>
+                        <div>
+                            <div style="font-weight: bold; font-family: 'Inter', sans-serif; letter-spacing: 0.5px;">DEEPSEEK AI ANALYSIS</div>
+                            <div style="font-size: 0.8rem; opacity: 0.9;">High-Probability Exam Patterns • 2024-25 Analysis</div>
+                        </div>
+                    </div>
+                    <div style="font-size: 0.8rem; background: rgba(255,255,255,0.1); padding: 4px 10px; rounded: 4px;">
+                        VERIFIED
+                    </div>
+                </div>
+
+                <div class="paper-header-real">
+                    <h1>Panjab University</h1>
+                    <div style="font-size: 1.1rem; margin-top: 5px;">Bachelor of Computer Applications (Semester I)</div>
+                    <div style="font-size: 1rem; font-weight: bold; margin-top: 5px;">PROBLEM SOLVING THROUGH C</div>
+                    <div class="paper-meta-real">
+                        <span>Paper Code: BCA-103</span>
+                        <span>Max Marks: 90</span>
+                    </div>
+                    <div class="paper-meta-real">
+                        <span>Time Allowed: 3 Hours</span>
+                    </div>
+                </div>
+
+                <p style="font-style: italic; font-size: 0.9rem; margin-bottom: 20px;">
+                    <strong>Instructions:</strong> 
+                    i) Question Paper has Four Units. 
+                    ii) Attempt ONE question from each Unit. 
+                    iii) Question No. 5 (Compulsory) consists of short-answer type questions covering the entire syllabus.
+                </p>
+            `;
+
+            // Units I - IV
+            const units = ['I', 'II', 'III', 'IV'];
+            units.forEach((u, idx) => {
+                html += `
+                    <div class="section-header">
+                        <span>Unit - ${u}</span>
+                    </div>
+                `;
+                const questions = paper.units[u];
+                // Q number logic: Unit I is 1, Unit II is 2... wait, typically it's Q1 (Unit I), Q2 (Unit II)... 
+                // Actually the prompt had Q1 for Unit I, Q2 for Unit II. 
+                // Let's stick to the prompt structure.
+
+                // Prompt: Q1 (a)(b) OR Q... wait, the prompt only gave ONE question structure per unit?
+                // "Attempt ONE question from each Unit." usually implies there are TWO choices per unit.
+                // But the user provided papers only have ONE question (with a/b parts) listed per unit in the prompt text.
+                // "1. (a)... (b)..."
+                // "2. (a)... (b)..."
+                // This means there is only ONE question shown in the practice paper. 
+                // I will render it as such.
+
+                html += `
+                    <div class="question-row">
+                        <div class="q-num">${idx + 1}.</div>
+                        <div class="q-text">
+                            <div style="margin-bottom: 10px;">${questions[0]}</div> <!-- Part a -->
+                            <div>${questions[1]}</div> <!-- Part b -->
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Compulsory
+            html += `
+                <div class="section-header">
+                    <span>Compulsory Question (Unit - I to IV)</span>
+                </div>
+                <div class="question-row">
+                    <div class="q-num">5.</div>
+                    <div class="q-text">
+                        Answer the following briefly:
+                        <ol class="sub-q-list" style="list-style-type: lower-alpha;">
+                            ${paper.units.Compulsory.map(q => `<li>${q.replace(/^\([a-z]\)\s*/, '')}</li>`).join('')}
+                        </ol>
+                    </div>
+                </div>
+            `;
 
             container.innerHTML = html;
         };
