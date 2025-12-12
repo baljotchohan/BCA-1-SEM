@@ -1430,115 +1430,94 @@
             if (!grid) return;
             grid.innerHTML = '';
 
-            cPapers.forEach(paper => {
-                const card = document.createElement('div');
-                card.className = 'paper-card';
-                card.style.borderColor = '#3b82f6'; // Blue border hint
-                card.innerHTML = `
-                    <div class="card-title">
-                        <i class="fas fa-file-code mr-2 text-blue-400"></i> ${paper.title}
+            // Single DeepSeek Trigger Card
+            const card = document.createElement('div');
+            card.className = 'paper-card';
+            // Special styling for the trigger
+            card.style.background = 'linear-gradient(145deg, rgba(30, 58, 138, 0.2), rgba(0, 0, 0, 0.4))';
+            card.style.borderColor = '#2563eb';
+            card.style.borderWidth = '1px';
+            card.style.display = 'flex';
+            card.style.alignItems = 'center';
+            card.style.justifyContent = 'center';
+            card.style.minHeight = '120px'; // Make it prominent
+
+            card.innerHTML = `
+                <div style="text-align: center;">
+                    <i class="fas fa-brain animate-pulse" style="color: #60a5fa; font-size: 2rem; margin-bottom: 15px;"></i>
+                    <div style="font-family: 'Inter', sans-serif; font-weight: 800; color: #fff; font-size: 1.1rem; letter-spacing: 1px;">
+                        DEEPSEEK AI<br>RESEARCH QUESTIONS
                     </div>
-                    <div class="card-meta">
-                         <span class="flex items-center gap-2"><i class="fas fa-brain text-blue-400"></i> <span class="text-xs">DeepSeek AI</span></span>
-                        <span class="text-blue-400 font-bold">C-PROG</span>
-                    </div>
-                `;
-                card.addEventListener('click', () => openCPaper(paper.id));
-                grid.appendChild(card);
-            });
+                </div>
+            `;
+            card.addEventListener('click', () => openDeepSeekMaster());
+            grid.appendChild(card);
         }
 
-        window.openCPaper = function (id) {
-            const paper = cPapers.find(p => p.id === id);
-            if (!paper) return;
-
+        window.openDeepSeekMaster = function () {
             const view = document.getElementById('paper-view');
             view.classList.remove('hidden');
             const container = document.getElementById('paper-content-container');
 
             let html = `
-                <!-- DEEPSEEK BRANDING BANNER -->
-                 <div style="background: linear-gradient(90deg, #1e3a8a 0%, #172554 100%); color: white; padding: 15px; border-radius: 8px; margin-bottom: 30px; display: flex; align-items: center; justify-content: space-between; border: 1px solid #3b82f6;">
-                    <div style="display: flex; align-items: center; gap: 15px;">
-                        <div style="background: white; padding: 8px; border-radius: 6px;">
-                           <i class="fas fa-brain" style="color: #2563eb; font-size: 24px;"></i>
-                        </div>
-                        <div>
-                            <div style="font-weight: bold; font-family: 'Inter', sans-serif; letter-spacing: 0.5px;">DEEPSEEK AI ANALYSIS</div>
-                            <div style="font-size: 0.8rem; opacity: 0.9;">High-Probability Exam Patterns • 2024-25 Analysis</div>
-                        </div>
-                    </div>
-                    <div style="font-size: 0.8rem; background: rgba(255,255,255,0.1); padding: 4px 10px; rounded: 4px;">
-                        VERIFIED
-                    </div>
+                <!-- DEEPSEEK BRANDING HEADER -->
+                 <div style="background: linear-gradient(90deg, #1e3a8a 0%, #172554 100%); color: white; padding: 20px; border-radius: 8px; margin-bottom: 30px; border: 1px solid #3b82f6; text-align: center;">
+                    <i class="fas fa-brain" style="color: #60a5fa; font-size: 40px; margin-bottom: 10px;"></i>
+                    <h2 style="font-weight: 900; font-family: 'Inter', sans-serif; font-size: 1.8rem; margin: 0;">DEEPSEEK AI RESEARCH</h2>
+                    <div style="font-size: 0.9rem; opacity: 0.8; margin-top: 5px; font-family: monospace;">ANALYSIS_ID: C_PROG_2024_25 // PROBABILITY: HIGH</div>
                 </div>
-
-                <div class="paper-header-real">
-                    <h1>Panjab University</h1>
-                    <div style="font-size: 1.1rem; margin-top: 5px;">Bachelor of Computer Applications (Semester I)</div>
-                    <div style="font-size: 1rem; font-weight: bold; margin-top: 5px;">PROBLEM SOLVING THROUGH C</div>
-                    <div class="paper-meta-real">
-                        <span>Paper Code: BCA-103</span>
-                        <span>Max Marks: 90</span>
-                    </div>
-                    <div class="paper-meta-real">
-                        <span>Time Allowed: 3 Hours</span>
-                    </div>
-                </div>
-
-                <p style="font-style: italic; font-size: 0.9rem; margin-bottom: 20px;">
-                    <strong>Instructions:</strong> 
-                    i) Question Paper has Four Units. 
-                    ii) Attempt ONE question from each Unit. 
-                    iii) Question No. 5 (Compulsory) consists of short-answer type questions covering the entire syllabus.
-                </p>
             `;
 
-            // Units I - IV
-            const units = ['I', 'II', 'III', 'IV'];
-            units.forEach((u, idx) => {
+            // Loop through all C papers and append them
+            cPapers.forEach((paper, index) => {
                 html += `
-                    <div class="section-header">
-                        <span>Unit - ${u}</span>
-                    </div>
+                    <div style="margin-bottom: 40px; padding-bottom: 40px; border-bottom: 2px dashed #ccc;">
+                        <h3 style="background: #eee; padding: 10px 15px; font-weight: bold; border-left: 5px solid #2563eb; margin-bottom: 20px; font-family: 'Inter', sans-serif; color: #333;">
+                            SET ${index + 1}
+                        </h3>
                 `;
-                const questions = paper.units[u];
-                // Q number logic: Unit I is 1, Unit II is 2... wait, typically it's Q1 (Unit I), Q2 (Unit II)... 
-                // Actually the prompt had Q1 for Unit I, Q2 for Unit II. 
-                // Let's stick to the prompt structure.
 
-                // Prompt: Q1 (a)(b) OR Q... wait, the prompt only gave ONE question structure per unit?
-                // "Attempt ONE question from each Unit." usually implies there are TWO choices per unit.
-                // But the user provided papers only have ONE question (with a/b parts) listed per unit in the prompt text.
-                // "1. (a)... (b)..."
-                // "2. (a)... (b)..."
-                // This means there is only ONE question shown in the practice paper. 
-                // I will render it as such.
+                // Units I - IV
+                const units = ['I', 'II', 'III', 'IV'];
+                units.forEach((u, idx) => {
+                    html += `
+                        <div class="section-header" style="background: transparent; border-bottom: 1px solid #ddd; margin-top: 15px; padding-left: 0;">
+                            <span style="color: #555;">Unit - ${u}</span>
+                        </div>
+                    `;
+                    const questions = paper.units[u];
+                    html += `
+                        <div class="question-row">
+                            <div class="q-num" style="color: #444;">${idx + 1}.</div>
+                            <div class="q-text">
+                                <div style="margin-bottom: 8px;">${questions[0]}</div>
+                                <div>${questions[1]}</div>
+                            </div>
+                        </div>
+                    `;
+                });
 
+                // Compulsory
                 html += `
+                    <div class="section-header" style="background: transparent; border-bottom: 1px solid #ddd; margin-top: 15px; padding-left: 0;">
+                        <span style="color: #555;">Compulsory</span>
+                    </div>
                     <div class="question-row">
-                        <div class="q-num">${idx + 1}.</div>
+                        <div class="q-num" style="color: #444;">5.</div>
                         <div class="q-text">
-                            <div style="margin-bottom: 10px;">${questions[0]}</div> <!-- Part a -->
-                            <div>${questions[1]}</div> <!-- Part b -->
+                            <ol class="sub-q-list" style="list-style-type: lower-alpha;">
+                                ${paper.units.Compulsory.map(q => `<li>${q.replace(/^\([a-z]\)\s*/, '')}</li>`).join('')}
+                            </ol>
                         </div>
                     </div>
                 `;
+
+                html += `</div>`; // End of Paper Div
             });
 
-            // Compulsory
             html += `
-                <div class="section-header">
-                    <span>Compulsory Question (Unit - I to IV)</span>
-                </div>
-                <div class="question-row">
-                    <div class="q-num">5.</div>
-                    <div class="q-text">
-                        Answer the following briefly:
-                        <ol class="sub-q-list" style="list-style-type: lower-alpha;">
-                            ${paper.units.Compulsory.map(q => `<li>${q.replace(/^\([a-z]\)\s*/, '')}</li>`).join('')}
-                        </ol>
-                    </div>
+                <div style="text-align: center; color: #999; font-size: 0.8rem; margin-top: 20px;">
+                    --- END OF RESEARCH ---
                 </div>
             `;
 
