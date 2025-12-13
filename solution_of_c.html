@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solution of C - Master Answer Key</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+
+            body {
+                background: white;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .page-break {
+                page-break-before: always;
+            }
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 210mm;
+            /* A4 width */
+            margin: 0 auto;
+            background: white;
+            padding: 20mm;
+            min-height: 297mm;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            color: #111827;
+        }
+
+        .paper-header {
+            border-bottom: 2px solid #000;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .question-block {
+            margin-bottom: 2rem;
+            border-left: 4px solid #3b82f6;
+            padding-left: 1rem;
+        }
+
+        .answer-block {
+            margin-top: 1rem;
+        }
+
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+            border: 1px solid #333;
+        }
+
+        .keywords {
+            font-weight: 600;
+            color: #2563eb;
+        }
+
+        .diagram-placeholder {
+            border: 2px dashed #9ca3af;
+            background: #f9fafb;
+            color: #6b7280;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .topper-tip {
+            background-color: #ecfccb;
+            border-left: 4px solid #84cc16;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            color: #365314;
+        }
+
+        .section-tag {
+            display: inline-block;
+            background: #e0e7ff;
+            color: #3730a3;
+            padding: 0.2rem 0.6rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+
+<body class="py-10">
+
+    <!-- CONTROLS -->
+    <div class="fixed top-4 right-4 no-print flex gap-2">
+        <button onclick="window.print()"
+            class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg flex items-center">
+            <i class="fas fa-print mr-2"></i> Save as PDF
+        </button>
+    </div>
+
+    <!-- COVER PAGE -->
+    <div class="container mb-10 text-center flex flex-col justify-center items-center h-[297mm]">
+        <div class="mb-8">
+            <i class="fas fa-book-open text-6xl text-blue-600"></i>
+        </div>
+        <h1 class="text-4xl font-bold mb-4">Problem Solving Through C</h1>
+        <h2 class="text-2xl font-light text-gray-600 mb-8">Master Solutions & Answer Key</h2>
+        <div class="w-24 h-1 bg-blue-600 mb-8 rounded"></div>
+        <p class="text-lg text-gray-500 max-w-lg">
+            Comprehensive, detailed solutions for BCA 1st Semester.
+            Includes theory explanations, algorithms, flowcharts, and fully commented C code examples.
+        </p>
+        <div class="mt-12 text-sm text-gray-400">
+            Prepared by Gemini 3.0 Pro<br>
+            Date: December 2024
+        </div>
+    </div>
+
+    <!-- PAPER 1 -->
+    <div class="container page-break">
+        <div class="paper-header">
+            <h2 class="text-3xl font-bold">PRACTICE PAPER - 1</h2>
+            <div class="flex justify-between mt-4 text-sm font-mono text-gray-600">
+                <span>Subject: Problem Solving Through C</span>
+                <span>Max Marks: 75</span>
+            </div>
+        </div>
+
+        <!-- UNIT I -->
+        <div class="mb-8">
+            <h3 class="text-xl font-bold text-gray-800 border-b-2 border-gray-200 pb-2 mb-4">UNIT - I</h3>
+
+            <!-- Q1 (a) -->
+            <div class="question-block">
+                <span class="section-tag">Algorithm & Flowcharts</span>
+                <p class="font-bold">Q1 (a) Draw a flowchart to find the sum of all numbers between 1 to 100 that are
+                    divisible by 5. Explain the flowchart symbols used. (7 marks)</p>
+
+                <div class="answer-block">
+                    <h4 class="font-bold text-lg text-blue-800 mb-2">Solution:</h4>
+
+                    <p class="mb-4"><strong>Logic:</strong> We need to iterate through numbers from 1 to 100. Inside the
+                        loop, we check if the current number is divisible by 5 (i.e., `num % 5 == 0`). If it is, we add
+                        it to a `sum` variable.</p>
+
+                    <div
+                        class="diagram-placeholder font-mono text-sm leading-relaxed text-left pl-8 border-l-4 border-gray-300">
+                        <strong>[Flowchart Structure]</strong><br><br>
+                        ( START ) Oval<br>
+                        |<br>
+                        [ sum = 0, i = 1 ] Rectangle (Process)<br>
+                        |<br>
+                        < i <=100?> Diamond (Decision)<br>
+                            / \<br>
+                            YES NO ----> [ PRINT sum ] Parallelagram (Input/Output)<br>
+                            / \ |<br>
+                            < i % 5==0?> ( STOP ) Oval<br>
+                                / \<br>
+                                YES NO<br>
+                                / \<br>
+                                [ sum+=i ] \<br>
+                                \ /<br>
+                                \ /<br>
+                                [ i++ ]<br>
+                                |<br>
+                                (Loop Back)
+                    </div>
+
+                    <h5 class="font-bold mt-4 mb-2">Explanation of Symbols:</h5>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li><strong>Oval (Terminator):</strong> Used for START and STOP. Indicates the beginning and end
+                            of the flow.</li>
+                        <li><strong>Parallelogram (Input/Output):</strong> Used for displaying the final result ("PRINT
+                            sum").</li>
+                        <li><strong>Rectangle (Process):</strong> Used for calculations and assignments (e.g., `sum =
+                            sum + i`, `i = i + 1`).</li>
+                        <li><strong>Diamond (Decision):</strong> Used for conditions (e.g., `i <= 100`, `i % 5==0`). It
+                                has two outgoing paths (Yes/No).</li>
+                        <li><strong>Arrows (Flowlines):</strong> Connect the symbols and show the direction of
+                            execution.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Q1 (b) -->
+            <div class="question-block">
+                <span class="section-tag">Software Development</span>
+                <p class="font-bold">Q1 (b) Discuss the significance of testing and debugging in programming. What are
+                    the different types of errors encountered during programming? (6 marks)</p>
+
+                <div class="answer-block">
+                    <h4 class="font-bold text-lg text-blue-800 mb-2">Solution:</h4>
+
+                    <h5 class="font-bold mt-2">1. Significance of Testing and Debugging</h5>
+                    <p class="mb-2">Testing and debugging are critical phases in the software development life cycle
+                        (SDLC) to ensure software quality.</p>
+                    <ul class="list-disc pl-5 mb-4">
+                        <li><strong>Testing:</strong> The process of executing a program with the intent of finding
+                            errors. It verifies that the software meets specific requirements and behaves as expected.
+                            <br><em class="text-gray-600">Goal: To discover bugs.</em>
+                        </li>
+                        <li><strong>Debugging:</strong> The process of locating, analyzing, and fixing the errors found
+                            during testing. It involves tracing the code to find the root cause of a failure.
+                            <br><em class="text-gray-600">Goal: To fix bugs.</em>
+                        </li>
+                    </ul>
+                    <div class="topper-tip">
+                        <strong>Topper's Note:</strong> Testing proves the "presence" of bugs, but never their
+                        "absence". Debugging is the remedial action taken after testing.
+                    </div>
+
+                    <h5 class="font-bold mt-2">2. Types of Errors</h5>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li><strong>Syntax Errors (Compile-time Errors):</strong>
+                            <br>Violations of the language's grammar rules. The compiler detects these and prevents
+                            execution.
+                            <br><span class="text-sm font-mono text-red-600">Example: Missing semicolon (;), unmatched
+                                braces {}.</span>
+                        </li>
+                        <li><strong>Logical Errors (Semantics Errors):</strong>
+                            <br>The program runs but produces incorrect output due to flawed logic. These are the
+                            hardest to detect.
+                            <br><span class="text-sm font-mono text-red-600">Example: Using area = l + b instead of area
+                                = l * b.</span>
+                        </li>
+                        <li><strong>Runtime Errors:</strong>
+                            <br>Errors that occur during execution, causing the program to crash.
+                            <br><span class="text-sm font-mono text-red-600">Example: Division by zero, accessing
+                                invalid memory (segmentation fault).</span>
+                        </li>
+                        <li><strong>Linker Errors:</strong>
+                            <br>Occur when the program cannot link to the required object files or libraries.
+                            <br><span class="text-sm font-mono text-red-600">Example: Undefined reference to a function
+                                (e.g., writing 'prntf' instead of 'printf' and not including a header).</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- OR SEPARATOR -->
+            <div class="flex items-center my-8">
+                <div class="flex-grow border-t border-gray-300"></div>
+                <span class="px-4 text-gray-500 font-bold bg-white">OR</span>
+                <div class="flex-grow border-t border-gray-300"></div>
+            </div>
+
+            <!-- Q2 (a) -->
+            <div class="question-block">
+                <span class="section-tag">Algorithm</span>
+                <p class="font-bold">Q2 (a) Write an algorithm to check whether a given number is prime or not. Also,
+                    discuss the characteristics of a good algorithm. (6 marks)</p>
+                <div class="answer-block">
+                    <h4 class="font-bold text-lg text-blue-800 mb-2">Solution:</h4>
+                    <h5 class="font-bold mt-2">Algorithm: Check Prime Number</h5>
+                    <ol class="list-decimal pl-5 font-mono text-sm bg-gray-50 p-4 rounded border border-gray-200">
+                        <li>START</li>
+                        <li>Read integer N.</li>
+                        <li>If N <= 1, Print "Not Prime" and GOTO Step 8.</li>
+                        <li>Initialize counter i = 2.</li>
+                        <li>Repeat Steps 6 while i <= N/2:</li>
+                        <li> If (N % i == 0), Print "Not Prime" and GOTO Step 8.</li>
+                        Else, increment i by 1.</li>
+                        <li>Print "Prime Number".</li>
+                        <li>STOP.</li>
+                    </ol>
+
+                    <h5 class="font-bold mt-4">Characteristics of a Good Algorithm:</h5>
+                    <ul class="list-disc pl-5">
+                        <li><strong>Finiteness:</strong> It must terminate after a finite number of steps.</li>
+                        <li><strong>Definiteness:</strong> Each step must be clear and unambiguous.</li>
+                        <li><strong>Input:</strong> It should accept zero or more inputs.</li>
+                        <li><strong>Output:</strong> It should produce at least one output.</li>
+                        <li><strong>Effectiveness:</strong> Operations must be basic enough to be performed exactly.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Q2 (b) -->
+            <div class="question-block">
+                <span class="section-tag">Data Types & Variables</span>
+                <p class="font-bold">Q2 (b) Discuss various data types available in C language. What are the rules for
+                    constructing variables in C? Give appropriate examples for each rule. (7 marks)</p>
+                <div class="answer-block">
+                    <h4 class="font-bold text-lg text-blue-800 mb-2">Solution:</h4>
+
+                    <h5 class="font-bold">1. Data Types in C</h5>
+                    <p>C provides a rich set of data types to define the type of data a variable will hold.</p>
+                    <table class="min-w-full mt-2 mb-4 border border-gray-300 text-sm">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="border px-4 py-2">Category</th>
+                                <th class="border px-4 py-2">Types</th>
+                                <th class="border px-4 py-2">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="border px-4 py-2 font-bold">Primary (Primitive)</td>
+                                <td class="border px-4 py-2">int, float, double, char, void</td>
+                                <td class="border px-4 py-2">Basic building blocks.</td>
+                            </tr>
+                            <tr>
+                                <td class="border px-4 py-2 font-bold">Derived</td>
+                                <td class="border px-4 py-2">Array, Pointer, Function</td>
+                                <td class="border px-4 py-2">Derived from fundamental types.</td>
+                            </tr>
+                            <tr>
+                                <td class="border px-4 py-2 font-bold">User-Defined</td>
+                                <td class="border px-4 py-2">Structure, Union, Enum</td>
+                                <td class="border px-4 py-2">Defined by user for complex data.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h5 class="font-bold">2. Rules for Constructing Variables (Identifiers)</h5>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li><strong>Characters:</strong> Can contain letters (A-Z, a-z), digits (0-9), and underscore
+                            (_).</li>
+                        <li><strong>Start:</strong> Must start with a letter or an underscore. <span
+                                class="text-red-600 text-xs">Cannot start with a digit.</span>
+                            <br><span class="text-green-600 text-xs text-mono">Valid: _count, num1</span> | <span
+                                class="text-red-600 text-xs text-mono">Invalid: 1num</span>
+                        </li>
+                        <li><strong>No Special Symbols:</strong> No spaces or symbols like @, #, $, % are allowed.
+                            <br><span class="text-green-600 text-xs text-mono">Valid: total_sum</span> | <span
+                                class="text-red-600 text-xs text-mono">Invalid: total sum</span>
+                        </li>
+                        <li><strong>Reserved Keywords:</strong> Cannot use C keywords (int, float, if, while, etc.) as
+                            variable names.</li>
+                        <li><strong>Case Sensitive:</strong> 'Sum' and 'sum' are different variables.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNIT II -->
+        <div class="mb-8">
+            <h3 class="text-xl font-bold text-gray-800 border-b-2 border-gray-200 pb-2 mb-4">UNIT - II</h3>
+
+            <!-- Q3 (a) -->
+            <div class="question-block">
+                <span class="section-tag">Control Structures</span>
+                <p class="font-bold">Q3 (a) Discuss various looping statements used in C language (while, do-while,
+                    for). Write the differences between them with syntax examples. (6 marks)</p>
+                <div class="answer-block">
+                    <h4 class="font-bold text-lg text-blue-800 mb-2">Solution:</h4>
+                    <p>Loops are used to execute a block of code repeatedly until a specific condition is met.</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                        <div class="border p-4 rounded bg-white">
+                            <h5 class="font-bold text-blue-600 mb-2">1. while Loop</h5>
+                            <p class="text-xs mb-2">Entry-controlled loop. Condition checks <em>before</em> execution.
+                            </p>
+                            <div class="code-block">
+                                while (condition) {
+                                // code
+                                }
+                            </div>
+                        </div>
+                        <div class="border p-4 rounded bg-white">
+                            <h5 class="font-bold text-blue-600 mb-2">2. do-while Loop</h5>
+                            <p class="text-xs mb-2">Exit-controlled loop. Executes at least once.</p>
+                            <div class="code-block">
+                                do {
+                                // code
+                                } while (condition);
+                            </div>
+                        </div>
+                        <div class="border p-4 rounded bg-white">
+                            <h5 class="font-bold text-blue-600 mb-2">3. for Loop</h5>
+                            <p class="text-xs mb-2">Compact loop. Init, condition, and update in one line.</p>
+                            <div class="code-block">
+                                for(init; cond; upd) {
+                                // code
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Q3 (b) -->
+            <div class="question-block">
+                <span class="section-tag">Recursion vs Coding</span>
+                <p class="font-bold">Q3 (b) Write a C program to display the factorial of a given number using both
+                    recursive and non-recursive methods. Explain which approach is more efficient. (7 marks)</p>
+                <div class="answer-block">
+                    <h4 class="font-bold text-lg text-blue-800 mb-2">Solution:</h4>
+
+                    <div class="code-block">
+                        #include &lt;stdio.h&gt;
+
+                        // Recursive Function
+                        long factorialRecursive(int n) {
+                        if (n == 0) return 1;
+                        return n * factorialRecursive(n - 1);
+                        }
+
+                        // Non-Recursive (Iterative) Function
+                        long factorialIterative(int n) {
+                        long fact = 1;
+                        for (int i = 1; i <= n; i++) { fact=fact * i; } return fact; } int main() { int num;
+                            printf("Enter a number: ");
+    scanf(" %d", &num); printf("Factorial (Recursive): %ld\n", factorialRecursive(num)); printf("Factorial (Iterative):
+                            %ld\n", factorialIterative(num)); return 0; } </div>
+                            <div class="topper-tip mt-2">
+                                <strong>Efficiency Analysis:</strong> The <strong>Iterative (Non-Recursive)</strong>
+                                approach is generally more efficient in terms of memory. Recursion builds up a call
+                                stack for every function call, which can lead to Stack Overflow for large numbers and
+                                consumes more memory overhead. Iteration uses a single stack frame.
+                            </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="text-center text-gray-400 mt-8 mb-4">
+                --- End of Paper 1 Preview (More papers to follow in full version) ---
+            </div>
+
+        </div>
+
+
+        <!-- PAPER 2 -->
+        <div class="container page-break">
+            <div class="paper-header">
+                <h2 class="text-3xl font-bold">PRACTICE PAPER - 2</h2>
+                <div class="flex justify-between mt-4 text-sm font-mono text-gray-600">
+                    <span>Subject: Problem Solving Through C</span>
+                    <span>Max Marks: 75</span>
+                </div>
+            </div>
+
+            <!-- UNIT I -->
+            <div class="mb-8">
+                <h3 class="text-xl font-bold text-gray-800 border-b-2 border-gray-200 pb-2 mb-4">UNIT - I</h3>
+
+                <!-- Q1 (a) -->
+                <div class="question-block">
+                    <span class="section-tag">Program Structure</span>
+                    <p class="font-bold">Q1 (a) Discuss the structure of a C program with a substantial example. Show
+                        all sections including preprocessor directives, header files, function declarations, and main
+                        function. (7 marks)</p>
+
+                    <div class="answer-block">
+                        <h4 class="font-bold text-lg text-blue-800 mb-2">Solution:</h4>
+                        <p>A C program follows a specific structure consisting of several standard sections.</p>
+
+                        <div class="code-block">
+                            /* 1. DOCUMENTATION SECTION */
+                            // Program to calculate Area of Circle
+                            // Author: Gemini Student
+
+                            /* 2. LINK SECTION */
+                            #include &lt;stdio.h&gt; // Preprocessor Directive
+                            #include &lt;math.h&gt; // Header File
+
+                            /* 3. DEFINITION SECTION */
+                            #define PI 3.14159 // Macro Definition
+
+                            /* 4. GLOBAL DECLARATION SECTION */
+                            float radius; // Global Variable
+                            float calculateArea(float r); // Function Prototype
+
+                            /* 5. MAIN FUNCTION SECTION */
+                            int main() {
+                            // Local Declaration
+                            float area;
+
+                            // Executable Part
+                            printf("Enter Radius: ");
+                            scanf("%f", &radius);
+
+                            area = calculateArea(radius); // Function Call
+                            printf("Area: %.2f\n", area);
+
+                            return 0; // Return Statement
+                            }
+
+                            /* 6. SUB-PROGRAM SECTION */
+                            // Function Definition
+                            float calculateArea(float r) {
+                            return PI * r * r;
+                            }
+                        </div>
+                        <ul class="list-disc pl-5 mt-2 space-y-1 text-sm">
+                            <li><strong>Documentation:</strong> Comments describing the program.</li>
+                            <li><strong>Link:</strong> Includes standard libraries (stdio.h).</li>
+                            <li><strong>Global Declaration:</strong> Variables accessible throughout the program.</li>
+                            <li><strong>Main Function:</strong> The entry point of execution.</li>
+                            <li><strong>Sub-Program:</strong> User-defined functions.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Q1 (b) -->
+                <div class="question-block">
+                    <span class="section-tag">Type Conversion</span>
+                    <p class="font-bold">Q1 (b) What do you understand by type conversion? Explain implicit and explicit
+                        type conversion with examples. (6 marks)</p>
+
+                    <div class="answer-block">
+                        <h4 class="font-bold text-lg text-blue-800 mb-2">Solution:</h4>
+                        <p><strong>Type Conversion:</strong> Process of converting one data type into another during
+                            program execution.</p>
+
+                        <h5 class="font-bold mt-2">1. Implicit Conversion (Type Coercion)</h5>
+                        <p class="text-sm">Done automatically by the compiler. Smaller types are promoted to larger
+                            types (e.g., int to float) to prevent data loss.</p>
+                        <div class="code-block">
+                            int x = 10;
+                            char y = 'A'; // ASCII 65
+                            // 'y' is implicitly converted to int (65) before addition
+                            int sum = x + y; // result 75
+                        </div>
+
+                        <h5 class="font-bold mt-2">2. Explicit Conversion (Type Casting)</h5>
+                        <p class="text-sm">Done manually by the programmer using a cast operator `(type)`. Used when
+                            forcing a conversion that might lose data (e.g., float to int).</p>
+                        <div class="code-block">
+                            float a = 10.5;
+                            // Explicitly casting float to int
+                            int b = (int)a; // b becomes 10 (fractional part lost)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- OR SEPARATOR -->
+                <div class="flex items-center my-8">
+                    <div class="flex-grow border-t border-gray-300"></div>
+                    <span class="px-4 text-gray-500 font-bold bg-white">OR</span>
+                    <div class="flex-grow border-t border-gray-300"></div>
+                </div>
+
+                <!-- Q2 (a) -->
+                <div class="question-block">
+                    <span class="section-tag">Operators</span>
+                    <p class="font-bold">Q2 (a) Discuss various arithmetic, relational, and logical operators available
+                        in C language. Write about the hierarchy (precedence) among these operators. (7 marks)</p>
+                    <div class="answer-block">
+                        <h4 class="font-bold text-lg text-blue-800 mb-2">Solution:</h4>
+                        <ul class="list-disc pl-5 mb-4">
+                            <li><strong>Arithmetic:</strong> Used for mathematical calculations.
+                                <br><span class="font-mono text-sm bg-gray-100 p-1">+ (Add), - (Sub), * (Mul), / (Div),
+                                    % (Modulus)</span>
+                            </li>
+                            <li><strong>Relational:</strong> Used to compare two values. Returns 1 (True) or 0 (False).
+                                <br><span class="font-mono text-sm bg-gray-100 p-1">==, !=, >, <,>=, <=< /span>
+                            </li>
+                            <li><strong>Logical:</strong> Used to combine conditions.
+                                <br><span class="font-mono text-sm bg-gray-100 p-1">&& (AND), || (OR), ! (NOT)</span>
+                            </li>
+                        </ul>
+
+                        <h5 class="font-bold mt-2">Operator Precedence (Hierarchy)</h5>
+                        <p>Determines the order in which operators are evaluated.</p>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full text-sm mt-2 border">
+                                <thead class="bg-gray-100">
+                                    <tr>
+                                        <th class="border px-2 py-1">Priority</th>
+                                        <th class="border px-2 py-1">Operator Type</th>
+                                        <th class="border px-2 py-1">Operators</th>
+                                        <th class="border px-2 py-1">Associativity</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="border px-2 py-1">1 (High)</td>
+                                        <td class="border px-2 py-1">Unary</td>
+                                        <td class="border px-2 py-1 font-mono">! ++ -- sizeof type</td>
+                                        <td class="border px-2 py-1">Right to Left</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border px-2 py-1">2</td>
+                                        <td class="border px-2 py-1">Arithmetic (Mul/Div)</td>
+                                        <td class="border px-2 py-1 font-mono">* / %</td>
+                                        <td class="border px-2 py-1">Left to Right</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border px-2 py-1">3</td>
+                                        <td class="border px-2 py-1">Arithmetic (Add/Sub)</td>
+                                        <td class="border px-2 py-1 font-mono">+ -</td>
+                                        <td class="border px-2 py-1">Left to Right</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border px-2 py-1">4</td>
+                                        <td class="border px-2 py-1">Relational</td>
+                                        <td class="border px-2 py-1 font-mono">
+                                            < <=> >=
+                                        </td>
+                                        <td class="border px-2 py-1">Left to Right</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border px-2 py-1">5</td>
+                                        <td class="border px-2 py-1">Equality</td>
+                                        <td class="border px-2 py-1 font-mono">== !=</td>
+                                        <td class="border px-2 py-1">Left to Right</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border px-2 py-1">6</td>
+                                        <td class="border px-2 py-1">Logical AND</td>
+                                        <td class="border px-2 py-1 font-mono">&&</td>
+                                        <td class="border px-2 py-1">Left to Right</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border px-2 py-1">7 (Low)</td>
+                                        <td class="border px-2 py-1">Logical OR</td>
+                                        <td class="border px-2 py-1 font-mono">||</td>
+                                        <td class="border px-2 py-1">Left to Right</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UNIT II -->
+            <div class="mb-8">
+                <h3 class="text-xl font-bold text-gray-800 border-b-2 border-gray-200 pb-2 mb-4">UNIT - II</h3>
+
+                <!-- Q3 (a) -->
+                <div class="question-block">
+                    <span class="section-tag">Conditional Statements</span>
+                    <p class="font-bold">Q3 (a) Differentiate between if-else statement and switch statement. Write
+                        example programs to demonstrate when to use each. (6 marks)</p>
+                    <div class="answer-block">
+                        <h4 class="font-bold text-lg text-blue-800 mb-2">Solution:</h4>
+                        <table class="min-w-full text-sm border">
+                            <thead class="bg-gray-100">
+                                <tr>
+                                    <th class="border px-4 py-2">Criteria</th>
+                                    <th class="border px-4 py-2">if-else</th>
+                                    <th class="border px-4 py-2">switch</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="border px-4 py-2 font-bold">Expression</td>
+                                    <td class="border px-4 py-2">Can test relational or logical expressions (ranges, > <
+                                            etc).</td>
+                                    <td class="border px-4 py-2">Can only test for equality against constant values.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="border px-4 py-2 font-bold">Case Types</td>
+                                    <td class="border px-4 py-2">Works with all data types (float, int, etc).</td>
+                                    <td class="border px-4 py-2">Works only with int and char constants.</td>
+                                </tr>
+                                <tr>
+                                    <td class="border px-4 py-2 font-bold">Performance</td>
+                                    <td class="border px-4 py-2">Slower for many branches (checks sequentially).</td>
+                                    <td class="border px-4 py-2">Faster (jump table).</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Q3 (b) -->
+                <div class="question-block">
+                    <span class="section-tag">Bit Logic / Looping</span>
+                    <p class="font-bold">Q3 (b) Write a C program to convert a decimal number to binary using loops and
+                        conditional statements. Display the binary equivalent. (7 marks)</p>
+                    <div class="answer-block">
+                        <h4 class="font-bold text-lg text-blue-800 mb-2">Solution:</h4>
+                        <p>To convert Decimal to Binary, we repeatedly divide the number by 2 and store the remainder.
+                            The binary number is the remainders read in reverse order.</p>
+
+                        <div class="code-block">
+                            #include &lt;stdio.h&gt;
+
+                            int main() {
+                            int n, binary[32], i = 0;
+
+                            printf("Enter a decimal number: ");
+                            scanf("%d", &n);
+
+                            // Handling 0 case
+                            if (n == 0) {
+                            printf("Binary: 0\n");
+                            return 0;
+                            }
+
+                            // Conversion Logic
+                            while (n > 0) {
+                            binary[i] = n % 2; // Store remainder (0 or 1)
+                            n = n / 2; // Divide by 2
+                            i++;
+                            }
+
+                            // Printing in reverse
+                            printf("Binary: ");
+                            for (int j = i - 1; j >= 0; j--) {
+                            printf("%d", binary[j]);
+                            }
+                            printf("\n");
+
+                            return 0;
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+</body>
+
+</html>
