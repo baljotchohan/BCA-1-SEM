@@ -1232,152 +1232,242 @@
         // --- C PROGRAMMING DATA ---
         const cPapers = [
             {
-                id: 'c_01',
-                title: 'Practice Paper 1',
-                date: 'DEEPSEEK-AI',
-                units: {
-                    I: [
-                        "(a) Explain the basic structure of a C program with a suitable example.",
-                        "(b) Write a program to calculate and print the area and circumference of a circle. Take radius as input."
+                "id": "c_01",
+                "title": "Practice Paper 1",
+                "date": "PRACTICE-SET",
+                "units": {
+                    "I": [
+                        {
+                            "t": "<strong>Question 1</strong><br><strong>(a)</strong> Draw a flowchart to find the <strong>sum of all numbers between 1 to 100 that are divisible by 5</strong>. Explain the flowchart symbols used. <strong>(7 marks)</strong><br><br><strong>(b)</strong> <strong>Discuss the significance of testing and debugging in programming.</strong> What are the different types of errors encountered during programming? <strong>(6 marks)</strong>"
+                        },
+                        {
+                            "t": "<strong>Question 2</strong><br><strong>(a)</strong> <strong>Write an algorithm to check whether a given number is prime or not.</strong> Also, discuss the characteristics of a good algorithm. <strong>(6 marks)</strong><br><br><strong>(b)</strong> <strong>Discuss various data types available in C language.</strong> What are the rules for constructing variables in C? Give appropriate examples for each rule. <strong>(7 marks)</strong>"
+                        }
                     ],
-                    II: [
-                        "(a) Differentiate between while, do-while, and for loop with examples.",
-                        "(b) Write a program to print the following pattern using nested loops:<br>1<br>22<br>333<br>4444"
+                    "II": [
+                        {
+                            "t": "<strong>Question 3</strong><br><strong>(a)</strong> <strong>Discuss various looping statements used in C language</strong> (while, do-while, for). Write the differences between them with syntax examples. <strong>(6 marks)</strong><br><br><strong>(b)</strong> <strong>Write a C program to display the factorial of a given number using both recursive and non-recursive methods.</strong> Explain which approach is more efficient. <strong>(7 marks)</strong>"
+                        },
+                        {
+                            "t": "<strong>Question 4</strong><br><strong>(a)</strong> <strong>How do you pass parameters to a function?</strong> Explain pass by value and pass by reference with suitable example programs. <strong>(6 marks)</strong><br><br><strong>(b)</strong> <strong>Write a C function to find whether a given number is prime or not. Use this function in a complete program to print all prime numbers between 1 and 50.</strong> <strong>(7 marks)</strong>"
+                        }
                     ],
-                    III: [
-                        "(a) What is an array? Write a program to accept 10 numbers in an array and sort them in ascending order using Bubble Sort technique.",
-                        "(b) Explain how linear search is performed on an array."
+                    "III": [
+                        {
+                            "t": "<strong>Question 5</strong><br><strong>(a)</strong> <strong>Write a C program to find the maximum element in each row of a 2D array (3x3).</strong> Also, explain how you would access this 2D array using pointers. <strong>(6 marks)</strong><br><br><strong>(b)</strong> <strong>How to declare, initialize, and access elements of a single-dimensional and two-dimensional array?</strong> Write the code to add two 3x3 matrices. <strong>(7 marks)</strong>"
+                        },
+                        {
+                            "t": "<strong>Question 6</strong><br><strong>(a)</strong> <strong>Explain the concepts of dynamic memory allocation.</strong> Discuss malloc(), calloc(), realloc(), and free() functions with their syntax and usage. Write example code for each. <strong>(7 marks)</strong><br><br><strong>(b)</strong> <strong>What is a pointer?</strong> How to use pointers with a 2D array? Write a C program to print all elements of a 2D array using pointers. <strong>(6 marks)</strong>"
+                        }
                     ],
-                    IV: [
-                        "(a) Explain any four standard string handling library functions (strlen, strcpy, strcat, strcmp) with examples.",
-                        "(b) Write a program to read a string and count the number of vowels in it."
+                    "IV": [
+                        {
+                            "t": "<strong>Question 7</strong><br><strong>(a)</strong> <strong>Discuss the following string handling functions with example code:</strong><br>- <strong>strlen()</strong> - Get string length<br>- <strong>strcpy()</strong> - Copy string<br>- <strong>strcmp()</strong> - Compare strings<br>- <strong>strcat()</strong> - Concatenate strings<br><strong>(6 marks)</strong><br><br><strong>(b)</strong> <strong>Write a C program to read strings from user and perform string manipulation</strong> (concatenation, comparison, and copying) without using built-in string functions. <strong>(7 marks)</strong>"
+                        },
+                        {
+                            "t": "<strong>Question 8</strong><br><strong>(a)</strong> <strong>How to declare, initialize, and use structures in a C program?</strong> Explain nested structures with a suitable example. <strong>(6 marks)</strong><br><br><strong>(b)</strong> <strong>Write a C program that creates a structure to store student information</strong> (roll number, name, marks in 5 subjects). Create an array of structures to store 5 students' data. <strong>Display the details of the student with the highest total marks.</strong> Also explain the difference between structure and union. <strong>(7 marks)</strong>"
+                        }
                     ],
-                    Compulsory: [
-                        "(a) List any five keywords in C.",
-                        "(b) What is the purpose of the break statement?",
-                        "(c) How is a two-dimensional array int arr[3][4] stored in memory?",
-                        "(d) What is the use of the typedef keyword?",
-                        "(e) Which function is used to open a file in C?"
+                    "Compulsory": [
+                        "<strong>(a)</strong> <strong>Define an algorithm.</strong> What are its characteristics? <strong>(2 marks)</strong>",
+                        "<strong>(b)</strong> <strong>What is a flowchart?</strong> How does it differ from a decision table? <strong>(2 marks)</strong>",
+                        "<strong>(c)</strong> <strong>What are keywords in C?</strong> Give 10 examples of C keywords. <strong>(2 marks)</strong>",
+                        "<strong>(d)</strong> <strong>Explain the difference between local and global variables</strong> with regard to scope and lifetime. <strong>(2 marks)</strong>",
+                        "<strong>(e)</strong> <strong>What is the purpose of the break statement?</strong> Where is it used? <strong>(1 mark)</strong>",
+                        "<strong>(f)</strong> <strong>What is a union?</strong> How is it different from a structure? <strong>(2 marks)</strong>",
+                        "<strong>(g)</strong> <strong>Explain the address operator (&) and indirection operator (*).</strong> Give example. <strong>(2 marks)</strong>"
                     ]
                 }
             },
             {
-                id: 'c_02',
-                title: 'Practice Paper 2',
-                date: 'DEEPSEEK-AI',
-                units: {
-                    I: [
-                        "(a) Explain the fundamental data types in C with their size and range.",
-                        "(b) What is type conversion? Explain implicit and explicit type conversion with examples."
+                "id": "c_02",
+                "title": "Practice Paper 2",
+                "date": "PRACTICE-SET",
+                "units": {
+                    "I": [
+                        {
+                            "t": "<strong>Question 1</strong><br><strong>(a)</strong> <strong>Discuss the structure of a C program with a substantial example.</strong> Show all sections including preprocessor directives, header files, function declarations, and main function. <strong>(7 marks)</strong><br><br><strong>(b)</strong> <strong>What do you understand by type conversion?</strong> Explain implicit and explicit type conversion with examples. <strong>(6 marks)</strong>"
+                        },
+                        {
+                            "t": "<strong>Question 2</strong><br><strong>(a)</strong> <strong>Discuss various arithmetic, relational, and logical operators available in C language.</strong> Write about the hierarchy (precedence) among these operators. <strong>(7 marks)</strong><br><br><strong>(b)</strong> <strong>What are constants?</strong> Discuss different types of constants in C language with rules for constructing each type (integer, float, character, and string constants). <strong>(6 marks)</strong>"
+                        }
                     ],
-                    II: [
-                        "(a) Write a program to find the roots of a quadratic equation. Consider all cases (real & distinct, real & equal, imaginary).",
-                        "(b) Explain the switch-case statement with its syntax and a simple example (e.g., a calculator menu)."
+                    "II": [
+                        {
+                            "t": "<strong>Question 3</strong><br><strong>(a)</strong> <strong>Differentiate between if-else statement and switch statement.</strong> Write example programs to demonstrate when to use each. <strong>(6 marks)</strong><br><br><strong>(b)</strong> <strong>Write a C program to convert a decimal number to binary</strong> using loops and conditional statements. Display the binary equivalent. <strong>(7 marks)</strong>"
+                        },
+                        {
+                            "t": "<strong>Question 4</strong><br><strong>(a)</strong> <strong>Discuss storage classes available in C language</strong> (auto, static, extern, register). Explain scope and lifetime of each. <strong>(6 marks)</strong><br><br><strong>(b)</strong> <strong>Write a C program to generate and print the Fibonacci series</strong> using recursion. Write the recursive function and demonstrate it with example output. <strong>(7 marks)</strong>"
+                        }
                     ],
-                    III: [
-                        "(a) Write a program to add two 3x3 matrices.",
-                        "(b) What is the relationship between an array name and a pointer? Illustrate with an example."
+                    "III": [
+                        {
+                            "t": "<strong>Question 5</strong><br><strong>(a)</strong> <strong>Explain call by value and call by reference methods</strong> of passing arguments to a function. Write example programs demonstrating both methods. <strong>(7 marks)</strong><br><br><strong>(b)</strong> <strong>Write a C program to search the smallest and the largest elements in an array of 10 integers.</strong> Display both values with their positions. <strong>(6 marks)</strong>"
+                        },
+                        {
+                            "t": "<strong>Question 6</strong><br><strong>(a)</strong> <strong>Elaborate on various dynamic memory allocation functions</strong> (malloc, calloc, realloc) with their importance in C programming. Write syntax for each and example code. <strong>(7 marks)</strong><br><br><strong>(b)</strong> <strong>How to allocate memory dynamically?</strong> Write a C program to create a dynamic array of integers, input 5 numbers, and display them. Also demonstrate free() function to deallocate memory. <strong>(6 marks)</strong>"
+                        }
                     ],
-                    IV: [
-                        "(a) Define a structure named Student with members: Roll_no, Name, Marks. Write a program to read data for 5 students and display details of the student who scored highest.",
-                        "(b) What is a nested structure? Give an example."
+                    "IV": [
+                        {
+                            "t": "<strong>Question 7</strong><br><strong>(a)</strong> <strong>How to read and write strings in a C program?</strong> Discuss various string handling functions used in C language. <strong>(6 marks)</strong><br><br><strong>(b)</strong> <strong>Write a C program to read a text file and count the total number of words in it.</strong> Display the word count. <strong>(7 marks)</strong>"
+                        },
+                        {
+                            "t": "<strong>Question 8</strong><br><strong>(a)</strong> <strong>How to use array of structures?</strong> Write a C program with a structure to store employee information (employee ID, name, salary) and create an array to store 5 employees' data. <strong>(6 marks)</strong><br><br><strong>(b)</strong> <strong>Explain nested structures with a suitable example.</strong> Also discuss how structures are different from arrays in C. <strong>(7 marks)</strong>"
+                        }
                     ],
-                    Compulsory: [
-                        "(a) Differentiate between a compiler and an interpreter.",
-                        "(b) What is an infinite loop? How can it be created unintentionally?",
-                        "(c) What does int *ptr declare?",
-                        "(d) State one key difference between a structure and a union.",
-                        "(e) Name the function used to close a file."
+                    "Compulsory": [
+                        "<strong>(a)</strong> <strong>What are data flow diagrams (DFD)?</strong> Give an example and explain their advantage over traditional flowcharts. <strong>(2 marks)</strong>",
+                        "<strong>(b)</strong> <strong>What are the different ways to pass parameters to a function?</strong> <strong>(2 marks)</strong>",
+                        "<strong>(c)</strong> <strong>What logical operators are available in C language?</strong> Give truth table examples. <strong>(2 marks)</strong>",
+                        "<strong>(d)</strong> <strong>What is the significance of static storage class?</strong> <strong>(2 marks)</strong>",
+                        "<strong>(e)</strong> <strong>What is pseudo code?</strong> How is it useful in algorithm development? <strong>(1 mark)</strong>",
+                        "<strong>(f)</strong> <strong>How are structures different from arrays?</strong> <strong>(2 marks)</strong>",
+                        "<strong>(g)</strong> <strong>Explain what happens during compilation and execution of a C program.</strong> <strong>(2 marks)</strong>"
                     ]
                 }
             },
             {
-                id: 'c_03',
-                title: 'Practice Paper 3',
-                date: 'DEEPSEEK-AI',
-                units: {
-                    I: [
-                        "(a) Explain the hierarchy/priority of operators in C. Evaluate: z = 5 * 2 / 5 + 3 * 4 % 2 - 1.",
-                        "(b) Differentiate between formatted (printf, scanf) and unformatted (getchar, putchar) console I/O functions with examples."
+                "id": "c_03",
+                "title": "Practice Paper 3",
+                "date": "PRACTICE-SET",
+                "units": {
+                    "I": [
+                        {
+                            "t": "<strong>Question 1</strong><br><strong>(a)</strong> <strong>Draw a flowchart to find the GCD (Greatest Common Divisor) of two numbers.</strong> Explain flowchart symbols and the logic. <strong>(7 marks)</strong><br><br><strong>(b)</strong> <strong>What is a decision table?</strong> What are the components of a decision table? Explain with an example. <strong>(6 marks)</strong>"
+                        },
+                        {
+                            "t": "<strong>Question 2</strong><br><strong>(a)</strong> <strong>Explain the difference between Algorithm and Flowchart.</strong> When should you use each? Give examples. <strong>(6 marks)</strong><br><br><strong>(b)</strong> <strong>Discuss the various data types in C language</strong> with their sizes (in bytes) and range of values. Also explain type specifications (signed, unsigned, short, long). <strong>(7 marks)</strong>"
+                        }
                     ],
-                    II: [
-                        "(a) Write a program to print the following pyramid pattern:<br>&nbsp;&nbsp;*<br>&nbsp;***<br>*****",
-                        "(b) What is an infinite loop? Write an example and explain how to avoid it."
+                    "II": [
+                        {
+                            "t": "<strong>Question 3</strong><br><strong>(a)</strong> <strong>Differentiate between while loop and for loop.</strong> Write example programs demonstrating when to use each. <strong>(6 marks)</strong><br><br><strong>(b)</strong> <strong>Write a C program to compute the factorial of a given number</strong> using iteration (for loop). Validate the input. <strong>(7 marks)</strong>"
+                        },
+                        {
+                            "t": "<strong>Question 4</strong><br><strong>(a)</strong> <strong>How are library functions different from user-defined functions?</strong> Explain with examples. Give 5 library functions in C with their purpose. <strong>(7 marks)</strong><br><br><strong>(b)</strong> <strong>Explain various methods for parameter passing to functions</strong> with the help of suitable sample codes. <strong>(6 marks)</strong>"
+                        }
                     ],
-                    III: [
-                        "(a) How are arrays passed to a function? Write a program to find the smallest element in an array by passing the array to a function.",
-                        "(b) What is an address operator (&)? Explain its use with an example."
+                    "III": [
+                        {
+                            "t": "<strong>Question 5</strong><br><strong>(a)</strong> <strong>Explain the concept of arrays of characters with an application.</strong> Write a C program to search for an element in an array and display its position. <strong>(7 marks)</strong><br><br><strong>(b)</strong> <strong>How to declare and initialize one-dimensional and two-dimensional arrays?</strong> Write example programs for array initialization in different ways. <strong>(6 marks)</strong>"
+                        },
+                        {
+                            "t": "<strong>Question 6</strong><br><strong>(a)</strong> <strong>Elaborate on the memory map of a 2D array</strong> (row-major order). Explain how elements are stored in memory with an example. <strong>(6 marks)</strong><br><br><strong>(b)</strong> <strong>What is a pointer?</strong> How to declare and use pointers with single-dimensional and two-dimensional arrays? Write example programs. <strong>(7 marks)</strong>"
+                        }
                     ],
-                    IV: [
-                        "(a) Explain any two string handling functions: strlen() and strcat() with syntax and example programs.",
-                        "(b) Write a program to read a line of text from the user and count the number of words in it."
+                    "IV": [
+                        {
+                            "t": "<strong>Question 7</strong><br><strong>(a)</strong> <strong>Explain string manipulation in C language</strong> highlighting the use of major string handling functions with examples. <strong>(7 marks)</strong><br><br><strong>(b)</strong> <strong>Write a C program to count the number of vowels, consonants, and spaces in a given string.</strong> Display results. <strong>(6 marks)</strong>"
+                        },
+                        {
+                            "t": "<strong>Question 8</strong><br><strong>(a)</strong> <strong>How to create, open, and close a file in a C program?</strong> Discuss various functions used. <strong>(6 marks)</strong><br><br><strong>(b)</strong> <strong>Write a C program to write content to a file and then read it back and display on screen.</strong> Use proper file handling techniques. <strong>(7 marks)</strong>"
+                        }
                     ],
-                    Compulsory: [
-                        "(a) What is the purpose of header files like stdio.h?",
-                        "(b) Differentiate between Assignment (=) and Equality (==) operator.",
-                        "(c) Can a default case be placed in the middle of a switch statement?",
-                        "(d) What will ptr++ do if ptr is an integer pointer?",
-                        "(e) Name two modes for opening a text file for reading and writing."
+                    "Compulsory": [
+                        "<strong>(a)</strong> <strong>What is the use of the goto statement in a program?</strong> Give an example and discuss its disadvantages. <strong>(2 marks)</strong>",
+                        "<strong>(b)</strong> <strong>What is debugging?</strong> What are the different types of errors you encounter during programming. <strong>(2 marks)</strong>",
+                        "<strong>(c)</strong> <strong>Define escape sequences in C.</strong> Give 5 examples. <strong>(2 marks)</strong>",
+                        "<strong>(d)</strong> <strong>What is a function prototype?</strong> Why is it important? <strong>(2 marks)</strong>",
+                        "<strong>(e)</strong> <strong>What is the use of static variable?</strong> <strong>(1 mark)</strong>",
+                        "<strong>(f)</strong> <strong>How are structures different from unions?</strong> <strong>(2 marks)</strong>",
+                        "<strong>(g)</strong> <strong>What is the purpose of the header file stdio.h?</strong> List 5 functions provided by it. <strong>(2 marks)</strong>"
                     ]
                 }
             },
             {
-                id: 'c_04',
-                title: 'Practice Paper 4',
-                date: 'DEEPSEEK-AI',
-                units: {
-                    I: [
-                        "(a) What is an algorithm? Write an algorithm to find whether a given number is positive, negative, or zero.",
-                        "(b) Draw a flowchart to represent the logic for finding the factorial of a number."
+                "id": "c_04",
+                "title": "Practice Paper 4",
+                "date": "PRACTICE-SET",
+                "units": {
+                    "I": [
+                        {
+                            "t": "<strong>Question 1</strong><br><strong>(a)</strong> <strong>What is an algorithm?</strong> Write an algorithm to find the sum of digits of a given number. <strong>(6 marks)</strong><br><br><strong>(b)</strong> <strong>Discuss the significance of testing and debugging</strong> in the software development process. <strong>(7 marks)</strong>"
+                        },
+                        {
+                            "t": "<strong>Question 2</strong><br><strong>(a)</strong> <strong>Discuss various operators available in C language</strong> (arithmetic, relational, logical, assignment) with hierarchy/precedence. <strong>(7 marks)</strong><br><br><strong>(b)</strong> <strong>What are the rules for constructing variables in C?</strong> Give examples of valid and invalid variable names. <strong>(6 marks)</strong>"
+                        }
                     ],
-                    II: [
-                        "(a) What is recursion? Write a recursive function to calculate the sum of first N natural numbers.",
-                        "(b) Differentiate between call by value and call by reference with suitable C code examples."
+                    "II": [
+                        {
+                            "t": "<strong>Question 3</strong><br><strong>(a)</strong> <strong>How to use switch, break, and continue statements in a program?</strong> Give example code. <strong>(6 marks)</strong><br><br><strong>(b)</strong> <strong>Define a function to print the ith Fibonacci term where term i is passed as argument</strong> to the function. Use this function in a program to print first n Fibonacci terms. <strong>(7 marks)</strong>"
+                        },
+                        {
+                            "t": "<strong>Question 4</strong><br><strong>(a)</strong> <strong>Differentiate between while and do-while loops</strong> with regard to entry/exit control. <strong>(6 marks)</strong><br><br><strong>(b)</strong> <strong>Write a C program using a menu-driven approach</strong> that performs the following operations:<br>- Find factorial of a number<br>- Find whether a number is prime<br>- Display table of a number<br>Use switch statement and functions. <strong>(7 marks)</strong>"
+                        }
                     ],
-                    III: [
-                        "(a) Explain the memory representation of a two-dimensional array (int a[3][4]) in row-major order.",
-                        "(b) Write a program to find the transpose of a 3x3 matrix."
+                    "III": [
+                        {
+                            "t": "<strong>Question 5</strong><br><strong>(a)</strong> <strong>Write a program to find the greatest element in each row</strong> of a two-dimensional array (3x3). <strong>(7 marks)</strong><br><br><strong>(b)</strong> <strong>How to access individual values in an array?</strong> How to initialize an array during compile time and runtime? Give appropriate example code. <strong>(6 marks)</strong>"
+                        },
+                        {
+                            "t": "<strong>Question 6</strong><br><strong>(a)</strong> <strong>Discuss the concept of pointer arithmetic.</strong> Write example programs showing increment, decrement, and addition/subtraction operations on pointers. <strong>(6 marks)</strong><br><br><strong>(b)</strong> <strong>Write a C program to sort an array of 5 numbers using pointers.</strong> Display both unsorted and sorted arrays. <strong>(7 marks)</strong>"
+                        }
                     ],
-                    IV: [
-                        "(a) What is a file? Explain the basic operations (fopen, fclose, fprintf, fscanf) performed on files in C.",
-                        "(b) Write a program to read numbers from a text file named input.txt and write their squares to another file output.txt."
+                    "IV": [
+                        {
+                            "t": "<strong>Question 7</strong><br><strong>(a)</strong> <strong>How to declare and initialize string variables in C?</strong> Discuss methods for reading and writing strings. <strong>(6 marks)</strong><br><br><strong>(b)</strong> <strong>Write a C program to implement a simple text editor</strong> that can create a file, add text, read file content, and display it on screen. <strong>(7 marks)</strong>"
+                        },
+                        {
+                            "t": "<strong>Question 8</strong><br><strong>(a)</strong> <strong>Write a structure to store book information</strong> (book ID, title, author, price). Create an array of structures to store 5 books' data and display all book information. <strong>(7 marks)</strong><br><br><strong>(b)</strong> <strong>Explain the difference between structure with pointers and array of structures.</strong> <strong>(6 marks)</strong>"
+                        }
                     ],
-                    Compulsory: [
-                        "(a) Name the different phases of program compilation.",
-                        "(b) What is the use of the static storage class specifier for a variable inside a function?",
-                        "(c) What is a Null Pointer?",
-                        "(d) Why is the gets() function considered dangerous to use?",
-                        "(e) What is the purpose of the fseek() function?"
+                    "Compulsory": [
+                        "<strong>(a)</strong> <strong>What is a pseudo code?</strong> Give a pseudo code example. <strong>(2 marks)</strong>",
+                        "<strong>(b)</strong> <strong>What is the character set of C?</strong> List the valid characters. <strong>(2 marks)</strong>",
+                        "<strong>(c)</strong> <strong>Differentiate between break and continue statements.</strong> <strong>(2 marks)</strong>",
+                        "<strong>(d)</strong> <strong>What are storage classes in C?</strong> Name all 4 storage classes. <strong>(2 marks)</strong>",
+                        "<strong>(e)</strong> <strong>What is the use of conio.h header file?</strong> <strong>(1 mark)</strong>",
+                        "<strong>(f)</strong> <strong>How are arrays of structures used?</strong> <strong>(2 marks)</strong>",
+                        "<strong>(g)</strong> <strong>What is the significance of free() function in dynamic memory allocation?</strong> <strong>(2 marks)</strong>"
                     ]
                 }
             },
             {
-                id: 'c_05',
-                title: 'Practice Paper 5',
-                date: 'DEEPSEEK-AI',
-                units: {
-                    I: [
-                        "(a) Explain the basic data types (int, float, char, double) in C with their typical sizes and ranges.",
-                        "(b) Explain the format specifiers used in printf() and scanf() for the basic data types."
+                "id": "c_05",
+                "title": "Practice Paper 5",
+                "date": "PRACTICE-SET",
+                "units": {
+                    "I": [
+                        {
+                            "t": "<strong>Question 1</strong><br><strong>(a)</strong> <strong>Discuss the significance of decision table and algorithm development</strong> in the programming process. Write algorithm for generating Fibonacci series. <strong>(7 marks)</strong><br><br><strong>(b)</strong> <strong>What are the various data types supported in C?</strong> What are the rules to name variables. <strong>(6 marks)</strong>"
+                        },
+                        {
+                            "t": "<strong>Question 2</strong><br><strong>(a)</strong> <strong>Write about various operators available in C language</strong> along with their hierarchy. Write about the structure of a C program along with a sample code. <strong>(7 marks)</strong><br><br><strong>(b)</strong> <strong>What do you understand by type conversion?</strong> Explain with examples of both implicit and explicit conversion. <strong>(6 marks)</strong>"
+                        }
                     ],
-                    II: [
-                        "(a) Explain the switch statement with its syntax and rules. How is it different from a nested if-else ladder?",
-                        "(b) What is the purpose of the goto statement? Discuss why its use is generally discouraged."
+                    "II": [
+                        {
+                            "t": "<strong>Question 3</strong><br><strong>(a)</strong> <strong>Differentiate between a while loop and for loop.</strong> Write a program in C to compute factorial of a given number. <strong>(6 marks)</strong><br><br><strong>(b)</strong> <strong>How are library functions different from user-defined functions?</strong> Explain various methods for parameter passing to functions with suitable sample codes. <strong>(7 marks)</strong>"
+                        },
+                        {
+                            "t": "<strong>Question 4</strong><br><strong>(a)</strong> <strong>Explain storage classes in C.</strong> Discuss the scope and lifetime of each storage class. <strong>(7 marks)</strong><br><br><strong>(b)</strong> <strong>Write a C program to check whether a given number is even or odd</strong> using a function. Use this function in a menu-driven program. <strong>(6 marks)</strong>"
+                        }
                     ],
-                    III: [
-                        "(a) What is a pointer? Demonstrate with a program how pointers can be used to swap the values of two variables.",
-                        "(b) How can you access elements of a 1-D array using a pointer? Write a code snippet to illustrate."
+                    "III": [
+                        {
+                            "t": "<strong>Question 5</strong><br><strong>(a)</strong> <strong>Explain the concept of arrays of characters with an application.</strong> Write a C program to search for an element in an array using linear search. <strong>(7 marks)</strong><br><br><strong>(b)</strong> <strong>How to declare, initialize, and access array elements?</strong> Write example programs for both compile-time and runtime initialization. <strong>(6 marks)</strong>"
+                        },
+                        {
+                            "t": "<strong>Question 6</strong><br><strong>(a)</strong> <strong>Elaborate on various dynamic memory allocation functions</strong> (malloc, calloc, realloc) along with their importance in C programming. <strong>(7 marks)</strong><br><br><strong>(b)</strong> <strong>What is a pointer?</strong> Write a C program to create a dynamic array, input n numbers, and display them using pointers. Deallocate memory properly. <strong>(6 marks)</strong>"
+                        }
                     ],
-                    IV: [
-                        "(a) Define a structure named Book with members: title, author, price. Write a program to read details for 3 books and display them.",
-                        "(b) Explain the key difference between a structure and a union with a memory layout example."
+                    "IV": [
+                        {
+                            "t": "<strong>Question 7</strong><br><strong>(a)</strong> <strong>Discuss various I/O operations from files.</strong> Write a C program to read text from a file and provide the count of total words and characters. <strong>(7 marks)</strong><br><br><strong>(b)</strong> <strong>How to declare and initialize string variables?</strong> Discuss any four string handling functions with syntax and examples. <strong>(6 marks)</strong>"
+                        },
+                        {
+                            "t": "<strong>Question 8</strong><br><strong>(a)</strong> <strong>How to declare, initialize, and use structures in a program?</strong> Explain nested structures with an example program. <strong>(7 marks)</strong><br><br><strong>(b)</strong> <strong>Explain the concept of structures with pointers.</strong> Write a program to store student information using structures and pointers, and display all students' data. <strong>(6 marks)</strong>"
+                        }
                     ],
-                    Compulsory: [
-                        "(a) List any five keywords in C (other than int, float).",
-                        "(b) What is the function of the continue statement in a loop?",
-                        "(c) What does int (*ptr)[5]; declare?",
-                        "(d) Which function would you use to compare two strings?",
-                        "(e) Which function is used to close a file?"
+                    "Compulsory": [
+                        "<strong>(a)</strong> <strong>Explain keywords and constants</strong> with the help of suitable examples. <strong>(2 marks)</strong>",
+                        "<strong>(b)</strong> <strong>What is the significance of the address operator (&) and indirection operator (*)?</strong> <strong>(2 marks)</strong>",
+                        "<strong>(c)</strong> <strong>What is a union?</strong> How is it different from a structure? <strong>(2 marks)</strong>",
+                        "<strong>(d)</strong> <strong>What is the use of break statement in a program?</strong> Give an example. <strong>(2 marks)</strong>",
+                        "<strong>(e)</strong> <strong>What is binary search?</strong> <strong>(1 mark)</strong>",
+                        "<strong>(f)</strong> <strong>How does dynamic memory allocation differ from static memory allocation?</strong> <strong>(2 marks)</strong>",
+                        "<strong>(g)</strong> <strong>What is the significance of null terminator (\\0) in strings?</strong> <strong>(2 marks)</strong>"
                     ]
                 }
             }
@@ -1414,7 +1504,97 @@
             `;
             card.addEventListener('click', () => openGeminiResearch());
             grid.appendChild(card);
+
+            // Practice Papers
+            cPapers.forEach(paper => {
+                const pCard = document.createElement('div');
+                pCard.className = 'paper-card';
+                pCard.innerHTML = `
+                    <div class="card-title">
+                        <i class="fas fa-file-code mr-2"></i> ${paper.title}
+                    </div>
+                    <div class="card-meta">
+                        <span><i class="far fa-calendar-alt"></i> ${paper.date}</span>
+                        <span class="text-[var(--terminal-green)]">C-PROG</span>
+                    </div>
+                `;
+                pCard.addEventListener('click', () => openCPaper(paper.id));
+                grid.appendChild(pCard);
+            });
         }
+
+        window.openCPaper = function (id) {
+            const paper = cPapers.find(p => p.id === id);
+            if (!paper) return;
+
+            const view = document.getElementById('paper-view');
+            view.classList.remove('hidden');
+            const container = document.getElementById('paper-content-container');
+
+            let html = `
+                <div class="paper-header-real">
+                    <h1>Panjab University</h1>
+                    <div style="font-size: 1.1rem; margin-top: 5px;">Bachelor of Computer Applications (Semester I)</div>
+                    <div style="font-size: 1rem; font-weight: bold; margin-top: 5px;">PROBLEM SOLVING THROUGH C</div>
+                    <div class="paper-meta-real">
+                        <span>Paper Code: BCA-16-104 / BCA-103</span>
+                        <span>Max Marks: 65</span>
+                    </div>
+                    <div class="paper-meta-real">
+                        <span>Exam Code: 0027</span>
+                        <span>Time Allowed: 3 Hours</span>
+                    </div>
+                </div>
+                <div class="paper-note">
+                    <strong>NOTE:</strong> Attempt FIVE questions in all, including Question No. 9 (Unit-V) which is compulsory and selecting ONE question each from Units I-IV.
+                </div>
+            `;
+
+            const units = [
+                { name: 'UNIT I', qs: paper.units.I },
+                { name: 'UNIT II', qs: paper.units.II },
+                { name: 'UNIT III', qs: paper.units.III },
+                { name: 'UNIT IV', qs: paper.units.IV }
+            ];
+
+            units.forEach((unit, idx) => {
+                html += `
+                    <div class="section-header">
+                        <span>${unit.name}</span>
+                        <span>[13 Marks]</span> 
+                    </div>
+                `;
+                unit.qs.forEach((q, qIdx) => {
+                    html += `
+                        <div class="question-row">
+                            <div class="q-text" style="white-space: pre-wrap;">${q.t}</div>
+                        </div>
+                    `;
+                    if (qIdx === 0) html += `<div style="text-align: center; font-weight: bold; font-size: 0.8rem; margin: 10px 0;">OR</div>`;
+                });
+            });
+
+            // Compulsory Unit V
+            html += `
+                <div class="section-header">
+                    <span>UNIT V (Compulsory)</span>
+                    <span>[13 Marks]</span>
+                </div>
+                <div class="question-row">
+                    <div class="q-num">9.</div>
+                    <div class="q-text">
+                        Attempt ALL parts:
+                        <ol class="sub-q-list">
+            `;
+
+            paper.units.Compulsory.forEach(q => {
+                html += `<li>${q}</li>`;
+            });
+
+            html += `</ol></div></div>`;
+
+            container.innerHTML = html;
+        };
 
         window.openGeminiResearch = function () {
             const view = document.getElementById('paper-view');
