@@ -19,6 +19,7 @@
             body {
                 background: white;
                 -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
             }
 
             .page-break {
@@ -112,6 +113,49 @@
             font-size: 0.75rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
+        }
+
+        @media screen and (max-width: 768px) {
+            body {
+                background-color: white;
+                /* Seamless mobile look */
+            }
+
+            .container {
+                max-width: 100%;
+                width: 100%;
+                margin: 0;
+                padding: 1rem;
+                min-height: auto;
+                /* Remove A4 height constraint */
+                box-shadow: none;
+                /* Flat look */
+            }
+
+            .paper-header h2 {
+                font-size: 1.5rem;
+                /* Smaller header */
+            }
+
+            .code-block,
+            .overflow-x-auto {
+                font-size: 0.75rem;
+                /* Smaller code font */
+            }
+
+            /* Floating Action Button for PDF on Mobile */
+            .fixed.top-4.right-4 {
+                top: auto;
+                bottom: 1.5rem;
+                right: 1.5rem;
+                z-index: 50;
+            }
+
+            .fixed.top-4.right-4 button {
+                border-radius: 9999px;
+                padding: 0.75rem 1.25rem;
+                box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+            }
         }
     </style>
 </head>
@@ -730,10 +774,672 @@
                             }
                         </div>
                     </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+
+    <!-- UNIT III -->
+    <div class="mb-8">
+        <h3 class="text-xl font-bold text-gray-800 border-b-2 border-gray-200 pb-2 mb-4">UNIT - III</h3>
+
+        <!-- Q5 (a) -->
+        <div class="question-block">
+            <span class="section-tag">Functions</span>
+            <p class="font-bold">Q5 (a) Explain call by value and call by reference methods of passing arguments to a
+                function. Write example programs demonstrating both methods. (7 marks)</p>
+            <div class="answer-block">
+                <h4 class="font-bold text-lg text-blue-800 mb-2">Solution:</h4>
+                <table class="min-w-full text-sm border mb-4">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="border px-4 py-2">Call by Value</th>
+                            <th class="border px-4 py-2">Call by Reference</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="border px-4 py-2">Copy of actual argument is passed.</td>
+                            <td class="border px-4 py-2">Address of actual argument is passed.</td>
+                        </tr>
+                        <tr>
+                            <td class="border px-4 py-2">Changes in function do NOT affect original.</td>
+                            <td class="border px-4 py-2">Changes in function affect original variable.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="code-block">
+                    // Call by Value
+                    void swapValue(int a, int b) {
+                    int temp = a; a = b; b = temp;
+                    }
+                    // Call by Reference
+                    void swapRef(int *a, int *b) {
+                    int temp = *a; *a = *b; *b = temp;
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Q5 (b) -->
+        <div class="question-block">
+            <span class="section-tag">Arrays</span>
+            <p class="font-bold">Q5 (b) Write a C program to search the smallest and the largest elements in an array of
+                10 integers. Display both values with their positions. (6 marks)</p>
+            <div class="answer-block">
+                <h4 class="font-bold text-lg text-blue-800 mb-2">Solution:</h4>
+                <div class="code-block">
+                    #include &lt;stdio.h&gt;
+                    int main() {
+                    int arr[10], i, small, large, s_pos = 0, l_pos = 0;
+
+                    printf("Enter 10 integers:\n");
+                    for(i=0; i<10; i++) scanf("%d", &arr[i]); small=large=arr[0]; for(i=1; i<10; i++) { if(arr[i] <
+                        small) { small=arr[i]; s_pos=i; } if(arr[i]> large) { large = arr[i]; l_pos = i; }
+                        }
+
+                        printf("Smallest: %d at index %d\n", small, s_pos);
+                        printf("Largest: %d at index %d\n", large, l_pos);
+                        return 0;
+                        }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- UNIT IV -->
+    <div class="mb-8">
+        <h3 class="text-xl font-bold text-gray-800 border-b-2 border-gray-200 pb-2 mb-4">UNIT - IV</h3>
+
+        <!-- Q7 (b) -->
+        <div class="question-block">
+            <span class="section-tag">File Handling</span>
+            <p class="font-bold">Q7 (b) Write a C program to read a text file and count the total number of words in it.
+                Display the word count. (7 marks)</p>
+            <div class="answer-block">
+                <h4 class="font-bold text-lg text-blue-800 mb-2">Solution:</h4>
+                <div class="code-block">
+                    #include &lt;stdio.h&gt;
+                    #include &lt;stdlib.h&gt;
+
+                    int main() {
+                    FILE *fp;
+                    char ch;
+                    int words = 0, inWord = 0;
+
+                    fp = fopen("data.txt", "r");
+                    if(fp == NULL) {
+                    printf("File not found.\n");
+                    exit(1);
+                    }
+
+                    while((ch = fgetc(fp)) != EOF) {
+                    if(ch == ' ' || ch == '\n' || ch == '\t') {
+                    inWord = 0;
+                    } else if (inWord == 0) {
+                    inWord = 1;
+                    words++;
+                    }
+                    }
+
+                    printf("Total Words: %d\n", words);
+                    fclose(fp);
+                    return 0;
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Q8 (a) -->
+        <div class="question-block">
+            <span class="section-tag">Structures</span>
+            <p class="font-bold">Q8 (a) How to use array of structures? Write a C program with a structure to store
+                employee information (employee ID, name, salary) and create an array to store 5 employees' data. (6
+                marks)</p>
+            <div class="answer-block">
+                <h4 class="font-bold text-lg text-blue-800 mb-2">Solution:</h4>
+                <div class="code-block">
+                    struct Employee {
+                    int id;
+                    char name[50];
+                    float salary;
+                    };
+
+                    int main() {
+                    struct Employee emp[5]; // Array of 5 structures
+                    int i;
+
+                    // Input
+                    for(i=0; i<5; i++) { printf("Enter ID, Name, Salary for Emp %d: ", i+1);
+        scanf(" %d %s %f", &emp[i].id, emp[i].name, &emp[i].salary); } // Output printf("\nEmployee Details:\n");
+                        for(i=0; i<5; i++) { printf("%d\t%s\t%.2f\n", emp[i].id, emp[i].name, emp[i].salary); } return
+                        0; } </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- COMPULSORY -->
+        <div class="bg-yellow-50 p-6 rounded-lg border border-yellow-200">
+            <h3 class="text-xl font-bold text-yellow-800 mb-4">UNIT - V (Compulsory)</h3>
+            <div class="space-y-4">
+                <div>
+                    <p class="font-bold text-sm">a) What are data flow diagrams (DFD)?</p>
+                    <p class="text-sm text-gray-700">A graphical representation of the "flow" of data through an
+                        information system, modeling its process aspects.</p>
+                </div>
+                <div>
+                    <p class="font-bold text-sm">b) What are the different ways to pass parameters to a function?</p>
+                    <p class="text-sm text-gray-700">1. Call by Value (value copied). 2. Call by Reference (address
+                        passed).</p>
+                </div>
+                <div>
+                    <p class="font-bold text-sm">c) What logical operators are available in C language?</p>
+                    <p class="text-sm text-gray-700">AND (&&), OR (||), NOT (!).</p>
+                </div>
+                <div>
+                    <p class="font-bold text-sm">d) What is the significance of static storage class?</p>
+                    <p class="text-sm text-gray-700">Preserves value between function calls. Default initial value is 0.
+                        Scope is local, lifetime is global.</p>
+                </div>
+                <div>
+                    <p class="font-bold text-sm">e) What is pseudo code?</p>
+                    <p class="text-sm text-gray-700">Informal high-level description of the operating principle of a
+                        computer program using natural language.</p>
+                </div>
+                <div>
+                    <p class="font-bold text-sm">f) How are structures different from arrays?</p>
+                    <p class="text-sm text-gray-700">Arrays hold elements of the SAME data type. Structures hold
+                        elements of DIFFERENT data types.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- PAPER 3 -->
+    <div class="container page-break">
+        <div class="paper-header">
+            <h2 class="text-3xl font-bold">PRACTICE PAPER - 3</h2>
+            <div class="flex justify-between mt-4 text-sm font-mono text-gray-600">
+                <span>Subject: Problem Solving Through C</span>
+                <span>Max Marks: 75</span>
+            </div>
+        </div>
+
+        <!-- UNIT I -->
+        <div class="mb-8">
+            <h3 class="text-xl font-bold text-gray-800 border-b-2 border-gray-200 pb-2 mb-4">UNIT - I</h3>
+
+            <!-- Q1 (a) -->
+            <div class="question-block">
+                <span class="section-tag">Algorithm & Flowchart</span>
+                <p class="font-bold">Q1 (a) Draw a flowchart to find the GCD (Greatest Common Divisor) of two numbers.
+                    Explain flowchart symbols and the logic. (7 marks)</p>
+
+                <div class="answer-block">
+                    <h4 class="font-bold text-lg text-blue-800 mb-2">Solution:</h4>
+                    <p><strong>Logic (Euclidean Algorithm):</strong> Repeatedly subtract the smaller number from the
+                        larger number until one of them becomes zero. The other non-zero number is the GCD.</p>
+                    <div
+                        class="diagram-placeholder font-mono text-sm leading-relaxed text-left pl-8 border-l-4 border-gray-300">
+                        [ START ]<br>
+                        |<br>
+                        [ Input A, B ]<br>
+                        |<<br>
+                            < A !=B?><br>
+                                / \<br>
+                                YES NO ---->[ Print A or B ]--> ( STOP )<br>
+                                | <br>
+                                < A> B? ><br>
+                                    / \<br>
+                                    YES NO<br>
+                                    | |<br>
+                                    [A = A - B] [B = B - A]<br>
+                                    \ /<br>
+                                    \ /<br>
+                                    (Loop Back)
+                    </div>
                 </div>
             </div>
 
+            <!-- Q1 (b) -->
+            <div class="question-block">
+                <span class="section-tag">Decision Table</span>
+                <p class="font-bold">Q1 (b) What is a decision table? What are the components of a decision table?
+                    Explain with an example. (6 marks)</p>
+                <div class="answer-block">
+                    <h4 class="font-bold text-lg text-blue-800 mb-2">Solution:</h4>
+                    <p><strong>Decision Table:</strong> A tabular representation of logic that lists conditions and the
+                        corresponding actions to be taken.</p>
+                    <div class="grid grid-cols-2 gap-4 mt-2 mb-2">
+                        <div class="border p-2 bg-gray-50">
+                            <strong>1. Condition Stub:</strong> Lists all possible conditions (Top Left).
+                        </div>
+                        <div class="border p-2 bg-gray-50">
+                            <strong>2. Condition Entry:</strong> Rules (Values Y/N) (Top Right).
+                        </div>
+                        <div class="border p-2 bg-gray-50">
+                            <strong>3. Action Stub:</strong> Lists possible actions (Bottom Left).
+                        </div>
+                        <div class="border p-2 bg-gray-50">
+                            <strong>4. Action Entry:</strong> Checks action to take (Bottom Right).
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OR SEPARATOR -->
+            <div class="flex items-center my-8">
+                <div class="flex-grow border-t border-gray-300"></div>
+                <span class="px-4 text-gray-500 font-bold bg-white">OR</span>
+                <div class="flex-grow border-t border-gray-300"></div>
+            </div>
+
+            <!-- Q2 (b) -->
+            <div class="question-block">
+                <span class="section-tag">Data Types</span>
+                <p class="font-bold">Q2 (b) Discuss the various data types in C language with their sizes. Also explain
+                    type specifications. (7 marks)</p>
+                <div class="answer-block">
+                    <h4 class="font-bold text-lg text-blue-800 mb-2">Solution:</h4>
+                    <table class="min-w-full text-sm border mt-2">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="border px-4 py-2">Type</th>
+                                <th class="border px-4 py-2">Size (Typical)</th>
+                                <th class="border px-4 py-2">Format Specifier</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="border px-4 py-2">char</td>
+                                <td class="border px-4 py-2">1 byte</td>
+                                <td class="border px-4 py-2">%c</td>
+                            </tr>
+                            <tr>
+                                <td class="border px-4 py-2">int</td>
+                                <td class="border px-4 py-2">2 or 4 bytes</td>
+                                <td class="border px-4 py-2">%d</td>
+                            </tr>
+                            <tr>
+                                <td class="border px-4 py-2">float</td>
+                                <td class="border px-4 py-2">4 bytes</td>
+                                <td class="border px-4 py-2">%f</td>
+                            </tr>
+                            <tr>
+                                <td class="border px-4 py-2">double</td>
+                                <td class="border px-4 py-2">8 bytes</td>
+                                <td class="border px-4 py-2">%lf</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="mt-2"><strong>Qualifiers:</strong> signed (default), unsigned (positive only), short
+                        (smaller range), long (larger range).</p>
+                </div>
+            </div>
         </div>
+
+        <!-- UNIT II -->
+        <div class="mb-8">
+            <h3 class="text-xl font-bold text-gray-800 border-b-2 border-gray-200 pb-2 mb-4">UNIT - II</h3>
+            <!-- Q3 (b) -->
+            <div class="question-block">
+                <span class="section-tag">Looping</span>
+                <p class="font-bold">Q3 (b) Write a C program to compute the factorial of a given number using iteration
+                    (for loop). Validate the input. (7 marks)</p>
+                <div class="answer-block">
+                    <div class="code-block">
+                        #include &lt;stdio.h&gt;
+                        int main() {
+                        int n, i;
+                        unsigned long long fact = 1;
+
+                        printf("Enter an integer: ");
+                        scanf("%d", &n);
+
+                        if (n < 0) printf("Error! Factorial of a negative number doesn't exist."); else { for (i=1; i
+                            <=n; ++i) { fact *=i; } printf("Factorial of %d=%llu", n, fact); } return 0; } </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UNIT III -->
+            <div class="mb-8">
+                <h3 class="text-xl font-bold text-gray-800 border-b-2 border-gray-200 pb-2 mb-4">UNIT - III</h3>
+                <!-- Q5 (a) -->
+                <div class="question-block">
+                    <span class="section-tag">Arrays</span>
+                    <p class="font-bold">Q5 (a) Explain the concept of arrays of characters with an application. Write a
+                        C program to search for an element in an array and display its position. (7 marks)</p>
+                    <div class="answer-block">
+                        <h4 class="font-bold text-lg text-blue-800 mb-2">Solution:</h4>
+                        <p><strong>Array of Characters:</strong> In C, a string is essentially an array of characters
+                            ending with a null character `\0`.</p>
+                        <div class="code-block">
+                            #include &lt;stdio.h&gt;
+                            int main() {
+                            int arr[10] = {10, 2, 5, 8, 9, 20, 55, 33, 1, 99};
+                            int key, i, found=0;
+
+                            printf("Enter element to search: ");
+                            scanf("%d", &key);
+
+                            for(i=0; i<10; i++) { if(arr[i]==key) { printf("Found at position: %d\n", i+1); found=1;
+                                break; } } if(!found) printf("Not found.\n"); return 0; } </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- UNIT IV -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-gray-800 border-b-2 border-gray-200 pb-2 mb-4">UNIT - IV</h3>
+                    <!-- Q7 (b) -->
+                    <div class="question-block">
+                        <span class="section-tag">Strings</span>
+                        <p class="font-bold">Q7 (b) Write a C program to count the number of vowels, consonants, and
+                            spaces in a given string. Display results. (6 marks)</p>
+                        <div class="answer-block">
+                            <div class="code-block">
+                                #include &lt;stdio.h&gt;
+                                int main() {
+                                char line[150];
+                                int vowels, consonant, digit, space;
+                                vowels = consonant = digit = space = 0;
+
+                                printf("Enter a line of string: ");
+                                fgets(line, sizeof(line), stdin);
+
+                                for (int i = 0; line[i] != '\0'; ++i) {
+                                if (line[i] == 'a' || line[i] == 'e' || line[i] == 'i' ||
+                                line[i] == 'o' || line[i] == 'u' || line[i] == 'A' ||
+                                line[i] == 'E' || line[i] == 'I' || line[i] == 'O' ||
+                                line[i] == 'U') {
+                                vowels++;
+                                } else if ((line[i] >= 'a' && line[i] <= 'z' ) || (line[i]>= 'A' && line[i] <= 'Z' )) {
+                                        consonant++; } else if (line[i]==' ' ) { space++; } } printf("Vowels: %d",
+                                        vowels); printf("\nConsonants: %d", consonant); printf("\nWhite spaces: %d",
+                                        space); return 0; } </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- COMPULSORY -->
+                    <div class="bg-yellow-50 p-6 rounded-lg border border-yellow-200">
+                        <h3 class="text-xl font-bold text-yellow-800 mb-4">UNIT - V (Compulsory)</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <p class="font-bold text-sm">a) What is the use of the goto statement?</p>
+                                <p class="text-sm">Unconditional jump to a labeled statement. Disadvantage: Spaghetti
+                                    code.</p>
+                            </div>
+                            <div>
+                                <p class="font-bold text-sm">b) What are types of errors?</p>
+                                <p class="text-sm">Syntax, Logical, Runtime, Linker errors.</p>
+                            </div>
+                            <div>
+                                <p class="font-bold text-sm">c) Define escape sequences.</p>
+                                <p class="text-sm">Combination of characters representing non-printable chars. e.g. \n
+                                    (newline), \t (tab), \b (backspace).</p>
+                            </div>
+                            <div>
+                                <p class="font-bold text-sm">d) What is a function prototype?</p>
+                                <p class="text-sm">Declaration of a function specifying name, return type and
+                                    parameters, telling compiler about it before definition.</p>
+                            </div>
+                            <div>
+                                <p class="font-bold text-sm">e) Use of static variable?</p>
+                                <p class="text-sm">Retains value across function calls.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- PAPER 4 -->
+                <div class="container page-break">
+                    <div class="paper-header">
+                        <h2 class="text-3xl font-bold">PRACTICE PAPER - 4</h2>
+                        <div class="flex justify-between mt-4 text-sm font-mono text-gray-600">
+                            <span>Subject: Problem Solving Through C</span>
+                            <span>Max Marks: 75</span>
+                        </div>
+                    </div>
+
+                    <!-- UNIT I -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-bold text-gray-800 border-b-2 border-gray-200 pb-2 mb-4">UNIT - I</h3>
+                        <div class="question-block">
+                            <span class="section-tag">Algorithm</span>
+                            <p class="font-bold">Q1 (a) What is an algorithm? Write an algorithm to find the sum of
+                                digits of a given number. (6 marks)</p>
+                            <div class="answer-block">
+                                <h4 class="font-bold text-lg text-blue-800 mb-2">Solution:</h4>
+                                <p><strong>Algorithm:</strong> A step-by-step procedure to solve a problem.</p>
+                                <ol class="list-decimal pl-5 mt-2 bg-gray-50 p-4 rounded text-sm font-mono">
+                                    <li>START</li>
+                                    <li>Input integer N.</li>
+                                    <li>Initialize Sum = 0, Remainder = 0.</li>
+                                    <li>Repeat While N != 0:<br>
+                                        a. Remainder = N % 10<br>
+                                        b. Sum = Sum + Remainder<br>
+                                        c. N = N / 10
+                                    </li>
+                                    <li>Print Sum.</li>
+                                    <li>STOP.</li>
+                                </ol>
+                            </div>
+                        </div>
+                        <!-- Q1 (b) -->
+                        <div class="question-block">
+                            <span class="section-tag">Testing & Debugging</span>
+                            <p class="font-bold">Q1 (b) Discuss the significance of testing and debugging. (7 marks)</p>
+                            <div class="answer-block">
+                                <p class="text-sm">Testing identifies defects. Debugging locates and fixes them. Testing
+                                    ensures quality, debugging ensures correctness.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- UNIT II -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-bold text-gray-800 border-b-2 border-gray-200 pb-2 mb-4">UNIT - II</h3>
+                        <div class="question-block">
+                            <span class="section-tag">Recursion</span>
+                            <p class="font-bold">Q3 (b) Define a function to print the ith Fibonacci term where term i
+                                is passed as argument... (7 marks)</p>
+                            <div class="answer-block">
+                                <div class="code-block">
+                                    #include &lt;stdio.h&gt;
+                                    int fib(int n) {
+                                    if (n <= 1) return n; return fib(n-1) + fib(n-2); } int main() { int n, i;
+                                        printf("Enter terms: ");
+    scanf(" %d", &n); for(i=0; i<n; i++) printf("%d ", fib(i));
+    return 0;
+}
+</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNIT III -->
+        <div class=" mb-8">
+                                        <h3
+                                            class="text-xl font-bold text-gray-800 border-b-2 border-gray-200 pb-2 mb-4">
+                                            UNIT - III</h3>
+                                        <div class="question-block">
+                                            <span class="section-tag">2D Arrays</span>
+                                            <p class="font-bold">Q5 (a) Write a program to find the greatest element in
+                                                each row of a 2D array (3x3). (7 marks)</p>
+                                            <div class="answer-block">
+                                                <div class="code-block">
+                                                    #include &lt;stdio.h&gt;
+                                                    int main() {
+                                                    int arr[3][3], i, j, max;
+                                                    // Input omitted for brevity, assume input logic
+                                                    for(i=0; i<3; i++) { max=arr[i][0]; for(j=1; j<3; j++) {
+                                                        if(arr[i][j]> max) max = arr[i][j];
+                                                        }
+                                                        printf("Row %d Max: %d\n", i+1, max);
+                                                        }
+                                                        return 0;
+                                                        }
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+
+                                <!-- UNIT IV -->
+                                <div class="mb-8">
+                                    <h3 class="text-xl font-bold text-gray-800 border-b-2 border-gray-200 pb-2 mb-4">
+                                        UNIT - IV</h3>
+                                    <div class="question-block">
+                                        <span class="section-tag">File Operations</span>
+                                        <p class="font-bold">Q7 (b) Write a C program to implement a simple text editor
+                                            (add text, read file). (7 marks)</p>
+                                        <div class="answer-block">
+                                            <div class="code-block">
+                                                #include &lt;stdio.h&gt;
+                                                int main() {
+                                                FILE *fp;
+                                                char str[100];
+                                                fp = fopen("note.txt", "w"); // Write Mode
+                                                printf("Enter text: ");
+                                                gets(str);
+                                                fprintf(fp, "%s", str);
+                                                fclose(fp);
+
+                                                fp = fopen("note.txt", "r"); // Read Mode
+                                                printf("File Content: ");
+                                                while(fgets(str, 100, fp) != NULL) printf("%s", str);
+                                                fclose(fp);
+                                                return 0;
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- COMPULSORY -->
+                                <div class="bg-yellow-50 p-6 rounded-lg border border-yellow-200">
+                                    <h3 class="text-xl font-bold text-yellow-800 mb-4">UNIT - V (Compulsory)</h3>
+                                    <div class="grid grid-cols-2 gap-4 text-sm">
+                                        <div><strong>(a) Pseudo Code:</strong> Artificial and informal language that
+                                            helps programmers develop algorithms.</div>
+                                        <div><strong>(b) Character Set:</strong> Letters, Digits, Special Characters,
+                                            White Spaces.</div>
+                                        <div><strong>(c) break vs continue:</strong> break exits loop; continue skips
+                                            iteration.</div>
+                                        <div><strong>(d) Storage Classes:</strong> auto, register, static, extern.</div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- PAPER 5 -->
+                            <div class="container page-break">
+                                <div class="paper-header">
+                                    <h2 class="text-3xl font-bold">PRACTICE PAPER - 5</h2>
+                                    <div class="flex justify-between mt-4 text-sm font-mono text-gray-600">
+                                        <span>Subject: Problem Solving Through C</span>
+                                        <span>Max Marks: 75</span>
+                                    </div>
+                                </div>
+
+                                <!-- UNIT I -->
+                                <div class="mb-8">
+                                    <h3 class="text-xl font-bold text-gray-800 border-b-2 border-gray-200 pb-2 mb-4">
+                                        UNIT - I</h3>
+                                    <div class="question-block">
+                                        <span class="section-tag">Data Types</span>
+                                        <p class="font-bold">Q1 (b) What are the various data types supported in C? (6
+                                            marks)</p>
+                                        <div class="answer-block">
+                                            <p>Primary (int, char, float, double, void), Derived (array, pointer),
+                                                User-defined (structure, union, enum). Variables naming rules: Start
+                                                with letter/underscore, no spaces, no keywords.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- UNIT II -->
+                                <div class="mb-8">
+                                    <h3 class="text-xl font-bold text-gray-800 border-b-2 border-gray-200 pb-2 mb-4">
+                                        UNIT - II</h3>
+                                    <div class="question-block">
+                                        <span class="section-tag">Functions</span>
+                                        <p class="font-bold">Q4 (b) check whether a given number is even or odd using a
+                                            function. (6 marks)</p>
+                                        <div class="answer-block">
+                                            <div class="code-block">
+                                                int isEven(int n) { return (n%2==0); }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- UNIT III -->
+                                <div class="mb-8">
+                                    <h3 class="text-xl font-bold text-gray-800 border-b-2 border-gray-200 pb-2 mb-4">
+                                        UNIT - III</h3>
+                                    <div class="question-block">
+                                        <span class="section-tag">Dynamic Memory</span>
+                                        <p class="font-bold">Q6 (a) Elaborate on various dynamic memory allocation
+                                            functions. (7 marks)</p>
+                                        <div class="answer-block">
+                                            <ul class="list-disc pl-5 text-sm">
+                                                <li><strong>malloc(size):</strong> Allocates uninitialized block.</li>
+                                                <li><strong>calloc(n, size):</strong> Allocates initialized (zero)
+                                                    block.</li>
+                                                <li><strong>realloc(ptr, size):</strong> Resizes allocated block.</li>
+                                                <li><strong>free(ptr):</strong> Releases memory.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- UNIT IV -->
+                                <div class="mb-8">
+                                    <h3 class="text-xl font-bold text-gray-800 border-b-2 border-gray-200 pb-2 mb-4">
+                                        UNIT - IV</h3>
+                                    <div class="question-block">
+                                        <span class="section-tag">Structure & Pointers</span>
+                                        <p class="font-bold">Q8 (b) Explain the concept of structures with pointers. (6
+                                            marks)</p>
+                                        <div class="answer-block">
+                                            <p>Pointers can point to a structure. We use the arrow operator
+                                                <code>-></code> to access members of a structure using a pointer.
+                                            </p>
+                                            <div class="code-block">
+                                                struct Student *ptr, s;
+                                                ptr = &s;
+                                                printf("%s", ptr->name); // Accessing member
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- COMPULSORY -->
+                                <div class="bg-yellow-50 p-6 rounded-lg border border-yellow-200">
+                                    <h3 class="text-xl font-bold text-yellow-800 mb-4">UNIT - V (Compulsory)</h3>
+                                    <div class="grid grid-cols-2 gap-4 text-sm">
+                                        <div><strong>(a) Keywords:</strong> Reserved words (e.g., auto, break, case,
+                                            char). constants: Fixed values.</div>
+                                        <div><strong>(b) & and *:</strong> & is Address of operator. * is Value at
+                                            address operator.</div>
+                                        <div><strong>(c) Union vs Struct:</strong> Union shares memory for members (size
+                                            = largest member). Struct provides separate memory (size = sum of members).
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
 
 </body>
 
