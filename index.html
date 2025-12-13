@@ -1505,6 +1505,29 @@
             card.addEventListener('click', () => openGeminiResearch());
             grid.appendChild(card);
 
+            // Master Solution Card
+            const solCard = document.createElement('div');
+            solCard.className = 'paper-card';
+            solCard.style.background = 'linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(6, 95, 70, 0.3))';
+            solCard.style.borderColor = '#10b981';
+            solCard.style.display = 'flex';
+            solCard.style.alignItems = 'center';
+            solCard.style.justifyContent = 'center';
+
+            solCard.innerHTML = `
+                <div style="text-align: center;">
+                    <div style="margin-bottom: 15px;">
+                        <i class="fas fa-file-pdf animate-bounce" style="color: #6ee7b7; font-size: 2rem;"></i>
+                    </div>
+                    <div style="font-family: 'Inter', sans-serif; font-weight: 700; color: #fff; font-size: 1.1rem;">
+                        MASTER SOLUTION<br>
+                        <span style="font-size: 0.8rem; font-weight: 400; color: #a7f3d0;">All Papers (Solved)</span>
+                    </div>
+                </div>
+            `;
+            solCard.addEventListener('click', () => window.open('solution_of_c.html', '_blank'));
+            grid.appendChild(solCard);
+
             // Practice Papers
             cPapers.forEach(paper => {
                 const pCard = document.createElement('div');
