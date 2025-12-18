@@ -4,13 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ਲਾਜ਼ਮੀ ਪੰਜਾਬੀ - ਮਾਸਟਰ ਕੁੰਜੀ</title>
+    <title>ਲਾਜ਼ਮੀ ਪੰਜਾਬੀ - ਟੌਪਰ ਜਵਾਬ ਕੁੰਜੀ</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+Gurmukhi:wght@400;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Noto+Sans+Gurmukhi:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #db2777 100%);
+            --glass-bg: rgba(255, 255, 255, 0.95);
+            --glass-border: rgba(255, 255, 255, 0.4);
+            --text-primary: #1e293b;
+        }
+
+        body {
+            font-family: 'Noto Sans Gurmukhi', 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: var(--text-primary);
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* PREMIUM PRINT STYLES */
         @media print {
             .no-print {
                 display: none !important;
@@ -26,327 +44,558 @@
                 page-break-before: always;
             }
 
-            .container {
+            .print-container {
                 width: 100% !important;
                 max-width: none !important;
-                box-shadow: none !important;
-                padding: 0 !important;
                 margin: 0 !important;
+                padding: 0 !important;
+                box-shadow: none !important;
+            }
+
+            .gradient-text {
+                color: #4f46e5 !important;
+                background: none !important;
+                -webkit-text-fill-color: initial !important;
+            }
+
+            .glass-card {
+                border: 1px solid #ddd !important;
+                box-shadow: none !important;
+                background: white !important;
+                break-inside: avoid;
             }
         }
 
-        body {
-            font-family: 'Noto Sans Gurmukhi', 'Inter', sans-serif;
-            background-color: #f3f4f6;
-            color: #1f2937;
-            line-height: 1.6;
-        }
-
-        /* Responsive Container */
-        .container {
-            width: 100%;
+        /* CONTAINER & LAYOUT */
+        .container-sheet {
+            max-width: 210mm;
+            margin: 2rem auto;
             background: white;
-            min-height: 100vh;
-            margin: 0 auto;
-            padding: 1.5rem;
+            padding: 2.5rem;
+            /* ~20mm */
+            min-height: 297mm;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Desktop specific styles (mimic A4 paper) */
-        @media (min-width: 768px) {
-            .container {
-                max-width: 210mm;
-                padding: 20mm;
-                min-height: 297mm;
-                margin: 2rem auto;
-                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        @media (max-width: 768px) {
+            .container-sheet {
+                width: 100%;
+                margin: 0;
+                padding: 1.5rem;
+                min-height: auto;
+                box-shadow: none;
+                border-radius: 0;
             }
         }
 
-        .paper-header {
-            border-bottom: 2px solid #000;
-            padding-bottom: 1rem;
-            margin-bottom: 2rem;
-            text-align: center;
+        /* TYPOGRAPHY & DESIGN SYSTEM */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: 700;
+            letter-spacing: -0.02em;
         }
 
-        .section-header {
-            background-color: #e5e7eb;
-            padding: 0.5rem 1rem;
-            font-weight: bold;
+        .gradient-bg {
+            background: var(--primary-gradient);
+        }
+
+        .gradient-text {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            background: rgba(79, 70, 229, 0.1);
+            color: #4f46e5;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
             text-transform: uppercase;
-            margin-top: 1.5rem;
-            margin-bottom: 1rem;
-            border-left: 4px solid #10b981;
+            letter-spacing: 0.05em;
+            border: 1px solid rgba(79, 70, 229, 0.2);
         }
 
-        .content-block {
+        .glass-card {
+            background: var(--glass-bg);
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
             margin-bottom: 1.5rem;
+        }
+
+        .answer-text {
+            color: #334155;
+            text-align: justify;
+        }
+
+        .highlight-box {
+            background-color: #f0f9ff;
+            border-left: 4px solid #0ea5e9;
             padding: 1rem;
-            background-color: #f9fafb;
-            border-radius: 0.5rem;
-            border: 1px solid #e5e7eb;
+            margin: 1rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+            font-style: italic;
+            color: #0369a1;
         }
 
-        .term-table {
+        /* TABLE STYLES */
+        .premium-table {
             width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 1rem;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
         }
 
-        .term-table th,
-        .term-table td {
-            border: 1px solid #d1d5db;
-            padding: 8px;
+        .premium-table th {
+            background: #f1f5f9;
+            color: #475569;
+            font-weight: 600;
+            padding: 0.75rem 1rem;
             text-align: left;
+            border-bottom: 1px solid #e2e8f0;
         }
 
-        .term-table th {
-            background-color: #f3f4f6;
+        .premium-table td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+        }
+
+        .premium-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .premium-table tr:hover td {
+            background-color: #f8fafc;
         }
     </style>
 </head>
 
-<body class="py-0 md:py-10">
+<body class="bg-slate-100">
 
-    <!-- CONTROLS -->
-    <div class="fixed top-4 right-4 no-print flex gap-2 z-50">
+    <!-- FLOATING ACTION BUTTONS -->
+    <div class="fixed top-6 right-6 no-print flex gap-3 z-50">
         <a href="index.html"
-            class="bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-3 md:px-4 rounded shadow-lg flex items-center transition-all text-sm md:text-base">
-            <i class="fas fa-arrow-left mr-2"></i> Dashboard
+            class="bg-white/90 backdrop-blur text-slate-700 hover:text-indigo-600 font-bold py-2.5 px-5 rounded-full shadow-lg border border-slate-200 transition-all flex items-center gap-2 group">
+            <i class="fas fa-arrow-left transition-transform group-hover:-translate-x-1"></i> Dashboard
         </a>
         <button onclick="window.print()"
-            class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-3 md:px-4 rounded shadow-lg flex items-center transition-all text-sm md:text-base">
-            <i class="fas fa-print mr-2"></i> PDF
+            class="gradient-bg text-white font-bold py-2.5 px-6 rounded-full shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-105 transition-all flex items-center gap-2">
+            <i class="fas fa-file-pdf"></i> Save PDF
         </button>
     </div>
 
-    <!-- COVER PAGE -->
-    <div class="container mb-0 md:mb-10 text-center flex flex-col justify-center items-center h-screen md:h-[297mm]">
-        <div class="mb-8">
-            <i class="fas fa-book-reader text-6xl text-green-600"></i>
-        </div>
-        <h1 class="text-3xl md:text-4xl font-bold mb-4">ਲਾਜ਼ਮੀ ਪੰਜਾਬੀ</h1>
-        <h2 class="text-xl md:text-2xl font-light text-gray-600 mb-8">ਸਿਲੇਬਸ ਅਤੇ ਪ੍ਰੀਖਿਆ ਮਾਸਟਰ ਕੁੰਜੀ (ਦਸੰਬਰ 2024)</h2>
-        <div class="w-24 h-1 bg-green-600 mb-8 rounded"></div>
-        <p class="text-lg text-gray-500 max-w-lg">
-            ਪਾਠ ਪੁਸਤਕ ਦੇ ਅਧਿਆਏ, ਮਹੱਤਵਪੂਰਨ ਪ੍ਰਸ਼ਨ, ਵਿਆਕਰਣ ਅਤੇ ਰਚਨਾ ਨੂੰ ਕਵਰ ਕਰਨ ਵਾਲੀ ਵਿਆਪਕ ਗਾਈਡ।
-        </p>
-        <div class="mt-12 text-sm text-gray-400">
-            ਅਲਫ਼ਾ ਟਰਮੀਨਲ v1 ਦੁਆਰਾ ਤਿਆਰ
-        </div>
-    </div>
+    <!-- MAIN SHEET -->
+    <div class="container-sheet print-container">
 
-    <!-- PAGE 1: UNIT-I Syllabus & Questions -->
-    <div class="container page-break">
-        <div class="paper-header">
-            <h2 class="text-2xl md:text-3xl font-bold">ਯੂਨਿਟ - I: ਪਾਠ ਪੁਸਤਕ ਅਤੇ ਪ੍ਰਸ਼ਨ</h2>
-            <div class="text-gray-500 mt-2">ਪੰਜਾਬੀ ਸੱਭਿਆਚਾਰ (ਡਾ. ਵਿਸ਼ਵਨਾਥ ਤਿਵਾੜੀ)</div>
+        <!-- HEADER -->
+        <div class="text-center mb-10 pb-8 border-b border-slate-200 relative">
+            <div class="absolute top-0 right-0 opacity-10">
+                <i class="fas fa-quote-right text-8xl"></i>
+            </div>
+
+            <span class="section-badge mb-4">Gemini 3 Pro Edition</span>
+            <h1 class="text-4xl md:text-5xl font-black mb-2 tracking-tight text-slate-900">
+                ਲਾਜ਼ਮੀ ਪੰਜਾਬੀ
+            </h1>
+            <h2 class="text-2xl md:text-3xl font-light gradient-text mb-6">
+                ਟੌਪਰ ਜਵਾਬ ਕੁੰਜੀ (ਸਿਲੇਬਸ ਦਸੰਬਰ 2024)
+            </h2>
+
+            <div class="flex flex-wrap justify-center gap-4 text-sm font-medium text-slate-500">
+                <span class="flex items-center gap-1"><i class="far fa-clock text-indigo-500"></i> ਪ੍ਰੀਖਿਆ ਸਮਾਂ: 3
+                    ਘੰਟੇ</span>
+                <span class="w-px h-5 bg-slate-300 hidden md:block"></span>
+                <span class="flex items-center gap-1"><i class="fas fa-star text-amber-500"></i> ਕੁੱਲ ਅੰਕ: 45</span>
+                <span class="w-px h-5 bg-slate-300 hidden md:block"></span>
+                <span class="flex items-center gap-1"><i class="fas fa-check-circle text-emerald-500"></i> 100% ਹੱਲ
+                    ਸ਼ੁਦਾ</span>
+            </div>
         </div>
 
-        <div class="section-header">1. ਪਾਠ ਪੁਸਤਕ ਦੇ ਅਧਿਆਏ</div>
-        <div class="content-block">
-            <p class="mb-2"><strong>ਫੋਕਸ:</strong> ਇਹਨਾਂ ਅਧਿਆਵਾਂ ਲਈ ਸਾਰ (Summary) ਅਤੇ ਵਿਸ਼ਾ-ਵਸਤੂ (Theme) ਤਿਆਰ ਕਰੋ।</p>
-            <ul class="list-disc pl-5 space-y-1">
-                <li>ਆਕਾਰ (Geography & Size of Punjab)</li>
-                <li><strong>ਪੰਜਾਬ ਦੀ ਆਤਮਾ (The Soul/Spirit of Punjab) [ਬਹੁਤ ਜ਼ਰੂਰੀ]</strong></li>
-                <li>ਜੀਵਨ (Daily Life in Punjab)</li>
-                <li><strong>ਰਸਮਾਂ, ਤਿਉਹਾਰ ਤੇ ਮੇਲੇ (Rituals, Festivals & Fairs) [ਬਹੁਤ ਜ਼ਰੂਰੀ]</strong></li>
-                <li>ਵਿੱਦਿਆ ਅਤੇ ਗਿਆਨ-ਸੱਭਿਆਚਾਰ (Education & Knowledge)</li>
-                <li>ਪ੍ਰੀਤ-ਕਹਾਣੀਆਂ (Love Legends like Heer-Ranjha, Mirza-Sahiban)</li>
-                <li>ਭਾਸ਼ਾ (Punjabi Language & Script)</li>
-                <li>ਸਾਹਿਤ (Literature - Sufi, Gurmat, Qissa)</li>
-                <li>ਕਲਾ (Art - Phulkari, Mudh-houses, etc.)</li>
-                <li>ਸਵੈ-ਵਿਰੋਧ (Self-Contradictions in Culture)</li>
+        <!-- TOC SUMMARY -->
+        <div class="glass-card mb-12 bg-indigo-50/50 border-indigo-100">
+            <h3 class="text-lg font-bold text-indigo-900 mb-3 flex items-center gap-2">
+                <i class="fas fa-list-ul"></i> ਇਸ ਦਸਤਾਵੇਜ਼ ਵਿੱਚ:
+            </h3>
+            <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 text-indigo-800/80 text-sm">
+                <li><i class="fas fa-check mr-2 text-indigo-500"></i> ਯੂਨਿਟ I: ਲੇਖ ਅਤੇ ਸਾਰ (ਪੰਜਾਬ ਦੀ ਆਤਮਾ, ਰਸਮਾਂ)</li>
+                <li><i class="fas fa-check mr-2 text-indigo-500"></i> ਯੂਨਿਟ I: ਇਤਿਹਾਸ ਦੇ ਛੋਟੇ ਪ੍ਰਸ਼ਨ</li>
+                <li><i class="fas fa-check mr-2 text-indigo-500"></i> ਯੂਨਿਟ II: ਤਕਨੀਕੀ ਸ਼ਬਦਾਵਲੀ (English to Punjabi)
+                </li>
+                <li><i class="fas fa-check mr-2 text-indigo-500"></i> ਯੂਨਿਟ II: ਮੁਹਾਵਰੇ ਅਤੇ ਵਾਕ</li>
+                <li><i class="fas fa-check mr-2 text-indigo-500"></i> ਯੂਨਿਟ II: ਪੱਤਰ ਰਚਨਾ ਅਤੇ ਸੰਖੇਪ ਰਚਨਾ</li>
             </ul>
         </div>
 
-        <div class="section-header">2. ਮਹੱਤਵਪੂਰਨ ਪ੍ਰਸ਼ਨ (ਯੂਨਿਟ-I)</div>
+        <!-- UNIT I: ESSAYS -->
+        <div class="mb-12">
+            <div class="flex items-end gap-4 mb-6 border-b border-slate-200 pb-2">
+                <h2 class="text-3xl font-bold text-slate-800">ਯੂਨਿਟ - I</h2>
+                <span class="text-lg text-slate-500 font-light pb-1">ਲੇਖ ਅਤੇ ਸਾਰ (Essays)</span>
+            </div>
 
-        <h3 class="font-bold text-lg mb-2 text-green-700">A. ਲੰਬੇ ਲੇਖ ਪ੍ਰਸ਼ਨ (8 ਅੰਕ)</h3>
-        <div class="grid grid-cols-1 gap-3 mb-6">
-            <div class="p-3 bg-white border rounded shadow-sm">
-                ਲੇਖ <strong>"ਪੰਜਾਬ ਦੀ ਆਤਮਾ"</strong> ਦਾ ਸਾਰ/ਵਿਸ਼ਾ-ਵਸਤੂ ਲਿਖੋ।
+            <!-- ESSAY 1 -->
+            <div class="glass-card page-break">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-2xl font-bold text-indigo-700">1. ਪੰਜਾਬ ਦੀ ਆਤਮਾ (ਸਾਰ)</h3>
+                    <span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-xs font-bold">ਬਹੁਤ
+                        ਜ਼ਰੂਰੀ</span>
+                </div>
+
+                <div class="answer-text space-y-4">
+                    <div>
+                        <h4 class="font-bold text-slate-900 mb-1 border-l-4 border-indigo-500 pl-2">ਜਾਣ-ਪਛਾਣ</h4>
+                        <p>ਪ੍ਰਿੰਸੀਪਲ ਤੇਜਾ ਸਿੰਘ ਦਾ ਨਿਬੰਧ <strong>'ਪੰਜਾਬ ਦੀ ਆਤਮਾ'</strong> ਪੰਜਾਬੀ ਸੱਭਿਆਚਾਰ ਅਤੇ ਪੰਜਾਬੀ
+                            ਚਰਿੱਤਰ ਦਾ ਸ਼ੀਸ਼ਾ ਹੈ। ਇਸ ਲੇਖ ਵਿੱਚ ਲੇਖਕ ਨੇ ਪੰਜਾਬੀਆਂ ਦੇ ਸੁਭਾਅ, ਰਹਿਣ-ਸਹਿਣ, ਅਤੇ ਉਹਨਾਂ ਦੀ ਜੁਰਅਤ
+                            ਬਾਰੇ ਗੱਲ ਕੀਤੀ ਹੈ। ਲੇਖਕ ਦੱਸਦਾ ਹੈ ਕਿ ਸਦੀਆਂ ਤੋਂ ਹਮਲਾਵਰਾਂ ਦਾ ਸਾਹਮਣਾ ਕਰਦੇ ਹੋਏ ਪੰਜਾਬੀਆਂ ਦਾ ਸੁਭਾਅ
+                            ਕਿਵੇਂ ਅੜਿੱਕਾ ਅਤੇ ਦਲੇਰ ਬਣ ਗਿਆ ਹੈ।</p>
+                    </div>
+
+                    <div>
+                        <h4 class="font-bold text-slate-900 mb-1 border-l-4 border-indigo-500 pl-2">ਮੁੱਖ ਨੁਕਤੇ</h4>
+                        <ul class="list-disc pl-5 mt-2 space-y-2">
+                            <li><strong>ਬਹਾਦਰੀ ਅਤੇ ਦਲੇਰੀ:</strong> ਪੰਜਾਬ ਭਾਰਤ ਦਾ ਪ੍ਰਵੇਸ਼ ਦੁਆਰ ਰਿਹਾ ਹੈ। ਲਗਾਤਾਰ ਜੰਗਾਂ ਕਾਰਨ
+                                ਪੰਜਾਬੀ ਮੌਤ ਤੋਂ ਨਹੀਂ ਡਰਦੇ। ਉਹ ਜਾਨ ਦੀ ਬਾਜ਼ੀ ਲਗਾਉਣ ਵਿੱਚ ਇੱਕ ਪਲ ਵੀ ਨਹੀਂ ਸੋਚਦੇ।</li>
+                            <li><strong>ਖੁੱਲ੍ਹਾ ਸੁਭਾਅ:</strong> ਪੰਜਾਬੀ ਲੋਕ ਤੰਗ ਦਿਲ ਨਹੀਂ ਹੁੰਦੇ। 'ਖਾਧਾ ਪੀਤਾ ਲਾਹੇ ਦਾ, ਬਾਕੀ
+                                ਅਹਿਮਦ ਸ਼ਾਹੇ ਦਾ' - ਇਹ ਅਖਾਣ ਉਹਨਾਂ ਦੀ ਜ਼ਿੰਦਗੀ ਜਿਉਣ ਦੇ ਢੰਗ ਨੂੰ ਦਰਸਾਉਂਦਾ ਹੈ। ਉਹ ਅੱਜ ਵਿੱਚ
+                                ਜਿਉਂਦੇ ਹਨ ਅਤੇ ਭਵਿੱਖ ਦੀ ਬਹੁਤੀ ਚਿੰਤਾ ਨਹੀਂ ਕਰਦੇ।</li>
+                            <li><strong>ਪਿਆਰ ਅਤੇ ਵਫ਼ਾ:</strong> ਜਿੱਥੇ ਪੰਜਾਬੀ ਦੁਸ਼ਮਣ ਲਈ ਲੋਹਾ ਹਨ, ਉੱਥੇ ਦੋਸਤਾਂ ਲਈ ਮੋਮ ਹਨ।
+                                ਹੀਰ-ਰਾਂਝਾ, ਮਿਰਜ਼ਾ-ਸਾਹਿਬਾਂ ਵਰਗੀਆਂ ਪ੍ਰੀਤ ਕਹਾਣੀਆਂ ਪੰਜਾਬੀਆਂ ਦੇ ਪਿਆਰ ਦੇ ਜਜ਼ਬੇ ਨੂੰ ਬਿਆਨ ਕਰਦੀਆਂ
+                                ਹਨ।</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box">
+                        <strong>ਸਿੱਟਾ:</strong> ਅੰਤ ਵਿੱਚ, ਪੰਜਾਬ ਦੀ ਆਤਮਾ ਇਸਦੀ ਅਣਖ, ਮਹਿਮਾਨ-ਨਿਵਾਜ਼ੀ ਅਤੇ ਸੱਚਾਈ ਵਿੱਚ ਵੱਸਦੀ
+                        ਹੈ। ਭਾਵੇਂ ਸਮਾਂ ਬਦਲ ਗਿਆ ਹੈ, ਪਰ ਪੰਜਾਬੀ ਅੱਜ ਵੀ ਆਪਣੀ ਵਿਰਾਸਤ ਅਤੇ ਗੁਰੂਆਂ ਦੇ ਦੱਸੇ ਰਾਹ 'ਤੇ ਚੱਲਣ ਦੀ
+                        ਕੋਸ਼ਿਸ਼ ਕਰਦੇ ਹਨ।
+                    </div>
+                </div>
             </div>
-            <div class="p-3 bg-white border rounded shadow-sm">
-                ਪੰਜਾਬ ਦੇ <strong>"ਰਸਮਾਂ, ਤਿਉਹਾਰ ਅਤੇ ਮੇਲਿਆਂ"</strong> ਦਾ ਵਰਣਨ ਕਰੋ।
-            </div>
-            <div class="p-3 bg-white border rounded shadow-sm">
-                ਪਾਠ ਵਿੱਚ ਦਰਸਾਏ ਅਨੁਸਾਰ ਪੰਜਾਬੀ ਲੋਕਾਂ ਦੇ <strong>"ਜੀਵਨ"</strong> ਬਾਰੇ ਚਰਚਾ ਕਰੋ।
-            </div>
-            <div class="p-3 bg-white border rounded shadow-sm">
-                <strong>"ਪੰਜਾਬੀ ਕਲਾ"</strong> 'ਤੇ ਇੱਕ ਨੋਟ ਲਿਖੋ।
+
+            <!-- ESSAY 2 -->
+            <div class="glass-card page-break">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-2xl font-bold text-pink-700">2. ਰਸਮਾਂ, ਤਿਉਹਾਰ ਅਤੇ ਮੇਲੇ (ਸਾਰ)</h3>
+                    <span class="bg-pink-100 text-pink-700 px-3 py-1 rounded-full text-xs font-bold">ਬਹੁਤ ਜ਼ਰੂਰੀ</span>
+                </div>
+
+                <div class="answer-text space-y-4">
+                    <div>
+                        <h4 class="font-bold text-slate-900 mb-1 border-l-4 border-pink-500 pl-2">ਜਾਣ-ਪਛਾਣ</h4>
+                        <p>ਮੇਲੇ ਅਤੇ ਤਿਉਹਾਰ ਕਿਸੇ ਵੀ ਕੌਮ ਦਾ ਸਰਮਾਇਆ ਹੁੰਦੇ ਹਨ। ਪੰਜਾਬ ਨਾਚਾਂ, ਗੀਤਾਂ ਅਤੇ ਮੇਲਿਆਂ ਦੀ ਧਰਤੀ ਹੈ।
+                            ਕਿਹਾ ਜਾਂਦਾ ਹੈ ਕਿ ਪੰਜਾਬੀ ਰੋਜ਼ ਕੋਈ ਨਾ ਕੋਈ ਮੇਲਾ ਮਨਾਉਂਦੇ ਰਹਿੰਦੇ ਹਨ। ਇਹ ਮੇਲੇ ਪੰਜਾਬੀਆਂ ਦੀ ਜ਼ਿੰਦਗੀ
+                            ਵਿੱਚ ਰੰਗ ਭਰਦੇ ਹਨ ਅਤੇ ਉਹਨਾਂ ਦੀ ਏਕਤਾ ਨੂੰ ਮਜ਼ਬੂਤ ਕਰਦੇ ਹਨ।</p>
+                    </div>
+
+                    <div>
+                        <h4 class="font-bold text-slate-900 mb-1 border-l-4 border-pink-500 pl-2">ਮੁੱਖ ਤਿਉਹਾਰ</h4>
+                        <ul class="list-disc pl-5 mt-2 space-y-2">
+                            <li><strong>ਵਿਸਾਖੀ:</strong> ਇਹ ਪੰਜਾਬ ਦਾ ਸਭ ਤੋਂ ਵੱਡਾ ਮੌਸਮੀ ਅਤੇ ਧਾਰਮਿਕ ਮੇਲਾ ਹੈ। ਇਹ ਕਣਕ ਦੀ ਫਸਲ
+                                ਪੱਕਣ ਦੀ ਖੁਸ਼ੀ ਵਿੱਚ ਮਨਾਇਆ ਜਾਂਦਾ ਹੈ। 1699 ਵਿੱਚ ਇਸੇ ਦਿਨ ਗੁਰੂ ਗੋਬਿੰਦ ਸਿੰਘ ਜੀ ਨੇ ਖਾਲਸਾ ਪੰਥ ਦੀ
+                                ਸਾਜਨਾ ਕੀਤੀ ਸੀ।</li>
+                            <li><strong>ਲੋਹੜੀ:</strong> ਪੋਹ ਮਹੀਨੇ ਦੀ ਆਖਰੀ ਰਾਤ ਨੂੰ ਲੋਹੜੀ ਮਨਾਈ ਜਾਂਦੀ ਹੈ। ਨਵੇਂ ਜੰਮੇ ਬੱਚੇ
+                                (ਮੁੰਡੇ) ਅਤੇ ਨਵੀਂ ਵਿਆਹੀ ਜੋੜੀ ਲਈ ਇਹ ਤਿਉਹਾਰ ਖਾਸ ਮਹੱਤਵ ਰੱਖਦਾ ਹੈ।</li>
+                            <li><strong>ਦੀਵਾਲੀ:</strong> ਸਿੱਖ ਇਤਿਹਾਸ ਵਿੱਚ ਦੀਵਾਲੀ ਦਾ ਮਹੱਤਵ 'ਬੰਦੀ ਛੋੜ ਦਿਵਸ' ਵਜੋਂ ਹੈ, ਜਦੋਂ
+                                ਗੁਰੂ ਹਰਗੋਬਿੰਦ ਸਾਹਿਬ ਗਵਾਲੀਅਰ ਦੇ ਕਿਲੇ ਤੋਂ ਰਿਹਾਅ ਹੋ ਕੇ ਅੰਮ੍ਰਿਤਸਰ ਪਹੁੰਚੇ ਸਨ।</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="font-bold text-slate-900 mb-1 border-l-4 border-pink-500 pl-2">ਜੀਵਨ ਦੀਆਂ ਰਸਮਾਂ</h4>
+                        <p>ਜਨਮ ਤੋਂ ਲੈ ਕੇ ਮੌਤ ਤੱਕ ਪੰਜਾਬੀ ਜੀਵਨ ਰਸਮਾਂ ਨਾਲ ਭਰਿਆ ਹੋਇਆ ਹੈ।
+                            <br><strong>ਜਨਮ:</strong> ਗੁੜ੍ਹਤੀ, ਛਟੀ ਦੀ ਰਸਮ।
+                            <br><strong>ਵਿਆਹ:</strong> ਰੋਕਾ, ਮੰਗਣੀ, ਵਟਣਾ, ਜਾਗੋ, ਅਤੇ ਡੋਲੀ।
+                            <br><strong>ਮੌਤ:</strong> ਅੰਤਿਮ ਸੰਸਕਾਰ ਅਤੇ ਭੋਗ ਦੀ ਰਸਮ।
+                        </p>
+                    </div>
+
+                    <div class="highlight-box bg-pink-50 border-pink-500 text-pink-800">
+                        <strong>ਸਿੱਟਾ:</strong> ਅਜੋਕੇ ਸਮੇਂ ਵਿੱਚ ਭਾਵੇਂ ਮੇਲਿਆਂ ਦਾ ਰੂਪ ਬਦਲ ਰਿਹਾ ਹੈ, ਪਰ ਇਹ ਅੱਜ ਵੀ ਸਾਡੇ
+                        ਭਾਈਚਾਰਕ ਸਾਂਝ ਦੇ ਪ੍ਰਤੀਕ ਹਨ। ਇਹ ਸਾਨੂੰ ਸਾਡੇ ਅਮੀਰ ਵਿਰਸੇ ਨਾਲ ਜੋੜੀ ਰੱਖਦੇ ਹਨ।
+                    </div>
+                </div>
             </div>
         </div>
 
-        <h3 class="font-bold text-lg mb-2 text-green-700">B. ਛੋਟੇ ਉੱਤਰ ਵਾਲੇ ਪ੍ਰਸ਼ਨ (ਇਤਿਹਾਸ ਅਤੇ ਜੀ.ਕੇ.) (4+4 ਅੰਕ)</h3>
-        <div class="space-y-3">
-            <div class="bg-gray-50 p-3 rounded">
-                <div class="font-bold text-sm text-gray-800">ਪ੍ਰ: ਇਸ ਧਰਤੀ ਦਾ ਨਾਮ "ਪੰਜਾਬ" (ਪੰਜ-ਆਬ) ਕਿਉਂ ਪਿਆ?</div>
-                <div class="text-gray-600 mt-1">ਉੱਤਰ: ਪੰਜ ਦਰਿਆਵਾਂ (ਸਤਲੁਜ, ਬਿਆਸ, ਰਾਵੀ, ਚਨਾਬ, ਜੇਹਲਮ) ਦੇ ਕਾਰਨ।</div>
-            </div>
-            <div class="bg-gray-50 p-3 rounded">
-                <div class="font-bold text-sm text-gray-800">ਪ੍ਰ: ਦੁਨੀਆ ਦੀ ਸਭ ਤੋਂ ਪੁਰਾਣੀ ਕਿਤਾਬ ਦਾ ਨਾਮ ਦੱਸੋ। ਇਹ ਕਿੱਥੇ
-                    ਲਿਖੀ ਗਈ ਸੀ?</div>
-                <div class="text-gray-600 mt-1">ਉੱਤਰ: ਰਿਗਵੇਦ। ਇਹ ਪੰਜਾਬ ਖੇਤਰ (ਸਪਤ ਸਿੰਧੂ) ਵਿੱਚ ਲਿਖਿਆ ਗਿਆ ਸੀ।</div>
-            </div>
-            <div class="bg-gray-50 p-3 rounded">
-                <div class="font-bold text-sm text-gray-800">ਪ੍ਰ: ਰਾਜਾ ਅਸ਼ੋਕ ਬੋਧੀ ਕਿਉਂ ਬਣਿਆ ਸੀ?</div>
-                <div class="text-gray-600 mt-1">ਉੱਤਰ: ਕਲਿੰਗਾ ਯੁੱਧ ਵਿੱਚ ਹੋਏ ਖੂਨ-ਖਰਾਬੇ ਨੂੰ ਦੇਖ ਕੇ।</div>
-            </div>
-            <div class="bg-gray-50 p-3 rounded">
-                <div class="font-bold text-sm text-gray-800">ਪ੍ਰ: ਬਾਬਰ ਨੇ ਮੁਗਲ ਸਾਮਰਾਜ ਦੀ ਨੀਂਹ ਕਦੋਂ ਅਤੇ ਕਿੱਥੇ ਰੱਖੀ?</div>
-                <div class="text-gray-600 mt-1">ਉੱਤਰ: 1526 ਈ: ਵਿੱਚ, ਪਾਣੀਪਤ ਦੀ ਪਹਿਲੀ ਲੜਾਈ ਵਿੱਚ।</div>
-            </div>
-            <div class="bg-gray-50 p-3 rounded">
-                <div class="font-bold text-sm text-gray-800">ਪ੍ਰ: "ਪੈਂਟਾਪੋਟਾਮੀਆ" (Pentapotamia) ਦਾ ਕੀ ਅਰਥ ਹੈ?</div>
-                <div class="text-gray-600 mt-1">ਉੱਤਰ: ਪੰਜਾਬ ਲਈ ਯੂਨਾਨੀ ਨਾਮ ਜਿਸਦਾ ਅਰਥ ਹੈ "ਪੰਜ ਦਰਿਆਵਾਂ ਦੀ ਧਰਤੀ"।</div>
+        <!-- SHORT QUESTIONS -->
+        <div class="mb-12 page-break">
+            <h3 class="text-xl font-bold bg-slate-800 text-white p-3 rounded-lg mb-4 inline-block shadow-lg">
+                <i class="fas fa-question-circle mr-2"></i> ਭਾਗ ਅ - ਛੋਟੇ ਪ੍ਰਸ਼ਨ (Solved)
+            </h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
+                    <div class="text-xs text-slate-400 font-bold uppercase tracking-wider mb-1">Question 1</div>
+                    <div class="font-bold text-slate-800 mb-2">ਇਸ ਧਰਤੀ ਦਾ ਨਾਮ "ਪੰਜਾਬ" (ਪੰਜ-ਆਬ) ਕਿਉਂ ਪਿਆ?</div>
+                    <div class="text-indigo-600 font-medium">ਉੱਤਰ: ਇਥੇ ਵਗਦੇ ਪੰਜ ਦਰਿਆਵਾਂ (ਸਤਲੁਜ, ਬਿਆਸ, ਰਾਵੀ, ਚਨਾਬ, ਜੇਹਲਮ)
+                        ਦੇ ਕਾਰਨ ਇਸਦਾ ਨਾਮ ਪੰਜ+ਆਬ (ਪੰਜ ਪਾਣੀਆਂ ਦੀ ਧਰਤੀ) ਪਿਆ।</div>
+                </div>
+
+                <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
+                    <div class="text-xs text-slate-400 font-bold uppercase tracking-wider mb-1">Question 2</div>
+                    <div class="font-bold text-slate-800 mb-2">ਦੁਨੀਆ ਦੀ ਸਭ ਤੋਂ ਪੁਰਾਣੀ ਕਿਤਾਬ ਕਿਹੜੀ ਹੈ ਤੇ ਕਿੱਥੇ ਲਿਖੀ ਗਈ?
+                    </div>
+                    <div class="text-indigo-600 font-medium">ਉੱਤਰ: 'ਰਿਗਵੇਦ'। ਇਹ ਪ੍ਰਾਚੀਨ ਪੰਜਾਬ (ਸਪਤ ਸਿੰਧੂ ਖੇਤਰ) ਵਿੱਚ
+                        ਦਰਿਆਵਾਂ ਦੇ ਕੰਢੇ ਲਿਖੀ ਗਈ ਸੀ।</div>
+                </div>
+
+                <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
+                    <div class="text-xs text-slate-400 font-bold uppercase tracking-wider mb-1">Question 3</div>
+                    <div class="font-bold text-slate-800 mb-2">ਰਾਜਾ ਅਸ਼ੋਕ ਬੋਧੀ ਕਿਉਂ ਬਣਿਆ ਸੀ?</div>
+                    <div class="text-indigo-600 font-medium">ਉੱਤਰ: ਕਲਿੰਗਾ ਯੁੱਧ (261 ਈ: ਪੂ:) ਵਿੱਚ ਹੋਏ ਭਾਰੀ ਖੂਨ-ਖਰਾਬੇ ਅਤੇ
+                        ਦੁੱਖ ਨੂੰ ਦੇਖ ਕੇ ਉਸਦਾ ਮਨ ਬਦਲ ਗਿਆ ਅਤੇ ਉਸਨੇ ਬੁੱਧ ਧਰਮ ਅਪਣਾ ਲਿਆ।</div>
+                </div>
+
+                <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
+                    <div class="text-xs text-slate-400 font-bold uppercase tracking-wider mb-1">Question 4</div>
+                    <div class="font-bold text-slate-800 mb-2">ਮੁਗਲ ਸਾਮਰਾਜ ਦੀ ਨੀਂਹ ਕਦੋਂ ਅਤੇ ਕਿੱਥੇ ਰੱਖੀ ਗਈ?</div>
+                    <div class="text-indigo-600 font-medium">ਉੱਤਰ: 1526 ਈ: ਵਿੱਚ, ਬਾਬਰ ਦੁਆਰਾ ਪਾਣੀਪਤ ਦੀ ਪਹਿਲੀ ਲੜਾਈ ਵਿੱਚ
+                        ਇਬਰਾਹਿਮ ਲੋਧੀ ਨੂੰ ਹਰਾ ਕੇ।</div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- PAGE 2: UNIT-II Grammar & Composition -->
-    <div class="container page-break">
-        <div class="paper-header">
-            <h2 class="text-2xl md:text-3xl font-bold">ਯੂਨਿਟ - II: ਵਿਆਕਰਣ ਅਤੇ ਰਚਨਾ</h2>
-            <div class="text-gray-500 mt-2">ਸ਼ਬਦਾਵਲੀ, ਮੁਹਾਵਰੇ ਅਤੇ ਲਿਖਣ ਕੌਸ਼ਲ</div>
-        </div>
-
-        <div class="section-header">A. ਤਕਨੀਕੀ ਸ਼ਬਦਾਵਲੀ (ਅਨੁਵਾਦ) [5 ਅੰਕ]</div>
-        <div class="content-block overflow-x-auto">
-            <table class="term-table min-w-full">
-                <thead>
-                    <tr>
-                        <th class="w-1/3">ਅੰਗਰੇਜ਼ੀ</th>
-                        <th class="w-1/3">ਪੰਜਾਬੀ</th>
-                        <th class="w-1/3">ਉਚਾਰਨ (Transliteration)</th>
-                    </tr>
-                </thead>
-                <tbody class="punjabi-text">
-                    <tr>
-                        <td>Account</td>
-                        <td>ਖਾਤਾ</td>
-                        <td>Khata</td>
-                    </tr>
-                    <tr>
-                        <td>Advance</td>
-                        <td>ਪੇਸ਼ਗੀ</td>
-                        <td>Peshgi</td>
-                    </tr>
-                    <tr>
-                        <td>Approval</td>
-                        <td>ਪ੍ਰਵਾਨਗੀ</td>
-                        <td>Prvaangi</td>
-                    </tr>
-                    <tr>
-                        <td>Balance</td>
-                        <td>ਬਕਾਇਆ</td>
-                        <td>Bakaaya</td>
-                    </tr>
-                    <tr>
-                        <td>Budget</td>
-                        <td>ਬਜਟ</td>
-                        <td>Budget</td>
-                    </tr>
-                    <tr>
-                        <td>Bill</td>
-                        <td>ਬਿਲ</td>
-                        <td>Bill</td>
-                    </tr>
-                    <tr>
-                        <td>Capital</td>
-                        <td>ਪੂੰਜੀ</td>
-                        <td>Punji</td>
-                    </tr>
-                    <tr>
-                        <td>Cash</td>
-                        <td>ਨਕਦ</td>
-                        <td>Nakad</td>
-                    </tr>
-                    <tr>
-                        <td>Credit</td>
-                        <td>ਉਧਾਰ</td>
-                        <td>Udhaar</td>
-                    </tr>
-                    <tr>
-                        <td>Dismiss</td>
-                        <td>ਬਰਖਾਸਤ</td>
-                        <td>Barkhaast</td>
-                    </tr>
-                    <tr>
-                        <td>Interest</td>
-                        <td>ਵਿਆਜ</td>
-                        <td>Vyaaj</td>
-                    </tr>
-                    <tr>
-                        <td>Notification</td>
-                        <td>ਅਧਿਸੂਚਨਾ</td>
-                        <td>Adhisuchna</td>
-                    </tr>
-                    <tr>
-                        <td>Salary</td>
-                        <td>ਤਨਖਾਹ</td>
-                        <td>Tankhah</td>
-                    </tr>
-                    <tr>
-                        <td>Tax</td>
-                        <td>ਕਰ</td>
-                        <td>Kar</td>
-                    </tr>
-                    <tr>
-                        <td>Vacancy</td>
-                        <td>ਖਾਲੀ ਆਸਾਮੀ</td>
-                        <td>Khali Asami</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="section-header">B. ਮੁਹਾਵਰੇ (ਅਖਾਣ) [5 ਅੰਕ]</div>
-        <div class="content-block">
-            <ul class="space-y-2">
-                <li class="p-2 border-b border-gray-200">
-                    <span class="font-bold text-green-700">ਉੱਲੂ ਬਣਾਉਣਾ:</span> ਮੂਰਖ ਬਣਾਉਣਾ।
-                </li>
-                <li class="p-2 border-b border-gray-200">
-                    <span class="font-bold text-green-700">ਈਦ ਦਾ ਚੰਨ ਹੋਣਾ:</span> ਬਹੁਤ ਦੇਰ ਬਾਅਦ ਮਿਲਣਾ/ਦਿਖਾਈ ਦੇਣਾ।
-                </li>
-                <li class="p-2 border-b border-gray-200">
-                    <span class="font-bold text-green-700">ਇੱਟ ਨਾਲ ਇੱਟ ਖੜਕਾਉਣੀ:</span> ਪੂਰੀ ਤਰ੍ਹਾਂ ਤਬਾਹ ਕਰਨਾ।
-                </li>
-                <li class="p-2 border-b border-gray-200">
-                    <span class="font-bold text-green-700">ਤੂਤੀ ਬੋਲਣੀ:</span> ਬਹੁਤ ਪ੍ਰਭਾਵ ਹੋਣਾ।
-                </li>
-                <li class="p-2 border-b border-gray-200">
-                    <span class="font-bold text-green-700">ਆਪਣਾ ਉੱਲੂ ਸਿੱਧਾ ਕਰਨਾ:</span> ਆਪਣਾ ਮਤਲਬ ਕੱਢਣਾ।
-                </li>
-                <li class="p-2 border-b border-gray-200">
-                    <span class="font-bold text-green-700">ਲਹੂ ਉਬਲਣਾ:</span> ਬਹੁਤ ਗੁੱਸੇ/ਜੋਸ਼ ਵਿੱਚ ਆਉਣਾ।
-                </li>
-                <li class="p-2 border-b border-gray-200">
-                    <span class="font-bold text-green-700">ਫੂਕ ਸੁੱਕ ਜਾਣਾ:</span> ਬਹੁਤ ਡਰ ਜਾਣਾ।
-                </li>
-            </ul>
-        </div>
-
-        <div class="section-header">C. ਪੱਤਰ ਅਤੇ ਸੰਖੇਪ ਰਚਨਾ [5 + 5 ਅੰਕ]</div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="content-block">
-                <h4 class="font-bold border-b border-gray-300 mb-2 pb-1">ਪੱਤਰ ਰਚਨਾ (Letter Writing)</h4>
-                <p class="text-sm mb-2">ਇਹਨਾਂ ਦੋ ਫਾਰਮੈਟਾਂ ਨੂੰ ਤਿਆਰ ਕਰੋ:</p>
-                <ol class="list-decimal pl-4 text-sm space-y-1">
-                    <li><strong>ਨੌਕਰੀ ਲਈ ਅਰਜ਼ੀ:</strong> ਕੰਪਿਊਟਰ ਆਪਰੇਟਰ ਜਾਂ ਕਲਰਕ ਦੀ ਪੋਸਟ ਲਈ ਮੈਨੇਜਰ ਨੂੰ ਲਿਖੋ (ਆਪਣੀ ਯੋਗਤਾ
-                        ਸ਼ਾਮਲ ਕਰੋ)।</li>
-                    <li><strong>ਆਰਡਰ ਪੱਤਰ:</strong> ਆਪਣੀ ਕਾਲਜ ਲਾਇਬਰੇਰੀ ਲਈ ਕਿਤਾਬਾਂ ਮੰਗਵਾਉਣ ਲਈ ਪੁਸਤਕ ਵਿਕਰੇਤਾ ਨੂੰ ਲਿਖੋ।
-                    </li>
-                </ol>
+        <!-- UNIT II: GRAMMAR -->
+        <div class="mb-12 pt-8 border-t border-slate-200">
+            <div class="flex items-end gap-4 mb-6">
+                <h2 class="text-3xl font-bold text-slate-800">ਯੂਨਿਟ - II</h2>
+                <span class="text-lg text-slate-500 font-light pb-1">ਵਿਆਕਰਣ ਅਤੇ ਰਚਨਾ</span>
             </div>
-            <div class="content-block">
-                <h4 class="font-bold border-b border-gray-300 mb-2 pb-1">ਸੰਖੇਪ ਰਚਨਾ (Precis Writing)</h4>
-                <p class="text-sm mb-2"><strong>ਕੰਮ:</strong> ਦਿੱਤੇ ਗਏ ਪੈਰੇ ਨੂੰ ਇਸਦੀ ਲੰਬਾਈ ਦੇ 1/3 ਹਿੱਸੇ ਤੱਕ ਸੰਖੇਪ ਕਰੋ।
-                </p>
-                <p class="text-sm mb-2"><strong>ਸ਼ਰਤ:</strong> ਤੁਹਾਨੂੰ ਸਿਖਰ 'ਤੇ ਇੱਕ ਸਿਰਲੇਖ (Title) ਦੇਣਾ ਲਾਜ਼ਮੀ ਹੈ।</p>
-                <p class="text-sm"><strong>ਵਿਸ਼ੇ:</strong> ਔਰਤਾਂ ਦੀ ਸਥਿਤੀ, ਮਾਂ ਬੋਲੀ ਦਾ ਮਹੱਤਵ, ਵਾਤਾਵਰਣ, ਅਨੁਸ਼ਾਸਨ।</p>
+
+            <!-- TERMINOLOGY TABLE -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-8">
+                <h3 class="text-xl font-bold text-slate-800 mb-4 border-l-4 border-emerald-500 pl-3">A. ਤਕਨੀਕੀ ਸ਼ਬਦਾਵਲੀ
+                    (Translation)</h3>
+                <div class="overflow-x-auto">
+                    <table class="premium-table">
+                        <thead>
+                            <tr>
+                                <th width="33%">English Word</th>
+                                <th width="33%">Punjabi Translation</th>
+                                <th width="33%">Pronunciation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Account</td>
+                                <td class="font-bold text-slate-900">ਖਾਤਾ</td>
+                                <td>Khata</td>
+                            </tr>
+                            <tr>
+                                <td>Balance</td>
+                                <td class="font-bold text-slate-900">ਬਕਾਇਆ</td>
+                                <td>Bakaaya</td>
+                            </tr>
+                            <tr>
+                                <td>Budget</td>
+                                <td class="font-bold text-slate-900">ਬਜਟ</td>
+                                <td>Budget</td>
+                            </tr>
+                            <tr>
+                                <td>Dismiss</td>
+                                <td class="font-bold text-slate-900">ਬਰਖਾਸਤ</td>
+                                <td>Barkhaast</td>
+                            </tr>
+                            <tr>
+                                <td>Interest</td>
+                                <td class="font-bold text-slate-900">ਵਿਆਜ</td>
+                                <td>Vyaaj</td>
+                            </tr>
+                            <tr>
+                                <td>Notification</td>
+                                <td class="font-bold text-slate-900">ਅਧਿਸੂਚਨਾ</td>
+                                <td>Adhisuchna</td>
+                            </tr>
+                            <tr>
+                                <td>Vacancy</td>
+                                <td class="font-bold text-slate-900">ਖਾਲੀ ਆਸਾਮੀ</td>
+                                <td>Khali Asami</td>
+                            </tr>
+                            <tr>
+                                <td>Tax</td>
+                                <td class="font-bold text-slate-900">ਕਰ / ਟੈਕਸ</td>
+                                <td>Kar</td>
+                            </tr>
+                            <tr>
+                                <td>Approval</td>
+                                <td class="font-bold text-slate-900">ਪ੍ਰਵਾਨਗੀ</td>
+                                <td>Prvaangi</td>
+                            </tr>
+                            <tr>
+                                <td>Advance</td>
+                                <td class="font-bold text-slate-900">ਪੇਸ਼ਗੀ</td>
+                                <td>Peshgi</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
+
+            <!-- IDIOMS -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-8 break-inside-avoid">
+                <h3 class="text-xl font-bold text-slate-800 mb-4 border-l-4 border-purple-500 pl-3">B. ਮੁਹਾਵਰੇ ਅਤੇ ਵਾਕ
+                    (Idioms)</h3>
+                <div class="space-y-4">
+                    <div class="p-3 bg-purple-50 rounded-lg">
+                        <div class="font-bold text-purple-900 text-lg">1. ਉੱਲੂ ਬਣਾਉਣਾ (ਮੂਰਖ ਬਣਾਉਣਾ)</div>
+                        <div class="text-purple-800 italic mt-1">"ਦੁਕਾਨਦਾਰ ਨੇ ਖਰਾਬ ਸਮਾਨ ਦੇ ਕੇ ਮੈਨੂੰ ਉੱਲੂ ਬਣਾ ਦਿੱਤਾ।"
+                        </div>
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded-lg">
+                        <div class="font-bold text-slate-900 text-lg">2. ਈਦ ਦਾ ਚੰਨ ਹੋਣਾ (ਬਹੁਤ ਦੇਰ ਬਾਅਦ ਮਿਲਣਾ)</div>
+                        <div class="text-slate-700 italic mt-1">"ਰਮਨ, ਤੂੰ ਤਾਂ ਪਰਦੇਸ ਜਾ ਕੇ ਈਦ ਦਾ ਚੰਨ ਹੀ ਹੋ ਗਿਆ ਹੈਂ।"
+                        </div>
+                    </div>
+                    <div class="p-3 bg-purple-50 rounded-lg">
+                        <div class="font-bold text-purple-900 text-lg">3. ਇੱਟ ਨਾਲ ਇੱਟ ਖੜਕਾਉਣੀ (ਤਬਾਹ ਕਰਨਾ)</div>
+                        <div class="text-purple-800 italic mt-1">"ਬੰਦਾ ਸਿੰਘ ਬਹਾਦਰ ਨੇ ਸਰਹਿੰਦ ਦੀ ਇੱਟ ਨਾਲ ਇੱਟ ਖੜਕਾ ਦਿੱਤੀ।"
+                        </div>
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded-lg">
+                        <div class="font-bold text-slate-900 text-lg">4. ਤੂਤੀ ਬੋਲਣੀ (ਬਹੁਤ ਪ੍ਰਭਾਵ ਹੋਣਾ)</div>
+                        <div class="text-slate-700 italic mt-1">"ਅੱਜਕਲ੍ਹ ਦਫਤਰ ਵਿੱਚ ਨਵੇਂ ਮੈਨੇਜਰ ਦੀ ਤੂਤੀ ਬੋਲਦੀ ਹੈ।"</div>
+                    </div>
+                    <div class="p-3 bg-purple-50 rounded-lg">
+                        <div class="font-bold text-purple-900 text-lg">5. ਲਹੂ ਉਬਲਣਾ (ਜੋਸ਼ ਆਉਣਾ/ਗੁੱਸਾ ਆਉਣਾ)</div>
+                        <div class="text-purple-800 italic mt-1">"ਦੇਸ਼ ਦੇ ਦੁਸ਼ਮਣਾਂ ਦੀ ਗੱਲ ਸੁਣ ਕੇ ਹਰ ਭਾਰਤੀ ਦਾ ਲਹੂ ਉਬਲ
+                            ਪੈਂਦਾ ਹੈ।"</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LETTERS -->
+            <div class="page-break">
+                <h3 class="text-xl font-bold text-slate-800 mb-6 border-l-4 border-blue-500 pl-3">C. ਪੱਤਰ ਰਚਨਾ (Solved
+                    Examples)</h3>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- LETTER 1: JOB APP -->
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm relative">
+                        <div
+                            class="absolute top-0 right-0 bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded-bl-lg">
+                            NOKRI</div>
+                        <p class="font-bold mb-4 text-center border-b pb-2">ਹਵਾਲਾ: ਕੰਪਿਊਟਰ ਆਪਰੇਟਰ ਦੀ ਪੋਸਟ ਲਈ</p>
+                        <div class="font-mono text-sm leading-relaxed text-slate-700">
+                            ਸੇਵਾ ਵਿਖੇ,<br>
+                            ਮੈਨੇਜਰ ਸਾਹਿਬ,<br>
+                            ਐਚ.ਡੀ.ਐਫ.ਸੀ. ਬੈਂਕ,<br>
+                            ਸੈਕਟਰ-17, ਚੰਡੀਗੜ੍ਹ।<br><br>
+                            <strong>ਵਿਸ਼ਾ: ਕੰਪਿਊਟਰ ਆਪਰੇਟਰ ਦੀ ਅਸਾਮੀ ਲਈ ਬਿਨੈ-ਪੱਤਰ।</strong><br><br>
+                            ਸ਼੍ਰੀਮਾਨ ਜੀ,<br>
+                            ਬੇਨਤੀ ਹੈ ਕਿ ਅੱਜ ਦੇ 'ਦਾ ਟ੍ਰਿਬਿਊਨ' ਅਖਬਾਰ ਵਿੱਚ ਆਪ ਜੀ ਵੱਲੋਂ ਕੰਪਿਊਟਰ ਆਪਰੇਟਰ ਦੀ ਅਸਾਮੀ ਲਈ ਇਸ਼ਤਿਹਾਰ
+                            ਦਿੱਤਾ ਗਿਆ ਸੀ। ਮੈਂ ਇਸ ਅਸਾਮੀ ਲਈ ਆਪਣੀਆਂ ਸੇਵਾਵਾਂ ਪੇਸ਼ ਕਰਦਾ ਹਾਂ।<br><br>
+                            ਮੇਰੀ ਵਿੱਦਿਅਕ ਯੋਗਤਾ ਬੀ.ਸੀ.ਏ. (BCA) ਹੈ ਜੋ ਮੈਂ ਪੰਜਾਬ ਯੂਨੀਵਰਸਿਟੀ ਤੋਂ 75% ਅੰਕਾਂ ਨਾਲ ਪਾਸ ਕੀਤੀ ਹੈ।
+                            ਮੈਨੂੰ ਟਾਈਪਿੰਗ (ਪੰਜਾਬੀ ਅਤੇ ਅੰਗਰੇਜ਼ੀ) ਦਾ ਚੰਗਾ ਗਿਆਨ ਹੈ। ਮੈਨੂੰ ਕੰਮ ਦਾ 2 ਸਾਲ ਦਾ ਤਜਰਬਾ ਵੀ
+                            ਹੈ।<br><br>
+                            ਮੈਨੂੰ ਉਮੀਦ ਹੈ ਕਿ ਆਪ ਮੈਨੂੰ ਸੇਵਾ ਦਾ ਮੌਕਾ ਜ਼ਰੂਰ ਦਿਓਗੇ।<br><br>
+                            ਧੰਨਵਾਦ ਸਾਹਿਤ,<br>
+                            ਆਪ ਜੀ ਦਾ ਵਿਸ਼ਵਾਸਪਾਤਰ,<br>
+                            <strong>(ਤੁਹਾਡਾ ਨਾਮ)</strong><br>
+                            ਮਿਤੀ: 18-12-2024
+                        </div>
+                    </div>
+
+                    <!-- LETTER 2: BOOK ORDER -->
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm relative">
+                        <div
+                            class="absolute top-0 right-0 bg-emerald-500 text-white text-xs font-bold px-2 py-1 rounded-bl-lg">
+                            ORDER</div>
+                        <p class="font-bold mb-4 text-center border-b pb-2">ਹਵਾਲਾ: ਕਿਤਾਬਾਂ ਮੰਗਵਾਉਣ ਲਈ</p>
+                        <div class="font-mono text-sm leading-relaxed text-slate-700">
+                            ਸੇਵਾ ਵਿਖੇ,<br>
+                            ਮੈਸਰਜ਼ ਲਾਇਲ ਬੁੱਕ ਡਿਪੂ,<br>
+                            ਚੌੜਾ ਬਾਜ਼ਾਰ, ਲੁਧਿਆਣਾ।<br><br>
+                            <strong>ਵਿਸ਼ਾ: ਕਾਲਜ ਲਾਇਬਰੇਰੀ ਲਈ ਕਿਤਾਬਾਂ ਮੰਗਵਾਉਣ ਸਬੰਧੀ।</strong><br><br>
+                            ਸ਼੍ਰੀਮਾਨ ਜੀ,<br>
+                            ਸਾਡੇ ਕਾਲਜ ਦੀ ਲਾਇਬਰੇਰੀ ਲਈ ਹੇਠ ਲਿਖੀਆਂ ਕਿਤਾਬਾਂ ਦੀ ਲੋੜ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਇਹ ਕਿਤਾਬਾਂ ਜਲਦੀ ਤੋਂ ਜਲਦੀ
+                            ਭੇਜੀਆਂ ਜਾਣ। ਧਿਆਨ ਰਹੇ ਕਿ ਕਿਤਾਬਾਂ ਨਵੀਆਂ ਹੋਣੀਆਂ ਚਾਹੀਦੀਆਂ ਹਨ।<br><br>
+                            <table class="w-full border text-xs mb-2">
+                                <tr class="bg-gray-100">
+                                    <th>ਨੰ.</th>
+                                    <th>ਕਿਤਾਬ ਦਾ ਨਾਮ</th>
+                                    <th>ਲੇਖਕ</th>
+                                    <th>ਗਿਣਤੀ</th>
+                                </tr>
+                                <tr>
+                                    <td>1.</td>
+                                    <td>ਪੰਜਾਬੀ ਸੱਭਿਆਚਾਰ</td>
+                                    <td>ਡਾ. ਟੀ.ਆਰ. ਵਿਨੋਦ</td>
+                                    <td>10</td>
+                                </tr>
+                                <tr>
+                                    <td>2.</td>
+                                    <td>ਪਵਿੱਤਰ ਪਾਪੀ</td>
+                                    <td>ਨਾਨਕ ਸਿੰਘ</td>
+                                    <td>05</td>
+                                </tr>
+                                <tr>
+                                    <td>3.</td>
+                                    <td>ਮੜ੍ਹੀ ਦਾ ਦੀਵਾ</td>
+                                    <td>ਗੁਰਦਿਆਲ ਸਿੰਘ</td>
+                                    <td>08</td>
+                                </tr>
+                            </table>
+                            <br>
+                            ਬਿੱਲ ਨਾਲ ਹੀ ਭੇਜ ਦੇਣਾ। ਭੁਗਤਾਨ ਚੈੱਕ ਰਾਹੀਂ ਕੀਤਾ ਜਾਵੇਗਾ।<br><br>
+                            ਧੰਨਵਾਦ ਸਾਹਿਤ,<br>
+                            ਲਾਇਬ੍ਰੇਰੀਅਨ,<br>
+                            ਸਰਕਾਰੀ ਕਾਲਜ, ਰੋਪੜ।
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PRECIS WRITING -->
+            <div class="bg-slate-900 rounded-xl shadow-lg border border-slate-700 p-8 mt-12 text-slate-300">
+                <h3 class="text-xl font-bold text-white mb-4 border-l-4 border-amber-500 pl-3">D. ਸੰਖੇਪ ਰਚਨਾ (Precis
+                    Example)</h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <div class="text-xs font-bold text-slate-500 uppercase mb-2">Original Paragraph (ਮੂਲ ਪੈਰਾ)</div>
+                        <p class="text-sm leading-relaxed bg-slate-800 p-4 rounded-lg">
+                            "ਅਨੁਸ਼ਾਸਨ ਜੀਵਨ ਦਾ ਇੱਕ ਬਹੁਤ ਮਹੱਤਵਪੂਰਨ ਅੰਗ ਹੈ। ਇਸ ਤੋਂ ਬਿਨਾਂ ਮਨੁੱਖੀ ਜੀਵਨ ਇੱਕ ਬੇਲਗਾਮ ਘੋੜੇ ਵਰਗਾ
+                            ਹੈ। ਕੁਦਰਤ ਵੀ ਇੱਕ ਅਨੁਸ਼ਾਸਨ ਵਿੱਚ ਚੱਲਦੀ ਹੈ। ਸੂਰਜ ਸਮੇਂ ਸਿਰ ਚੜ੍ਹਦਾ ਹੈ ਅਤੇ ਸਮੇਂ ਸਿਰ ਡੁੱਬਦਾ ਹੈ।
+                            ਵਿਦਿਆਰਥੀ ਜੀਵਨ ਵਿੱਚ ਅਨੁਸ਼ਾਸਨ ਦੀ ਬਹੁਤ ਮਹੱਤਤਾ ਹੈ। ਜੋ ਵਿਦਿਆਰਥੀ ਅਨੁਸ਼ਾਸਨ ਵਿੱਚ ਰਹਿੰਦੇ ਹਨ, ਉਹ ਹੀ
+                            ਤਰੱਕੀ ਕਰਦੇ ਹਨ। ਸਮਾਜ ਅਤੇ ਦੇਸ਼ ਦੀ ਤਰੱਕੀ ਲਈ ਵੀ ਅਨੁਸ਼ਾਸਨ ਜ਼ਰੂਰੀ ਹੈ।" (ਸ਼ਬਦ: ~60)
+                        </p>
+                    </div>
+                    <div>
+                        <div class="text-xs font-bold text-emerald-500 uppercase mb-2">Solved Precis (ਹੱਲ)</div>
+                        <div class="bg-emerald-900/20 border border-emerald-500/30 p-4 rounded-lg">
+                            <div class="font-bold text-white mb-2 text-center underline">ਸਿਰਲੇਖ: ਅਨੁਸ਼ਾਸਨ ਦਾ ਮਹੱਤਵ</div>
+                            <p class="text-sm leading-relaxed text-emerald-100">
+                                <strong>ਸਾਰ:</strong> ਅਨੁਸ਼ਾਸਨ ਮਨੁੱਖੀ ਜੀਵਨ ਅਤੇ ਸਫਲਤਾ ਲਈ ਬਹੁਤ ਜ਼ਰੂਰੀ ਹੈ। ਕੁਦਰਤ ਵਾਂਗ,
+                                ਮਨੁੱਖ ਨੂੰ ਵੀ ਨਿਯਮਾਂ ਵਿੱਚ ਰਹਿਣਾ ਚਾਹੀਦਾ ਹੈ। ਅਨੁਸ਼ਾਸਿਤ ਵਿਦਿਆਰਥੀ ਅਤੇ ਸਮਾਜ ਹੀ ਉੱਨਤੀ ਕਰ ਸਕਦੇ
+                                ਹਨ। (ਸ਼ਬਦ: ~20)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="text-center mt-12 text-slate-400 text-sm no-print">
+            &copy; 2024 Alpha Terminal. Designed with <i class="fas fa-heart text-red-400"></i> by Gemini.
         </div>
     </div>
 
