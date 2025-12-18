@@ -22,6 +22,15 @@
                 print-color-adjust: exact;
             }
 
+            .container {
+                width: 210mm;
+                max-width: 210mm;
+                padding: 20mm;
+                margin: 0 auto;
+                box-shadow: none;
+                min-height: 297mm;
+            }
+
             .page-break {
                 page-break-before: always;
             }
@@ -32,15 +41,58 @@
             background-color: #f3f4f6;
             color: #1f2937;
             line-height: 1.6;
+            margin: 0;
+            padding: 0;
         }
 
         .container {
             max-width: 210mm;
+            width: 100%;
             margin: 0 auto;
             background: white;
             padding: 20mm;
             min-height: 297mm;
+            /* Keep visual consistency with paper on desktop */
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+
+        /* Mobile Responsive Overrides */
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                width: 100%;
+                max-width: 100%;
+                padding: 1.5rem;
+                min-height: auto;
+                margin-bottom: 20px;
+            }
+
+            .paper-header {
+                margin-bottom: 1.5rem;
+            }
+
+            .text-6xl {
+                font-size: 3rem;
+                /* Smaller icon on mobile */
+            }
+
+            .text-4xl {
+                font-size: 1.75rem;
+                /* Smaller title */
+            }
+
+            .text-3xl {
+                font-size: 1.5rem;
+            }
+
+            /* Enable horizontal scroll for tables if needed */
+            .content-block {
+                overflow-x: auto;
+            }
         }
 
         .paper-header {
