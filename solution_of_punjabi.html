@@ -81,13 +81,37 @@
         }
 
         @media (max-width: 768px) {
+            body {
+                background: white;
+            }
+
             .container-sheet {
-                width: auto;
-                margin: 1rem;
-                padding: 1.5rem;
-                min-height: auto;
-                box-shadow: none;
-                border-radius: 0;
+                padding: 1.25rem !important;
+                margin: 0 !important;
+                width: 100% !important;
+                max-width: none !important;
+                min-height: 100vh;
+                box-shadow: none !important;
+                border: none !important;
+            }
+
+            .glass-card {
+                padding: 1.25rem !important;
+                margin-bottom: 1.5rem !important;
+            }
+
+            h1 {
+                font-size: 1.75rem !important;
+            }
+
+            h2 {
+                font-size: 1.35rem !important;
+            }
+
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
             }
         }
 

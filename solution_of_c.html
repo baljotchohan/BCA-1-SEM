@@ -44,11 +44,32 @@
         }
 
         @media (max-width: 768px) {
+            body {
+                background: white;
+                padding-top: 0;
+            }
+
             .container {
-                padding: 1.5rem;
-                margin: 1rem;
-                width: auto;
-                min-height: auto;
+                padding: 1.25rem !important;
+                margin: 0 !important;
+                width: 100% !important;
+                max-width: none !important;
+                min-height: 100vh;
+                box-shadow: none !important;
+            }
+
+            .paper-header h1 {
+                font-size: 1.5rem !important;
+            }
+
+            .paper-header h2 {
+                font-size: 1.2rem !important;
+            }
+
+            pre {
+                overflow-x: auto;
+                font-size: 0.85rem;
+                padding: 1rem;
             }
         }
 
