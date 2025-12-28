@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hardware Question Bank (Solved & Unsolved)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+        }
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+
+            body {
+                background: white;
+                margin: 0;
+            }
+
+            .container {
+                max-width: 100% !important;
+                box-shadow: none !important;
+                margin: 0 !important;
+            }
+        }
+
+        .container {
+            max-width: 210mm;
+            min-height: 297mm;
+            margin: 2rem auto;
+            background: white;
+            padding: 3rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .q-tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 8px;
+        }
+
+        .tag-sure {
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #86efac;
+        }
+
+        .tag-imp {
+            background: #dbeafe;
+            color: #1e40af;
+            border: 1px solid #93c5fd;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- NAV -->
+    <div class="fixed top-6 right-6 no-print flex gap-3 z-50">
+        <a href="index.html"
+            class="bg-white hover:bg-slate-50 text-slate-800 font-bold py-2 px-4 rounded border shadow transition">
+            <i class="fas fa-arrow-left"></i> Dashboard
+        </a>
+        <button onclick="window.print()"
+            class="bg-black text-white hover:bg-gray-800 font-bold py-2 px-4 rounded shadow transition">
+            Print Bank
+        </button>
+    </div>
+
+    <div class="container">
+        <!-- TITLE -->
+        <div class="border-b-4 border-black pb-6 mb-10">
+            <h1 class="text-4xl font-black text-black mb-2 uppercase">Exam Question Bank</h1>
+            <h2 class="text-xl text-slate-600">Introduction to Computer Hardware (CSA-VAC-102)</h2>
+            <div class="mt-4 flex gap-4 text-sm font-bold">
+                <span class="bg-black text-white px-3 py-1">SOLVED + UNSOLVED</span>
+                <span class="bg-gray-200 px-3 py-1">2024 EDITION</span>
+            </div>
+        </div>
+
+        <!-- PART 1: SOLVED -->
+        <div class="mb-12">
+            <h3 class="text-2xl font-bold border-l-8 border-green-500 pl-4 mb-6">SECTION A: 100% SURE TOPICS (SOLVED)
+            </h3>
+
+            <!-- Q1 -->
+            <div class="mb-8 bg-slate-50 p-6 rounded-lg border border-slate-200">
+                <h4 class="font-bold text-lg mb-2 flex items-center">
+                    Q1. PATA vs SATA (Hard Disk Interfaces) <span class="q-tag tag-sure">100% Sure</span>
+                </h4>
+                <div class="text-sm text-slate-700 leading-relaxed">
+                    <strong>Answer:</strong>
+                    <ul class="list-disc pl-5 mt-2 space-y-2">
+                        <li><strong>Technology:</strong> PATA (Parallel ATA) uses parallel transmission (slower,
+                            interference prone), while SATA (Serial ATA) uses serial transmission (faster, efficient).
+                        </li>
+                        <li><strong>Cabling:</strong> PATA uses wide 40/80-pin ribbon cables blocking airflow. SATA uses
+                            thin 7-pin cables improving cooling.</li>
+                        <li><strong>Configuration:</strong> PATA requires Master/Slave jumpers. SATA is Point-to-Point
+                            (Plug and Play).</li>
+                        <li><strong>Speed:</strong> PATA maxes at 133 MB/s. SATA III supports up to 6 Gbps.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Q2 -->
+            <div class="mb-8 bg-slate-50 p-6 rounded-lg border border-slate-200">
+                <h4 class="font-bold text-lg mb-2 flex items-center">
+                    Q2. Differentiate between AT and ATX Motherboards. <span class="q-tag tag-sure">Most Likely</span>
+                </h4>
+                <div class="text-sm text-slate-700 leading-relaxed">
+                    <strong>Answer:</strong>
+                    <ul class="list-disc pl-5 mt-2 space-y-2">
+                        <li><strong>Power Management:</strong> AT uses a physical switch (no software shutdown). ATX
+                            uses "Soft Power" allowing the OS to shut down the PC.</li>
+                        <li><strong>Design:</strong> ATX is rotated 90 degrees to clear space for full-length cards and
+                            places the CPU near the fan for better cooling.</li>
+                        <li><strong>Connectors:</strong> AT had messy cables for ports. ATX has integrated I/O ports on
+                            the rear panel.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Q3 -->
+            <div class="mb-8 bg-slate-50 p-6 rounded-lg border border-slate-200">
+                <h4 class="font-bold text-lg mb-2 flex items-center">
+                    Q3. Explain the working of a UPS. Types? <span class="q-tag tag-imp">Important</span>
+                </h4>
+                <div class="text-sm text-slate-700 leading-relaxed">
+                    <strong>Answer:</strong> A UPS (Uninterruptible Power Supply) provides battery backup when mains
+                    power fails.
+                    <br><strong>Types:</strong>
+                    1. <strong>Offline:</strong> Switches to battery only when power cuts (5ms delay).
+                    2. <strong>Line-Interactive:</strong> Uses AVR to fix voltage fluctuations without switching to
+                    battery.
+                    3. <strong>Online:</strong> Always runs off battery (Zero transfer time). Best for servers.
+                </div>
+            </div>
+        </div>
+
+        <!-- PART 2: UNSOLVED PRACTICE -->
+        <div class="page-break">
+            <h3 class="text-2xl font-bold border-l-8 border-black pl-4 mb-6">SECTION B: PRACTICE PAPERS (UNSOLVED)</h3>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- PAPER 1 -->
+                <div class="border border-slate-300 p-6 shadow-sm">
+                    <div class="text-center border-b pb-2 mb-4 font-bold">PRACTICE SET 01</div>
+                    <ol class="list-decimal pl-4 space-y-4 text-sm font-medium">
+                        <li>Define Motherboard. Draw a block diagram showing the connection of various components.</li>
+                        <li>What are Add-on cards? Discuss the detailed functioning of the Network Interface Card (NIC).
+                        </li>
+                        <li>Write the steps to install Windows 10 using a bootable USB.</li>
+                        <li>Explain the difference between Antivirus and Firewall.</li>
+                        <li><strong>Short Notes:</strong>
+                            <ul class="list-disc pl-4 mt-2 font-normal text-slate-600">
+                                <li>Cache Memory</li>
+                                <li>HDMI Port</li>
+                                <li>CMOS Battery</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+
+                <!-- PAPER 2 -->
+                <div class="border border-slate-300 p-6 shadow-sm">
+                    <div class="text-center border-b pb-2 mb-4 font-bold">PRACTICE SET 02</div>
+                    <ol class="list-decimal pl-4 space-y-4 text-sm font-medium">
+                        <li>Classify Computer Memory. Differentiate between SRAM and DRAM.</li>
+                        <li>Explain the 'Booting' process. What is the difference between Cold and Warm booting?</li>
+                        <li>What is DISKPART? specific commands used for partitioning.</li>
+                        <li>Explain the different types of Printers (Dot Matrix vs Laser).</li>
+                        <li><strong>Short Notes:</strong>
+                            <ul class="list-disc pl-4 mt-2 font-normal text-slate-600">
+                                <li>BIOS vs UEFI</li>
+                                <li>RJ-45 Connector</li>
+                                <li>Blue Ray Disk</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

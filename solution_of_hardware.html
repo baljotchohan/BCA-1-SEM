@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Hardware (CSA-VAC-102) - Complete Study Resource</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #10b981 0%, #3b82f6 50%, #6366f1 100%);
+            --hardware-accent: #0b9e57;
+            --glass-bg: rgba(255, 255, 255, 0.95);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0fdf4;
+            /* Light Green Tint */
+            color: #1e293b;
+            line-height: 1.7;
+        }
+
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* PRINT STYLES */
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+
+            body {
+                background: white;
+            }
+
+            .container-sheet {
+                box-shadow: none !important;
+                margin: 0 !important;
+                width: 100% !important;
+            }
+
+            .page-break {
+                page-break-before: always;
+            }
+        }
+
+        /* LAYOUT */
+        .container-sheet {
+            max-width: 210mm;
+            margin: 2rem auto;
+            background: white;
+            padding: 3rem;
+            min-height: 297mm;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-weight: 800;
+            letter-spacing: -0.03em;
+        }
+
+        .gradient-text {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .section-badge {
+            background: #dcfce7;
+            color: #166534;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border: 1px solid #86efac;
+        }
+
+        /* CARDS */
+        .topic-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: all 0.2s;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-color: #10b981;
+        }
+
+        /* TABLES */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            font-size: 0.95rem;
+        }
+
+        .comparison-table th {
+            background: #1e293b;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .comparison-table td {
+            border: 1px solid #e2e8f0;
+            padding: 1rem;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        /* HIGHLIGHT BOXES */
+        .highlight-box {
+            background: #f0fdf4;
+            border-left: 4px solid #10b981;
+            padding: 1.5rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+            margin: 1rem 0;
+        }
+
+        .tech-pill {
+            display: inline-block;
+            background: #f1f5f9;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85em;
+            color: #d946ef;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <div class="fixed top-6 right-6 no-print flex gap-3 z-50">
+        <a href="index.html"
+            class="bg-white/90 backdrop-blur text-slate-700 hover:text-green-600 font-bold py-2.5 px-5 rounded-full shadow-lg border border-slate-200 transition-all flex items-center gap-2">
+            <i class="fas fa-arrow-left"></i> Dashboard
+        </a>
+        <button onclick="window.print()"
+            class="bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold py-2.5 px-6 rounded-full shadow-lg hover:scale-105 transition-all flex items-center gap-2">
+            <i class="fas fa-print"></i> Print Notes
+        </button>
+    </div>
+
+    <div class="container-sheet">
+        <!-- HEADER -->
+        <div class="text-center mb-16 pb-8 border-b-2 border-slate-100">
+            <div class="section-badge mb-4">Gemini Advanced • Exclusive Resource</div>
+            <h1 class="text-5xl font-black mb-4 text-slate-900">INTRODUCTION TO COMPUTER HARDWARE</h1>
+            <h2 class="text-2xl font-light gradient-text italic">Complete Theoretical Analysis & "100% Sure" Topics</h2>
+            <div class="flex justify-center gap-8 mt-6 text-sm font-bold text-slate-500 uppercase tracking-widest">
+                <span>Code: CSA-VAC-102</span>
+                <span>•</span>
+                <span>Max Marks: 50</span>
+                <span>•</span>
+                <span>Credits: 2</span>
+            </div>
+        </div>
+
+        <!-- UNIT I -->
+        <div class="mb-12">
+            <div class="flex items-center gap-4 mb-8">
+                <span
+                    class="bg-slate-900 text-white text-xl font-bold w-12 h-12 flex items-center justify-center rounded-lg">I</span>
+                <h2 class="text-3xl font-bold text-slate-800">Hardware Architecture & Components</h2>
+            </div>
+
+            <!-- MOTHERBOARDS -->
+            <div class="topic-card">
+                <h3 class="text-2xl text-emerald-700 mb-4 flex items-center">
+                    <i class="fas fa-microchip mr-3"></i> 1. The Motherboard & Form Factors
+                </h3>
+                <p class="mb-4">The Motherboard (System Board) is the backbone of the PC. The syllabus focuses on Form
+                    Factors (Size/Shape/Layout).</p>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-slate-50 p-5 rounded-lg border border-slate-200">
+                        <strong class="text-lg block mb-2 text-slate-900">Legacy: AT (Advanced Technology)</strong>
+                        <ul class="list-disc pl-4 space-y-2 text-sm text-slate-600">
+                            <li><strong>Era:</strong> Mid-80s (IBM). Obsolute now.</li>
+                            <li><strong>Size:</strong> Large (12" x 13.8").</li>
+                            <li><strong>Power Switch:</strong> Directly connected to mains voltage (No software
+                                shutdown).</li>
+                            <li><strong>Flaws:</strong> "Cable Nest" (ribbon cables blocking airflow), manual power
+                                switch, connector confusion (P8/P9).</li>
+                        </ul>
+                    </div>
+                    <div class="bg-emerald-50 p-5 rounded-lg border border-emerald-200">
+                        <strong class="text-lg block mb-2 text-emerald-900">Standard: ATX (Advanced Tech
+                            eXtended)</strong>
+                        <ul class="list-disc pl-4 space-y-2 text-sm text-emerald-800">
+                            <li><strong>Era:</strong> 1995 (Intel) to Present. Dominate standard.</li>
+                            <li><strong>Key Feature:</strong> "Soft Power" (OS can shut down system).</li>
+                            <li><strong>Layout:</strong> Rotated 90 degrees for better cooling. CPU near PSU fan.</li>
+                            <li><strong>Connectors:</strong> Integrated I/O panel (less clutter), keyed power plug
+                                (cannot insert backwards).</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-4 p-3 bg-yellow-50 text-yellow-800 text-sm border-l-4 border-yellow-400">
+                    <strong>Note on BTX:</strong> Introduced in 2004 to solve heat issues with a "Traffic Tunnel"
+                    airflow design. It failed commercially as CPUs became more efficient, making the radical redesign
+                    unnecessary.
+                </div>
+            </div>
+
+            <!-- PORTS -->
+            <div class="topic-card">
+                <h3 class="text-2xl text-emerald-700 mb-4 flex items-center">
+                    <i class="fas fa-plug mr-3"></i> 2. Peripheral Interfaces (Ports)
+                </h3>
+                <table class="comparison-table">
+                    <tr>
+                        <th>Feature</th>
+                        <th>Serial Port (COM)</th>
+                        <th>Parallel Port (LPT)</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Transmission</strong></td>
+                        <td><span class="tech-pill">Sequential</span> (1 bit at a time).</td>
+                        <td><span class="tech-pill">Simultaneous</span> (8 bits/1 byte at a time).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Connector</strong></td>
+                        <td>DE-9 (9-pin Male) or DB-25.</td>
+                        <td>DB-25 (25-pin Female).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Key Usage</strong></td>
+                        <td>Modems, Mice, Industrial Routers. Best for Long Distance.</td>
+                        <td>Printers (LPT = Line Print Terminal). Best for Short Distance.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Speed</strong></td>
+                        <td>Slower, but reliable over distance.</td>
+                        <td>Faster (Historically), but suffers crosstalk.</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- STORAGE -->
+            <div class="topic-card page-break">
+                <h3 class="text-2xl text-emerald-700 mb-4 flex items-center">
+                    <i class="fas fa-hdd mr-3"></i> 3. Data Storage (PATA vs SATA)
+                </h3>
+                <p class="mb-4">The evolution of Hard Disk Interfaces is a guaranteed exam topic.</p>
+
+                <div class="highlight-box">
+                    <h4 class="font-bold text-lg mb-2">PATA (Parallel ATA) / IDE</h4>
+                    <ul class="mb-4 ml-4 list-disc">
+                        <li>Uses wide, flat 40/80 pin ribbon cables (obstructs airflow).</li>
+                        <li><strong>Configuration:</strong> Master/Slave jumpers required (2 drives per cable).</li>
+                        <li><strong>Speed limit:</strong> 133 MB/s. No hot-swapping.</li>
+                    </ul>
+
+                    <h4 class="font-bold text-lg mb-2 text-emerald-700">SATA (Serial ATA) - The Modern Standard</h4>
+                    <ul class="ml-4 list-disc">
+                        <li>Uses thin 7-pin cables (better airflow).</li>
+                        <li><strong>Configuration:</strong> Point-to-Point (1 drive per port, no jumpers).</li>
+                        <li><strong>Speed:</strong> Up to 6 Gbps (SATA III). Supports Hot-Swapping.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- UNIT II -->
+        <div class="mb-12">
+            <div class="flex items-center gap-4 mb-8">
+                <span
+                    class="bg-slate-900 text-white text-xl font-bold w-12 h-12 flex items-center justify-center rounded-lg">II</span>
+                <h2 class="text-3xl font-bold text-slate-800">Software, Maintenance & Security</h2>
+            </div>
+
+            <!-- THE BOOT PROCESS -->
+            <div class="topic-card">
+                <h3 class="text-2xl text-purple-700 mb-4 flex items-center">
+                    <i class="fas fa-power-off mr-3"></i> 4. The Boot Process & BIOS
+                </h3>
+                <div class="prose max-w-none text-slate-700">
+                    <p><strong>BIOS (Basic Input/Output System):</strong> Firmware on the motherboard that initializes
+                        hardware. It runs the <span class="bg-gray-200 px-1 rounded font-mono">POST</span> (Power-On
+                        Self-Test) to check RAM, CPU, and Video before loading the OS.</p>
+
+                    <div class="mt-4 grid grid-cols-2 gap-4">
+                        <div class="border border-purple-200 p-4 rounded bg-purple-50">
+                            <strong class="text-purple-900">🥶 Cold Booting</strong>
+                            <p class="text-sm mt-1">Starting a computer from a completely off state. Checks all hardware
+                                (POST). High stress on components.</p>
+                        </div>
+                        <div class="border border-purple-200 p-4 rounded bg-purple-50">
+                            <strong class="text-purple-900">🔥 Warm Booting</strong>
+                            <p class="text-sm mt-1">Restarting a computer that is already on (Ctrl+Alt+Del). Skips full
+                                memory check. Faster.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- WINDOWS INSTALLATION -->
+            <div class="topic-card">
+                <h3 class="text-2xl text-purple-700 mb-4 flex items-center">
+                    <i class="fab fa-windows mr-3"></i> 5. Windows Installation & DISKPART
+                </h3>
+                <p class="mb-4 text-sm font-bold text-red-500">IMPORTANT: You must write steps in numbered format for
+                    the exam.</p>
+
+                <ol class="list-decimal pl-6 space-y-2 font-medium text-slate-700">
+                    <li>Create Bootable Media (USB/DVD).</li>
+                    <li>Enter BIOS and set <strong>Boot Priority</strong> to USB.</li>
+                    <li>Boot system. Select Language -> "Install Now".</li>
+                    <li>Select "Custom: Install Windows only (Advanced)".</li>
+                    <li><strong>Partitioning:</strong> Delete old partitions -> Select Unallocated Space -> New.</li>
+                    <li>Windows copies files and restarts multiple times.</li>
+                    <li><strong>OOBE:</strong> Create User Account, Set Privacy settings.</li>
+                </ol>
+
+                <div class="mt-6 bg-slate-900 text-green-400 p-4 rounded-lg font-mono text-sm leading-relaxed">
+                    <div class="text-slate-400 mb-2 border-b border-slate-700 pb-1"># DISKPART CLI Commands (For Exam)
+                    </div>
+                    > diskpart<br>
+                    > list disk<br>
+                    > select disk 0<br>
+                    > clean <span class="text-gray-500">// Wipes disk</span><br>
+                    > create partition primary<br>
+                    > format fs=ntfs quick<br>
+                    > active <span class="text-gray-500">// Marks bootable</span><br>
+                    > assign letter=C
+                </div>
+            </div>
+
+            <!-- SECURITY -->
+            <div class="topic-card mb-0">
+                <h3 class="text-2xl text-purple-700 mb-4 flex items-center">
+                    <i class="fas fa-shield-alt mr-3"></i> 6. Security: Antivirus vs Firewall
+                </h3>
+                <div class="grid md:grid-cols-2 gap-0 overflow-hidden rounded-lg border border-slate-200">
+                    <div class="p-6 bg-red-50">
+                        <h4 class="font-bold text-red-800 text-lg mb-2">Antivirus</h4>
+                        <p class="text-sm text-red-900">Protects the <strong>Internal System</strong> (Files/RAM). Scans
+                            for signatures of known malware initiated by the user (downloads, USBs).</p>
+                        <ul class="text-xs mt-2 list-disc pl-4">
+                            <li>Norton, McAfee</li>
+                            <li>Removes infected files</li>
+                        </ul>
+                    </div>
+                    <div class="p-6 bg-indigo-50">
+                        <h4 class="font-bold text-indigo-800 text-lg mb-2">Firewall</h4>
+                        <p class="text-sm text-indigo-900">Protects the <strong>Perimeter</strong> (Network). Acts as a
+                            gatekeeper monitoring incoming/outgoing traffic ports.</p>
+                        <ul class="text-xs mt-2 list-disc pl-4">
+                            <li>Hardware or Software</li>
+                            <li>Blocks hackers/worms</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center text-slate-400 text-xs mt-12 no-print">
+            Gemini Advanced Agentic Analysis | 2024
+        </div>
+    </div>
+
+</body>
+
+</html>
