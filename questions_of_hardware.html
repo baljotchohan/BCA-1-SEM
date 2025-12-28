@@ -73,11 +73,50 @@
             class="bg-white hover:bg-slate-50 text-slate-800 font-bold py-2 px-4 rounded border shadow transition">
             <i class="fas fa-arrow-left"></i> Dashboard
         </a>
+        <div class="flex gap-1 bg-white rounded shadow border p-1 mr-2">
+            <button onclick="adjustZoom(-0.1)"
+                class="w-8 h-8 flex items-center justify-center hover:bg-slate-100 rounded text-slate-700 transition"
+                title="Zoom Out">
+                <i class="fas fa-minus"></i>
+            </button>
+            <button onclick="resetZoom()"
+                class="w-8 h-8 flex items-center justify-center hover:bg-slate-100 rounded text-slate-700 transition"
+                title="Reset Zoom">
+                <i class="fas fa-search"></i>
+            </button>
+            <button onclick="adjustZoom(0.1)"
+                class="w-8 h-8 flex items-center justify-center hover:bg-slate-100 rounded text-slate-700 transition"
+                title="Zoom In">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+
         <button onclick="window.print()"
             class="bg-black text-white hover:bg-gray-800 font-bold py-2 px-4 rounded shadow transition">
             Print Bank
         </button>
     </div>
+
+    <script>
+        let currentZoom = 1;
+
+        function adjustZoom(delta) {
+            currentZoom += delta;
+            // Clamp zoom between 0.5 and 2.0
+            if (currentZoom < 0.5) currentZoom = 0.5;
+            if (currentZoom > 2.0) currentZoom = 2.0;
+            applyZoom();
+        }
+
+        function resetZoom() {
+            currentZoom = 1;
+            applyZoom();
+        }
+
+        function applyZoom() {
+            document.body.style.zoom = currentZoom;
+        }
+    </script>
 
     <div class="container">
         <!-- TITLE -->

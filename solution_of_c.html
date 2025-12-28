@@ -80,11 +80,47 @@
             class="bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded shadow-lg flex items-center transition-all">
             <i class="fas fa-arrow-left mr-2"></i> Dashboard
         </a>
+        <div class="flex gap-1 bg-gray-800 rounded shadow-lg p-1 mr-2 text-white">
+            <button onclick="adjustZoom(-0.1)"
+                class="w-8 h-8 flex items-center justify-center hover:bg-gray-700 rounded transition" title="Zoom Out">
+                <i class="fas fa-minus"></i>
+            </button>
+            <button onclick="resetZoom()"
+                class="w-8 h-8 flex items-center justify-center hover:bg-gray-700 rounded transition"
+                title="Reset Zoom">
+                <i class="fas fa-search"></i>
+            </button>
+            <button onclick="adjustZoom(0.1)"
+                class="w-8 h-8 flex items-center justify-center hover:bg-gray-700 rounded transition" title="Zoom In">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
         <button onclick="window.print()"
             class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg flex items-center transition-all">
             <i class="fas fa-print mr-2"></i> Save as PDF
         </button>
     </div>
+
+    <script>
+        let currentZoom = 1;
+
+        function adjustZoom(delta) {
+            currentZoom += delta;
+            // Clamp zoom between 0.5 and 2.0
+            if (currentZoom < 0.5) currentZoom = 0.5;
+            if (currentZoom > 2.0) currentZoom = 2.0;
+            applyZoom();
+        }
+
+        function resetZoom() {
+            currentZoom = 1;
+            applyZoom();
+        }
+
+        function applyZoom() {
+            document.body.style.zoom = currentZoom;
+        }
+    </script>
 
     <!-- COVER PAGE -->
     <div class="container mb-10 text-center flex flex-col justify-center items-center h-[297mm]">
