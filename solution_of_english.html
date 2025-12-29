@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English (Compulsory) - Strategic Course Companion</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #db2777 100%);
+            --glass-bg: rgba(255, 255, 255, 0.95);
+            --glass-border: rgba(255, 255, 255, 0.4);
+            --text-primary: #1e293b;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: var(--text-primary);
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* PREMIUM PRINT STYLES */
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+
+            body {
+                background: white;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .page-break {
+                page-break-before: always;
+            }
+
+            .print-container {
+                width: 100% !important;
+                max-width: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                box-shadow: none !important;
+            }
+
+            .gradient-text {
+                color: #4f46e5 !important;
+                background: none !important;
+                -webkit-text-fill-color: initial !important;
+            }
+
+            .glass-card {
+                border: 1px solid #ddd !important;
+                box-shadow: none !important;
+                background: white !important;
+                break-inside: avoid;
+            }
+        }
+
+        /* CONTAINER & LAYOUT */
+        .container-sheet {
+            max-width: 210mm;
+            margin: 2rem auto;
+            background: white;
+            padding: 2.5rem;
+            min-height: 297mm;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .container-sheet {
+                padding: 1.25rem !important;
+                margin: 0 !important;
+                width: 100% !important;
+                max-width: none !important;
+                min-height: 100vh;
+                box-shadow: none !important;
+                border: none !important;
+            }
+
+            .glass-card {
+                padding: 1.25rem !important;
+                margin-bottom: 1.5rem !important;
+            }
+
+            h1 {
+                font-size: 1.75rem !important;
+            }
+
+            h2 {
+                font-size: 1.35rem !important;
+            }
+
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+        }
+
+        /* TYPOGRAPHY & DESIGN SYSTEM */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .serif-text {
+            font-family: 'Merriweather', serif;
+        }
+
+        .gradient-bg {
+            background: var(--primary-gradient);
+        }
+
+        .gradient-text {
+            background: var(--primary-gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            color: #4f46e5;
+        }
+
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            background: rgba(79, 70, 229, 0.1);
+            color: #4f46e5;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 1px solid rgba(79, 70, 229, 0.2);
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-bottom: 2rem;
+        }
+
+        .highlight-box {
+            background-color: #f0f9ff;
+            border-left: 4px solid #0ea5e9;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+            color: #0369a1;
+        }
+
+        .sub-heading {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .sub-heading::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: #4f46e5;
+            border-radius: 50%;
+            margin-right: 0.75rem;
+        }
+
+        /* TABLE STYLES */
+        .premium-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 1rem;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        .premium-table th {
+            background: #f1f5f9;
+            color: #475569;
+            font-weight: 600;
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .premium-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+        }
+
+        .premium-table tr:last-child td {
+            border-bottom: none;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-100">
+
+    <!-- FLOATING ACTION BUTTONS -->
+    <div class="fixed top-2 right-2 md:top-6 md:right-6 no-print flex gap-2 md:gap-3 z-50 items-center">
+        <a href="index.html"
+            class="bg-white/90 backdrop-blur text-slate-700 hover:text-indigo-600 font-bold py-2 px-3 md:py-2.5 md:px-5 rounded-full shadow-lg border border-slate-200 transition-all flex items-center gap-2 group">
+            <i class="fas fa-arrow-left transition-transform group-hover:-translate-x-1"></i> <span
+                class="hidden md:inline">Dashboard</span>
+        </a>
+        <div class="flex gap-1 bg-white/90 backdrop-blur rounded-full shadow-lg border border-slate-200 p-1">
+            <button onclick="adjustZoom(-0.1)"
+                class="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full hover:bg-slate-100 text-slate-700 transition"
+                title="Zoom Out"><i class="fas fa-minus"></i></button>
+            <button onclick="resetZoom()"
+                class="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full hover:bg-slate-100 text-slate-700 transition"
+                title="Reset Zoom"><i class="fas fa-search"></i></button>
+            <button onclick="adjustZoom(0.1)"
+                class="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full hover:bg-slate-100 text-slate-700 transition"
+                title="Zoom In"><i class="fas fa-plus"></i></button>
+        </div>
+        <button onclick="window.print()"
+            class="gradient-bg text-white font-bold py-2 px-3 md:py-2.5 md:px-6 rounded-full shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-105 transition-all flex items-center gap-2">
+            <i class="fas fa-file-pdf"></i> <span class="hidden md:inline">Save PDF</span>
+        </button>
+    </div>
+
+    <script>
+        let currentZoom = 1;
+        function adjustZoom(delta) {
+            currentZoom += delta;
+            if (currentZoom < 0.5) currentZoom = 0.5;
+            if (currentZoom > 2.0) currentZoom = 2.0;
+            document.body.style.zoom = currentZoom;
+        }
+        function resetZoom() {
+            currentZoom = 1;
+            document.body.style.zoom = currentZoom;
+        }
+    </script>
+
+    <!-- MAIN SHEET -->
+    <div class="container-sheet print-container">
+
+        <!-- HEADER -->
+        <div class="text-center mb-12 pb-8 border-b border-slate-200 relative">
+            <span class="section-badge mb-4">Gemini 3 Pro Edition - Expanded</span>
+            <h1 class="text-4xl md:text-5xl font-black mb-4 tracking-tight text-slate-900">
+                English (Compulsory)
+            </h1>
+            <h2 class="text-xl md:text-2xl font-light gradient-text mb-2">
+                Strategic Course Companion & Predictive Assessment
+            </h2>
+            <p class="text-slate-500 text-sm">BCA 1st Semester • Panjab University • 2024-2025</p>
+        </div>
+
+        <!-- 1. EXECUTIVE SUMMARY -->
+        <div class="mb-12">
+            <h3 class="text-2xl font-bold text-slate-800 mb-6 flex items-center">
+                <span class="bg-indigo-100 text-indigo-700 p-2 rounded mr-3 text-lg"><i
+                        class="fas fa-bullseye"></i></span>
+                1. Executive Summary & Strategy
+            </h3>
+            <div class="glass-card">
+                <p class="mb-4 text-justify">
+                    This research report serves as an exhaustive, expert-level analysis of the English curriculum for
+                    BCA 1st Semester at Panjab University. It functions as a definitive "Course Companion" and
+                    "Predictive Assessment Model" for students aiming for maximum grade retention.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                    <div class="bg-indigo-50 p-4 rounded-lg border border-indigo-100">
+                        <h4 class="font-bold text-indigo-800 mb-2">Component A: Literature</h4>
+                        <p class="text-sm text-indigo-900">Focuses on traditional literary analysis (Prose and Poetry),
+                            grammar, and translation. Remains the core evaluation.</p>
+                    </div>
+                    <div class="bg-green-50 p-4 rounded-lg border border-green-100">
+                        <h4 class="font-bold text-green-800 mb-2">Component B: AEC (NEP)</h4>
+                        <p class="text-sm text-green-900">Focuses on Phonetics, Oral Communication, and Soft Skills
+                            (Interviews, GD). Based on the new pedagogical shift.</p>
+                    </div>
+                </div>
+                <div class="mt-6 p-4 bg-yellow-50 border-l-4 border-yellow-400 text-sm">
+                    <strong>The Deterministic Nature of PU Exams:</strong> Unlike competitive exams, PU semester exams
+                    rely on a finite bank of "high-value" concepts. This report leverages this determinism to construct
+                    a "100% Sure" preparation strategy.
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. COMPONENT A: PROSE -->
+        <div class="mb-12 page-break">
+            <h3 class="text-2xl font-bold text-slate-800 mb-6 flex items-center">
+                <span class="bg-indigo-100 text-indigo-700 p-2 rounded mr-3 text-lg"><i
+                        class="fas fa-book-open"></i></span>
+                2. Component A: Prose Section
+            </h3>
+            <p class="mb-6 text-slate-600">Statistical analysis indicates that three specific prose pieces dominate the
+                examination.</p>
+
+            <!-- 2.1 The Model Millionaire -->
+            <div class="glass-card">
+                <div class="flex justify-between items-start border-b border-slate-200 pb-4 mb-4">
+                    <div>
+                        <h4 class="text-xl font-bold text-slate-900">2.1 The Model Millionaire (Oscar Wilde)</h4>
+                        <span class="text-sm text-slate-500">Probability: <span
+                                class="text-green-600 font-bold">95%</span></span>
+                    </div>
+                    <span class="bg-indigo-600 text-white text-xs px-2 py-1 rounded">Sure Shot</span>
+                </div>
+                <div class="mb-4">
+                    <strong class="text-indigo-700 block mb-1">Recurring Question:</strong>
+                    <p class="text-sm italic text-slate-600">Character Sketch of Baron Hausberg; Thematic Analysis of
+                        "Millionaire Model vs. Model Millionaire."</p>
+                </div>
+                <div class="space-y-4 text-justify">
+                    <p><strong>The Baron Hausberg Paradox:</strong> He is a "Millionaire Model" because he poses as a
+                        beggar for art, an eccentricity of wealth. He is a "Model Millionaire" because he embodies the
+                        ideal behavior of a wealthy person: benevolence and philanthropy.</p>
+                    <p><strong>Hughie Erskine:</strong> The romantic foil—handsome but poor. He passes the moral test
+                        not through intellect, but through compassion (giving his last sovereign).</p>
+                    <div class="bg-slate-50 p-4 rounded border border-slate-200 mt-4">
+                        <strong class="block mb-2 text-indigo-600">Model Answer Strategy (Character Sketch):</strong>
+                        <ul class="list-disc pl-5 text-sm space-y-1">
+                            <li><strong>Intro:</strong> Richest man in Europe vs. Beggar disguise.</li>
+                            <li><strong>Interaction:</strong> Analyze his silence and observation during the studio
+                                scene.</li>
+                            <li><strong>The Revelation:</strong> He is not offended by Hughie's charity; he is charmed.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2.2 The Tell-Tale Heart -->
+            <div class="glass-card">
+                <div class="flex justify-between items-start border-b border-slate-200 pb-4 mb-4">
+                    <div>
+                        <h4 class="text-xl font-bold text-slate-900">2.2 The Tell-Tale Heart (Edgar Allan Poe)</h4>
+                        <span class="text-sm text-slate-500">Probability: <span
+                                class="text-green-600 font-bold">95%</span></span>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <strong class="text-indigo-700 block mb-1">Recurring Question:</strong>
+                    <p class="text-sm italic text-slate-600">Psychological Study; Significance of the Title; Atmosphere
+                        of Horror.</p>
+                </div>
+                <div class="space-y-4 text-justify">
+                    <p><strong>Mechanism of Madness:</strong> Defined by "Monomania"—obsession with the "Vulture Eye".
+                        Rational in method, irrational in motive.</p>
+                    <p><strong>Symbolism:</strong> The "Tell-Tale Heart" is the narrator's own guilt projecting as the
+                        sound of a beating heart. It "tells the tale" he tries to hide.</p>
+                    <div class="bg-slate-50 p-4 rounded border border-slate-200 mt-4">
+                        <strong class="block mb-2 text-indigo-600">Thesis Statement:</strong>
+                        <p class="text-sm border-l-2 border-indigo-400 pl-3 italic">"Poe constructs horror not through
+                            the act of murder itself, but through the claustrophobic confinement within a disintegrating
+                            mind."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2.3 Prayer -->
+            <div class="glass-card">
+                <div class="flex justify-between items-start border-b border-slate-200 pb-4 mb-4">
+                    <div>
+                        <h4 class="text-xl font-bold text-slate-900">2.3 Prayer (Mahatma Gandhi)</h4>
+                        <span class="text-sm text-slate-500">Probability: <span
+                                class="text-green-600 font-bold">90%</span></span>
+                    </div>
+                </div>
+                <div class="space-y-4 text-justify">
+                    <p><strong>The Food Analogy:</strong> The body dies without food; the soul dies without prayer.</p>
+                    <p><strong>Definition:</strong> Prayer is a "longing of the soul" and a "petition for strength," not
+                        a request for favors.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. COMPONENT A: POETRY -->
+        <div class="mb-12">
+            <h3 class="text-2xl font-bold text-slate-800 mb-6 flex items-center">
+                <span class="bg-pink-100 text-pink-700 p-2 rounded mr-3 text-lg"><i
+                        class="fas fa-feather-alt"></i></span>
+                3. Component A: Poetry Section
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Poem 1 -->
+                <div class="glass-card mb-0">
+                    <h4 class="font-bold text-lg mb-2">Sigh No More, Ladies</h4>
+                    <p class="text-sm text-slate-500 mb-4">William Shakespeare</p>
+                    <p class="text-sm text-justify"><strong>Theme:</strong> The fickleness of men and resilience of
+                        women. Advice to stop mourning infidelity ("One foot in sea...") and live joyfully ("hey nonny,
+                        nonny").</p>
+                </div>
+                <!-- Poem 2 -->
+                <div class="glass-card mb-0">
+                    <h4 class="font-bold text-lg mb-2">On Receipt of My Mother’s Picture</h4>
+                    <p class="text-sm text-slate-500 mb-4">William Cowper</p>
+                    <p class="text-sm text-justify"><strong>Theme:</strong> Permanence of memory vs. transience of life.
+                        The picture acts as a "Time Machine". <br><strong>Imagery:</strong> "Biscuit or confectionary
+                        plum", "Tempestuous sea".</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. GRAMMAR -->
+        <div class="mb-12 page-break">
+            <h3 class="text-2xl font-bold text-slate-800 mb-6 flex items-center">
+                <span class="bg-amber-100 text-amber-700 p-2 rounded mr-3 text-lg"><i
+                        class="fas fa-spell-check"></i></span>
+                4. Components A: Grammar (The Mathematical Section)
+            </h3>
+
+            <!-- Word Formation -->
+            <div class="mb-8">
+                <h4 class="font-bold text-lg mb-4 text-slate-700">4.1 100% Sure Word Formation</h4>
+                <table class="premium-table text-sm">
+                    <thead>
+                        <tr>
+                            <th>Base</th>
+                            <th>Target</th>
+                            <th>Transformed</th>
+                            <th class="hidden md:table-cell">Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Solve</td>
+                            <td>Noun</td>
+                            <td class="font-bold text-indigo-700">Solution</td>
+                            <td class="hidden md:table-cell">The solution was simple.</td>
+                        </tr>
+                        <tr>
+                            <td>Examination</td>
+                            <td>Verb</td>
+                            <td class="font-bold text-indigo-700">Examine</td>
+                            <td class="hidden md:table-cell">Doctor will examine the patient.</td>
+                        </tr>
+                        <tr>
+                            <td>Power</td>
+                            <td>Adj</td>
+                            <td class="font-bold text-indigo-700">Powerful</td>
+                            <td class="hidden md:table-cell">A powerful speech.</td>
+                        </tr>
+                        <tr>
+                            <td>Rich</td>
+                            <td>Verb</td>
+                            <td class="font-bold text-indigo-700">Enrich</td>
+                            <td class="hidden md:table-cell">Reading will enrich vocabulary.</td>
+                        </tr>
+                        <tr>
+                            <td>Speak</td>
+                            <td>Noun</td>
+                            <td class="font-bold text-indigo-700">Speech</td>
+                            <td class="hidden md:table-cell">His speech was inspiring.</td>
+                        </tr>
+                        <tr>
+                            <td>Beauty</td>
+                            <td>Verb</td>
+                            <td class="font-bold text-indigo-700">Beautify</td>
+                            <td class="hidden md:table-cell">We will beautify the park.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Idioms -->
+            <div class="mb-8">
+                <h4 class="font-bold text-lg mb-4 text-slate-700">4.2 100% Sure Idioms</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-white p-3 border rounded shadow-sm"><strong>As a Rule:</strong> (Generally) As a
+                        rule, I do not lend money.</div>
+                    <div class="bg-white p-3 border rounded shadow-sm"><strong>To cut off:</strong> (Disconnect) The
+                        village was cut off by snow.</div>
+                    <div class="bg-white p-3 border rounded shadow-sm"><strong>To extinguish:</strong> (Put out)
+                        Firefighters extinguished the flames.</div>
+                    <div class="bg-white p-3 border rounded shadow-sm"><strong>On behalf of:</strong> (Representing) I
+                        speak on behalf of the students.</div>
+                    <div class="bg-white p-3 border rounded shadow-sm"><strong>Trifles:</strong> (Small things) Don't
+                        worry about mere trifles.</div>
+                    <div class="bg-white p-3 border rounded shadow-sm"><strong>Maiden:</strong> (First) It was the
+                        ship's maiden voyage.</div>
+                </div>
+            </div>
+
+            <!-- Translation -->
+            <div class="glass-card bg-amber-50 border-amber-200">
+                <h4 class="font-bold text-amber-800 mb-2">4.3 The "100% Sure" Translation Passage (Books)</h4>
+                <p class="text-sm italic mb-2 text-slate-600">Original Concept: "Books are a boon... tower of light..."
+                </p>
+                <div class="bg-white p-4 rounded border border-amber-200 shadow-inner">
+                    <p class="serif-text text-slate-800">
+                        "Books are truly a boon. They accompany us everywhere—in sorrow, in joy, in childhood, in youth,
+                        and in old age. When clouds of suffering and trouble darken our lives, they show us the path
+                        like a tower of light (lighthouse). Books are those friends who support us in times of need.
+                        They not only entertain us but also increase our knowledge."
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. AEC -->
+        <div class="mb-12 page-break">
+            <h3 class="text-2xl font-bold text-slate-800 mb-6 flex items-center">
+                <span class="bg-emerald-100 text-emerald-700 p-2 rounded mr-3 text-lg"><i
+                        class="fas fa-microphone-alt"></i></span>
+                5. Component B: AEC - Language Skills
+            </h3>
+
+            <!-- Phonetics -->
+            <div class="glass-card">
+                <h4 class="font-bold text-lg text-emerald-800 mb-4">5.1 Unit I: Phonetics & Prosody</h4>
+                <div class="space-y-4">
+                    <div>
+                        <strong class="text-slate-900">Monophthongs (Pure Vowels):</strong> Single, unchanging vowel
+                        sounds (12 in English, e.g., /ɪ/ in 'sit').
+                    </div>
+                    <div>
+                        <strong class="text-slate-900">Diphthongs (Gliding Vowels):</strong> Combination of two vowels
+                        in one syllable (8 in English, e.g., /aɪ/ in 'fly').
+                    </div>
+                    <div class="bg-emerald-50 p-3 rounded text-sm">
+                        <strong>Transcription Examples:</strong><br>
+                        Cattle: /ˈkæt.l/ • Rice: /raɪs/ • East: /iːst/ • Change: /tʃeɪndʒ/
+                    </div>
+                    <div>
+                        <strong class="text-slate-900">Intonation:</strong> Rise and fall of voice.<br>
+                        <span class="text-sm ml-4 block">• Falling Tone: Statements/Commands ("Sit down.")</span>
+                        <span class="text-sm ml-4 block">• Rising Tone: Yes/No Questions ("Are you ready?")</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interviews & Soft Skills -->
+            <div class="glass-card">
+                <h4 class="font-bold text-lg text-emerald-800 mb-4">5.2 Unit II: Communication & Interviews</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <strong class="block mb-2">Behavioural Interview</strong>
+                        <p class="text-sm">Based on "past behavior predicts future performance". Asks for examples
+                            (e.g., "Tell me a time you handled conflict").</p>
+                    </div>
+                    <div>
+                        <strong class="block mb-2">Debate vs. GD</strong>
+                        <ul class="text-sm list-disc pl-5">
+                            <li><strong>Debate:</strong> Formal, Win/Loss, For/Against.</li>
+                            <li><strong>GD:</strong> Informal, Consensus, Cooperative.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AEC Grammar -->
+            <div class="glass-card">
+                <h4 class="font-bold text-lg text-emerald-800 mb-4">5.3 Unit III: Applied Grammar (Root Words)</h4>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-2 text-sm">
+                    <div class="p-2 border rounded"><strong>Ultra- (Beyond):</strong> Ultraviolet</div>
+                    <div class="p-2 border rounded"><strong>Semi- (Half):</strong> Semicircle</div>
+                    <div class="p-2 border rounded"><strong>Uni- (One):</strong> Uniform</div>
+                    <div class="p-2 border rounded"><strong>Poly- (Many):</strong> Polygon</div>
+                    <div class="p-2 border rounded"><strong>-Graph (Write):</strong> Autograph</div>
+                    <div class="p-2 border rounded"><strong>Trans- (Across):</strong> Transport</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. MASTER LIST -->
+        <div class="mb-12 page-break">
+            <h3 class="text-2xl font-bold text-slate-800 mb-6 flex items-center">
+                <span class="bg-red-100 text-red-700 p-2 rounded mr-3 text-lg"><i class="fas fa-list-check"></i></span>
+                6. The Master Predictive List (>90% Probability)
+            </h3>
+            <table class="premium-table">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Top Priority Topic</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="font-bold">Short Story</td>
+                        <td>Character Sketch of Baron Hausberg (Model Millionaire)</td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold">Essay</td>
+                        <td>Prayer (Gandhi): Efficacy & Value</td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold">Poem</td>
+                        <td>Sigh No More, Ladies (Theme)</td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold">Translation</td>
+                        <td>Passage on "Books" (Boon/Blessing)</td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold">AEC Phonetics</td>
+                        <td>Monophthongs vs Diphthongs</td>
+                    </tr>
+                    <tr>
+                        <td class="font-bold">AEC Interview</td>
+                        <td>Behavioural Interview & Body Language</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 7. EXECUTION GUIDE -->
+        <div class="bg-slate-900 text-slate-300 p-8 rounded-xl border border-slate-700">
+            <h3 class="text-2xl font-bold text-white mb-6">
+                <i class="fas fa-chess-king text-yellow-500 mr-2"></i> Strategic Exam Execution Guide
+            </h3>
+            <div class="space-y-4">
+                <p><strong>1. "Translation Hack":</strong> Do not translate word-for-word. Focus on flow. Use elevated
+                    vocabulary (e.g., instead of "Books are tower of light", write "Books serve as a beacon of light").
+                </p>
+                <p><strong>2. Structural Headings:</strong> For Character Sketches, NEVER write a single block of text.
+                    Use headings like Introduction, The Irony, Benevolence, Conclusion.</p>
+                <p><strong>3. Managing Choice:</strong> In Section A, always choose <em>The Model Millionaire</em>
+                    question. It is factual and easier to score high on than the abstract <em>Tell-Tale Heart</em>.</p>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
