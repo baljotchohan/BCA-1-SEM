@@ -212,6 +212,14 @@ const BCA_1ST_SEM_DATA = {
           "question": "Define Internet and World Wide Web. State one difference.",
           "marks": 2,
           "probability": "High Probability (PU Exam)"
+        },
+        {
+          "id": "web-tech-q-1786729188569",
+          "unit": "Unit I",
+          "type": "2-mark",
+          "question": "What is a URL? Name its major components.",
+          "marks": 2,
+          "probability": "High Probability (PU Exam)"
         }
       ],
       "solutions": [
@@ -262,6 +270,16 @@ const BCA_1ST_SEM_DATA = {
           "unit": "Unit I",
           "type": "2-mark",
           "solution": "Internet is the global network infrastructure connecting networks and devices. The World Wide Web is a service running over the Internet using technologies such as URLs, HTTP/HTTPS and browsers. Difference: the Internet is the underlying network; the Web is one service/application system built on it.",
+          "code": "",
+          "formula": ""
+        },
+        {
+          "id": "sol-web-tech-q-1786729188569",
+          "questionId": "web-tech-q-1786729188569",
+          "question": "What is a URL? Name its major components.",
+          "unit": "Unit I",
+          "type": "2-mark",
+          "solution": "A URL (Uniform Resource Locator) identifies how and where a resource can be accessed. Major components can include scheme, host/domain, port, path, query and fragment. Example: https://example.com:443/products?id=10#reviews.",
           "code": "",
           "formula": ""
         }
