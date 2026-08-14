@@ -372,6 +372,14 @@ const BCA_1ST_SEM_DATA = {
           "question": "Explain JavaScript variables, data types and operators. Compare var, let and const and discuss strict equality with examples.",
           "marks": 8,
           "probability": "High Probability (PU Exam)"
+        },
+        {
+          "id": "web-tech-q-1786729258913",
+          "unit": "Unit IV",
+          "type": "8-mark",
+          "question": "Explain JavaScript functions in detail. Differentiate function declarations, function expressions and arrow functions with syntax, examples and important behavioural differences.",
+          "marks": 8,
+          "probability": "High Probability (PU Exam)"
         }
       ],
       "solutions": [
@@ -622,6 +630,16 @@ const BCA_1ST_SEM_DATA = {
           "unit": "Unit IV",
           "type": "8-mark",
           "solution": "Model Answer:\\nDefine JavaScript and its role in browser applications. Explain var as function-scoped and redeclarable/reassignable; let as block-scoped and reassignable; const as block-scoped with non-reassignable binding. Discuss primitive values such as string, number, bigint, boolean, undefined, symbol and null, plus objects. Explain arithmetic, comparison, logical and assignment operators. Show 5 == '5' versus 5 === '5'. Conclude with practical recommendation to use let/const appropriately and strict equality when type-sensitive comparison is intended.",
+          "code": "",
+          "formula": ""
+        },
+        {
+          "id": "sol-web-tech-q-1786729258913",
+          "questionId": "web-tech-q-1786729258913",
+          "question": "Explain JavaScript functions in detail. Differentiate function declarations, function expressions and arrow functions with syntax, examples and important behavioural differences.",
+          "unit": "Unit IV",
+          "type": "8-mark",
+          "solution": "Model Answer:\\nDefine a function as reusable logic. Function declaration: function add(a,b){return a+b;} Function expression: const add=function(a,b){return a+b;}; Arrow: const add=(a,b)=>a+b;. Explain parameters/arguments and return. Discuss that declarations have different hoisting behaviour from expressions. Arrow functions have lexical this and do not have their own arguments object/prototype semantics. Use cases: reusable calculations, event handlers and data transformations.",
           "code": "",
           "formula": ""
         }
