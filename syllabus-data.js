@@ -244,6 +244,14 @@ const BCA_1ST_SEM_DATA = {
           "question": "Explain the complete anatomy of an HTML5 document. Discuss DOCTYPE, html, head, metadata, viewport, title and body with a labelled structure diagram.",
           "marks": 8,
           "probability": "High Probability (PU Exam)"
+        },
+        {
+          "id": "web-tech-q-1786729204653",
+          "unit": "Unit II",
+          "type": "8-mark",
+          "question": "Explain semantic HTML5. Describe header, nav, main, article, section and footer with a realistic webpage diagram and discuss accessibility benefits.",
+          "marks": 8,
+          "probability": "High Probability (PU Exam)"
         }
       ],
       "solutions": [
@@ -334,6 +342,16 @@ const BCA_1ST_SEM_DATA = {
           "unit": "Unit II",
           "type": "8-mark",
           "solution": "Model Answer:\\nDefine HTML as a markup language for document structure. Show: DOCTYPE -> html -> head -> metadata/title/resources -> body -> visible content. Explain standards mode, UTF-8 charset and viewport metadata. Give a complete HTML5 example. Mention that semantic structure improves accessibility and maintainability. Diagram: Document -> html -> head + body; head -> meta/title/link; body -> header/nav/main/article/footer.",
+          "code": "",
+          "formula": ""
+        },
+        {
+          "id": "sol-web-tech-q-1786729204653",
+          "questionId": "web-tech-q-1786729204653",
+          "question": "Explain semantic HTML5. Describe header, nav, main, article, section and footer with a realistic webpage diagram and discuss accessibility benefits.",
+          "unit": "Unit II",
+          "type": "8-mark",
+          "solution": "Model Answer:\\nSemantic HTML uses elements that communicate meaning. Explain header, nav, main, article, section and footer. Diagram: header -> nav -> main -> article -> section; aside/footer as appropriate. Explain that semantic landmarks improve screen-reader navigation, maintainability and machine understanding. State that native semantic HTML should be preferred over unnecessary ARIA roles. Punjabi: semantic tags webpage ਦੇ parts ਦਾ purpose واضح ਕਰਦੇ ਹਨ.",
           "code": "",
           "formula": ""
         }
