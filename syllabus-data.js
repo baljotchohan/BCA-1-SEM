@@ -332,6 +332,14 @@ const BCA_1ST_SEM_DATA = {
           "question": "Explain Flexbox and responsive web design. Discuss main/cross axes, important Flexbox properties, media queries and mobile-first design with a practical layout example.",
           "marks": 8,
           "probability": "High Probability (PU Exam)"
+        },
+        {
+          "id": "web-tech-q-1786729241926",
+          "unit": "Unit III",
+          "type": "2-mark",
+          "question": "What is the CSS box model? Name its four major components.",
+          "marks": 2,
+          "probability": "High Probability (PU Exam)"
         }
       ],
       "solutions": [
@@ -532,6 +540,16 @@ const BCA_1ST_SEM_DATA = {
           "unit": "Unit III",
           "type": "8-mark",
           "solution": "Model Answer:\\nDefine Flexbox as a one-dimensional layout model. Explain main axis and cross axis. Container properties: display:flex, flex-direction, justify-content, align-items, flex-wrap, gap. Item properties: flex-grow, flex-shrink, flex-basis, flex, align-self, order. Then define responsive design and mobile-first approach. Show base mobile layout and media query for larger screens. Example: college dashboard cards that stack on mobile and become multiple columns on desktop. Explain why responsive design improves usability across devices.",
+          "code": "",
+          "formula": ""
+        },
+        {
+          "id": "sol-web-tech-q-1786729241926",
+          "questionId": "web-tech-q-1786729241926",
+          "question": "What is the CSS box model? Name its four major components.",
+          "unit": "Unit III",
+          "type": "2-mark",
+          "solution": "The CSS box model describes the rectangular area occupied by an element. Its four major components are content, padding, border and margin.",
           "code": "",
           "formula": ""
         }
