@@ -236,6 +236,14 @@ const BCA_1ST_SEM_DATA = {
           "question": "Differentiate static and dynamic websites.",
           "marks": 2,
           "probability": "High Probability (PU Exam)"
+        },
+        {
+          "id": "web-tech-q-1786729199408",
+          "unit": "Unit II",
+          "type": "8-mark",
+          "question": "Explain the complete anatomy of an HTML5 document. Discuss DOCTYPE, html, head, metadata, viewport, title and body with a labelled structure diagram.",
+          "marks": 8,
+          "probability": "High Probability (PU Exam)"
         }
       ],
       "solutions": [
@@ -316,6 +324,16 @@ const BCA_1ST_SEM_DATA = {
           "unit": "Unit I",
           "type": "2-mark",
           "solution": "A static website mainly serves pre-existing files such as HTML, CSS and images. A dynamic website generates or retrieves content at request time using application logic, APIs or databases. Example: a simple portfolio can be static; a personalized shopping dashboard is dynamic.",
+          "code": "",
+          "formula": ""
+        },
+        {
+          "id": "sol-web-tech-q-1786729199408",
+          "questionId": "web-tech-q-1786729199408",
+          "question": "Explain the complete anatomy of an HTML5 document. Discuss DOCTYPE, html, head, metadata, viewport, title and body with a labelled structure diagram.",
+          "unit": "Unit II",
+          "type": "8-mark",
+          "solution": "Model Answer:\\nDefine HTML as a markup language for document structure. Show: DOCTYPE -> html -> head -> metadata/title/resources -> body -> visible content. Explain standards mode, UTF-8 charset and viewport metadata. Give a complete HTML5 example. Mention that semantic structure improves accessibility and maintainability. Diagram: Document -> html -> head + body; head -> meta/title/link; body -> header/nav/main/article/footer.",
           "code": "",
           "formula": ""
         }
