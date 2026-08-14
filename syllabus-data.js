@@ -300,6 +300,14 @@ const BCA_1ST_SEM_DATA = {
           "question": "Why is client-side validation not sufficient for security?",
           "marks": 2,
           "probability": "High Probability (PU Exam)"
+        },
+        {
+          "id": "web-tech-q-1786729227360",
+          "unit": "Unit III",
+          "type": "8-mark",
+          "question": "Explain the CSS cascade and specificity in detail. Compare inline, ID, class/attribute/pseudo-class and element selectors with examples.",
+          "marks": 8,
+          "probability": "High Probability (PU Exam)"
         }
       ],
       "solutions": [
@@ -460,6 +468,16 @@ const BCA_1ST_SEM_DATA = {
           "unit": "Unit II",
           "type": "2-mark",
           "solution": "Client-side validation runs in an environment controlled by the user and can be bypassed or replaced by crafted requests. The server must validate and authorize submitted data independently before processing or storing it.",
+          "code": "",
+          "formula": ""
+        },
+        {
+          "id": "sol-web-tech-q-1786729227360",
+          "questionId": "web-tech-q-1786729227360",
+          "question": "Explain the CSS cascade and specificity in detail. Compare inline, ID, class/attribute/pseudo-class and element selectors with examples.",
+          "unit": "Unit III",
+          "type": "8-mark",
+          "solution": "Model Answer:\\nDefine cascade as the algorithm used to resolve competing declarations. Explain that origin/importance/layers, specificity and source order all matter. Give simplified specificity tuple: inline | IDs | classes/attributes/pseudo-classes | elements/pseudo-elements. Example: p {color:blue}, .note {color:green}, #warning {color:red}; an element matching all normally receives the ID declaration. Warn that source order only resolves declarations that are otherwise tied in the relevant cascade comparison. Punjabi: 'last rule wins' alone is an incomplete rule.",
           "code": "",
           "formula": ""
         }
