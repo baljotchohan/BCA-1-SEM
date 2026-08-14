@@ -364,6 +364,14 @@ const BCA_1ST_SEM_DATA = {
           "question": "What is responsive web design and what is mobile-first design?",
           "marks": 2,
           "probability": "High Probability (PU Exam)"
+        },
+        {
+          "id": "web-tech-q-1786729256350",
+          "unit": "Unit IV",
+          "type": "8-mark",
+          "question": "Explain JavaScript variables, data types and operators. Compare var, let and const and discuss strict equality with examples.",
+          "marks": 8,
+          "probability": "High Probability (PU Exam)"
         }
       ],
       "solutions": [
@@ -604,6 +612,16 @@ const BCA_1ST_SEM_DATA = {
           "unit": "Unit III",
           "type": "2-mark",
           "solution": "Responsive web design adapts presentation and layout to different screen sizes and environments. Mobile-first design starts with the small-screen experience as the base and progressively enhances the layout for larger screens, often using min-width media queries.",
+          "code": "",
+          "formula": ""
+        },
+        {
+          "id": "sol-web-tech-q-1786729256350",
+          "questionId": "web-tech-q-1786729256350",
+          "question": "Explain JavaScript variables, data types and operators. Compare var, let and const and discuss strict equality with examples.",
+          "unit": "Unit IV",
+          "type": "8-mark",
+          "solution": "Model Answer:\\nDefine JavaScript and its role in browser applications. Explain var as function-scoped and redeclarable/reassignable; let as block-scoped and reassignable; const as block-scoped with non-reassignable binding. Discuss primitive values such as string, number, bigint, boolean, undefined, symbol and null, plus objects. Explain arithmetic, comparison, logical and assignment operators. Show 5 == '5' versus 5 === '5'. Conclude with practical recommendation to use let/const appropriately and strict equality when type-sensitive comparison is intended.",
           "code": "",
           "formula": ""
         }
