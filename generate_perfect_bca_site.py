@@ -1,4 +1,15 @@
-<!DOCTYPE html>
+import json
+
+# Read syllabus-data.js
+with open("syllabus-data.js", "r", encoding="utf-8") as f:
+    raw = f.read()
+
+idx = raw.find("{")
+last_idx = raw.rfind("};")
+syllabus_json = raw[idx:last_idx+1]
+data = json.loads(syllabus_json)
+
+html_content = """<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -14,7 +25,7 @@
     <!-- MathJax Configuration for LaTeX Math -->
     <script>
         window.MathJax = {
-            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            tex: { inlineMath: [['$', '$'], ['\\\\(', '\\\\)']], displayMath: [['$$', '$$'], ['\\\\[', '\\\\]']] },
             svg: { fontCache: 'global' }
         };
     </script>
@@ -1017,21 +1028,21 @@
                 .replace(/^## (.*$)/gim, '<h2>$1</h2>')
                 .replace(/^# (.*$)/gim, '<h1>$1</h1>')
                 // Code Blocks
-                .replace(/```([a-z]*)\n([\s\S]*?)\n```/gim, (match, lang, code) => {
+                .replace(/```([a-z]*)\\n([\\s\\S]*?)\\n```/gim, (match, lang, code) => {
                     return `<pre><button class="copy-code-btn" onclick="copyCode(this)">Copy</button><code>${code}</code></pre>`;
                 })
                 // Inline Code
                 .replace(/`([^`]+)`/gim, '<code>$1</code>')
                 // Bold & Italic
-                .replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>')
-                .replace(/\*(.*?)\*/gim, '<em>$1</em>')
+                .replace(/\\*\\*(.*?)\\*\\*/gim, '<strong>$1</strong>')
+                .replace(/\\*(.*?)\\*/gim, '<em>$1</em>')
                 // Blockquote
-                .replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>')
+                .replace(/^\\> (.*$)/gim, '<blockquote>$1</blockquote>')
                 // Lists
-                .replace(/^\s*[-*+] (.*$)/gim, '<li>$1</li>')
+                .replace(/^\\s*[-*+] (.*$)/gim, '<li>$1</li>')
                 // Paragraphs & Line Breaks
-                .replace(/\n\n+/g, '</p><p>')
-                .replace(/\n/g, '<br>');
+                .replace(/\\n\\n+/g, '</p><p>')
+                .replace(/\\n/g, '<br>');
 
             return '<p>' + html + '</p>';
         }
@@ -1193,23 +1204,23 @@
             const area = document.getElementById('modal-content-area');
             if (!unit) return;
 
-            let md = `# ${subject.title || subject.name}\n`;
-            md += `## ${unit.unitNumber || 'Unit'}: ${unit.title}\n\n`;
-            md += `> **Panjab University Academic Guide** • Official NEP 2026–27 Syllabus Breakdown.\n\n`;
+            let md = `# ${subject.title || subject.name}\\n`;
+            md += `## ${unit.unitNumber || 'Unit'}: ${unit.title}\\n\\n`;
+            md += `> **Panjab University Academic Guide** • Official NEP 2026–27 Syllabus Breakdown.\\n\\n`;
 
             if (unit.content) {
                 md += unit.content;
             } else if (unit.topics && unit.topics.length > 0) {
-                md += `### Unit Syllabus & Core Topics\n\n`;
+                md += `### Unit Syllabus & Core Topics\\n\\n`;
                 unit.topics.forEach((t, i) => {
-                    md += `#### ${i+1}. ${t}\n`;
-                    md += `- **Concept Analysis**: Master theoretical foundations, algorithmic steps, standard syntax, and architectural diagrams.\n`;
-                    md += `- **Examination Relevance**: High-probability exam questions from Panjab University past year papers focus heavily on comparisons, derivations, and practical code.\n\n`;
+                    md += `#### ${i+1}. ${t}\\n`;
+                    md += `- **Concept Analysis**: Master theoretical foundations, algorithmic steps, standard syntax, and architectural diagrams.\\n`;
+                    md += `- **Examination Relevance**: High-probability exam questions from Panjab University past year papers focus heavily on comparisons, derivations, and practical code.\\n\\n`;
                 });
-                md += `\n### 💡 Examination Tips & High-Yield Strategy\n`;
-                md += `1. **Short Answers (2 Marks)**: Provide sharp, formal definitions with examples.\n`;
-                md += `2. **Long Answers (8 Marks)**: Always draw clear, labeled block diagrams or flowchart representations.\n`;
-                md += `3. **Practical Code**: Write error-free, standard C / HTML / CSS / JS with comments.\n`;
+                md += `\\n### 💡 Examination Tips & High-Yield Strategy\\n`;
+                md += `1. **Short Answers (2 Marks)**: Provide sharp, formal definitions with examples.\\n`;
+                md += `2. **Long Answers (8 Marks)**: Always draw clear, labeled block diagrams or flowchart representations.\\n`;
+                md += `3. **Practical Code**: Write error-free, standard C / HTML / CSS / JS with comments.\\n`;
             }
 
             area.innerHTML = markdownToHtml(md);
@@ -1360,3 +1371,10 @@
     </script>
 </body>
 </html>
+"""
+
+with open("index.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print("Generated clean, dedicated Panjab University BCA 1st Sem platform into index.html. Size:", len(html_content))
+
