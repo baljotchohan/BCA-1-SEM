@@ -188,6 +188,14 @@ const BCA_1ST_SEM_DATA = {
           "question": "Explain the complete journey of opening an HTTPS website, including URL parsing, DNS resolution, TCP connection, TLS handshake, HTTP request/response and browser rendering.",
           "marks": 8,
           "probability": "High Probability (PU Exam)"
+        },
+        {
+          "id": "web-tech-q-1786729179901",
+          "unit": "Unit I",
+          "type": "8-mark",
+          "question": "What is DNS? Explain the six-step DNS resolution pipeline, DNS hierarchy, caching and the role of recursive and authoritative servers.",
+          "marks": 8,
+          "probability": "High Probability (PU Exam)"
         }
       ],
       "solutions": [
@@ -208,6 +216,16 @@ const BCA_1ST_SEM_DATA = {
           "unit": "Unit I",
           "type": "8-mark",
           "solution": "Model Answer:\\n1. URL is parsed into scheme, host, port, path, query and fragment.\\n2. DNS resolution finds the relevant IP/DNS record, commonly through local cache, recursive resolver, root, TLD and authoritative server when cache is unavailable.\\n3. Client establishes a transport connection to the server; for conventional HTTPS this includes TCP before TLS.\\n4. TLS handshake authenticates the server through certificates and establishes cryptographic keys.\\n5. Browser sends an HTTP request over the protected connection.\\n6. Server/application processes it and may access files, APIs or databases.\\n7. Server returns status, headers such as Content-Type and response body.\\n8. Browser parses HTML, builds DOM/CSS-related structures, executes JavaScript, calculates layout and paints the page.\\nDiagram: URL -> DNS -> TCP -> TLS -> HTTP request -> Server/App/DB -> HTTP response -> HTML/CSS/JS parsing -> Layout/Paint -> Screen.\\nPunjabi: Browser ਪਹਿਲਾਂ address ਸਮਝਦਾ ਹੈ, DNS ਨਾਲ server ਲੱਭਦਾ ਹੈ, HTTPS ਲਈ TLS security ਬਣਾਉਂਦਾ ਹੈ, request ਭੇਜਦਾ ਹੈ ਅਤੇ response ਨੂੰ page ਵਿੱਚ render ਕਰਦਾ ਹੈ.",
+          "code": "",
+          "formula": ""
+        },
+        {
+          "id": "sol-web-tech-q-1786729179901",
+          "questionId": "web-tech-q-1786729179901",
+          "question": "What is DNS? Explain the six-step DNS resolution pipeline, DNS hierarchy, caching and the role of recursive and authoritative servers.",
+          "unit": "Unit I",
+          "type": "8-mark",
+          "solution": "Model Answer:\\nDNS (Domain Name System) maps domain names to DNS records such as IP addresses. Explain: 1) browser/local cache check; 2) OS/resolver cache; 3) recursive resolver; 4) root server identifies TLD; 5) TLD server identifies authoritative server; 6) authoritative server supplies the answer. Explain that caching can make the resolver skip upstream queries. Distinguish recursive resolver from authoritative server. Give example: resolving www.example.com. Diagram: Browser -> Local cache -> Recursive resolver -> Root -> TLD -> Authoritative -> Answer. Punjabi: DNS Internet ਦੀ phonebook ਵਰਗਾ ਹੈ, ਪਰ technically it is a distributed hierarchical naming system, not simply a single database.",
           "code": "",
           "formula": ""
         }
