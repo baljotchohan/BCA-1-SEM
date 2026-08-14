@@ -48,6 +48,65 @@
             --terminal-green: #10b981; /* Soft modern emerald */
             --terminal-glow: rgba(16, 185, 129, 0.2);
         }
+        .light-mode {
+            --bg-base: #f8fafc; /* slate-50 */
+            --bg-panel: #ffffff;
+            --bg-card: #ffffff;
+            --bg-card-hover: #f1f5f9; /* slate-100 */
+            --border-light: rgba(0, 0, 0, 0.08);
+            --border-strong: rgba(0, 0, 0, 0.15);
+            
+            --text-main: #0f172a; /* slate-900 */
+            --text-muted: #475569; /* slate-600 */
+            --text-dim: #64748b; /* slate-500 */
+        }
+
+        /* Elegant Subject Color Variables (Dark Mode Defaults) */
+        .theme-blue { --accent-bg: rgba(59, 130, 246, 0.1); --accent-border: rgba(59, 130, 246, 0.25); --accent-text: #60a5fa; }
+        .theme-emerald { --accent-bg: rgba(16, 185, 129, 0.1); --accent-border: rgba(16, 185, 129, 0.25); --accent-text: #34d399; }
+        .theme-rose { --accent-bg: rgba(244, 63, 94, 0.1); --accent-border: rgba(244, 63, 94, 0.25); --accent-text: #fb7185; }
+        .theme-amber { --accent-bg: rgba(245, 158, 11, 0.1); --accent-border: rgba(245, 158, 11, 0.25); --accent-text: #fbbf24; }
+        .theme-purple { --accent-bg: rgba(168, 85, 247, 0.1); --accent-border: rgba(168, 85, 247, 0.25); --accent-text: #c084fc; }
+        .theme-teal { --accent-bg: rgba(20, 184, 166, 0.1); --accent-border: rgba(20, 184, 166, 0.25); --accent-text: #2dd4bf; }
+        .theme-zinc { --accent-bg: rgba(255, 255, 255, 0.05); --accent-border: var(--border-strong); --accent-text: var(--text-main); }
+
+        /* Light Mode Theme Overrides */
+        .light-mode .theme-blue { --accent-bg: rgba(59, 130, 246, 0.12); --accent-border: rgba(59, 130, 246, 0.4); --accent-text: #2563eb; }
+        .light-mode .theme-emerald { --accent-bg: rgba(16, 185, 129, 0.12); --accent-border: rgba(16, 185, 129, 0.4); --accent-text: #059669; }
+        .light-mode .theme-rose { --accent-bg: rgba(244, 63, 94, 0.12); --accent-border: rgba(244, 63, 94, 0.4); --accent-text: #e11d48; }
+        .light-mode .theme-amber { --accent-bg: rgba(245, 158, 11, 0.15); --accent-border: rgba(245, 158, 11, 0.5); --accent-text: #d97706; }
+        .light-mode .theme-purple { --accent-bg: rgba(168, 85, 247, 0.12); --accent-border: rgba(168, 85, 247, 0.4); --accent-text: #9333ea; }
+        .light-mode .theme-teal { --accent-bg: rgba(20, 184, 166, 0.12); --accent-border: rgba(20, 184, 166, 0.4); --accent-text: #0d9488; }
+        .light-mode .theme-zinc { --accent-bg: rgba(0, 0, 0, 0.04); --accent-border: var(--border-strong); --accent-text: var(--text-main); }
+        
+        .accent-pill {
+            background: var(--accent-bg);
+            border: 1px solid var(--accent-border);
+            color: var(--accent-text);
+        }
+        
+        .terminal-card.has-accent:hover {
+            border-color: var(--accent-border);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px var(--accent-bg);
+        }
+        .light-mode .terminal-nav {
+            background: rgba(255, 255, 255, 0.85);
+        }
+        .light-mode .search-box {
+            background: #ffffff;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+        }
+        .light-mode pre {
+            background: #f1f5f9 !important;
+            border-color: #cbd5e1 !important;
+            color: #0f172a !important;
+        }
+        .light-mode .code-header {
+            background: #e2e8f0;
+            border-color: #cbd5e1;
+            color: #475569;
+        }
+
 
         * {
             box-sizing: border-box;
@@ -940,14 +999,15 @@
         let currentNoteIndex = 0;
         let isReaderExpanded = false;
 
+        
         const subjectThemes = {
-            'web-tech': { color: 'zinc', border: 'border-zinc-800', bg: 'bg-zinc-900', text: 'text-zinc-100', glow: 'hover:border-zinc-600' },
-            'hardware': { color: 'zinc', border: 'border-zinc-800', bg: 'bg-zinc-900', text: 'text-zinc-100', glow: 'hover:border-zinc-600' },
-            'c-lang': { color: 'zinc', border: 'border-zinc-800', bg: 'bg-zinc-900', text: 'text-zinc-100', glow: 'hover:border-zinc-600' },
-            'english': { color: 'zinc', border: 'border-zinc-800', bg: 'bg-zinc-900', text: 'text-zinc-100', glow: 'hover:border-zinc-600' },
-            'punjabi': { color: 'zinc', border: 'border-zinc-800', bg: 'bg-zinc-900', text: 'text-zinc-100', glow: 'hover:border-zinc-600' },
-            'math': { color: 'zinc', border: 'border-zinc-800', bg: 'bg-zinc-900', text: 'text-zinc-100', glow: 'hover:border-zinc-600' },
-            'env-edu': { color: 'teal', border: 'border-teal-500/30', bg: 'bg-teal-500/10', text: 'text-teal-400', glow: 'hover:border-teal-500/50' }
+            'web-tech': { class: 'theme-blue' },
+            'hardware': { class: 'theme-teal' },
+            'c-lang': { class: 'theme-emerald' },
+            'english': { class: 'theme-rose' },
+            'punjabi': { class: 'theme-amber' },
+            'math': { class: 'theme-purple' },
+            'e-commerce': { class: 'theme-blue' }
         };
 
         function renderSubjectCards() {
@@ -955,17 +1015,17 @@
             if (!container || typeof BCA_1ST_SEM_DATA === 'undefined') return;
 
             container.innerHTML = BCA_1ST_SEM_DATA.subjects.map(s => {
-                const theme = subjectThemes[s.id] || { color: 'zinc', border: 'border-zinc-800', bg: 'bg-zinc-900', text: 'text-zinc-100', glow: 'hover:border-zinc-600' };
+                const theme = subjectThemes[s.id] || { class: 'theme-zinc' };
                 const topicCount = (s.notes || []).length;
                 const quesCount = (s.questions || []).length;
 
                 return `
-                    <div class="terminal-card cursor-pointer p-5 flex flex-col justify-between transition-all duration-200 hover:-translate-y-1 ${theme.glow}" onclick="navigateToSubject('${s.id}', 'notes')">
+                    <div class="terminal-card has-accent ${theme.class} cursor-pointer p-5 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1" onclick="navigateToSubject('${s.id}', 'notes')">
                         <div>
                             <!-- Top Metadata -->
                             <div class="flex items-start justify-between mb-3">
                                 <div>
-                                    <span class="mono text-[11px] px-2.5 py-0.5 rounded ${theme.bg} ${theme.border} ${theme.text} font-bold inline-block mb-1">
+                                    <span class="mono text-[11px] px-2.5 py-0.5 rounded accent-pill font-bold inline-block mb-1">
                                         ${escapeHtml(s.code)}
                                     </span>
                                     <div class="text-[11px] mono text-zinc-400 flex items-center gap-2">
@@ -1572,7 +1632,36 @@
         window.addEventListener('hashchange', handleHashRouting);
 
         // Initialization
+        
+        // --- 8. THEME TOGGLE LOGIC ---
+        function applySavedTheme() {
+            const savedTheme = localStorage.getItem('alpha-theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-mode');
+                document.getElementById('theme-toggle-icon').innerText = 'dark_mode';
+            }
+        }
+
+        function toggleGlobalTheme() {
+            const isLight = document.body.classList.toggle('light-mode');
+            localStorage.setItem('alpha-theme', isLight ? 'light' : 'dark');
+            const icon = document.getElementById('theme-toggle-icon');
+            if (icon) {
+                icon.innerText = isLight ? 'dark_mode' : 'light_mode';
+            }
+            // Update nav button hover states based on theme
+            const toggleBtn = document.getElementById('theme-toggle-btn');
+            if (isLight) {
+                toggleBtn.classList.remove('text-zinc-400', 'hover:text-zinc-100', 'hover:bg-white/10');
+                toggleBtn.classList.add('text-slate-600', 'hover:text-slate-900', 'hover:bg-black/5');
+            } else {
+                toggleBtn.classList.remove('text-slate-600', 'hover:text-slate-900', 'hover:bg-black/5');
+                toggleBtn.classList.add('text-zinc-400', 'hover:text-zinc-100', 'hover:bg-white/10');
+            }
+        }
+
         window.onload = () => {
+            applySavedTheme();
             typeText();
             startLiveClock();
             handleHashRouting();
