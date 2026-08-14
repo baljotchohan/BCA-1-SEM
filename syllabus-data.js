@@ -356,6 +356,14 @@ const BCA_1ST_SEM_DATA = {
           "question": "What is Flexbox? Name four container properties.",
           "marks": 2,
           "probability": "High Probability (PU Exam)"
+        },
+        {
+          "id": "web-tech-q-1786729252513",
+          "unit": "Unit III",
+          "type": "2-mark",
+          "question": "What is responsive web design and what is mobile-first design?",
+          "marks": 2,
+          "probability": "High Probability (PU Exam)"
         }
       ],
       "solutions": [
@@ -586,6 +594,16 @@ const BCA_1ST_SEM_DATA = {
           "unit": "Unit III",
           "type": "2-mark",
           "solution": "Flexbox is a one-dimensional CSS layout system for arranging and distributing items along main and cross axes. Four container properties are flex-direction, justify-content, align-items and flex-wrap; gap is also commonly used.",
+          "code": "",
+          "formula": ""
+        },
+        {
+          "id": "sol-web-tech-q-1786729252513",
+          "questionId": "web-tech-q-1786729252513",
+          "question": "What is responsive web design and what is mobile-first design?",
+          "unit": "Unit III",
+          "type": "2-mark",
+          "solution": "Responsive web design adapts presentation and layout to different screen sizes and environments. Mobile-first design starts with the small-screen experience as the base and progressively enhances the layout for larger screens, often using min-width media queries.",
           "code": "",
           "formula": ""
         }
