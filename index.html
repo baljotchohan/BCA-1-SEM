@@ -61,23 +61,65 @@
             --text-dim: #64748b; /* slate-500 */
         }
 
-        /* Elegant Subject Color Variables (Dark Mode Defaults) */
-        .theme-blue { --accent-bg: rgba(59, 130, 246, 0.1); --accent-border: rgba(59, 130, 246, 0.25); --accent-text: #60a5fa; }
-        .theme-emerald { --accent-bg: rgba(16, 185, 129, 0.1); --accent-border: rgba(16, 185, 129, 0.25); --accent-text: #34d399; }
-        .theme-rose { --accent-bg: rgba(244, 63, 94, 0.1); --accent-border: rgba(244, 63, 94, 0.25); --accent-text: #fb7185; }
-        .theme-amber { --accent-bg: rgba(245, 158, 11, 0.1); --accent-border: rgba(245, 158, 11, 0.25); --accent-text: #fbbf24; }
-        .theme-purple { --accent-bg: rgba(168, 85, 247, 0.1); --accent-border: rgba(168, 85, 247, 0.25); --accent-text: #c084fc; }
-        .theme-teal { --accent-bg: rgba(20, 184, 166, 0.1); --accent-border: rgba(20, 184, 166, 0.25); --accent-text: #2dd4bf; }
-        .theme-zinc { --accent-bg: rgba(255, 255, 255, 0.05); --accent-border: var(--border-strong); --accent-text: var(--text-main); }
+        /* Elegant Subject Color Variables (Dark Mode Defaults - Full Box Colors) */
+        .theme-blue { 
+            --accent-bg: rgba(59, 130, 246, 0.15); --accent-border: rgba(59, 130, 246, 0.3); --accent-text: #93c5fd; 
+            --card-bg: rgba(30, 58, 138, 0.4); --card-hover: rgba(30, 58, 138, 0.6); --card-border: rgba(59, 130, 246, 0.2);
+        }
+        .theme-emerald { 
+            --accent-bg: rgba(16, 185, 129, 0.15); --accent-border: rgba(16, 185, 129, 0.3); --accent-text: #6ee7b7; 
+            --card-bg: rgba(6, 78, 59, 0.4); --card-hover: rgba(6, 78, 59, 0.6); --card-border: rgba(16, 185, 129, 0.2);
+        }
+        .theme-rose { 
+            --accent-bg: rgba(244, 63, 94, 0.15); --accent-border: rgba(244, 63, 94, 0.3); --accent-text: #fda4af; 
+            --card-bg: rgba(136, 19, 55, 0.4); --card-hover: rgba(136, 19, 55, 0.6); --card-border: rgba(244, 63, 94, 0.2);
+        }
+        .theme-amber { 
+            --accent-bg: rgba(245, 158, 11, 0.15); --accent-border: rgba(245, 158, 11, 0.3); --accent-text: #fcd34d; 
+            --card-bg: rgba(120, 53, 15, 0.4); --card-hover: rgba(120, 53, 15, 0.6); --card-border: rgba(245, 158, 11, 0.2);
+        }
+        .theme-purple { 
+            --accent-bg: rgba(168, 85, 247, 0.15); --accent-border: rgba(168, 85, 247, 0.3); --accent-text: #d8b4fe; 
+            --card-bg: rgba(88, 28, 135, 0.4); --card-hover: rgba(88, 28, 135, 0.6); --card-border: rgba(168, 85, 247, 0.2);
+        }
+        .theme-teal { 
+            --accent-bg: rgba(20, 184, 166, 0.15); --accent-border: rgba(20, 184, 166, 0.3); --accent-text: #5eead4; 
+            --card-bg: rgba(19, 78, 74, 0.4); --card-hover: rgba(19, 78, 74, 0.6); --card-border: rgba(20, 184, 166, 0.2);
+        }
+        .theme-zinc { 
+            --accent-bg: rgba(255, 255, 255, 0.05); --accent-border: var(--border-strong); --accent-text: var(--text-main); 
+            --card-bg: var(--bg-card); --card-hover: var(--bg-card-hover); --card-border: var(--border-light);
+        }
 
-        /* Light Mode Theme Overrides */
-        .light-mode .theme-blue { --accent-bg: rgba(59, 130, 246, 0.12); --accent-border: rgba(59, 130, 246, 0.4); --accent-text: #2563eb; }
-        .light-mode .theme-emerald { --accent-bg: rgba(16, 185, 129, 0.12); --accent-border: rgba(16, 185, 129, 0.4); --accent-text: #059669; }
-        .light-mode .theme-rose { --accent-bg: rgba(244, 63, 94, 0.12); --accent-border: rgba(244, 63, 94, 0.4); --accent-text: #e11d48; }
-        .light-mode .theme-amber { --accent-bg: rgba(245, 158, 11, 0.15); --accent-border: rgba(245, 158, 11, 0.5); --accent-text: #d97706; }
-        .light-mode .theme-purple { --accent-bg: rgba(168, 85, 247, 0.12); --accent-border: rgba(168, 85, 247, 0.4); --accent-text: #9333ea; }
-        .light-mode .theme-teal { --accent-bg: rgba(20, 184, 166, 0.12); --accent-border: rgba(20, 184, 166, 0.4); --accent-text: #0d9488; }
-        .light-mode .theme-zinc { --accent-bg: rgba(0, 0, 0, 0.04); --accent-border: var(--border-strong); --accent-text: var(--text-main); }
+        /* Light Mode Theme Overrides (Full Box Pastel Colors) */
+        .light-mode .theme-blue { 
+            --accent-bg: #bfdbfe; --accent-border: #93c5fd; --accent-text: #1d4ed8; 
+            --card-bg: #eff6ff; --card-hover: #dbeafe; --card-border: #bfdbfe;
+        }
+        .light-mode .theme-emerald { 
+            --accent-bg: #a7f3d0; --accent-border: #6ee7b7; --accent-text: #047857; 
+            --card-bg: #ecfdf5; --card-hover: #d1fae5; --card-border: #a7f3d0;
+        }
+        .light-mode .theme-rose { 
+            --accent-bg: #fecdd3; --accent-border: #fda4af; --accent-text: #be123c; 
+            --card-bg: #fff1f2; --card-hover: #ffe4e6; --card-border: #fecdd3;
+        }
+        .light-mode .theme-amber { 
+            --accent-bg: #fde68a; --accent-border: #fcd34d; --accent-text: #b45309; 
+            --card-bg: #fffbeb; --card-hover: #fef3c7; --card-border: #fde68a;
+        }
+        .light-mode .theme-purple { 
+            --accent-bg: #e9d5ff; --accent-border: #d8b4fe; --accent-text: #7e22ce; 
+            --card-bg: #faf5ff; --card-hover: #f3e8ff; --card-border: #e9d5ff;
+        }
+        .light-mode .theme-teal { 
+            --accent-bg: #99f6e4; --accent-border: #5eead4; --accent-text: #0f766e; 
+            --card-bg: #f0fdfa; --card-hover: #ccfbf1; --card-border: #99f6e4;
+        }
+        .light-mode .theme-zinc { 
+            --accent-bg: rgba(0, 0, 0, 0.04); --accent-border: var(--border-strong); --accent-text: var(--text-main); 
+            --card-bg: var(--bg-card); --card-hover: var(--bg-card-hover); --card-border: var(--border-light);
+        }
         
         .accent-pill {
             background: var(--accent-bg);
@@ -85,9 +127,19 @@
             color: var(--accent-text);
         }
         
+        /* Apply full box colors to cards */
+        .terminal-card.has-accent {
+            background-color: var(--card-bg);
+            border-color: var(--card-border);
+        }
         .terminal-card.has-accent:hover {
+            background-color: var(--card-hover);
             border-color: var(--accent-border);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px var(--accent-bg);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px var(--card-border);
+        }
+        .workspace-hero.has-accent {
+            background-color: var(--card-bg);
+            border-color: var(--card-border);
         }
         .light-mode .terminal-nav {
             background: rgba(255, 255, 255, 0.85);
@@ -264,7 +316,7 @@
             gap: 8px;
             margin: 1.25rem 0 0.75rem 0;
             padding-top: 1.25rem;
-            border-top: 1px solid var(--border-light);
+            border-top: 1px solid var(--card-border);
         }
 
         .term-btn {
@@ -280,14 +332,17 @@
             cursor: pointer;
             transition: all 0.2s ease;
             text-decoration: none;
-            background: var(--bg-base);
-            border: 1px solid var(--border-light);
-            color: var(--text-muted);
+            background: rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+        }
+        .light-mode .term-btn {
+            background: rgba(255, 255, 255, 0.4);
         }
         .term-btn:hover {
-            background: var(--text-main);
-            color: var(--bg-base);
-            border-color: var(--text-main);
+            background: var(--accent-bg);
+            color: var(--accent-text);
+            border-color: var(--accent-border);
             transform: translateY(-1px);
         }
 
