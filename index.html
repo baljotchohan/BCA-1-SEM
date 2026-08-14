@@ -26,19 +26,30 @@
 
     <style>
         :root {
-            --bg-[#212121]olor: #212121;
-            --bg-panel: #2f2f2f;
-            --bg-[#212121]ard: #2f2f2f;
-            --bg-[#212121]ard-hover: #3a3a3a;
-            --border-color: #424242;
-            --border-highlight: #565656;
-            --text-main: #ececec;
-            --text-muted: #b4b4b4;
-            --text-dim: #888888;
-            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
-            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --terminal-green: #00ff41;
-            --terminal-glow: rgba(0, 255, 65, 0.4);
+            /* Google Antigravity Light/Dark Theme System */
+            --theme-surface-surface: #ffffff;
+            --theme-surface-surface-container: #f8f9fa;
+            --theme-surface-surface-container-low: #ffffff;
+            --theme-surface-on-surface: #121317;
+            --theme-surface-on-surface-variant: #45474d;
+            --theme-outline-variant: #e1e3e8;
+            --theme-button-primary: #121317;
+            --theme-button-primary-hover: #31333a;
+            --theme-button-secondary: transparent;
+            --theme-button-secondary-hover: #f1f3f6;
+            --gemini-blue: #3186FF;
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+            --space-4xl: 72px;
+            --shape-corner-rounded: 999px;
+            --shape-corner-xl: 24px;
+            
+            --font-mono: 'Google Sans Code', 'JetBrains Mono', monospace;
+            --font-sans: 'Google Sans Flex', 'Inter', -apple-system, sans-serif;
         }
 
         * {
@@ -48,488 +59,343 @@
         }
 
         body {
-            background-color: var(--bg-[#212121]olor);
-            color: var(--text-main);
+            background-color: var(--theme-surface-surface);
+            color: var(--theme-surface-on-surface);
             font-family: var(--font-sans);
             min-height: 100vh;
             overflow-x: hidden;
-            /* Clean background */
+            -webkit-font-smoothing: antialiased;
         }
 
         .mono {
             font-family: var(--font-mono);
         }
 
-        /* --- CRT SCANLINES LAYER --- */
-        .scanlines {
-            display: none !important;
-        }
-
-        /* --- INTRO OVERLAY --- */
-        #intro-overlay {
-            position: fixed;
-            inset: 0;
-            background-color: #000;
-            z-index: 100000;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-        }
-
-        .intro-content {
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .intro-img {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            border: 2px solid var(--terminal-green);
-            box-shadow: 0 0 25px var(--terminal-glow);
-            margin-bottom: 1.5rem;
-            object-fit: cover;
-            animation: pulseGlow 2s infinite alternate;
-        }
-
-        @keyframes pulseGlow {
-            0% { box-shadow: 0 0 15px rgba(0, 255, 65, 0.3); }
-            100% { box-shadow: 0 0 35px rgba(0, 255, 65, 0.7); }
-        }
-
-        .typing-text {
-            font-family: var(--font-mono);
-            color: var(--terminal-green);
-            font-size: 1.35rem;
-            border-right: 2px solid var(--terminal-green);
+        .symbol {
+            font-family: 'Google Symbols';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 20px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
             white-space: nowrap;
-            overflow: hidden;
-            animation: blink 0.75s step-end infinite;
-            text-shadow: 0 0 10px var(--terminal-glow);
+            word-wrap: normal;
+            direction: ltr;
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
         }
 
-        @keyframes blink {
-            from, to { border-color: transparent; }
-            50% { border-color: var(--terminal-green); }
-        }
-
-        /* --- HEADER NAVBAR --- */
-        .terminal-nav {
+        /* --- ANTIGRAVITY COMPONENTS --- */
+        
+        .header {
             height: 64px;
-            background: #212121;
-            border-bottom: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--theme-outline-variant);
             position: sticky;
             top: 0;
             z-index: 50;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 1.5rem;
+            padding: 0 24px;
         }
 
-        .text-white font-medium {
-            color: var(--terminal-green);
-            text-shadow: 0 0 8px var(--terminal-glow);
-        }
-        .text-white font-medium {
-            color: var(--neon-cyan);
-            text-shadow: 0 0 8px var(--cyan-glow);
+        .header-logo {
+            font-weight: 500;
+            font-size: 1.25rem;
+            color: var(--theme-surface-on-surface);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        /* --- SUBJECT CARDS --- */
-        .terminal-card {
-            background: var(--bg-[#212121]ard);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 1.5rem;
+        .button-primary {
+            background: var(--theme-button-primary);
+            color: #fff;
+            border: none;
+            padding: 10px 24px;
+            border-radius: var(--shape-corner-rounded);
+            font-family: var(--font-sans);
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        
+        .button-primary:hover {
+            background: var(--theme-button-primary-hover);
+        }
+
+        .button-secondary {
+            background: var(--theme-button-secondary);
+            color: var(--theme-surface-on-surface);
+            border: 1px solid var(--theme-outline-variant);
+            padding: 10px 24px;
+            border-radius: var(--shape-corner-rounded);
+            font-family: var(--font-sans);
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .button-secondary:hover {
+            background: var(--theme-button-secondary-hover);
+        }
+
+        .button-icon {
+            background: transparent;
+            color: var(--theme-surface-on-surface-variant);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .button-icon:hover {
+            background: var(--theme-surface-surface-container);
+            color: var(--theme-surface-on-surface);
+        }
+
+        .feature-card {
+            background: var(--theme-surface-surface);
+            border: 1px solid var(--theme-outline-variant);
+            border-radius: var(--shape-corner-xl);
+            padding: 32px;
             display: flex;
             flex-direction: column;
-            position: relative;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow: hidden;
+            transition: box-shadow 0.2s, border-color 0.2s;
         }
 
-        /* Elegant minimalist card */
-        .terminal-card:hover {
-            border-color: var(--border-highlight);
-            background: var(--bg-[#212121]ard-hover);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        .feature-card:hover {
+            border-color: #d2d5db;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
         }
 
-        .topic-pill {
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            padding: 3px 8px;
-            border-radius: 6px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border-color);
-            color: var(--text-muted);
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 8px;
+            color: var(--theme-surface-on-surface);
+        }
+        
+        .feature-desc {
+            color: var(--theme-surface-on-surface-variant);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 24px;
         }
 
-        /* 3-Action Buttons on Terminal Cards */
-        .terminal-btn-group {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            margin: 1.25rem 0 0.75rem 0;
-            padding-top: 1rem;
-            border-top: 1px dashed var(--border-color);
-        }
-
-        .term-btn {
+        .chip {
             font-family: var(--font-mono);
             font-size: 0.75rem;
-            font-weight: 600;
-            padding: 8px 6px;
-            border-radius: 6px;
+            padding: 4px 10px;
+            border-radius: var(--shape-corner-rounded);
+            background: var(--theme-surface-surface-container);
+            color: var(--theme-surface-on-surface-variant);
+            border: 1px solid var(--theme-outline-variant);
             display: inline-flex;
             align-items: center;
-            justify-content: center;
-            gap: 5px;
-            cursor: pointer;
-            transition: all 0.15s ease;
-            text-decoration: none;
-            border: 1px solid transparent;
         }
 
-        .term-btn-notes, .term-btn-qbank, .term-btn-solutions {
-            background: #424242;
-            border-color: transparent;
-            color: #ececec;
-        }
-        .term-btn-notes:hover, .term-btn-qbank:hover, .term-btn-solutions:hover {
-            background: #565656;
-            color: #fff;
+        /* Container & Layout */
+        .page-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--space-4xl) var(--space-lg);
         }
 
-        .term-btn-qbank {
-            background: rgba(251, 191, 36, 0.08);
-            border-color: rgba(251, 191, 36, 0.25);
-            color: var(--neon-amber);
+        .hero-section {
+            text-align: center;
+            padding: var(--space-4xl) 0;
         }
-        .term-btn-qbank:hover {
-            background: rgba(251, 191, 36, 0.2);
-            border-color: var(--neon-amber);
-            box-shadow: 0 0 10px rgba(251, 191, 36, 0.3);
-            color: #fff;
-        }
-
-        .term-btn-solutions {
-            background: rgba(0, 240, 255, 0.08);
-            border-color: rgba(0, 240, 255, 0.25);
-            color: var(--neon-cyan);
-        }
-        .term-btn-solutions:hover {
-            background: rgba(0, 240, 255, 0.2);
-            border-color: var(--neon-cyan);
-            box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
-            color: #fff;
+        
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            margin-bottom: var(--space-md);
+            color: var(--theme-surface-on-surface);
         }
 
-        /* --- DEDICATED FULL SUBJECT WORKSPACE --- */
-        .workspace-hero {
-            background: var(--bg-[#212121]ard);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 1.75rem;
-            margin-bottom: 1.5rem;
-            position: relative;
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--theme-surface-on-surface-variant);
+            max-width: 600px;
+            margin: 0 auto var(--space-xl);
         }
 
-        .tab-btn {
-            font-family: var(--font-mono);
-            font-size: 0.82rem;
-            font-weight: 600;
-            padding: 10px 16px;
-            border-radius: 8px;
-            color: var(--text-muted);
-            background: transparent;
-            border: 1px solid transparent;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .tab-btn.active {
-            background: #424242;
-            color: #fff;
-            border-color: #565656;
-        }
-
-        .unit-chip {
-            font-family: var(--font-mono);
-            font-size: 0.76rem;
-            padding: 5px 12px;
-            border-radius: 20px;
-            border: 1px solid var(--border-color);
-            background: rgba(255, 255, 255, 0.02);
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: all 0.15s ease;
-        }
-
-        .unit-chip.active, .unit-chip:hover {
-            border-color: #888;
-            color: #ececec;
-            background: #424242;
-        }
-
-        /* Content Articles & Notes */
-        .article-card {
-            background: var(--bg-[#212121]ard);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 1.75rem;
-            margin-bottom: 1.5rem;
-        }
-
-        /* Code block container */
-        .code-container {
-            position: relative;
-            margin: 1.25rem 0;
-        }
-        .code-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: #0b0d14;
-            border: 1px solid #1e2433;
-            border-bottom: none;
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
-            padding: 6px 12px;
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            color: var(--text-dim);
-        }
-        .code-header span {
-            color: var(--terminal-green);
-            font-weight: 600;
-        }
-        .code-copy-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--text-muted);
-            padding: 2px 8px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.7rem;
-            transition: all 0.15s;
-        }
-        .code-copy-btn:hover {
-            color: #fff;
-            border-color: var(--terminal-green);
-        }
-
-        pre {
-            background: #07090e !important;
-            border: 1px solid #1e2433 !important;
-            border-bottom-left-radius: 8px;
-            border-bottom-right-radius: 8px;
-            padding: 1rem;
-            overflow-x: auto;
-            font-family: var(--font-mono) !important;
-            font-size: 0.86rem;
-            color: #a5f3fc;
-            line-height: 1.6;
-            margin: 0 !important;
-        }
-
-        code.inline-code {
-            font-family: var(--font-mono);
-            background: rgba(0, 255, 65, 0.08);
-            color: var(--terminal-green);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 0.88em;
-            border: 1px solid rgba(0, 255, 65, 0.15);
-        }
-
-        /* Tables */
-        .table-wrap {
-            overflow-x: auto;
-            margin: 1.25rem 0;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.88rem;
-        }
-
-        th, td {
-            border: 1px solid var(--border-color);
-            padding: 10px 14px;
-            text-align: left;
-        }
-
-        th {
-            background: rgba(255, 255, 255, 0.04);
-            color: var(--terminal-green);
-            font-family: var(--font-mono);
-            font-weight: 600;
-        }
-
-        tr:nth-child(even) {
-            background: rgba(255, 255, 255, 0.015);
-        }
-
-        /* --- PURE BLACK & PAPER WHITE DOCS READER STYLES --- */
-        #reader-article-box {
-            background-color: var(--bg-[#212121]ard);
-            border-color: var(--border-color);
-            color: var(--text-main);
-            transition: background-color 0.2s ease, color 0.2s ease;
-        }
-
-        #reader-article-box.paper-mode {
-            background-color: #ffffff !important;
-            border-color: #e5e7eb !important;
-            color: #1f2937 !important;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06) !important;
-        }
-
-        #reader-article-box.paper-mode #reader-note-title,
-        #reader-article-box.paper-mode h1,
-        #reader-article-box.paper-mode h2,
-        #reader-article-box.paper-mode h3,
-        #reader-article-box.paper-mode h4 {
-            color: #111827 !important;
-            border-color: #e5e7eb !important;
-        }
-
-        #reader-article-box.paper-mode strong {
-            color: #111827 !important;
-        }
-
-        #reader-article-box.paper-mode em,
-        #reader-article-box.paper-mode li {
-            color: #374151 !important;
-        }
-
-        #reader-article-box.paper-mode blockquote {
-            border-color: #9ca3af !important;
-            color: #4b5563 !important;
-        }
-
-        #reader-article-box.paper-mode hr {
-            border-color: #e5e7eb !important;
-        }
-
-        #reader-article-box.paper-mode code.inline-code {
-            background-color: #f3f4f6 !important;
-            color: #111827 !important;
-            border-color: #e5e7eb !important;
-        }
-
-        #reader-article-box.paper-mode .table-wrap {
-            border-color: #e5e7eb !important;
-            background-color: #fafafa !important;
-        }
-
-        #reader-article-box.paper-mode table th {
-            background-color: #f3f4f6 !important;
-            color: #111827 !important;
-            border-color: #e5e7eb !important;
-        }
-
-        #reader-article-box.paper-mode table td {
-            color: #374151 !important;
-            border-color: #e5e7eb !important;
-        }
-
-        #reader-article-box.paper-mode .code-container {
-            background-color: #181a20 !important;
-            border-color: #2b2d35 !important;
-        }
-
-        #reader-article-box.paper-mode .code-header {
-            background-color: #20222a !important;
-            color: #9ca3af !important;
-            border-color: #2b2d35 !important;
-        }
-
-        /* Global overrides for Paper Mode */
-        body.paper-theme-active {
-            background-image: none !important;
-            background-color: #f3f4f6 !important;
-        }
-        body.paper-theme-active .scanlines {
-            display: none !important;
-        }
-
-        /* Q-Bank & Solution Styling */
-        .qbank-row {
-            background: var(--bg-[#212121]ard);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 1.25rem;
-            margin-bottom: 1rem;
-            transition: border-color 0.2s;
-        }
-        .qbank-row:hover {
-            border-color: var(--border-highlight);
-        }
-
-        .solution-row {
-            background: var(--bg-[#212121]ard);
-            border: 1px solid var(--border-color);
-            border-left: 4px solid #888;
-            border-radius: 10px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        /* Search Modal */
-        #search-modal {
+        /* Override old terminal classes dynamically */
+        .terminal-nav { display: none; }
+        
+        /* Modal & Views */
+        .modal-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(5, 5, 8, 0.85);
-            backdrop-filter: blur(12px);
-            z-index: 10000;
-            display: none;
-            align-items: flex-start;
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(4px);
+            z-index: 100;
+            display: flex;
+            align-items: center;
             justify-content: center;
-            padding-top: 10vh;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
         }
-        .search-box {
-            background: var(--bg-panel);
-            border: 1px solid var(--terminal-green);
-            box-shadow: 0 0 25px rgba(0, 255, 65, 0.2);
-            border-radius: 14px;
-            width: 100%;
-            max-width: 650px;
-            overflow: hidden;
+        
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
         }
 
-        /* Print styles */
-        @media print {
-            .scanlines, .terminal-nav, #intro-overlay, .no-print {
-                display: none !important;
-            }
-            body {
-                background: white !important;
-                color: black !important;
-            }
-            .article-card, .qbank-row, .solution-row {
-                background: white !important;
-                color: black !important;
-                border: 1px solid #ccc !important;
-            }
-            pre {
-                background: #f8fafc !important;
-                color: black !important;
-                border: 1px solid #ccc !important;
-            }
+        .modal-content {
+            background: var(--theme-surface-surface);
+            border: 1px solid var(--theme-outline-variant);
+            border-radius: var(--shape-corner-xl);
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s;
+        }
+        
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+        }
+
+        .reader-view {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--theme-surface-on-surface);
+        }
+        
+        .reader-view h1, .reader-view h2, .reader-view h3 {
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            font-weight: 500;
+            color: var(--theme-surface-on-surface);
+            letter-spacing: -0.01em;
+        }
+
+        .reader-view p {
+            margin-bottom: 1em;
+        }
+
+        .reader-view ul, .reader-view ol {
+            padding-left: 24px;
+            margin-bottom: 1em;
+        }
+
+        .reader-view li {
+            margin-bottom: 0.5em;
+        }
+
+        .reader-view blockquote {
+            border-left: 4px solid var(--gemini-blue);
+            padding-left: 16px;
+            color: var(--theme-surface-on-surface-variant);
+            margin: 1.5em 0;
+            font-style: italic;
+        }
+
+        .reader-view code {
+            font-family: var(--font-mono);
+            background: var(--theme-surface-surface-container);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        .reader-view pre code {
+            display: block;
+            padding: 16px;
+            border-radius: 8px;
+            background: var(--theme-surface-surface-container);
+            overflow-x: auto;
+            margin-bottom: 1.5em;
+        }
+
+        .reader-view strong {
+            font-weight: 600;
+        }
+        
+        /* Loading Overlay (Clean fade) */
+        #intro-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: var(--theme-surface-surface);
+            z-index: 100000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.6s;
+            color: var(--theme-surface-on-surface);
+        }
+        .intro-img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 24px;
+        }
+        .typing-text {
+            font-family: var(--font-sans);
+            font-size: 1.5rem;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+        }
+
+        /* QBank/List styles */
+        .list-item {
+            padding: 20px;
+            border-bottom: 1px solid var(--theme-outline-variant);
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+        
+        .list-item:last-child {
+            border-bottom: none;
+        }
+        
+        .mcp-sync-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            color: #0F9D58; /* Google Green */
+            background: rgba(15, 157, 88, 0.1);
+            padding: 4px 12px;
+            border-radius: var(--shape-corner-rounded);
+            font-weight: 500;
         }
     </style>
 </head>
@@ -560,14 +426,14 @@
         <div class="flex items-center gap-3">
             <!-- Global Search Trigger -->
             <button onclick="openSearchModal()" class="flex items-center gap-2 px-3 py-1.5 rounded bg-white/5 hover:bg-white/10 border border-white/10 text-xs mono text-gray-300 transition">
-                <i class="fas fa-search text-gray-200"></i>
+                <span class="symbol mr-1">search</span>
                 <span class="hidden sm:inline">Search bank...</span>
                 <kbd class="px-1 py-0.5 rounded bg-[#212121]lack/50 text-[10px] text-gray-400 border border-white/10">⌘K</kbd>
             </button>
 
             <!-- Live Clock -->
             <div class="flex items-center gap-2 px-3 py-1.5 rounded bg-[#2f2f2f] border border-white/10 mono text-xs text-gray-200">
-                <i class="far fa-clock"></i>
+                <span class="symbol mr-1">schedule</span>
                 <span id="terminal-clock">--:--:-- IST</span>
             </div>
         </div>
@@ -583,7 +449,7 @@
             <div class="flex flex-wrap items-center justify-between gap-4">
                 <div>
                     <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-[#424242] border border-[#565656] text-[#ececec] text-xs mono mb-3">
-                        <i class="fas fa-terminal"></i> PANJAB UNIVERSITY • BCA 1ST SEMESTER
+                        <span class="symbol mr-1">circle</span> PANJAB UNIVERSITY • BCA 1ST SEMESTER
                     </div>
                     <h1 class="text-2xl sm:text-3xl font-bold font-sans tracking-tight text-white mb-2">
                         Academic Command Deck <span class="text-white font-medium">[NEP 2026-27]</span>
@@ -620,7 +486,7 @@
             <div class="flex items-center justify-between mb-4 border-b border-white/10 pb-3">
                 <div class="flex items-center gap-2.5">
                     <div class="w-8 h-8 rounded-lg bg-[#424242] border border-[#565656] text-[#ececec] flex items-center justify-center text-sm">
-                        <i class="fas fa-graduation-cap"></i>
+                        <span class="symbol mr-1">circle</span>
                     </div>
                     <div>
                         <h2 class="text-base font-bold text-white tracking-tight">Panjab University BCA 1st Semester Marks & Assessment Scheme</h2>
@@ -730,7 +596,7 @@
             </div>
 
             <button onclick="navigateToDashboard(event)" class="px-3 py-1.5 rounded bg-white/5 hover:bg-white/10 border border-white/10 text-xs mono text-gray-300 flex items-center gap-2 transition">
-                <i class="fas fa-arrow-left text-gray-200"></i>
+                <span class="symbol mr-1">arrow_back</span>
                 <span>Back to Hub</span>
             </button>
         </div>
@@ -749,7 +615,7 @@
 
                 <div class="flex items-center gap-2 no-print">
                     <button onclick="window.print()" class="px-3 py-1.5 rounded bg-white/5 hover:bg-white/10 border border-white/10 text-xs mono text-gray-300 flex items-center gap-2 transition">
-                        <i class="fas fa-print text-gray-200"></i>
+                        <span class="symbol mr-1">circle</span>
                         <span>Print Syllabus</span>
                     </button>
                 </div>
@@ -763,19 +629,19 @@
         <div class="flex flex-wrap items-center justify-between gap-4 mb-6 border-b border-white/10 pb-4">
             <div class="flex items-center gap-2 overflow-x-auto">
                 <button onclick="switchWorkspaceTab('notes')" id="ws-tab-btn-notes" class="tab-btn active">
-                    <i class="fas fa-file-lines text-gray-200"></i>
+                    <span class="symbol mr-1">description</span>
                     <span>01. Notes View</span>
                 </button>
                 <button onclick="switchWorkspaceTab('questions')" id="ws-tab-btn-questions" class="tab-btn">
-                    <i class="fas fa-circle-question text-gray-200"></i>
+                    <span class="symbol mr-1">circle</span>
                     <span>02. Question Bank</span>
                 </button>
                 <button onclick="switchWorkspaceTab('solutions')" id="ws-tab-btn-solutions" class="tab-btn">
-                    <i class="fas fa-lightbulb text-gray-200"></i>
+                    <span class="symbol mr-1">lightbulb</span>
                     <span>03. Verified Solutions</span>
                 </button>
                 <button onclick="switchWorkspaceTab('units')" id="ws-tab-btn-units" class="tab-btn">
-                    <i class="fas fa-list-check text-gray-200"></i>
+                    <span class="symbol mr-1">circle</span>
                     <span>04. Syllabus Units</span>
                 </button>
             </div>
@@ -809,7 +675,7 @@
         <!-- Reader Sticky Top Bar -->
         <div class="sticky top-16 z-30 mb-6 p-3 rounded-xl bg-[#0b0d14]/90 backdrop-blur-md border border-white/10 flex flex-wrap items-center justify-between gap-3 shadow-2xl">
             <button onclick="backToSubjectWorkspace()" class="px-3 py-1.5 rounded bg-white/5 hover:bg-white/10 border border-white/10 text-xs mono text-gray-300 flex items-center gap-2 transition">
-                <i class="fas fa-arrow-left text-gray-200"></i>
+                <span class="symbol mr-1">arrow_back</span>
                 <span>Back to Topics</span>
             </button>
 
@@ -821,25 +687,25 @@
 
                 <!-- Paper White / Pure Dark Mode Toggle -->
                 <button onclick="toggleReaderPaperMode()" id="reader-paper-toggle-btn" class="px-2.5 py-1.5 rounded bg-white/5 hover:bg-white/10 border border-white/10 text-xs mono text-gray-300 transition flex items-center gap-1.5" title="Switch between Pitch Dark & Paper White Mode">
-                    <i class="fas fa-file-lines text-amber-300"></i>
+                    <span class="symbol mr-1">description</span>
                     <span class="hidden sm:inline" id="reader-paper-label">Paper Docs</span>
                 </button>
 
                 <!-- Full Width / Expand Toggle -->
                 <button onclick="toggleReaderWidth()" id="reader-width-toggle-btn" class="px-2.5 py-1.5 rounded bg-white/5 hover:bg-white/10 border border-white/10 text-xs mono text-gray-300 transition flex items-center gap-1.5" title="Toggle Full Width Reading">
-                    <i class="fas fa-expand text-gray-200"></i>
+                    <span class="symbol mr-1">open_in_full</span>
                     <span class="hidden sm:inline" id="reader-width-label">Expand</span>
                 </button>
 
                 <!-- Copy Note -->
                 <button onclick="copyCurrentNoteContent()" class="px-2.5 py-1.5 rounded bg-white/5 hover:bg-white/10 border border-white/10 text-xs mono text-gray-300 transition flex items-center gap-1.5" title="Copy Complete Note">
-                    <i class="far fa-copy text-gray-200"></i>
+                    <span class="symbol mr-1">content_copy</span>
                     <span class="hidden sm:inline">Copy Note</span>
                 </button>
 
                 <!-- Print Note -->
                 <button onclick="window.print()" class="px-2.5 py-1.5 rounded bg-white/5 hover:bg-white/10 border border-white/10 text-xs mono text-gray-300 transition" title="Print Note / Save PDF">
-                    <i class="fas fa-print text-gray-200"></i>
+                    <span class="symbol mr-1">circle</span>
                 </button>
             </div>
         </div>
@@ -861,15 +727,15 @@
             <!-- Bottom Note Navigation Controls -->
             <div class="flex flex-wrap items-center justify-between gap-4 mt-12 pt-6 border-t border-white/10 no-print">
                 <button id="reader-prev-btn" onclick="navigateNote(-1)" class="px-4 py-2 rounded bg-white/5 hover:bg-white/10 border border-white/10 text-xs mono text-gray-300 flex items-center gap-2 transition">
-                    <i class="fas fa-chevron-left text-gray-200"></i>
+                    <span class="symbol mr-1">chevron_left</span>
                     <span>Previous Topic</span>
                 </button>
                 <button onclick="window.scrollTo({top:0, behavior:'smooth'})" class="text-xs mono text-gray-400 hover:text-white flex items-center gap-1.5">
-                    <i class="fas fa-arrow-up text-gray-200"></i> Back to Top
+                    <span class="symbol mr-1">circle</span> Back to Top
                 </button>
                 <button id="reader-next-btn" onclick="navigateNote(1)" class="px-4 py-2 rounded bg-white/5 hover:bg-white/10 border border-white/10 text-xs mono text-gray-300 flex items-center gap-2 transition">
                     <span>Next Topic</span>
-                    <i class="fas fa-chevron-right text-gray-200"></i>
+                    <span class="symbol mr-1">chevron_right</span>
                 </button>
             </div>
         </article>
@@ -882,7 +748,7 @@
     <div id="search-modal" onclick="handleSearchOverlayClick(event)">
         <div class="search-box" onclick="event.stopPropagation()">
             <div class="p-4 border-b border-white/10 flex items-center gap-3">
-                <i class="fas fa-search text-gray-200"></i>
+                <span class="symbol mr-1">search</span>
                 <input type="text" id="global-search-input" oninput="executeSearch(this.value)" placeholder="Type topic or question (e.g. Pointers, Bisection, HTML Forms, RAM)..." class="bg-transparent border-none outline-none text-white font-mono text-sm w-full placeholder-gray-500">
                 <button onclick="closeSearchModal()" class="text-gray-400 hover:text-white text-xs mono px-2 py-1 rounded bg-white/5">ESC</button>
             </div>
@@ -1026,7 +892,7 @@
                                     </div>
                                 </div>
                                 <div class="w-10 h-10 rounded-xl flex items-center justify-center text-base ${theme.bg} border ${theme.border} ${theme.text} shadow-sm">
-                                    <i class="fas ${s.icon || 'fa-book-open'}"></i>
+                                    <span class="symbol mr-1">menu_book</span>
                                 </div>
                             </div>
 
@@ -1037,10 +903,10 @@
                             <!-- Stats badges -->
                             <div class="flex items-center gap-2 mb-4">
                                 <span class="text-[10px] mono px-2 py-0.5 rounded bg-white/5 text-gray-400 border border-white/5">
-                                    <i class="fas fa-file-alt text-gray-500 mr-1"></i>${topicCount} Topics
+                                    <span class="symbol mr-1">circle</span>${topicCount} Topics
                                 </span>
                                 <span class="text-[10px] mono px-2 py-0.5 rounded bg-white/5 text-gray-400 border border-white/5">
-                                    <i class="fas fa-question-circle text-gray-500 mr-1"></i>${quesCount} Questions
+                                    <span class="symbol mr-1">help</span>${quesCount} Questions
                                 </span>
                             </div>
                         </div>
@@ -1048,7 +914,7 @@
                         <!-- Single Action Button -->
                         <button onclick="event.stopPropagation(); navigateToSubject('${s.id}', 'notes')" class="w-full py-2.5 rounded-lg ${theme.bg} hover:bg-white/10 border ${theme.border} text-xs mono ${theme.text} flex items-center justify-center gap-2 transition font-bold">
                             <span>Open Subject Workspace</span>
-                            <i class="fas fa-arrow-right text-[10px]"></i>
+                            <span class="symbol mr-1">arrow_forward</span>
                         </button>
                     </div>
                 `;
@@ -1205,7 +1071,7 @@
                             <div class="flex items-center justify-between mb-3">
                                 <span class="px-2.5 py-0.5 rounded bg-[#424242] border border-[#565656] text-[#ececec] mono text-xs font-bold">${escapeHtml(n.unit)}</span>
                                 <span class="text-xs mono text-gray-400 flex items-center gap-1">
-                                    <i class="far fa-clock text-gray-500"></i> ${escapeHtml(n.readTime || '7 min read')}
+                                    <span class="symbol mr-1">schedule</span> ${escapeHtml(n.readTime || '7 min read')}
                                 </span>
                             </div>
                             <h3 class="text-base font-bold text-white mb-2 leading-snug group-hover:text-gray-100 transition">${escapeHtml(n.title)}</h3>
@@ -1342,7 +1208,7 @@
                         </span>
                     </div>
                     <p class="text-base font-semibold text-white mt-1">Q${idx + 1}. ${escapeHtml(q.question)}</p>
-                    ${q.examFrequency ? `<p class="text-xs mono text-gray-200/80 mt-1.5"><i class="fas fa-history mr-1"></i>${escapeHtml(q.examFrequency)}</p>` : ''}
+                    ${q.examFrequency ? `<p class="text-xs mono text-gray-200/80 mt-1.5"><span class="symbol mr-1">history</span>${escapeHtml(q.examFrequency)}</p>` : ''}
                 </div>
             `).join('');
         }
@@ -1363,7 +1229,7 @@
                     <div class="flex items-center justify-between mb-3">
                         <span class="px-2.5 py-0.5 rounded bg-[#424242] border border-[#565656] text-[#ececec] mono text-xs font-bold">${escapeHtml(sol.unit)}</span>
                         <button onclick="copyContent(this)" class="px-2.5 py-1 rounded bg-white/5 hover:bg-white/10 text-xs mono text-gray-100 transition">
-                            <i class="far fa-copy mr-1"></i> Copy Answer
+                            <span class="symbol mr-1">content_copy</span> Copy Answer
                         </button>
                     </div>
                     <h3 class="text-base font-bold text-gray-100 mb-3">Q: ${escapeHtml(sol.question)}</h3>
@@ -1493,7 +1359,7 @@
             if (!pre) return;
             navigator.clipboard.writeText(pre.innerText).then(() => {
                 const oldHtml = btn.innerHTML;
-                btn.innerHTML = '<i class="fas fa-check text-gray-200 mr-1"></i>Copied!';
+                btn.innerHTML = '<span class="symbol mr-1">check_circle</span>Copied!';
                 setTimeout(() => { btn.innerHTML = oldHtml; }, 1800);
             });
         }
@@ -1503,7 +1369,7 @@
             if (!card) return;
             navigator.clipboard.writeText(card.innerText).then(() => {
                 const oldHtml = btn.innerHTML;
-                btn.innerHTML = '<i class="fas fa-check text-gray-200 mr-1"></i> Copied!';
+                btn.innerHTML = '<span class="symbol mr-1">check_circle</span> Copied!';
                 setTimeout(() => { btn.innerHTML = oldHtml; }, 1800);
             });
         }
