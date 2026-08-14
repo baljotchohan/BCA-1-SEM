@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Study Reader — BCA III Academic Hub</title>
+<meta name="description" content="Official BCA 3rd Semester Study Notes, Master Guides, and Bilingual Academic Handouts — Panjab University."/>
+<meta name="robots" content="noindex"/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/tokyo-night-dark.min.css"/>
+<link rel="stylesheet" href="styles.css?v=5.0"/>
+
+<style>
+:root{
+  --fs-base: 1.0625;
+  --font-serif: 'Newsreader', 'Instrument Serif', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', SFMono-Regular, Menlo, monospace;
+  
+  --bg-page: #0c0c12;
+  --bg-surface: #14141e;
+  --bg-card: #1b1b28;
+  --bg-card-subtle: #222232;
+  --bg-glass: rgba(12, 12, 18, 0.88);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --border-accent: rgba(204, 120, 92, 0.35);
+  
+  --text-main: #f4f4f8;
+  --text-muted: #a4a4b8;
+  --text-subtle: #6c6c82;
+  
+  --color-coral: #cc785c;
+  --color-coral-dim: rgba(204, 120, 92, 0.12);
+  --color-coral-border: rgba(204, 120, 92, 0.3);
+  
+  --color-indigo: #818cf8;
+  --color-indigo-dim: rgba(129, 140, 248, 0.09);
+  --color-indigo-border: rgba(129, 140, 248, 0.25);
+  
+  --color-emerald: #34d399;
+  --color-amber: #fbbf24;
+  --color-blue: #38bdf8;
+  
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 26px;
+  --shadow-card: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="light"]{
+  --bg-page: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-card: #ffffff;
+  --bg-card-subtle: #f1f5f9;
+  --bg-glass: rgba(248, 250, 252, 0.92);
+  --border-color: rgba(15, 23, 42, 0.08);
+  --border-strong: rgba(15, 23, 42, 0.15);
+  --border-accent: rgba(204, 120, 92, 0.4);
+  
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --text-subtle: #94a3b8;
+  
+  --color-indigo: #4f46e5;
+  --color-indigo-dim: rgba(79, 70, 229, 0.08);
+  --color-indigo-border: rgba(79, 70, 229, 0.2);
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth;-webkit-text-size-adjust:none}
+body{font-family:var(--font-sans);background:var(--bg-page);color:var(--text-main);min-height:100vh;line-height:1.65;transition:background .25s,color .25s}
+
+/* ──────────── TOP READING PROGRESS BAR ──────────── */
+#rp{position:fixed;top:0;left:0;height:3px;width:0;z-index:9999;background:linear-gradient(90deg,var(--color-coral),#818cf8,#38bdf8);border-radius:0 2px 2px 0;transition:width .06s linear}
+
+/* ──────────── TOP NAVIGATION BAR ──────────── */
+.topbar{
+  position:sticky;top:0;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  height:calc(56px + env(safe-area-inset-top, 0px));
+  padding:env(safe-area-inset-top, 0px) 1.5rem 0 1.5rem;
+  gap:1rem;
+  background:var(--bg-glass);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border-color);
+  box-sizing:border-box;
+}
+.tb-left{display:flex;align-items:center;gap:.75rem;min-width:0;flex:1}
+.tb-back-btn{
+  display:inline-flex;align-items:center;gap:.4rem;
+  padding:.4rem .75rem;border-radius:var(--radius-sm);
+  background:var(--bg-card);border:1px solid var(--border-color);
+  color:var(--text-main);font-size:.78rem;font-weight:600;
+  cursor:pointer;transition:all .15s;text-decoration:none;
+  flex-shrink:0;
+}
+.tb-back-btn:hover{background:var(--color-coral-dim);border-color:var(--color-coral);color:var(--color-coral);transform:translateX(-2px)}
+.tb-logo{font-family:var(--font-mono);font-size:.82rem;font-weight:800;color:var(--color-coral);letter-spacing:.06em;flex-shrink:0;text-decoration:none}
+.tb-sep{color:var(--text-subtle);font-size:.75rem;flex-shrink:0}
+.tb-crumb{font-size:.8rem;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.tb-crumb strong{color:var(--text-main);font-weight:700}
+.tb-right{display:flex;align-items:center;gap:.45rem;flex-shrink:0}
+
+/* Toolbar buttons */
+.tb-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.35rem;
+  height:32px;padding:0 .75rem;
+  border:1px solid var(--border-color);border-radius:var(--radius-sm);
+  background:var(--bg-card);color:var(--text-muted);
+  font-size:.75rem;font-family:var(--font-sans);font-weight:600;
+  cursor:pointer;transition:all .15s;white-space:nowrap;
+}
+.tb-btn:hover{border-color:var(--color-coral);color:var(--color-coral);background:var(--color-coral-dim)}
+.tb-btn.active{border-color:var(--color-indigo);color:var(--color-indigo);background:var(--color-indigo-dim)}
+.tb-btn.icon-only{width:32px;padding:0}
+.tb-btn.pdf-btn{background:var(--color-coral);color:#fff;border-color:var(--color-coral)}
+.tb-btn.pdf-btn:hover{background:#b8654a;border-color:#b8654a;color:#fff;transform:translateY(-1px);box-shadow:0 4px 12px rgba(204,120,92,0.3)}
+
+/* Language Switcher */
+.lang-group{display:flex;align-items:center;border:1px solid var(--border-color);border-radius:var(--radius-sm);overflow:hidden;background:var(--bg-card)}
+.lang-btn{padding:0 .55rem;height:32px;background:transparent;border:none;color:var(--text-subtle);font-size:.72rem;font-weight:700;cursor:pointer;transition:all .15s}
+.lang-btn:hover{color:var(--text-main)}
+.lang-btn.active{background:var(--color-indigo-dim);color:var(--color-indigo);font-weight:800}
+
+/* Font size control */
+.fs-control{display:flex;align-items:center;border:1px solid var(--border-color);border-radius:var(--radius-sm);overflow:hidden;background:var(--bg-card)}
+.fs-btn{width:28px;height:32px;background:transparent;border:none;color:var(--text-muted);font-size:.85rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.fs-btn:hover{background:var(--color-coral-dim);color:var(--color-coral)}
+.fs-btn:first-child{border-right:1px solid var(--border-color)}
+.fs-btn:last-child{border-left:1px solid var(--border-color)}
+.fs-label{padding:0 .4rem;font-size:.7rem;font-family:var(--font-mono);color:var(--text-subtle);min-width:32px;text-align:center;line-height:32px}
+
+/* Topic Jump Dropdown */
+.topic-jump-select {
+  background: var(--bg-card);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 0.35rem 0.65rem;
+  font-size: 0.78rem;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  cursor: pointer;
+  max-width: 240px;
+  outline: none;
+  transition: all 0.15s;
+}
+.topic-jump-select:hover, .topic-jump-select:focus {
+  border-color: var(--color-coral);
+}
+@media(max-width:860px){
+  .topic-jump-select { display: none !important; }
+}
+
+/* ──────────── LOADING & ERROR STATES ──────────── */
+#ls{display:none !important;}
+.ls-ring{width:46px;height:46px;border:3px solid var(--border-color);border-top-color:var(--color-coral);border-radius:50%;animation:spin .75s linear infinite}
+.ls-text{font-family:var(--font-mono);font-size:.85rem;color:var(--text-subtle);letter-spacing:.04em}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ──────────── MAIN LAYOUT & CONTAINER ──────────── */
+#main {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.reader-wrap{
+  width: var(--page-width, 100%) !important;
+  max-width: var(--page-width, 100%) !important;
+  margin: 0 auto !important;
+  padding: 2.5rem clamp(1.5rem, 4vw, 4rem) 6rem !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  position: relative !important;
+  box-sizing: border-box !important;
+  transition: width 0.15s ease, max-width 0.15s ease;
+}
+
+/* ──────────── DOCUMENT MASTER HEADER ──────────── */
+.doc-header{
+  text-align: left;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  position: relative;
+}
+.doc-badge-pill{
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  background: var(--color-indigo-dim);
+  color: var(--color-indigo);
+  border: 1px solid var(--color-indigo-border);
+  font-size: .72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .15em;
+  padding: .35rem 1.1rem;
+  border-radius: 999px;
+  margin-bottom: 1rem;
+}
+.doc-title{
+  font-family: var(--font-serif);
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -.03em;
+  color: var(--text-main);
+  margin-bottom: .6rem;
+}
+.doc-subtitle{
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--color-coral);
+  font-style: italic;
+  margin-bottom: 1.25rem;
+}
+.doc-meta-row{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: .85rem;
+  font-size: .75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--text-subtle);
+  flex-wrap: wrap;
+}
+
+/* ──────────── TOPIC / SECTION BLOCKS ──────────── */
+.topic-card{
+  margin-bottom: 3.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px dashed var(--border-color);
+}
+.topic-card:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+
+.topic-header{
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.topic-number{
+  width: 42px;
+  height: 42px;
+  background: #0f172a;
+  color: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 1.15rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+[data-theme="light"] .topic-number {
+  background: #0f172a;
+  color: #ffffff;
+}
+.topic-title-wrap{flex:1;min-width:0}
+.topic-meta-tag{
+  font-size: .72rem;
+  font-weight: 800;
+  color: var(--color-coral);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  margin-bottom: .25rem;
+}
+.topic-title{
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 3vw, 1.85rem);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--text-main);
+  letter-spacing: -.01em;
+}
+
+/* ──────────── BILINGUAL MASTER GRID (BCA 2ND SEM STYLE) ──────────── */
+.bilingual-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.75rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  margin: 1.25rem 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+@media(max-width:860px){
+  .bilingual-grid{grid-template-columns:1fr;gap:1.5rem;padding:1.25rem}
+}
+
+.col-english{
+  border-right: 1px solid var(--border-color);
+  padding-right: 1.5rem;
+}
+@media(max-width:860px){
+  .col-english{border-right:none;border-bottom:1px solid var(--border-color);padding-right:0;padding-bottom:1.5rem}
+}
+
+.col-punjabi{
+  padding-left: .25rem;
+}
+
+.col-header{
+  font-size: .8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  padding-bottom: .5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+.col-header.en{color:#818cf8}
+.col-header.pa{color:#38bdf8}
+[data-theme="light"] .col-header.en{color:#4f46e5}
+[data-theme="light"] .col-header.pa{color:#0284c7}
+
+/* ──────────── MARKDOWN CONTENT & TYPOGRAPHY ──────────── */
+.lang-section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  margin: 2rem 0 1rem;
+}
+.lang-section-badge.en {
+  background: var(--color-indigo-dim);
+  color: var(--color-indigo);
+  border: 1px solid var(--color-indigo-border);
+}
+.lang-section-badge.pa {
+  background: rgba(56, 189, 248, 0.12);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.prose-content{
+  font-family: var(--font-serif);
+  font-size: calc(var(--fs-base, 1) * 1.15rem);
+  line-height: calc(1.75 + (var(--fs-base, 1) - 1) * 0.15);
+  color: var(--text-muted);
+  transition: font-size .1s ease, line-height .1s ease;
+  word-break: break-word;
+}
+.prose-content > p{font-size: 1em; margin-bottom:1.35rem}
+.prose-content h1{font-family:var(--font-serif);font-size:1.85em;font-weight:700;color:var(--text-main);margin:2.25rem 0 .75rem;line-height:1.2;border-bottom:1px solid var(--border-color);padding-bottom:.5rem}
+.prose-content h2{font-family:var(--font-serif);font-size:1.5em;font-weight:700;color:var(--text-main);margin:2rem 0 .75rem}
+.prose-content h3{font-family:var(--font-sans);font-size:1.2em;font-weight:700;color:var(--text-main);margin:1.5rem 0 .4rem}
+.prose-content h4{font-family:var(--font-sans);font-size:.9em;font-weight:800;color:var(--color-coral);margin:1.25rem 0 .35rem;text-transform:uppercase;letter-spacing:.08em}
+.prose-content strong{color:var(--text-main);font-weight:700}
+.prose-content em{color:var(--text-main);font-style:italic}
+.prose-content a{color:var(--color-coral);text-decoration:underline;text-underline-offset:3px}
+.prose-content hr{border:none;border-top:1px solid var(--border-color);margin:2rem 0}
+.prose-content ul{margin:.5rem 0 1.25rem 1.6rem;list-style:disc}
+.prose-content ol{margin:.5rem 0 1.25rem 1.6rem;list-style:decimal}
+.prose-content li{font-size: 1em; margin-bottom:.4rem;color:var(--text-muted)}
+.prose-content blockquote{font-size: 1.05em; border-left:3px solid var(--color-coral);padding:.65rem 1.25rem;margin:1.5rem 0;background:var(--color-coral-dim);border-radius:0 var(--radius-sm) var(--radius-sm) 0}
+.prose-content code{font-family:var(--font-mono);background:var(--color-indigo-dim);border:1px solid var(--color-indigo-border);padding:.12rem .4rem;border-radius:5px;font-size:.9em;color:var(--color-indigo)}
+
+/* Language filtering */
+[data-lang-mode="en"] .col-punjabi{display:none!important}
+[data-lang-mode="en"] .col-english{border-right:none!important;padding-right:0!important;grid-column:1/-1!important}
+[data-lang-mode="pa"] .col-english{display:none!important}
+[data-lang-mode="pa"] .col-punjabi{border-left:none!important;padding-left:0!important;grid-column:1/-1!important}
+
+/* ──────────── CODE BLOCKS ──────────── */
+.code-wrap{margin:1.75rem 0;border-radius:var(--radius-md);overflow:hidden;border:1px solid var(--border-color);background:#0d1117}
+.code-head{display:flex;align-items:center;justify-content:space-between;padding:.55rem 1rem;background:#161b22;border-bottom:1px solid rgba(255,255,255,0.06)}
+.code-lang{font-family:var(--font-mono);font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;display:flex;align-items:center;gap:.4rem}
+.code-lang .dot{width:6px;height:6px;border-radius:50%;background:currentColor}
+.code-copy-btn{display:flex;align-items:center;gap:.3rem;padding:.2rem .6rem;border-radius:5px;background:transparent;border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.6);font-size:.7rem;font-family:var(--font-sans);cursor:pointer;transition:all .15s}
+.code-copy-btn:hover{border-color:var(--color-indigo);color:#fff;background:rgba(255,255,255,0.06)}
+.code-wrap pre{margin:0;padding:1.25rem;overflow-x:auto;font-family:var(--font-mono);font-size:.875rem;line-height:1.7;color:#e6edf3}
+.code-wrap code{background:transparent;border:none;padding:0;font-size:inherit;color:inherit}
+
+/* ──────────── MERMAID DIAGRAMS ──────────── */
+.mermaid-wrap{margin:2rem 0;border-radius:var(--radius-lg);border:1px solid var(--color-indigo-border);overflow:hidden;background:var(--bg-surface)}
+.mermaid-head{display:flex;align-items:center;gap:.5rem;padding:.65rem 1.2rem;background:var(--color-indigo-dim);border-bottom:1px solid var(--color-indigo-border)}
+.mermaid-head-label{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--color-indigo);font-family:var(--font-sans)}
+.mermaid-body{padding:1.75rem;overflow-x:auto;min-height:90px;display:flex;align-items:center;justify-content:center;background:var(--bg-surface)}
+.mermaid-body svg{max-width:100%;height:auto;display:block;margin:0 auto}
+
+/* ──────────── CALLOUT BOXES ──────────── */
+.callout{
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 0.85rem 1.15rem;
+  margin: 1.25rem 0;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--text-main);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+.callout.tip{border-left: 4px solid #34d399; background: rgba(52, 211, 153, 0.06); color: var(--text-main);}
+.callout.warn{border-left: 4px solid #fbbf24; background: rgba(251, 191, 36, 0.06); color: var(--text-main);}
+.callout.info{border-left: 4px solid var(--color-indigo); background: var(--color-indigo-dim); color: var(--text-main);}
+.callout.note{border-left: 4px solid var(--color-coral); background: var(--color-coral-dim); color: var(--text-main);}
+.callout-icon{font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem;}
+.callout-content{flex: 1; min-width: 0;}
+.callout-content strong{color: var(--text-main); font-weight: 700;}
+
+/* ──────────── TABLES ──────────── */
+.table-wrap{overflow-x:auto;margin:1.85rem 0;border-radius:var(--radius-md);border:1px solid var(--border-color)}
+.note-table{width:100%;border-collapse:collapse;font-family:var(--font-sans);font-size:.875rem}
+.note-table thead th{padding:.75rem 1rem;text-align:left;background:var(--bg-card);border-bottom:1px solid var(--border-strong);font-weight:700;color:var(--text-main);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em}
+.note-table tbody td{padding:.7rem 1rem;border-bottom:1px solid var(--border-color);color:var(--text-muted)}
+.note-table tbody tr:last-child td{border-bottom:none}
+.note-table tbody tr:hover td{background:rgba(255,255,255,0.02)}
+
+/* ──────────── INTERACTIVE VISUAL ENGINE MOUNTS ──────────── */
+.vis-frame{margin:2.25rem 0;border-radius:var(--radius-xl);border:1px solid var(--color-coral-border);overflow:hidden;background:var(--bg-surface)}
+.vis-head{display:flex;align-items:center;gap:.5rem;padding:.7rem 1.2rem;background:linear-gradient(90deg,var(--color-coral-dim),transparent);border-bottom:1px solid var(--color-coral-border)}
+.vis-head-badge{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--color-coral);font-family:var(--font-sans)}
+.vis-head-dot{width:6px;height:6px;border-radius:50%;background:var(--color-coral);box-shadow:0 0 8px var(--color-coral);animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* ──────────── FOOTER NAVIGATION CARDS ──────────── */
+.reader-footer{max-width:100%;width:100%;margin:2.5rem 0 5rem;display:flex;gap:1.25rem;box-sizing:border-box}
+.footer-nav-card{
+  flex:1;padding:1.15rem 1.5rem;
+  border:1px solid var(--border-color);border-radius:var(--radius-lg);
+  background:var(--bg-surface);cursor:pointer;
+  font-family:var(--font-sans);text-align:left;
+  transition:all .2s;display:flex;flex-direction:column;gap:.3rem;
+  box-shadow:0 4px 16px rgba(0,0,0,0.1);
+  text-decoration:none;color:inherit;
+}
+.footer-nav-card:hover{border-color:var(--color-coral);background:var(--color-coral-dim);transform:translateY(-2px)}
+.footer-nav-card.next{text-align:right}
+.footer-nav-dir{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--color-coral)}
+.footer-nav-title{font-weight:700;color:var(--text-main);font-size:.95rem}
+
+/* ──────────── FLOATING TABLE OF CONTENTS (TOC) ──────────── */
+.floating-toc {
+  display: none !important;
+}
+
+@media(max-width:768px){
+  .topbar { padding: env(safe-area-inset-top, 0px) .65rem 0 .65rem; gap: .4rem; }
+  .reader-wrap{margin:0 auto 5rem; width:100%; max-width:100%; padding:1.25rem 0.85rem calc(5rem + env(safe-area-inset-bottom, 0px)); border-radius:0; box-sizing: border-box;}
+  .tb-crumb,.fs-label{display:none}
+  .hide-mobile{display:none}
+  .pdf-btn span{display:none}
+  .tb-btn{padding: 0 .5rem; height: 30px; font-size: .72rem;}
+  .tb-btn.icon-only{width: 30px;}
+  .lang-btn{padding: 0 .4rem; height: 30px; font-size: .68rem;}
+  .fs-btn{width: 26px; height: 30px; font-size: .75rem;}
+  .reader-footer{flex-direction:column;padding:0 .75rem}
+  .doc-title{font-size: clamp(1.65rem, 5.5vw, 2.4rem); line-height: 1.2;}
+  .doc-subtitle{font-size: 1rem;}
+  .topic-header{gap: .65rem;}
+  .topic-number{width: 36px; height: 36px; font-size: 1rem;}
+}
+@media(max-width:480px){
+  .topbar { padding: env(safe-area-inset-top, 0px) .45rem 0 .45rem; }
+  .tb-back-btn span{display: none;}
+  .tb-back-btn{padding: .35rem .5rem;}
+  .reader-wrap{width:calc(100% - 0.75rem); padding:1.25rem .75rem calc(4.5rem + env(safe-area-inset-bottom, 0px));}
+}
+
+/* ──────────── PRINT / PDF EXPORT MEDIA QUERY ──────────── */
+@media print{
+  #rp, .topbar, .floating-toc, .reader-footer, .code-copy-btn, .fs-control, .lang-group {
+    display: none !important;
+  }
+  
+  body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    font-size: 11pt !important;
+    line-height: 1.5 !important;
+  }
+  
+  .reader-wrap {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    background: #ffffff !important;
+  }
+  
+  .doc-header {
+    border-bottom: 2px solid #0f172a !important;
+    padding-bottom: 1.5rem !important;
+    margin-bottom: 2rem !important;
+  }
+  
+  .doc-title {
+    color: #0f172a !important;
+    font-size: 26pt !important;
+  }
+  
+  .doc-subtitle {
+    color: #4f46e5 !important;
+  }
+  
+  .bilingual-grid {
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: none !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    margin-bottom: 2rem !important;
+  }
+  
+  .topic-card {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+  
+  .topic-number {
+    background: #0f172a !important;
+    color: #ffffff !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  
+  .prose-content {
+    color: #1e293b !important;
+  }
+  
+  .code-wrap, .mermaid-wrap, .table-wrap, .vis-frame {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    border: 1px solid #cbd5e1 !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<div id="rp"></div>
+
+<!-- Sticky Top Navbar -->
+<nav class="topbar" id="topbar">
+  <div class="tb-left">
+    <button class="tb-back-btn" onclick="handleBackNavigation()" title="Back to Dashboard">
+      ← <span>Back</span>
+    </button>
+    <a href="/" class="tb-logo">BCA///</a>
+    <span class="tb-sep">›</span>
+    <span class="tb-crumb" id="tb-crumb">Study Guide</span>
+    <select id="topic-jump-select" class="topic-jump-select" onchange="jumpToSelectedTopic(this.value)" title="Quick Switch Topic" style="display:none;"></select>
+  </div>
+  <div class="tb-right">
+    <!-- Language Toggle -->
+    <div class="lang-group" id="lang-group" title="Language view">
+      <button class="lang-btn active" data-lang="all" onclick="setLangMode('all')">All</button>
+      <button class="lang-btn" data-lang="en" onclick="setLangMode('en')">EN</button>
+      <button class="lang-btn" data-lang="pa" onclick="setLangMode('pa')">ਪੰਜਾਬੀ</button>
+    </div>
+
+    <!-- Page Width / Margin Adjust Controls -->
+    <div class="fs-control" title="Adjust page reading width & side margins">
+      <button class="fs-btn" onclick="changePageWidth(-1)" title="Narrow width / increase side margins">↔−</button>
+      <span class="fs-label" id="fs-label">100%</span>
+      <button class="fs-btn" onclick="changePageWidth(1)" title="Expand width to 100% full screen">↔+</button>
+    </div>
+
+    <!-- Download PDF / Print Button -->
+    <button class="tb-btn pdf-btn" onclick="downloadPdf()" title="Download PDF or Print Handout">
+      📥 <span>Download PDF</span>
+    </button>
+
+    <!-- Bookmark / Pin Button -->
+    <button class="tb-btn" id="tb-bookmark-btn" onclick="toggleReaderBookmark()" title="Pin / Save Note to Profile">
+      <span id="tb-bookmark-icon">📌</span> <span id="tb-bookmark-text" class="hide-mobile">Pin Note</span>
+    </button>
+
+    <!-- Copy Note Text -->
+    <button class="tb-btn" id="copy-btn" onclick="copyNoteContent()" title="Copy Markdown & Notes">
+      📋 <span class="hide-mobile">Copy</span>
+    </button>
+
+    <!-- Theme Toggle -->
+    <button class="tb-btn icon-only" id="theme-btn" title="Toggle dark/light theme" onclick="toggleTheme()">☀️</button>
+  </div>
+</nav>
+
+<!-- Floating Table of Contents Jump Links -->
+<div class="floating-toc" id="floating-toc"></div>
+
+<!-- Main Reader Document Content -->
+<main id="main">
+  <div class="reader-wrap">
+    <header class="doc-header" id="doc-header">
+      <div class="doc-badge-pill" id="doc-badge">ANTIGRAVITY • BILINGUAL STUDY EDITION</div>
+      <h1 class="doc-title" id="doc-title">Computer Architecture — Unit I Study Guide</h1>
+      <p class="doc-subtitle" id="doc-subtitle">Complete Master Study Guide · Panjab University</p>
+      <div class="doc-meta-row" id="doc-meta">
+        <span>📚 Unit I</span>
+        <span>•</span>
+        <span>✍️ By Baljot Chohan</span>
+        <span>•</span>
+        <span>⏱️ 6 min read</span>
+      </div>
+    </header>
+
+    <div id="content-container"></div>
+  </div>
+
+  <!-- Footer Navigation -->
+  <footer class="reader-footer" id="reader-footer" style="display:none">
+    <a class="footer-nav-card" id="prev-btn" style="display:none">
+      <span class="footer-nav-dir">← Previous Topic</span>
+      <span class="footer-nav-title" id="prev-title"></span>
+    </a>
+    <a class="footer-nav-card next" id="next-btn" style="display:none">
+      <span class="footer-nav-dir">Next Topic →</span>
+      <span class="footer-nav-title" id="next-title"></span>
+    </a>
+  </footer>
+</main>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script src="firebase-config.js?v=5.0"></script>
+<script src="syllabus-data.js?v=5.0"></script>
+<script src="visuals-engine.js?v=5.0"></script>
+<script src="payment.js?v=5.0"></script>
+<script>
+const FIREBASE_DB = 'https://bca2nd-5c622-default-rtdb.firebaseio.com/bca3';
+let _notes = [];
+let _currentKey = null;
+let _currentSubjectId = null;
+let _mode = 'single'; // 'single' | 'master'
+
+// Load user profile for note access checking
+let currentUserProfile = null;
+try {
+  const saved = localStorage.getItem('studiq_user_profile');
+  if (saved) currentUserProfile = JSON.parse(saved);
+} catch (e) {}
+
+const adminEmails = ['baljotchohan23@gmail.com', 'mehakpreetkaur@gmail.com', 'mehakpreetsaini26@gmail.com'];
+const isAdmin = Boolean(
+  currentUserProfile &&
+  currentUserProfile.email &&
+  adminEmails.includes(String(currentUserProfile.email).toLowerCase())
+);
+
+if (currentUserProfile) {
+  currentUserProfile.isAdmin = isAdmin;
+  if (isAdmin) {
+    currentUserProfile.subscription = { plan: 'max', status: 'active', validUntil: Date.now() + 3650*24*60*60*1000 };
+  }
+}
+
+// 🔄 Auto-sync cloud subscription and purchased notes from Firebase RTDB
+if (currentUserProfile && currentUserProfile.uid && !String(currentUserProfile.uid).startsWith('guest_')) {
+  fetch(`${FIREBASE_DB}/users/${encodeURIComponent(currentUserProfile.uid)}.json`)
+    .then(r => r.json())
+    .then(dbUser => {
+      if (dbUser && typeof dbUser === 'object') {
+        if (dbUser.subscription) currentUserProfile.subscription = dbUser.subscription;
+        if (dbUser.purchasedNotes) currentUserProfile.purchasedNotes = Object.assign(currentUserProfile.purchasedNotes || {}, dbUser.purchasedNotes);
+        localStorage.setItem('studiq_user_profile', JSON.stringify(currentUserProfile));
+      }
+    }).catch(() => {});
+}
+
+const FS_STEPS = [0.85, 0.92, 1.0, 1.0625, 1.15, 1.25, 1.4];
+let _fsIdx = 2; // Default: 100%
+
+// ── Theme Initialization ──
+const savedTheme = localStorage.getItem('bca_hub_theme') || 'dark';
+document.documentElement.setAttribute('data-theme', savedTheme);
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('theme-btn');
+  if (btn) btn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+});
+
+function toggleTheme() {
+  const cur = document.documentElement.getAttribute('data-theme');
+  const next = cur === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('bca_hub_theme', next);
+  const btn = document.getElementById('theme-btn');
+  if (btn) btn.textContent = next === 'dark' ? '☀️' : '🌙';
+  try {
+    if (typeof mermaid !== 'undefined') {
+      mermaid.initialize({ theme: next === 'dark' ? 'dark' : 'base', startOnLoad: false, securityLevel: 'loose' });
+      document.querySelectorAll('.mermaid-body').forEach(el => {
+        const src = el.querySelector('.mermaid-src');
+        if (src) renderMermaidNode(src, el);
+      });
+    }
+  } catch (e) {}
+}
+
+// ── Page Width & Side Margins Adjustment ──
+const PAGE_WIDTH_STEPS = [65, 75, 85, 92, 100];
+let _pageWidthIdx = 4; // Default to 100% Full Width
+
+function changePageWidth(dir) {
+  _pageWidthIdx = Math.max(0, Math.min(PAGE_WIDTH_STEPS.length - 1, _pageWidthIdx + dir));
+  const w = PAGE_WIDTH_STEPS[_pageWidthIdx];
+  document.documentElement.style.setProperty('--page-width', w + '%');
+  const label = document.getElementById('fs-label');
+  if (label) label.textContent = w + '%';
+  try {
+    localStorage.setItem('bca_reader_width', String(w));
+  } catch (e) {}
+}
+
+(function initReaderWidth() {
+  try {
+    const saved = parseInt(localStorage.getItem('bca_reader_width'));
+    if (saved && PAGE_WIDTH_STEPS.includes(saved)) {
+      _pageWidthIdx = PAGE_WIDTH_STEPS.indexOf(saved);
+      document.documentElement.style.setProperty('--page-width', saved + '%');
+      const label = document.getElementById('fs-label');
+      if (label) label.textContent = saved + '%';
+    } else {
+      document.documentElement.style.setProperty('--page-width', '100%');
+      const label = document.getElementById('fs-label');
+      if (label) label.textContent = '100%';
+    }
+  } catch (e) {}
+})();
+
+// ── Reading Progress Bar ──
+window.addEventListener('scroll', () => {
+  const s = document.documentElement.scrollTop;
+  const t = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('rp').style.width = (t > 0 ? (s / t) * 100 : 0) + '%';
+  updateActiveTocDot();
+});
+
+// ── Language Filter ──
+function setLangMode(mode) {
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.getAttribute('data-lang') === mode);
+  });
+  document.getElementById('main').setAttribute('data-lang-mode', mode);
+}
+
+// ── Smart Back Navigation ──
+function handleBackNavigation() {
+  const p = new URLSearchParams(location.search);
+  const subj = p.get('subject') || _currentSubjectId || '';
+  if (window.history.length > 1 && document.referrer && document.referrer.includes(window.location.host)) {
+    window.history.back();
+  } else {
+    window.location.href = subj ? `/?subject=${encodeURIComponent(subj)}` : '/';
+  }
+}
+
+// Keyboard shortcuts: Escape to go back, Arrow keys for prev/next
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && !e.target.matches('input, textarea')) {
+    handleBackNavigation();
+  }
+});
+
+// ── Download PDF / Print ──
+function downloadPdf() {
+  const oldTitle = document.title;
+  const title = document.getElementById('doc-title').textContent || 'BCA_III_Notes';
+  document.title = `${title.trim()} — BCA III Handout`;
+  window.print();
+  setTimeout(() => { document.title = oldTitle; }, 1000);
+}
+
+// ── Copy Full Note Text ──
+function copyNoteContent() {
+  const container = document.getElementById('content-container');
+  if (!container) return;
+  navigator.clipboard.writeText(container.innerText).then(() => {
+    const btn = document.getElementById('copy-btn');
+    const orig = btn.innerHTML;
+    btn.innerHTML = '✅ <span>Copied!</span>';
+    setTimeout(() => { btn.innerHTML = orig; }, 2000);
+  });
+}
+
+// ── Loader & Error UI Helpers ──
+function hideLoading() {
+  const ls = document.getElementById('ls');
+  if (ls) ls.style.display = 'none';
+  const topbar = document.getElementById('topbar');
+  if (topbar) topbar.style.display = 'flex';
+  const main = document.getElementById('main');
+  if (main) main.style.display = 'block';
+  const footer = document.getElementById('reader-footer');
+  if (footer && _mode === 'single') footer.style.display = 'flex';
+}
+
+function showLoading() {
+  const ls = document.getElementById('ls');
+  if (ls) ls.style.display = 'flex';
+  const main = document.getElementById('main');
+  if (main) main.style.display = 'none';
+}
+
+function showErr(msg) {
+  const ls = document.getElementById('ls');
+  if (ls) ls.style.display = 'none';
+  const topbar = document.getElementById('topbar');
+  if (topbar) topbar.style.display = 'flex';
+  const main = document.getElementById('main');
+  if (main) main.style.display = 'block';
+  const container = document.getElementById('content-container');
+  if (container) {
+    container.innerHTML = `
+      <div style="text-align:center;padding:3.5rem 1.5rem;max-width:640px;margin:2rem auto;background:var(--bg-card);border:1px solid var(--border-color);border-radius:var(--radius-lg);box-shadow:var(--shadow-card);">
+        <div style="font-size:3rem;margin-bottom:1rem">📚</div>
+        <h2 style="font-family:var(--font-serif);margin-bottom:0.75rem;font-size:1.6rem;color:var(--text-main);">Note Unavailable</h2>
+        <p style="color:var(--text-muted);font-size:0.95rem;margin-bottom:1.75rem;line-height:1.5;">${esc(msg)}</p>
+        <div style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;">
+          <button class="tb-btn" style="height:40px;padding:0 1.25rem;font-size:0.88rem;cursor:pointer;" onclick="handleBackNavigation()">← Return to Dashboard</button>
+          <button class="tb-btn" style="height:40px;padding:0 1.25rem;font-size:0.88rem;background:var(--color-coral);color:#fff;border-color:var(--color-coral);cursor:pointer;" onclick="window.location.reload()">🔄 Retry</button>
+        </div>
+      </div>
+    `;
+  }
+}
+
+// ── Helper to parse unit order ──
+function parseUnitOrder(unitStr) {
+  if (!unitStr) return 1;
+  const s = String(unitStr).toLowerCase().trim();
+  if (s.includes('unit 4') || s.includes('unit iv') || s === '4' || s === 'iv') return 4;
+  if (s.includes('unit 3') || s.includes('unit iii') || s === '3' || s === 'iii') return 3;
+  if (s.includes('unit 2') || s.includes('unit ii') || s === '2' || s === 'ii') return 2;
+  if (s.includes('unit 1') || s.includes('unit i') || s === '1' || s === 'i' || s === 'general') return 1;
+  return 99;
+}
+
+// ── Instant Synchronous Note Render (0ms from Cache/Dataset) ──
+function renderInitialNoteSync() {
+  const p = new URLSearchParams(location.search);
+  _currentKey = p.get('id');
+  _currentSubjectId = p.get('subject');
+  const modeParam = p.get('mode');
+
+  let cachedNotes = [];
+  try {
+    const raw = localStorage.getItem('bca_cloud_notes_cache');
+    if (raw) cachedNotes = JSON.parse(raw);
+  } catch (e) {}
+
+  let staticNotes = [];
+  if (typeof BCA_3RD_SEM_DATA !== 'undefined' && BCA_3RD_SEM_DATA.subjects) {
+    BCA_3RD_SEM_DATA.subjects.forEach(s => {
+      (s.digitalNotes || []).forEach(n => {
+        staticNotes.push({ ...n, subjectId: s.id, subjectTitle: s.title, subjectCode: s.code });
+      });
+    });
+  }
+  _notes = [...cachedNotes, ...staticNotes.filter(sn => !cachedNotes.some(cn => cn.id === sn.id || cn.fbKey === sn.fbKey))];
+
+  _notes.sort((a, b) => {
+    const uA = parseUnitOrder(a.unit || a.unitNumber);
+    const uB = parseUnitOrder(b.unit || b.unitNumber);
+    if (uA !== uB) return uA - uB;
+    return (a.timestamp || 0) - (b.timestamp || 0) || (a.title || '').localeCompare(b.title || '');
+  });
+
+  let activeSubject = null;
+  if (_currentSubjectId && typeof BCA_3RD_SEM_DATA !== 'undefined') {
+    activeSubject = BCA_3RD_SEM_DATA.subjects.find(s => s.id === _currentSubjectId);
+  }
+
+  if (modeParam === 'master') {
+    _mode = 'master';
+    const subjNotes = _notes.filter(n => (n.subject === _currentSubjectId || n.subjectId === _currentSubjectId));
+    renderMasterGuide(activeSubject || { id: _currentSubjectId, title: 'BCA III Subject', code: 'BCA 301' }, subjNotes);
+    hideLoading();
+    return true;
+  }
+
+  let targetNote = _notes.find(n => (n.fbKey === _currentKey || n.id === _currentKey));
+  if (!targetNote) {
+    const subjNotes = _currentSubjectId
+      ? _notes.filter(n => (n.subject === _currentSubjectId || n.subjectId === _currentSubjectId))
+      : _notes;
+    if (subjNotes.length > 0) targetNote = subjNotes[0];
+    else if (_notes.length > 0) targetNote = _notes[0];
+  }
+
+  if (targetNote) {
+    renderSingleNote(targetNote);
+    setupNav(targetNote.fbKey || targetNote.id);
+    hideLoading();
+    return true;
+  }
+  return false;
+}
+
+// ── Non-Blocking Deferred CDN Assets Loader ──
+function loadDeferredAssets() {
+  // 1. Mermaid
+  if (typeof mermaid === 'undefined') {
+    const mScript = document.createElement('script');
+    mScript.src = 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js';
+    mScript.onload = () => {
+      try {
+        mermaid.initialize({
+          theme: savedTheme === 'dark' ? 'dark' : 'base',
+          startOnLoad: false,
+          securityLevel: 'loose',
+          fontFamily: 'Plus Jakarta Sans, Inter, sans-serif',
+          fontSize: 14,
+        });
+        renderAllMermaid();
+      } catch (e) {}
+    };
+    document.body.appendChild(mScript);
+  }
+
+  // 2. KaTeX
+  if (typeof renderMathInElement === 'undefined') {
+    const kScript = document.createElement('script');
+    kScript.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js';
+    kScript.onload = () => {
+      const kaScript = document.createElement('script');
+      kaScript.src = 'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js';
+      kaScript.onload = () => initKatex();
+      document.body.appendChild(kaScript);
+    };
+    document.body.appendChild(kScript);
+  }
+
+  // 3. Highlight.js
+  if (!window.hljs) {
+    const hljsScript = document.createElement('script');
+    hljsScript.src = 'https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/core.min.js';
+    hljsScript.onload = () => {
+      ['c', 'cpp', 'python', 'javascript', 'x86asm'].forEach(lang => {
+        const s = document.createElement('script');
+        s.src = `https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/languages/${lang}.min.js`;
+        s.onload = () => {
+          document.querySelectorAll('pre code').forEach(el => hljs.highlightElement(el));
+        };
+        document.body.appendChild(s);
+      });
+    };
+    document.body.appendChild(hljsScript);
+  }
+}
+
+// ── Main Page Initialization ──
+async function init() {
+  // Step 1: Render immediately from cache or built-in syllabus data
+  const renderedSync = renderInitialNoteSync();
+  hideLoading();
+  setTimeout(hideLoading, 50);
+  setTimeout(hideLoading, 200);
+
+  // Step 2: Load deferred visual & math assets in background
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(loadDeferredAssets, { timeout: 1500 });
+  } else {
+    setTimeout(loadDeferredAssets, 100);
+  }
+
+  // Step 3: Background sync of cloud notes from Firebase RTDB
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 4000);
+    const r = await fetch(`${FIREBASE_DB}/notes.json`, { signal: controller.signal });
+    clearTimeout(timeoutId);
+    if (r.ok) {
+      const raw = await r.json();
+      if (raw && typeof raw === 'object') {
+        const cloudNotes = Object.entries(raw).map(([k, v]) => ({ ...v, fbKey: k })).sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0) || (a.unit || '').localeCompare(b.unit || '') || (a.title || '').localeCompare(b.title || ''));
+        if (cloudNotes.length > 0) {
+          try { localStorage.setItem('bca_cloud_notes_cache', JSON.stringify(cloudNotes)); } catch(e) {}
+          _notes = cloudNotes;
+          const p = new URLSearchParams(location.search);
+          const currentKey = p.get('id');
+          const currentSubj = p.get('subject');
+          const modeParam = p.get('mode');
+
+          if (modeParam === 'master') {
+            const subjNotes = _notes.filter(n => (n.subject === currentSubj || n.subjectId === currentSubj));
+            let activeSubject = null;
+            if (currentSubj && typeof BCA_3RD_SEM_DATA !== 'undefined') {
+              activeSubject = BCA_3RD_SEM_DATA.subjects.find(s => s.id === currentSubj);
+            }
+            renderMasterGuide(activeSubject || { id: currentSubj, title: 'BCA III Subject', code: 'BCA 301' }, subjNotes);
+          } else {
+            let target = null;
+            if (currentKey) {
+              target = _notes.find(n => (n.fbKey === currentKey || n.id === currentKey));
+            }
+            if (!target && currentSubj) {
+              target = _notes.find(n => (n.subject === currentSubj || n.subjectId === currentSubj));
+            }
+            if (!target && _notes.length > 0) {
+              target = _notes[0];
+            }
+            if (target) {
+              renderSingleNote(target);
+              setupNav(target.fbKey || target.id);
+            } else if (!renderedSync) {
+              showErr(`No published digital note found for this topic. An admin can create it in the Admin Portal.`);
+            }
+          }
+        }
+      }
+    }
+  } catch (err) {
+    console.warn('Firebase RTDB background sync note:', err);
+    if (!renderedSync) {
+      showErr('Unable to connect to live academic notes database. Please check your internet connection and retry.');
+    }
+  }
+
+  hideLoading();
+}
+
+// ── Render Single Note View ──
+function renderSingleNote(note) {
+  _mode = 'single';
+  _currentKey = note.fbKey || note.id || _currentKey;
+  _currentSubjectId = note.subject || note.subjectId || _currentSubjectId;
+  document.title = `${note.title || 'Note'} — BCA III Academic Hub`;
+  
+  const subjName = note.subjectTitle || (typeof getSubjectName === 'function' ? getSubjectName(note.subject) : (note.subject || 'Academic Notes'));
+  document.getElementById('tb-crumb').innerHTML = `<a href="/?subject=${encodeURIComponent(note.subject || _currentSubjectId || '')}" style="color:inherit;text-decoration:none"><strong>${esc(subjName)}</strong></a> › ${esc(note.unit || 'Unit I')} › ${esc(note.title || 'Topic')}`;
+
+  document.getElementById('doc-badge').textContent = `${note.unit || 'Unit I'} • ${note.readTime || '5 min read'}`;
+  document.getElementById('doc-title').textContent = note.title || 'Untitled Academic Note';
+  document.getElementById('doc-subtitle').textContent = `Authored by ${note.author || 'Baljot Chohan'} · Panjab University`;
+
+  document.getElementById('doc-meta').innerHTML = [
+    note.unit ? `<span>📚 ${esc(note.unit)}</span>` : '',
+    note.author ? `<span>✍️ By ${esc(note.author)}</span>` : '',
+    note.readTime ? `<span>⏱️ ${esc(note.readTime)}</span>` : '',
+    note.date ? `<span>📅 ${esc(note.date)}</span>` : '',
+  ].filter(Boolean).join('<span>•</span>');
+
+  const container = document.getElementById('content-container');
+
+  // Verify User Access via Payment Module
+  const subjNotes = _notes.filter(n => (n.subject === _currentSubjectId || n.subjectId === _currentSubjectId));
+  const noteIndex = subjNotes.findIndex(n => (n.fbKey === note.fbKey || n.id === note.id));
+  const accessRes = (window.BCA3_PAYMENTS && typeof window.BCA3_PAYMENTS.hasNoteAccess === 'function')
+    ? window.BCA3_PAYMENTS.hasNoteAccess(note, Math.max(0, noteIndex))
+    : { hasAccess: true };
+
+  if (!accessRes.hasAccess) {
+    renderPaywallTeaser(note, accessRes);
+    return;
+  }
+
+  const hasPunjabi = !!note.punjabiSummary;
+
+  if (hasPunjabi) {
+    container.innerHTML = `
+      <div class="bilingual-grid">
+        <div class="col-english">
+          <div class="col-header en">📖 Easy English Study Notes</div>
+          <div class="prose-content">
+            ${renderMD(note.content || '')}
+          </div>
+        </div>
+        <div class="col-punjabi">
+          <div class="col-header pa">🌟 ਆਸਾਨ ਪੰਜਾਬੀ ਅਨੁਵਾਦ / Key Summary</div>
+          <div class="prose-content">
+            ${renderMD(note.punjabiSummary || '')}
+          </div>
+        </div>
+      </div>
+    `;
+    document.getElementById('lang-group').style.display = 'flex';
+  } else {
+    container.innerHTML = `
+      <div class="prose-content">
+        ${renderMD(note.content || '')}
+      </div>
+    `;
+    document.getElementById('lang-group').style.display = 'none';
+  }
+
+  postRenderMounts(container);
+  buildTableOfContents();
+  updateBookmarkButtonState();
+}
+
+// ── Render Paywall Teaser for Locked Notes ──
+function renderPaywallTeaser(note, accessRes) {
+  const isGuest = accessRes.reason === 'requires_signin';
+  const container = document.getElementById('content-container');
+  const noteKey = note.fbKey || note.id;
+
+  container.innerHTML = `
+    <div class="note-paywall-teaser" style="width: 100%; margin: 1.5rem 0; box-sizing: border-box;">
+      <div class="note-paywall-blur-content">
+        <h2>${esc(note.title)}</h2>
+        <p>${esc((note.content || '').slice(0, 260))}...</p>
+        <p>Detailed architecture, functional diagrams, execution steps, exam tips, and Punjabi bilingual explanations.</p>
+      </div>
+
+      <div class="note-paywall-overlay">
+        <div class="paywall-icon">🔒</div>
+        <h3 class="paywall-title">${isGuest ? 'Sign In to Read Academic Notes' : 'Pro or Max Study Pass Required'}</h3>
+        <p class="paywall-desc">
+          ${isGuest 
+            ? 'Sign in with Google to unlock all Unit 1 digital notes for free across all subjects, or choose a semester study pass.' 
+            : `This note is part of <strong>${esc(note.unit || 'Unit II/III/IV')}</strong>. Free tier includes full access to Unit 1. Upgrade to <strong>Pro (₹19/mo)</strong> or <strong>Max Lifetime (₹49)</strong> to unlock full notes, bilingual cards, and downloads.`}
+        </p>
+
+        <div class="paywall-upi-badge">
+          ⚡ UPI • Google Pay • PhonePe • Paytm • Cards
+        </div>
+
+        <div class="paywall-actions">
+          ${isGuest ? `
+            <button class="paywall-unlock-btn" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.65rem;" onclick="handleReaderGoogleSignIn()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+              </svg>
+              <span>Sign In with Google (Unlock Unit 1 Free)</span>
+            </button>
+            <button class="tb-btn" style="width: 100%; height: 38px; justify-content: center; font-size: 0.82rem; margin-top: 0.35rem;" onclick="handleBackNavigation()">
+              ← Return to Dashboard
+            </button>
+          ` : `
+            <button class="paywall-subscribe-btn" onclick="BCA3_PAYMENTS.payForSubscription('pro', 'Pro Scholar', 19)">
+              ⭐ Upgrade to Pro (₹19/mo)
+            </button>
+            <button class="paywall-unlock-btn" style="background: linear-gradient(135deg, #c25e3e, #ea580c);" onclick="BCA3_PAYMENTS.payForSubscription('max', 'Max Lifetime', 49)">
+              🌟 Get Lifetime Max Pass (₹49)
+            </button>
+            <button class="tb-btn" style="width: 100%; height: 38px; justify-content: center; font-size: 0.82rem; margin-top: 0.25rem;" onclick="BCA3_PAYMENTS.payForSingleNote('${esc(noteKey)}', '${esc(note.title)}', 15)">
+              📖 Or Unlock This Single Note (₹15)
+            </button>
+          `}
+        </div>
+      </div>
+    </div>
+  `;
+
+  const langGrp = document.getElementById('lang-group');
+  if (langGrp) langGrp.style.display = 'none';
+}
+
+// ── Render Master Study Guide (BCA 2nd Sem Style) ──
+function renderMasterGuide(subject, notes) {
+  _mode = 'master';
+  document.title = `${subject.title} Master Study Notes — BCA III Hub`;
+  document.getElementById('tb-crumb').innerHTML = `<strong>${esc(subject.title)}</strong> › Master Bilingual Study Guide`;
+
+  document.getElementById('doc-badge').textContent = 'ANTIGRAVITY • BILINGUAL MASTER EDITION';
+  document.getElementById('doc-title').textContent = subject.title;
+  document.getElementById('doc-subtitle').textContent = 'Complete Master Notes & Handouts (English + ਪੰਜਾਬੀ)';
+
+  document.getElementById('doc-meta').innerHTML = `
+    <span>Code: ${esc(subject.code || 'BCA-301')}</span>
+    <span>•</span>
+    <span>${notes.length} Topics Covered</span>
+    <span>•</span>
+    <span>Panjab University 2026-27</span>
+  `;
+
+  const container = document.getElementById('content-container');
+  const langGrp = document.getElementById('lang-group');
+  if (langGrp) langGrp.style.display = 'flex';
+
+  if (!notes || notes.length === 0) {
+    container.innerHTML = `
+      <div style="text-align:center;padding:3rem 1rem;">
+        <div style="font-size:2.5rem;margin-bottom:1rem">📚</div>
+        <h3 style="margin-bottom:.5rem">No Digital Notes Published Yet</h3>
+        <p style="color:var(--text-muted)">Notes for ${esc(subject.title)} are currently being compiled. Check back soon!</p>
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = `
+    <div class="master-topics-stack">
+      ${notes.map((note, idx) => {
+        const accessRes = (window.BCA3_PAYMENTS && typeof window.BCA3_PAYMENTS.hasNoteAccess === 'function')
+          ? window.BCA3_PAYMENTS.hasNoteAccess(note, idx)
+          : { hasAccess: true };
+
+        if (!accessRes.hasAccess) {
+          const isGuest = accessRes.reason === 'requires_signin';
+          return `
+            <article class="topic-card locked-topic" id="topic-section-${idx}">
+              <div class="topic-header">
+                <div class="topic-number">${idx + 1}</div>
+                <div class="topic-title-wrap">
+                  <div class="topic-meta-tag">${esc(note.unit || 'Unit I')} • 🔒 Pro Pass Required</div>
+                  <h2 class="topic-title">${esc(note.title)}</h2>
+                </div>
+              </div>
+              <div class="note-paywall-teaser" style="margin: 1rem 0;">
+                <div class="note-paywall-blur-content">
+                  <p>${esc((note.content || '').slice(0, 200))}...</p>
+                </div>
+                <div class="note-paywall-overlay">
+                  <div class="paywall-icon">🔒</div>
+                  <h4 style="margin: 0.25rem 0 0.5rem; color: #fff;">${isGuest ? 'Sign In to Unlock' : 'Pro or Max Pass Required'}</h4>
+                  <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.85rem;">
+                    ${isGuest ? 'Sign in with Google to unlock notes.' : 'Upgrade to Pro (₹19/mo) or Max Lifetime (₹49) to read this unit.'}
+                  </p>
+                  <button class="tb-btn" style="height: 38px; padding: 0 1.25rem; font-weight: 700; background: var(--color-coral); color: #fff; border: none; cursor: pointer;" onclick="handleReaderPaywallAction('${accessRes.reason}')">
+                    ${isGuest ? '🔑 Sign In with Google' : '⭐ Unlock Full Notes'}
+                  </button>
+                </div>
+              </div>
+            </article>
+          `;
+        }
+
+        return `
+          <article class="topic-card" id="topic-section-${idx}">
+            <div class="topic-header">
+              <div class="topic-number">${idx + 1}</div>
+              <div class="topic-title-wrap">
+                <div class="topic-meta-tag">${esc(note.unit || 'Unit I')} • ${esc(note.readTime || '6 min read')} • By ${esc(note.author || 'Baljot Chohan')}</div>
+                <h2 class="topic-title">${esc(note.title)}</h2>
+              </div>
+            </div>
+
+            <div class="bilingual-grid">
+              <div class="col-english">
+                <div class="col-header en">📖 Easy English Study Notes</div>
+                <div class="prose-content">
+                  ${renderMD(note.content || '')}
+                </div>
+              </div>
+              <div class="col-punjabi">
+                <div class="col-header pa">🌟 ਆਸਾਨ ਪੰਜਾਬੀ ਅਨੁਵਾਦ / Key Summary</div>
+                <div class="prose-content">
+                  ${renderMD(note.punjabiSummary || note.content || '')}
+                </div>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('')}
+    </div>
+  `;
+
+  postRenderMounts(container);
+  buildTableOfContents();
+}
+
+// ── Post Render Mounts (Syntax Highlighting, Mermaid, Math) ──
+function postRenderMounts(root) {
+  // 1. Syntax Highlighting
+  root.querySelectorAll('pre code').forEach(block => {
+    if (window.hljs) hljs.highlightElement(block);
+  });
+
+  // 2. Mermaid Diagrams
+  renderAllMermaid();
+
+  // 3. KaTeX Math rendering
+  if (typeof renderMathInElement === 'function') initKatex();
+
+  // 4. Interactive Manim 2D Visual Simulations
+  if (window.ManimVisuals && typeof window.ManimVisuals.mountAll === 'function') {
+    window.ManimVisuals.mountAll(root);
+  }
+}
+
+// ── Floating Table of Contents Builder ──
+function buildTableOfContents() {
+  const toc = document.getElementById('floating-toc');
+  if (!toc) return;
+  const headings = document.querySelectorAll('.topic-title, .prose-content h1, .prose-content h2');
+  if (headings.length < 2) {
+    toc.style.display = 'none';
+    return;
+  }
+  toc.style.display = 'flex';
+  toc.innerHTML = Array.from(headings).map((h, i) => `
+    <div class="toc-dot" data-idx="${i}" title="${esc(h.textContent)}" onclick="scrollToHeading(${i})"></div>
+  `).join('');
+  toc.classList.add('visible');
+}
+
+function scrollToHeading(idx) {
+  const headings = document.querySelectorAll('.topic-title, .prose-content h1, .prose-content h2');
+  if (headings[idx]) {
+    headings[idx].scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+function updateActiveTocDot() {
+  const headings = document.querySelectorAll('.topic-title, .prose-content h1, .prose-content h2');
+  const dots = document.querySelectorAll('.toc-dot');
+  if (!headings.length || !dots.length) return;
+  let activeIdx = 0;
+  headings.forEach((h, i) => {
+    const rect = h.getBoundingClientRect();
+    if (rect.top <= window.innerHeight * 0.4) activeIdx = i;
+  });
+  dots.forEach((d, i) => d.classList.toggle('active', i === activeIdx));
+}
+
+// ── Mermaid Diagram Renderer ──
+async function renderAllMermaid() {
+  if (typeof mermaid === 'undefined') return;
+  const nodes = document.querySelectorAll('.mermaid-src');
+  for (const node of nodes) {
+    if (node.getAttribute('data-done')) continue;
+    node.setAttribute('data-done', '1');
+    const wrap = node.closest('.mermaid-body');
+    if (wrap) await renderMermaidNode(node, wrap);
+  }
+}
+
+async function renderMermaidNode(node, wrap) {
+  if (typeof mermaid === 'undefined') return;
+  const code = (node && node.textContent) ? node.textContent : (wrap ? wrap.getAttribute('data-mermaid-src') : '');
+  if (!code) return;
+  try {
+    wrap.setAttribute('data-mermaid-src', code);
+    const id = 'm' + Math.random().toString(36).substring(2, 9);
+    const { svg } = await mermaid.render(id, code);
+    wrap.innerHTML = `<div class="mermaid-svg-wrap">${svg}</div><div class="mermaid-src" style="display:none">${esc(code)}</div>`;
+  } catch (e) {
+    wrap.innerHTML = `<pre style="color:#f87171;font-size:.78rem;padding:1rem;overflow:auto;max-height:240px">[Diagram render note: ${esc(e.message||'Check syntax')}]\n\n${esc(code)}</pre><div class="mermaid-src" style="display:none">${esc(code)}</div>`;
+  }
+}
+
+// ── KaTeX Math Formula Renderer ──
+function initKatex() {
+  if (typeof renderMathInElement === 'function') {
+    renderMathInElement(document.getElementById('main'), {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\[', right: '\\]', display: true },
+        { left: '\\(', right: '\\)', display: false }
+      ],
+      throwOnError: false,
+    });
+  }
+}
+
+// ── Markdown Parser Engine (Token Stashing for Pure Syntax & Math) ──
+function renderMD(raw) {
+  if (!raw) return '';
+  let h = raw.replace(/\r\n/g, '\n');
+
+  const tokens = [];
+  function stash(html) {
+    const key = `%%STASH_${tokens.length}%%`;
+    tokens.push(html);
+    return key;
+  }
+
+  // 1. Math Blocks ($$...$$ and \[...\]) & Inline Math ($...$ and \(...\))
+  h = h.replace(/(\$\$[\s\S]*?\$\$|\\\[[\s\S]*?\\\])/g, m => stash(m));
+  h = h.replace(/(\\\([\s\S]*?\\\))/g, m => stash(m));
+  h = h.replace(/(?<!\\)\$([^$\n]+?)(?<!\\)\$/g, m => stash(m));
+
+  // 2. Fenced Code Blocks & Diagrams
+  h = h.replace(/```([a-zA-Z0-9_+-]*)\s*\n([\s\S]*?)```/g, (m, lang, code) => {
+    const l = (lang || '').trim().toLowerCase();
+    if (l === 'mermaid') {
+      return stash(`<div class="mermaid-wrap"><div class="mermaid-head"><span class="mermaid-head-label">📊 Architecture Diagram</span></div><div class="mermaid-body"><div class="mermaid-src" style="display:none">${esc(code.trim())}</div></div></div>`);
+    }
+    const colors = { python: '#3b82f6', cpp: '#f59e0b', c: '#f59e0b', javascript: '#f59e0b', js: '#f59e0b', java: '#ef4444', sql: '#8b5cf6', asm: '#10b981', x86: '#10b981' };
+    const col = colors[l] || 'var(--color-indigo)';
+    return stash(`<div class="code-wrap"><div class="code-head"><span class="code-lang" style="color:${col}"><span class="dot" style="background:${col}"></span>${esc(l || 'CODE').toUpperCase()}</span><button class="code-copy-btn" onclick="cpCode(this)">📋 Copy</button></div><pre><code class="language-${esc(l || 'plaintext')}">${esc(code.trim())}</code></pre></div>`);
+  });
+
+  // 3. Strip visual simulation tags completely from note text
+  h = h.replace(/(?:@\[visual:|\[visual:)([a-zA-Z0-9_-]+)\]/gi, '');
+
+  // 4. Tables
+  h = h.replace(/\|(.+)\|\n\|[-|\s:]+\|\n((?:\|.+\|\n?)+)/g, (m, header, rows) => {
+    const ths = header.split('|').filter(x => x.trim()).map(x => `<th>${x.trim()}</th>`).join('');
+    const trs = rows.trim().split('\n').map(r => `<tr>${r.split('|').filter(x => x.trim()).map(x => `<td>${x.trim()}</td>`).join('')}</tr>`).join('');
+    return stash(`<div class="table-wrap"><table class="note-table"><thead><tr>${ths}</tr></thead><tbody>${trs}</tbody></table></div>`);
+  });
+
+  // Helper for inline markdown formatting
+  function parseInline(text) {
+    if (!text) return '';
+    let s = text;
+    s = s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    s = s.replace(/__([^_]+)__/g, '<strong>$1</strong>');
+    s = s.replace(/(?<!\*)\*([^*\n]+?)\*(?!\*)/g, '<em>$1</em>');
+    s = s.replace(/(?<!_)_([^_\n]+?)_(?!_)/g, '<em>$1</em>');
+    s = s.replace(/`([^`\n]+)`/g, '<code>$1</code>');
+    s = s.replace(/!\[(.+?)\]\((.+?)\)/g, (m, alt, url) => {
+      const safeUrl = url.trim().replace(/^javascript:/i, '#');
+      return `<figure style="margin:2rem 0;border-radius:var(--radius-md);overflow:hidden;border:1px solid var(--border-color)"><img src="${safeUrl}" alt="${esc(alt)}" style="width:100%;display:block" loading="lazy"/><figcaption style="padding:.5rem 1rem;font-size:.75rem;color:var(--text-subtle)">${esc(alt)}</figcaption></figure>`;
+    });
+    s = s.replace(/\[(.+?)\]\((.+?)\)/g, (m, label, url) => {
+      const safeUrl = url.trim().replace(/^javascript:/i, '#');
+      return `<a href="${safeUrl}" target="_blank" rel="noopener noreferrer">${label} ↗</a>`;
+    });
+    return s;
+  }
+
+  // 5. Blockquotes & Callout Blocks (Group consecutive > lines together)
+  h = h.replace(/((?:^>\s*.+\n?)+)/gm, (block) => {
+    const rawLines = block.trim().split('\n').map(l => l.replace(/^>\s*/, '').trim());
+    const fullText = rawLines.join(' ');
+    
+    const iconMatch = fullText.match(/^(💡|⚡|✅|⚠️|🚨|ℹ️|📌|📝)\s*(.*)$/);
+    let icon = '💡';
+    let bodyText = fullText;
+    let type = 'tip';
+
+    if (iconMatch) {
+      icon = iconMatch[1];
+      bodyText = iconMatch[2];
+      const typeMap = { ['💡']: 'tip', ['⚡']: 'tip', ['✅']: 'tip', ['⚠️']: 'warn', ['🚨']: 'warn', ['ℹ️']: 'info', ['📌']: 'note', ['📝']: 'note' };
+      type = typeMap[icon] || 'note';
+    }
+
+    bodyText = bodyText.replace(/^>\s*/, '').trim();
+
+    return stash(`<div class="callout ${type}"><span class="callout-icon">${icon}</span><div class="callout-content">${parseInline(bodyText)}</div></div>`);
+  });
+
+  // 6. Headings & Special Language Ribbons
+  h = h.replace(/^###\s*(?:📖\s*)?English\s*(?:Summary|Notes)?\s*$/gim, '<div class="lang-section-badge en">📖 English Study Notes</div>');
+  h = h.replace(/^###\s*(?:🌟\s*)?ਪੰਜਾਬੀ\s*(?:ਅਨੁਵਾਦ|Summary)?\s*$/gim, '<div class="lang-section-badge pa">🌟 ਪੰਜਾਬੀ ਅਨੁਵਾਦ (Key Explanation)</div>');
+  h = h.replace(/^#### (.+)$/gim, (m, t) => `<h4>${parseInline(t)}</h4>`);
+  h = h.replace(/^### (.+)$/gim, (m, t) => `<h3>${parseInline(t)}</h3>`);
+  h = h.replace(/^## (.+)$/gim, (m, t) => `<h2>${parseInline(t)}</h2>`);
+  h = h.replace(/^# (.+)$/gim, (m, t) => `<h1>${parseInline(t)}</h1>`);
+  h = h.replace(/^---$/gm, '<hr/>');
+
+  // 7. Lists
+  h = h.replace(/((?:^[-*] .+\n?)+)/gm, b => {
+    const items = b.trim().split('\n').map(l => `<li>${parseInline(l.replace(/^[-*] /, ''))}</li>`).join('');
+    return `<ul>${items}</ul>`;
+  });
+  h = h.replace(/((?:^\d+\. .+\n?)+)/gm, b => {
+    const items = b.trim().split('\n').map(l => `<li>${parseInline(l.replace(/^\d+\. /, ''))}</li>`).join('');
+    return `<ol>${items}</ol>`;
+  });
+
+  // 8. Inline formatting on remaining text
+  h = parseInline(h);
+
+  // 9. Paragraphs & Line Breaks
+  h = h.replace(/\n{2,}/g, '</p><p>');
+  h = h.replace(/(?<!\>)\n/g, '<br/>');
+
+  h = `<p>${h}</p>`;
+
+  // Restore stashed tokens reliably
+  tokens.forEach((val, i) => {
+    h = h.split(`%%STASH_${i}%%`).join(val);
+  });
+
+  // Clean empty paragraphs around block elements
+  h = h.replace(/<p>\s*<\/p>/g, '');
+  h = h.replace(/<p>\s*(<div|<figure|<table|<hr|<ul|<ol|<h[1-6])/g, '$1');
+  h = h.replace(/(<\/div>|<\/figure>|<\/table>|<\/hr>|<\/ul>|<\/ol>|<\/h[1-6]>)\s*<\/p>/g, '$1');
+
+  return h;
+}
+
+function esc(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+function cpCode(btn) {
+  const c = btn.closest('.code-wrap').querySelector('code');
+  if (!c) return;
+  navigator.clipboard.writeText(c.textContent).then(() => {
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => { btn.textContent = '📋 Copy'; }, 2000);
+  });
+}
+
+// ── Setup Next / Previous Note Navigation ──
+function setupNav(currentKey) {
+  const subjNotes = _notes.filter(n => n.subject === _currentSubjectId || n.subjectId === _currentSubjectId);
+  const pool = subjNotes.length > 0 ? subjNotes : _notes;
+  const idx = pool.findIndex(n => n.fbKey === currentKey || n.id === currentKey);
+
+  const footer = document.getElementById('reader-footer');
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+  if (footer) footer.style.display = 'flex';
+
+  if (idx > 0) {
+    const p = pool[idx - 1];
+    if (prevBtn) {
+      prevBtn.style.display = 'flex';
+      document.getElementById('prev-title').textContent = p.title || 'Previous Topic';
+      prevBtn.href = `/note.html?id=${encodeURIComponent(p.fbKey || p.id)}&subject=${encodeURIComponent(p.subject || p.subjectId || '')}`;
+    }
+  } else if (prevBtn) {
+    prevBtn.style.display = 'flex';
+    document.getElementById('prev-title').textContent = '← Return to Subject Workspace';
+    prevBtn.href = `/?subject=${encodeURIComponent(_currentSubjectId || '')}`;
+  }
+
+  if (idx >= 0 && idx < pool.length - 1) {
+    const n = pool[idx + 1];
+    if (nextBtn) {
+      nextBtn.style.display = 'flex';
+      document.getElementById('next-title').textContent = n.title || 'Next Topic';
+      nextBtn.href = `/note.html?id=${encodeURIComponent(n.fbKey || n.id)}&subject=${encodeURIComponent(n.subject || n.subjectId || '')}`;
+    }
+  } else if (nextBtn) {
+    nextBtn.style.display = 'flex';
+    document.getElementById('next-title').textContent = '📖 Open All Notes (Master Guide) →';
+    nextBtn.href = `/note.html?subject=${encodeURIComponent(_currentSubjectId || '')}&mode=master`;
+  }
+
+  updateTopicJumpDropdown(pool, idx);
+}
+
+function updateTopicJumpDropdown(pool, currentIdx) {
+  const sel = document.getElementById('topic-jump-select');
+  if (!sel) return;
+  if (!pool || pool.length < 2) {
+    sel.style.display = 'none';
+    return;
+  }
+  sel.style.display = 'inline-block';
+  sel.innerHTML = pool.map((n, i) => {
+    const isSelected = i === currentIdx ? 'selected' : '';
+    const unitPrefix = n.unit ? `[${n.unit}] ` : '';
+    return `<option value="${esc(n.fbKey || n.id)}" ${isSelected}>${i + 1}. ${unitPrefix}${esc(n.title || 'Topic')}</option>`;
+  }).join('');
+}
+
+function jumpToSelectedTopic(noteKey) {
+  if (!noteKey) return;
+  window.location.href = `/note.html?id=${encodeURIComponent(noteKey)}&subject=${encodeURIComponent(_currentSubjectId || '')}`;
+}
+
+function showToast(msg, type = 'info') {
+  let toastContainer = document.getElementById('toast-container');
+  if (!toastContainer) {
+    toastContainer = document.createElement('div');
+    toastContainer.id = 'toast-container';
+    toastContainer.style.cssText = 'position:fixed;bottom:1.5rem;right:1.5rem;z-index:99999;display:flex;flex-direction:column;gap:0.5rem;pointer-events:none;';
+    document.body.appendChild(toastContainer);
+  }
+  const toast = document.createElement('div');
+  const bg = type === 'success' ? '#10b981' : (type === 'error' ? '#ef4444' : '#1f2937');
+  toast.style.cssText = `background:${bg};color:#fff;padding:0.65rem 1rem;border-radius:8px;font-size:0.85rem;font-weight:600;box-shadow:0 4px 14px rgba(0,0,0,0.35);transition:all 0.25s ease;opacity:0;transform:translateY(10px);pointer-events:auto;`;
+  toast.textContent = msg;
+  toastContainer.appendChild(toast);
+  requestAnimationFrame(() => {
+    toast.style.opacity = '1';
+    toast.style.transform = 'translateY(0)';
+  });
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateY(-10px)';
+    setTimeout(() => toast.remove(), 300);
+  }, 3500);
+}
+
+function toggleReaderBookmark() {
+  const noteId = _currentKey || (new URLSearchParams(window.location.search).get('id'));
+  if (!noteId) return;
+  let bookmarks = JSON.parse(localStorage.getItem('bca_user_bookmarks') || '[]');
+  const idx = bookmarks.indexOf(noteId);
+  if (idx >= 0) {
+    bookmarks.splice(idx, 1);
+  } else {
+    bookmarks.push(noteId);
+  }
+  localStorage.setItem('bca_user_bookmarks', JSON.stringify(bookmarks));
+  
+  if (typeof currentUserProfile !== 'undefined' && currentUserProfile && currentUserProfile.uid && typeof firebase !== 'undefined' && firebase.database) {
+    firebase.database().ref(`/bca3/users/${currentUserProfile.uid}/bookmarks`).set(bookmarks).catch(()=>{});
+  }
+  updateBookmarkButtonState();
+}
+
+function updateBookmarkButtonState() {
+  const noteId = _currentKey || (new URLSearchParams(window.location.search).get('id'));
+  const bmBtn = document.getElementById('tb-bookmark-btn');
+  const bmIcon = document.getElementById('tb-bookmark-icon');
+  const bmText = document.getElementById('tb-bookmark-text');
+  if (!bmBtn || !noteId) return;
+  let bookmarks = JSON.parse(localStorage.getItem('bca_user_bookmarks') || '[]');
+  const isSaved = bookmarks.includes(noteId);
+  bmBtn.classList.toggle('active', isSaved);
+  if (bmIcon) bmIcon.textContent = isSaved ? '📌' : '📌';
+  if (bmText) bmText.textContent = isSaved ? 'Pinned' : 'Pin Note';
+  bmBtn.title = isSaved ? 'Unpin from Profile' : 'Pin / Save Note to Profile';
+}
+
+async function handleReaderGoogleSignIn() {
+  if (typeof firebase === 'undefined' || !firebase.auth) {
+    window.location.href = '/?action=signin';
+    return;
+  }
+  try {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    const res = await firebase.auth().signInWithPopup(provider);
+    if (res && res.user) {
+      let existing = {};
+      try {
+        existing = JSON.parse(localStorage.getItem('studiq_user_profile') || '{}');
+      } catch (e) {}
+      const profile = {
+        ...existing,
+        uid: res.user.uid,
+        email: res.user.email,
+        name: res.user.displayName || existing.name || 'BCA Scholar',
+        photo: res.user.photoURL || existing.photo || '',
+        isAdmin: ['baljotchohan23@gmail.com', 'mehakpreetkaur@gmail.com', 'mehakpreetsaini26@gmail.com'].includes((res.user.email || '').toLowerCase())
+      };
+      if (profile.isAdmin) {
+        profile.subscription = { plan: 'max', status: 'active', validUntil: Date.now() + 3650*24*60*60*1000 };
+      }
+      currentUserProfile = profile;
+      localStorage.setItem('studiq_user_profile', JSON.stringify(profile));
+      localStorage.setItem('bca_user_profile', JSON.stringify(profile));
+      showToast(`Welcome, ${profile.name}! 🎉`, 'success');
+      
+      const p = new URLSearchParams(location.search);
+      const currentKey = p.get('id');
+      const currentSubj = p.get('subject');
+      let target = _notes.find(n => (n.fbKey === currentKey || n.id === currentKey));
+      if (!target && currentSubj) target = _notes.find(n => (n.subject === currentSubj || n.subjectId === currentSubj));
+      if (target) {
+        renderSingleNote(target);
+      } else {
+        location.reload();
+      }
+    }
+  } catch (err) {
+    console.error('Reader Google sign in error:', err);
+    window.location.href = '/?action=signin';
+  }
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.target && ['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return;
+  if (e.key === 'ArrowLeft') {
+    const prev = document.getElementById('prev-btn');
+    if (prev && prev.style.display !== 'none') prev.click();
+  } else if (e.key === 'ArrowRight') {
+    const next = document.getElementById('next-btn');
+    if (next && next.style.display !== 'none') next.click();
+  } else if (e.key === 'Escape') {
+    handleBackNavigation();
+  }
+});
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
+</script>
+</body>
+</html>
