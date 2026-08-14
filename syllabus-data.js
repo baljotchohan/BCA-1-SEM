@@ -340,6 +340,14 @@ const BCA_1ST_SEM_DATA = {
           "question": "What is the CSS box model? Name its four major components.",
           "marks": 2,
           "probability": "High Probability (PU Exam)"
+        },
+        {
+          "id": "web-tech-q-1786729245795",
+          "unit": "Unit III",
+          "type": "2-mark",
+          "question": "Differentiate margin and padding.",
+          "marks": 2,
+          "probability": "High Probability (PU Exam)"
         }
       ],
       "solutions": [
@@ -550,6 +558,16 @@ const BCA_1ST_SEM_DATA = {
           "unit": "Unit III",
           "type": "2-mark",
           "solution": "The CSS box model describes the rectangular area occupied by an element. Its four major components are content, padding, border and margin.",
+          "code": "",
+          "formula": ""
+        },
+        {
+          "id": "sol-web-tech-q-1786729245795",
+          "questionId": "web-tech-q-1786729245795",
+          "question": "Differentiate margin and padding.",
+          "unit": "Unit III",
+          "type": "2-mark",
+          "solution": "Padding is space inside an element between its content and border. Margin is space outside the border that separates the element from neighbouring elements.",
           "code": "",
           "formula": ""
         }
