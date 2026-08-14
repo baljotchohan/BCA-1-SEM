@@ -412,6 +412,14 @@ const BCA_1ST_SEM_DATA = {
           "question": "What is the DOM?",
           "marks": 2,
           "probability": "High Probability (PU Exam)"
+        },
+        {
+          "id": "web-tech-q-1786729274074",
+          "unit": "Unit IV",
+          "type": "2-mark",
+          "question": "Differentiate var, let and const.",
+          "marks": 2,
+          "probability": "High Probability (PU Exam)"
         }
       ],
       "solutions": [
@@ -712,6 +720,16 @@ const BCA_1ST_SEM_DATA = {
           "unit": "Unit IV",
           "type": "2-mark",
           "solution": "The Document Object Model is the browser's in-memory object/tree representation of an HTML document. JavaScript can use it to inspect and modify document structure, content and attributes.",
+          "code": "",
+          "formula": ""
+        },
+        {
+          "id": "sol-web-tech-q-1786729274074",
+          "questionId": "web-tech-q-1786729274074",
+          "question": "Differentiate var, let and const.",
+          "unit": "Unit IV",
+          "type": "2-mark",
+          "solution": "var is function-scoped and can be redeclared/reassigned. let is block-scoped and can be reassigned but not redeclared in the same scope. const is block-scoped and its binding cannot be reassigned after initialization.",
           "code": "",
           "formula": ""
         }
