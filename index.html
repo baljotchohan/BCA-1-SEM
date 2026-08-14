@@ -1,85 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <title>Panjab University BCA 1st Sem Hub | Academic Deck & Notes</title>
-    <meta name="description" content="Official Panjab University BCA 1st Semester Academic Deck. Unit notes, high-yield question banks, and verified solutions.">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <!-- Google Fonts & Symbols -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpha Terminal v2.5 | BCA 1st Semester Academic Deck</title>
+    <meta name="description" content="Official Panjab University BCA 1st Semester Academic Deck. Complete unit notes, high-yield question banks, and verified step-by-step solutions.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,slnt,wdth,wght,ROND@8..144,-10..0,25..150,400..700,0..100&family=Google+Sans+Code:ital,wght@0,400..700;1,400..700&family=Google+Symbols:opsz,wght,FILL,GRAD,ROND@40..48,300,0..1,0,50&display=swap" rel="stylesheet">
-    
-    <!-- MathJax Configuration for LaTeX Math -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- MathJax for rendering LaTeX math formulas -->
     <script>
         window.MathJax = {
-            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
             svg: { fontCache: 'global' }
         };
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
-    <!-- Syllabus Data Source -->
-    <script src="syllabus-data.js"></script>
 
     <style>
         :root {
-            --bg-page: #f8f9fc;
-            --bg-surface: #ffffff;
-            --bg-surface-alt: #f1f3f8;
-            --bg-card: #ffffff;
-            --bg-card-hover: #ffffff;
-            --text-primary: #111318;
-            --text-secondary: #43474e;
-            --text-muted: #73777f;
-            --border-color: #e0e2ec;
-            --border-hover: #c4c6d0;
-            --accent-primary: #005ac1;
-            --accent-primary-hover: #004394;
-            --accent-secondary: #e8f0fe;
-            --accent-text: #1a73e8;
-            --accent-green: #137333;
-            --accent-green-bg: #e6f4ea;
-            --accent-amber: #b06000;
-            --accent-amber-bg: #fef7e0;
-            --accent-red: #c5221f;
-            --accent-red-bg: #fce8e6;
-            --radius-sm: 8px;
-            --radius-md: 14px;
-            --radius-lg: 20px;
-            --radius-pill: 9999px;
-            --font-sans: 'Google Sans Flex', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            --font-mono: 'Google Sans Code', 'JetBrains Mono', monospace;
-            --shadow-subtle: 0 1px 3px rgba(0,0,0,0.05), 0 4px 12px rgba(0,0,0,0.03);
-            --shadow-hover: 0 4px 16px rgba(0,0,0,0.08), 0 12px 32px rgba(0,0,0,0.06);
-            --shadow-modal: 0 24px 48px rgba(17, 19, 24, 0.2);
-        }
-
-        [data-theme="dark"] {
-            --bg-page: #121316;
-            --bg-surface: #1a1c20;
-            --bg-surface-alt: #24262b;
-            --bg-card: #1e2025;
-            --bg-card-hover: #262930;
-            --text-primary: #e2e2e8;
-            --text-secondary: #c4c6d0;
-            --text-muted: #8e9099;
-            --border-color: #33363e;
-            --border-hover: #484b55;
-            --accent-primary: #a8c7fa;
-            --accent-primary-hover: #c2e7ff;
-            --accent-secondary: #004a77;
-            --accent-text: #a8c7fa;
-            --accent-green: #81c995;
-            --accent-green-bg: rgba(129, 201, 149, 0.15);
-            --accent-amber: #fdd663;
-            --accent-amber-bg: rgba(253, 214, 99, 0.15);
-            --accent-red: #f28b82;
-            --accent-red-bg: rgba(242, 139, 130, 0.15);
-            --shadow-subtle: 0 2px 8px rgba(0,0,0,0.3);
-            --shadow-hover: 0 8px 24px rgba(0,0,0,0.4);
-            --shadow-modal: 0 32px 64px rgba(0,0,0,0.6);
+            /* Premium Dark Zinc Palette */
+            --bg-base: #09090b; /* zinc-950 */
+            --bg-panel: #18181b; /* zinc-900 */
+            --bg-card: #18181b;
+            --bg-card-hover: #27272a; /* zinc-800 */
+            --border-light: rgba(255, 255, 255, 0.08);
+            --border-strong: rgba(255, 255, 255, 0.15);
+            
+            /* Text */
+            --text-main: #f4f4f5; /* zinc-100 */
+            --text-muted: #a1a1aa; /* zinc-400 */
+            --text-dim: #71717a; /* zinc-500 */
+            
+            /* Typography */
+            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            
+            /* Retain for Intro Animation only */
+            --terminal-green: #10b981; /* Soft modern emerald */
+            --terminal-glow: rgba(16, 185, 129, 0.2);
         }
 
         * {
@@ -89,1274 +55,1512 @@
         }
 
         body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
             font-family: var(--font-sans);
-            background-color: var(--bg-page);
-            color: var(--text-primary);
             min-height: 100vh;
-            line-height: 1.6;
+            overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
-            transition: background-color 0.2s, color 0.2s;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Typography Helpers */
-        .mono { font-family: var(--font-mono); }
-        .symbol {
-            font-family: 'Google Symbols';
-            font-weight: normal;
-            font-style: normal;
-            font-size: 20px;
-            line-height: 1;
-            display: inline-block;
-            vertical-align: middle;
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-
-        /* Layout Container */
-        .container {
-            max-width: 1240px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        /* --- HEADER NAVBAR --- */
-        .navbar {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.88);
-            backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--border-color);
-            transition: background 0.2s, border-color 0.2s;
-        }
-        [data-theme="dark"] .navbar {
-            background: rgba(26, 28, 32, 0.88);
-        }
-
-        .navbar-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 68px;
-        }
-
-        .nav-brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            color: var(--text-primary);
-        }
-
-        .brand-icon {
-            width: 36px;
-            height: 36px;
-            background: var(--accent-primary);
-            color: #ffffff;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        .brand-info h1 {
-            font-size: 1.05rem;
-            font-weight: 600;
-            letter-spacing: -0.01em;
-            line-height: 1.2;
-        }
-
-        .brand-info p {
-            font-size: 0.75rem;
-            color: var(--text-muted);
+        .mono {
             font-family: var(--font-mono);
         }
 
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            list-style: none;
+        .scanlines {
+            display: none !important;
         }
 
-        .nav-item a {
-            text-decoration: none;
-            color: var(--text-secondary);
-            font-size: 0.92rem;
-            font-weight: 500;
-            padding: 8px 14px;
-            border-radius: var(--radius-pill);
-            transition: all 0.15s;
-        }
-
-        .nav-item a:hover {
-            background: var(--bg-surface-alt);
-            color: var(--text-primary);
-        }
-
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        /* Buttons & Badges */
-        .btn {
-            font-family: var(--font-sans);
-            font-size: 0.9rem;
-            font-weight: 500;
-            padding: 9px 18px;
-            border-radius: var(--radius-pill);
-            border: 1px solid transparent;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            text-decoration: none;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .btn-primary {
-            background: var(--accent-primary);
-            color: #ffffff;
-        }
-        [data-theme="dark"] .btn-primary {
-            color: #00224d;
-        }
-        .btn-primary:hover {
-            background: var(--accent-primary-hover);
-            box-shadow: 0 4px 12px rgba(0, 90, 193, 0.25);
-        }
-
-        .btn-secondary {
-            background: var(--bg-surface);
-            color: var(--text-primary);
-            border-color: var(--border-color);
-        }
-        .btn-secondary:hover {
-            background: var(--bg-surface-alt);
-            border-color: var(--border-hover);
-        }
-
-        .btn-icon {
-            width: 40px;
-            height: 40px;
-            padding: 0;
-            border-radius: 50%;
-            background: transparent;
-            color: var(--text-secondary);
-            border: 1px solid var(--border-color);
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.15s;
-        }
-        .btn-icon:hover {
-            background: var(--bg-surface-alt);
-            color: var(--text-primary);
-        }
-
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 4px 10px;
-            border-radius: var(--radius-pill);
-            font-size: 0.75rem;
-            font-weight: 600;
-            font-family: var(--font-mono);
-            letter-spacing: 0.02em;
-        }
-
-        .badge-blue { background: var(--accent-secondary); color: var(--accent-text); }
-        .badge-green { background: var(--accent-green-bg); color: var(--accent-green); }
-        .badge-amber { background: var(--accent-amber-bg); color: var(--accent-amber); }
-        .badge-red { background: var(--accent-red-bg); color: var(--accent-red); }
-
-        /* --- HERO SECTION --- */
-        .hero {
-            padding: 48px 0 32px 0;
-            text-align: center;
-        }
-
-        .hero-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 16px;
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-pill);
-            font-size: 0.8rem;
-            font-family: var(--font-mono);
-            color: var(--text-secondary);
-            margin-bottom: 20px;
-            box-shadow: var(--shadow-subtle);
-        }
-
-        .hero-title {
-            font-size: clamp(2rem, 4.5vw, 3.2rem);
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            color: var(--text-primary);
-            line-height: 1.15;
-            margin-bottom: 16px;
-        }
-
-        .hero-subtitle {
-            font-size: 1.15rem;
-            color: var(--text-secondary);
-            max-width: 740px;
-            margin: 0 auto 32px auto;
-            line-height: 1.6;
-        }
-
-        /* Search Bar */
-        .search-wrapper {
-            max-width: 680px;
-            margin: 0 auto 40px auto;
-            position: relative;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 16px 20px 16px 52px;
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-pill);
-            font-family: var(--font-sans);
-            font-size: 1.05rem;
-            color: var(--text-primary);
-            box-shadow: var(--shadow-subtle);
-            outline: none;
-            transition: all 0.2s;
-        }
-
-        .search-input:focus {
-            border-color: var(--accent-primary);
-            box-shadow: 0 0 0 3px rgba(0, 90, 193, 0.12), var(--shadow-hover);
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-            pointer-events: none;
-        }
-
-        /* --- STATS BAR --- */
-        .stats-bar {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-            margin-bottom: 48px;
-        }
-
-        .stat-card {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 18px 20px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            box-shadow: var(--shadow-subtle);
-        }
-
-        .stat-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-        }
-
-        .stat-val {
-            font-size: 1.35rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            line-height: 1.2;
-        }
-
-        .stat-lbl {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        /* --- SECTION HEADERS --- */
-        .section-header {
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
-            margin-bottom: 24px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .section-header h2 {
-            font-size: 1.55rem;
-            font-weight: 600;
-            letter-spacing: -0.02em;
-            color: var(--text-primary);
-        }
-
-        .section-header p {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            margin-top: 4px;
-        }
-
-        /* --- SUBJECTS GRID --- */
-        .subjects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-            gap: 24px;
-            margin-bottom: 64px;
-        }
-
-        .subject-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
-            padding: 28px;
-            display: flex;
-            flex-direction: column;
-            box-shadow: var(--shadow-subtle);
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-        }
-
-        .subject-card:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-hover);
-            border-color: var(--border-hover);
-        }
-
-        .card-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 14px;
-        }
-
-        .card-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 8px;
-            line-height: 1.35;
-        }
-
-        .card-desc {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
-
-        /* Unit Pills List in Card */
-        .card-units {
-            background: var(--bg-surface-alt);
-            border-radius: var(--radius-md);
-            padding: 12px;
-            margin-bottom: 24px;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .card-unit-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 6px 10px;
-            background: var(--bg-surface);
-            border-radius: var(--radius-sm);
-            border: 1px solid var(--border-color);
-            font-size: 0.82rem;
-            cursor: pointer;
-            transition: all 0.15s;
-        }
-
-        .card-unit-row:hover {
-            border-color: var(--accent-primary);
-            color: var(--accent-text);
-        }
-
-        .card-unit-row span.unit-tag {
-            font-weight: 600;
-            font-family: var(--font-mono);
-            color: var(--text-primary);
-        }
-
-        .card-actions {
-            margin-top: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .btn-row {
-            display: flex;
-            gap: 8px;
-        }
-
-        /* --- MARKS SCHEME TABLE --- */
-        .table-card {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            box-shadow: var(--shadow-subtle);
-            margin-bottom: 64px;
-        }
-
-        .styled-table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-            font-size: 0.92rem;
-        }
-
-        .styled-table th {
-            background: var(--bg-surface-alt);
-            padding: 16px 20px;
-            font-weight: 600;
-            color: var(--text-secondary);
-            border-bottom: 1px solid var(--border-color);
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-        }
-
-        .styled-table td {
-            padding: 16px 20px;
-            border-bottom: 1px solid var(--border-color);
-            color: var(--text-primary);
-        }
-
-        .styled-table tbody tr:last-child td {
-            border-bottom: none;
-        }
-
-        .styled-table tbody tr:hover {
-            background: var(--bg-surface-alt);
-        }
-
-        /* --- MODAL SYSTEM --- */
-        .modal-backdrop {
+        /* --- INTRO OVERLAY (Untouched functionality, updated styles) --- */
+        #intro-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(15, 17, 21, 0.7);
-            backdrop-filter: blur(8px);
-            z-index: 2000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            opacity: 0;
-            transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .modal-backdrop.open {
-            display: flex;
-            opacity: 1;
-        }
-
-        .modal-dialog {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
-            width: 100%;
-            max-width: 980px;
-            max-height: 90vh;
+            background-color: #09090b;
+            z-index: 100000;
             display: flex;
             flex-direction: column;
-            box-shadow: var(--shadow-modal);
-            transform: scale(0.97) translateY(12px);
-            transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .intro-content {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .intro-img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 2px solid var(--terminal-green);
+            box-shadow: 0 0 40px var(--terminal-glow);
+            margin-bottom: 1.5rem;
+            object-fit: cover;
+            animation: pulseGlow 3s infinite alternate ease-in-out;
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.2); transform: scale(1); }
+            100% { box-shadow: 0 0 60px rgba(16, 185, 129, 0.4); transform: scale(1.02); }
+        }
+
+        .typing-text {
+            font-family: var(--font-mono);
+            color: var(--text-main);
+            font-size: 1.2rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            border-right: 2px solid var(--terminal-green);
+            white-space: nowrap;
             overflow: hidden;
+            animation: blink 0.75s step-end infinite;
         }
 
-        .modal-backdrop.open .modal-dialog {
-            transform: scale(1) translateY(0);
+        @keyframes blink {
+            from, to { border-color: transparent; }
+            50% { border-color: var(--terminal-green); }
         }
 
-        .modal-header {
-            padding: 18px 28px;
-            background: var(--bg-surface-alt);
-            border-bottom: 1px solid var(--border-color);
+        /* --- PREMIUM HEADER NAVBAR (Frosted Glass) --- */
+        .terminal-nav {
+            height: 64px;
+            background: rgba(9, 9, 11, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-light);
+            position: sticky;
+            top: 0;
+            z-index: 50;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            padding: 0 1.5rem;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
         }
 
-        .modal-title-wrap h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--text-primary);
+        /* --- PREMIUM CARDS --- */
+        .terminal-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
 
-        .modal-title-wrap p {
-            font-size: 0.8rem;
+        .terminal-card:hover {
+            border-color: var(--border-strong);
+            background: var(--bg-card-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .topic-pill {
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 9999px; /* full pill */
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-light);
             color: var(--text-muted);
-            font-family: var(--font-mono);
+            transition: all 0.2s ease;
+        }
+        .topic-pill:hover {
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--border-strong);
         }
 
-        .modal-controls {
-            display: flex;
+        /* 3-Action Buttons */
+        .terminal-btn-group {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin: 1.25rem 0 0.75rem 0;
+            padding-top: 1.25rem;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .term-btn {
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 8px 10px;
+            border-radius: 8px;
+            display: inline-flex;
             align-items: center;
-            gap: 8px;
+            justify-content: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            background: var(--bg-base);
+            border: 1px solid var(--border-light);
+            color: var(--text-muted);
+        }
+        .term-btn:hover {
+            background: var(--text-main);
+            color: var(--bg-base);
+            border-color: var(--text-main);
+            transform: translateY(-1px);
         }
 
-        .modal-body {
-            padding: 28px 32px;
-            overflow-y: auto;
-            flex: 1;
-        }
-
-        /* Document Reader Formatting */
-        .unit-nav-tabs {
-            display: flex;
-            gap: 8px;
-            overflow-x: auto;
-            padding-bottom: 14px;
-            margin-bottom: 24px;
-            border-bottom: 1px solid var(--border-color);
+        /* --- WORKSPACE & TABS --- */
+        .workspace-hero {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
         .tab-btn {
-            padding: 8px 18px;
-            border-radius: var(--radius-pill);
-            border: 1px solid var(--border-color);
-            background: var(--bg-surface);
-            color: var(--text-secondary);
             font-family: var(--font-sans);
+            font-size: 0.85rem;
             font-weight: 500;
-            font-size: 0.88rem;
-            cursor: pointer;
-            transition: all 0.15s;
-            white-space: nowrap;
-        }
-
-        .tab-btn.active, .tab-btn:hover {
-            background: var(--accent-primary);
-            color: #ffffff;
-            border-color: var(--accent-primary);
-        }
-        [data-theme="dark"] .tab-btn.active {
-            color: #00224d;
-        }
-
-        .reader-content {
-            font-size: 1.05rem;
-            line-height: 1.8;
-            color: var(--text-primary);
-        }
-
-        .reader-content h1 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-            letter-spacing: -0.02em;
-        }
-
-        .reader-content h2 {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin: 28px 0 12px 0;
-            color: var(--accent-primary);
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 8px;
-        }
-
-        .reader-content h3 {
-            font-size: 1.15rem;
-            font-weight: 600;
-            margin: 20px 0 8px 0;
-        }
-
-        .reader-content h4 {
-            font-size: 1.05rem;
-            font-weight: 600;
-            margin: 16px 0 6px 0;
-            color: var(--text-secondary);
-        }
-
-        .reader-content p {
-            margin-bottom: 16px;
-        }
-
-        .reader-content ul, .reader-content ol {
-            padding-left: 28px;
-            margin-bottom: 16px;
-        }
-
-        .reader-content li {
-            margin-bottom: 6px;
-        }
-
-        .reader-content blockquote {
-            background: var(--accent-secondary);
-            border-left: 4px solid var(--accent-text);
-            padding: 14px 20px;
-            border-radius: var(--radius-sm);
-            color: var(--text-primary);
-            margin: 20px 0;
-            font-size: 0.95rem;
-        }
-
-        .reader-content pre {
-            background: var(--bg-surface-alt);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 18px 20px;
-            overflow-x: auto;
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            line-height: 1.5;
-            margin: 20px 0;
-            position: relative;
-        }
-
-        .reader-content code {
-            font-family: var(--font-mono);
-            background: var(--bg-surface-alt);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 0.9em;
-        }
-
-        .copy-code-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            padding: 4px 10px;
-            font-size: 0.75rem;
-            border-radius: var(--radius-sm);
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            color: var(--text-secondary);
-            cursor: pointer;
-        }
-
-        /* --- FOOTER --- */
-        .footer {
-            border-top: 1px solid var(--border-color);
-            background: var(--bg-surface);
-            padding: 40px 0;
-            margin-top: 80px;
-            font-size: 0.9rem;
+            padding: 10px 18px;
+            border-radius: 9999px;
             color: var(--text-muted);
+            background: transparent;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .footer-inner {
+        .tab-btn.active {
+            background: var(--text-main);
+            color: var(--bg-base);
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+        }
+        .tab-btn:not(.active):hover {
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .unit-chip {
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            font-weight: 500;
+            padding: 6px 14px;
+            border-radius: 9999px;
+            border: 1px solid var(--border-light);
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .unit-chip.active, .unit-chip:hover {
+            border-color: var(--border-strong);
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Content Articles & Notes */
+        .article-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        /* Code block container */
+        .code-container {
+            position: relative;
+            margin: 1.5rem 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+        .code-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 20px;
+            background: #18181b;
+            border: 1px solid #27272a;
+            border-bottom: none;
+            padding: 8px 16px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: #a1a1aa;
+        }
+        .code-copy-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #a1a1aa;
+            padding: 4px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            transition: all 0.2s;
+        }
+        .code-copy-btn:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.1);
         }
 
-        /* Responsive Mobile */
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .subjects-grid { grid-template-columns: 1fr; }
-            .modal-dialog { max-height: 95vh; margin: 10px; }
-            .modal-body { padding: 20px; }
+        pre {
+            background: #09090b !important;
+            border: 1px solid #27272a !important;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            padding: 1.25rem !important;
+            overflow-x: auto;
+            font-family: var(--font-mono) !important;
+            font-size: 0.875rem;
+            color: #f4f4f5;
+            line-height: 1.6;
+            margin: 0 !important;
+        }
+
+        code.inline-code {
+            font-family: var(--font-mono);
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
+            padding: 2px 6px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Tables */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border-radius: 12px;
+            border: 1px solid var(--border-light);
+            background: var(--bg-card);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+        }
+        th, td {
+            border-bottom: 1px solid var(--border-light);
+            padding: 12px 16px;
+            text-align: left;
+        }
+        th {
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        /* --- PURE BLACK & PAPER WHITE DOCS READER STYLES --- */
+        #reader-article-box {
+            background-color: var(--bg-card);
+            border-color: var(--border-light);
+            color: var(--text-main);
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        #reader-article-box.paper-mode {
+            background-color: #ffffff !important;
+            border-color: #e5e7eb !important;
+            color: #1f2937 !important;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06) !important;
+        }
+        #reader-article-box.paper-mode #reader-note-title,
+        #reader-article-box.paper-mode h1, #reader-article-box.paper-mode h2,
+        #reader-article-box.paper-mode h3, #reader-article-box.paper-mode h4,
+        #reader-article-box.paper-mode strong {
+            color: #111827 !important;
+            border-color: #e5e7eb !important;
+        }
+        #reader-article-box.paper-mode em, #reader-article-box.paper-mode li,
+        #reader-article-box.paper-mode table td {
+            color: #374151 !important;
+            border-color: #e5e7eb !important;
+        }
+        #reader-article-box.paper-mode blockquote {
+            border-color: #9ca3af !important;
+            color: #4b5563 !important;
+        }
+        #reader-article-box.paper-mode hr, #reader-article-box.paper-mode .table-wrap,
+        #reader-article-box.paper-mode table th {
+            border-color: #e5e7eb !important;
+            background-color: #f9fafb !important;
+        }
+        #reader-article-box.paper-mode code.inline-code {
+            background-color: #f3f4f6 !important;
+            color: #111827 !important;
+            border-color: #e5e7eb !important;
+        }
+        #reader-article-box.paper-mode .code-container, #reader-article-box.paper-mode .code-header {
+            background-color: #111827 !important;
+            border-color: #374151 !important;
+        }
+
+        /* Global overrides for Paper Mode */
+        body.paper-theme-active {
+            background-image: none !important;
+            background-color: #f3f4f6 !important;
+        }
+        body.paper-theme-active .scanlines {
+            display: none !important;
+        }
+
+        /* Q-Bank & Solution Styling */
+        .qbank-row, .solution-row {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .qbank-row:hover, .solution-row:hover {
+            border-color: var(--border-strong);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Search Modal */
+        #search-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(9, 9, 11, 0.85);
+            backdrop-filter: blur(16px);
+            z-index: 10000;
+            display: none;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 10vh;
+        }
+        .search-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 650px;
+            overflow: hidden;
+        }
+
+        /* Print styles */
+        @media print {
+            .terminal-nav, #intro-overlay, .no-print { display: none !important; }
+            body { background: white !important; color: black !important; }
+            .article-card, .qbank-row, .solution-row { background: white !important; color: black !important; border: 1px solid #ccc !important; }
+            pre { background: #f8fafc !important; color: black !important; border: 1px solid #ccc !important; }
         }
     </style>
 </head>
+
 <body>
 
-    <!-- TOP NAVIGATION -->
-    <header class="navbar">
-        <div class="container navbar-inner">
-            <a href="#" class="nav-brand">
-                <div class="brand-icon">PU</div>
-                <div class="brand-info">
-                    <h1>Panjab University • BCA</h1>
-                    <p>Semester 1 Academic Deck</p>
-                </div>
+    <!-- CRT SCANLINES EFFECT -->
+    <div class="scanlines" id="scanlines-layer"></div>
+
+    <!-- INTRO OVERLAY -->
+    <div id="intro-overlay">
+        <div class="intro-content">
+            <img src="assets/intro_img.jpg" alt="User" class="intro-img" onerror="this.src='https://via.placeholder.com/140/000000/00ff41?text=USER'">
+            <div class="typing-text" id="typing-text"></div>
+        </div>
+    </div>
+
+    <!-- TERMINAL NAVIGATION BAR -->
+    <header class="terminal-nav no-print">
+        <div class="flex items-center gap-3">
+            <a href="#/" onclick="navigateToDashboard(event)" class="flex items-center gap-2 text-decoration-none">
+                <div class="w-2.5 h-2.5 rounded-full bg-zinc-900merald-400 animate-pulse"></div>
+                <span class="mono font-bold text-sm tracking-wider text-zinc-100 font-semibold tracking-tight">BCA Hub (Beta)</span>
             </a>
-            <ul class="nav-links">
-                <li class="nav-item"><a href="#subjects">📚 Subjects</a></li>
-                <li class="nav-item"><a href="#qbank">❓ Question Bank</a></li>
-                <li class="nav-item"><a href="#solutions">✅ Model Solutions</a></li>
-                <li class="nav-item"><a href="#scheme">📊 Marks Scheme</a></li>
-            </ul>
-            <div class="nav-actions">
-                <span id="mcp-status" class="badge badge-green">
-                    <span class="symbol" style="font-size:14px;">cloud_sync</span> Live Synced
-                </span>
-                <button class="btn-icon" onclick="toggleTheme()" title="Toggle Theme">
-                    <span class="symbol" id="theme-icon">dark_mode</span>
-                </button>
-                <a href="mcp-admin.html" class="btn btn-primary">
-                    <span class="symbol">dashboard</span> Admin Deck
-                </a>
+            <span class="hidden md:inline-block px-2 py-0.5 text-xs mono rounded bg-zinc-900 text-zinc-300 border border-[#565656]">PU 2026-27</span>
+        </div>
+
+        <div class="flex items-center gap-3">
+            <!-- Global Search Trigger -->
+            <button onclick="openSearchModal()" class="flex items-center gap-2 px-3 py-1.5 rounded bg-white/5 hover:bg-white/10 border border-zinc-800 text-xs mono text-zinc-300 transition">
+                <span class="symbol mr-1">search</span>
+                <span class="hidden sm:inline">Search bank...</span>
+                <kbd class="px-1 py-0.5 rounded bg-zinc-950lack/50 text-[10px] text-zinc-400 border border-zinc-800">⌘K</kbd>
+            </button>
+
+            <!-- Live Clock -->
+            <div class="flex items-center gap-2 px-3 py-1.5 rounded bg-zinc-900 border border-zinc-800 mono text-xs text-zinc-300">
+                <span class="symbol mr-1">schedule</span>
+                <span id="terminal-clock">--:--:-- IST</span>
             </div>
         </div>
     </header>
 
-    <main class="container">
+    <!-- ========================================================================= -->
+    <!-- VIEW 1: DASHBOARD VIEW                                                    -->
+    <!-- ========================================================================= -->
+    <div id="dashboard-view" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
-        <!-- HERO SECTION -->
-        <section class="hero">
-            <div class="hero-tag">
-                <span class="symbol" style="font-size:16px; color:var(--accent-primary);">school</span>
-                PANJAB UNIVERSITY (CHANDIGARH) • NEP 2026–27 ACADEMIC FRAMEWORK
-            </div>
-            <h2 class="hero-title">BCA 1st Semester Academic Deck</h2>
-            <p class="hero-subtitle">
-                The definitive curriculum hub for Panjab University BCA Semester 1. Comprehensive structured unit notes, high-yield examination question banks, and verified step-by-step solutions.
-            </p>
-
-            <!-- Search Bar -->
-            <div class="search-wrapper">
-                <span class="symbol search-icon">search</span>
-                <input type="text" id="searchInput" class="search-input" placeholder="Search subjects, topics (e.g. C Pointers, DNS, Karl Pearson, HTML5)..." oninput="filterSubjects()">
-            </div>
-
-            <!-- Stats Bar -->
-            <div class="stats-bar">
-                <div class="stat-card">
-                    <div class="stat-icon" style="background:var(--accent-secondary); color:var(--accent-text);">
-                        <span class="symbol">menu_book</span>
-                    </div>
-                    <div>
-                        <div class="stat-val">7 Subjects</div>
-                        <div class="stat-lbl">Major, Minor, VAC & AEC</div>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon" style="background:var(--accent-green-bg); color:var(--accent-green);">
-                        <span class="symbol">folder_open</span>
-                    </div>
-                    <div>
-                        <div class="stat-val">28 Units</div>
-                        <div class="stat-lbl">100% PU Syllabus Aligned</div>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon" style="background:var(--accent-amber-bg); color:var(--accent-amber);">
-                        <span class="symbol">quiz</span>
-                    </div>
-                    <div>
-                        <div class="stat-val">High-Yield Qs</div>
-                        <div class="stat-lbl">PYQs & Model Answers</div>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon" style="background:var(--accent-red-bg); color:var(--accent-red);">
-                        <span class="symbol">terminal</span>
-                    </div>
-                    <div>
-                        <div class="stat-val">Verified Code</div>
-                        <div class="stat-lbl">C Programs & Web Solutions</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SUBJECTS SECTION -->
-        <section id="subjects" style="scroll-margin-top: 90px;">
-            <div class="section-header">
+        <!-- HERO BANNER -->
+        <div class="mb-8 p-6 sm:p-7 rounded-xl bg-zinc-900 border border-zinc-800 shadow-lg relative overflow-hidden">
+            <div class="flex flex-wrap items-center justify-between gap-4">
                 <div>
-                    <h2>Curriculum Subjects & Unit Decks</h2>
-                    <p>Select any subject to read full unit notes, test question banks, or inspect practical solutions.</p>
+                    <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-zinc-800 border border-zinc-800 text-zinc-100 shadow-sm text-xs mono mb-3">
+                        <span class="symbol mr-1">circle</span> PANJAB UNIVERSITY • BCA 1ST SEMESTER
+                    </div>
+                    <h1 class="text-2xl sm:text-3xl font-bold font-sans tracking-tight text-white mb-2">
+                        Academic Command Deck <span class="text-zinc-100 font-semibold tracking-tight">[NEP 2026-27]</span>
+                    </h1>
+                    <p class="text-xs sm:text-sm text-zinc-400 max-w-2xl leading-relaxed">
+                        Curated subject workspaces with deep unit notes, exam question banks, and complete verified solutions.
+                    </p>
                 </div>
-                <span class="badge badge-blue">Semester 1</span>
-            </div>
 
-            <div id="subjects-grid" class="subjects-grid">
-                <!-- Dynamically rendered via JS -->
-            </div>
-        </section>
-
-        <!-- MARKS & CREDITS SCHEME SECTION -->
-        <section id="scheme" style="scroll-margin-top: 90px;">
-            <div class="section-header">
-                <div>
-                    <h2>Examination & Marks Scheme</h2>
-                    <p>Official Panjab University evaluation breakdown under the NEP credit framework.</p>
+                <div class="flex items-center gap-3 font-mono text-xs">
+                    <div class="p-2.5 sm:p-3 rounded-lg bg-zinc-900 border border-zinc-800 text-center min-w-[70px]">
+                        <div class="text-zinc-300 font-bold text-base">7</div>
+                        <div class="text-zinc-400 text-[10px]">Subjects</div>
+                    </div>
+                    <div class="p-2.5 sm:p-3 rounded-lg bg-zinc-900 border border-zinc-800 text-center min-w-[70px]">
+                        <div class="text-zinc-300 font-bold text-base">28</div>
+                        <div class="text-zinc-400 text-[10px]">Units</div>
+                    </div>
+                    <div class="p-2.5 sm:p-3 rounded-lg bg-zinc-900 border border-zinc-800 text-center min-w-[70px]">
+                        <div class="text-zinc-300 font-bold text-base">100%</div>
+                        <div class="text-zinc-400 text-[10px]">PU Aligned</div>
+                    </div>
                 </div>
-                <span class="badge badge-green">NEP 2026–27</span>
+            </div>
+        </div>
+
+        <!-- 7 SUBJECT CARDS GRID (Minimal, Smaller, Single-Action) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-10" id="subjects-grid">
+            <!-- Dynamically populated via syllabus-data.js -->
+        </div>
+
+        <!-- PANJAB UNIVERSITY MARKS & ASSESSMENT SCHEME TABLE -->
+        <div class="terminal-card p-6 border border-zinc-800">
+            <div class="flex items-center justify-between mb-4 border-b border-zinc-800 pb-3">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-lg bg-zinc-800 border border-zinc-800 text-zinc-100 shadow-sm flex items-center justify-center text-sm">
+                        <span class="symbol mr-1">circle</span>
+                    </div>
+                    <div>
+                        <h2 class="text-base font-bold text-white tracking-tight">Panjab University BCA 1st Semester Marks & Assessment Scheme</h2>
+                        <p class="text-xs text-zinc-400 mono">Official National Education Policy (NEP 2026-27) Framework</p>
+                    </div>
+                </div>
+                <span class="px-2.5 py-1 rounded bg-white/5 border border-zinc-800 text-xs mono text-zinc-300 font-bold hidden sm:inline-block">Total Credits: 21</span>
             </div>
 
-            <div class="table-card">
-                <table class="styled-table">
+            <div class="table-wrap overflow-x-auto">
+                <table class="w-full text-left text-xs mono">
                     <thead>
-                        <tr>
-                            <th>Paper Code</th>
-                            <th>Subject Name</th>
-                            <th>Credits</th>
-                            <th>Internal</th>
-                            <th>External</th>
-                            <th>Practical</th>
-                            <th>Total Marks</th>
+                        <tr class="bg-zinc-900 text-zinc-400 border-b border-zinc-800">
+                            <th class="py-3 px-3">Course Code</th>
+                            <th class="py-3 px-3">Course Title</th>
+                            <th class="py-3 px-3 text-center">Credits</th>
+                            <th class="py-3 px-3 text-center">Int. Theory</th>
+                            <th class="py-3 px-3 text-center">Ext. Theory</th>
+                            <th class="py-3 px-3 text-center">Ext. Practical</th>
+                            <th class="py-3 px-3 text-right">Total Marks</th>
                         </tr>
                     </thead>
-                    <tbody id="marks-table-body">
-                        <!-- Rendered via JS -->
+                    <tbody class="divide-y divide-white/5 text-zinc-300">
+                        <tr class="hover:bg-white/5 transition">
+                            <td class="py-3 px-3 text-zinc-300 font-bold">BCA-DSC-1(Maj)-101A</td>
+                            <td class="py-3 px-3 text-zinc-100 font-semibold tracking-tight">Introduction to Web Technologies</td>
+                            <td class="py-3 px-3 text-center">4</td>
+                            <td class="py-3 px-3 text-center">05</td>
+                            <td class="py-3 px-3 text-center">45</td>
+                            <td class="py-3 px-3 text-center">50</td>
+                            <td class="py-3 px-3 text-right font-bold text-white">100</td>
+                        </tr>
+                        <tr class="hover:bg-white/5 transition">
+                            <td class="py-3 px-3 text-indigo-400 font-bold">BCA-DSC-1(Min)-103</td>
+                            <td class="py-3 px-3 text-zinc-100 font-semibold tracking-tight">Problem Solving Through C</td>
+                            <td class="py-3 px-3 text-center">4</td>
+                            <td class="py-3 px-3 text-center">05</td>
+                            <td class="py-3 px-3 text-center">45</td>
+                            <td class="py-3 px-3 text-center">50</td>
+                            <td class="py-3 px-3 text-right font-bold text-white">100</td>
+                        </tr>
+                        <tr class="hover:bg-white/5 transition">
+                            <td class="py-3 px-3 text-zinc-300 font-bold">BCA-DSC-1(Maj)-102</td>
+                            <td class="py-3 px-3 text-zinc-100 font-semibold tracking-tight">Fundamentals of Mathematical Statistics</td>
+                            <td class="py-3 px-3 text-center">4</td>
+                            <td class="py-3 px-3 text-center">10</td>
+                            <td class="py-3 px-3 text-center">90</td>
+                            <td class="py-3 px-3 text-center text-gray-500">--</td>
+                            <td class="py-3 px-3 text-right font-bold text-white">100</td>
+                        </tr>
+                        <tr class="hover:bg-white/5 transition">
+                            <td class="py-3 px-3 text-zinc-300 font-bold">CSA-VAC-102</td>
+                            <td class="py-3 px-3 text-zinc-100 font-semibold tracking-tight">Introduction to Computer Hardware</td>
+                            <td class="py-3 px-3 text-center">2</td>
+                            <td class="py-3 px-3 text-center">05</td>
+                            <td class="py-3 px-3 text-center">45</td>
+                            <td class="py-3 px-3 text-center text-gray-500">--</td>
+                            <td class="py-3 px-3 text-right font-bold text-white">50</td>
+                        </tr>
+                        <tr class="hover:bg-white/5 transition">
+                            <td class="py-3 px-3 text-zinc-300 font-bold">AEC-1-101</td>
+                            <td class="py-3 px-3 text-zinc-100 font-semibold tracking-tight">English-1 (Communication Skills)</td>
+                            <td class="py-3 px-3 text-center">2</td>
+                            <td class="py-3 px-3 text-center">05</td>
+                            <td class="py-3 px-3 text-center">45</td>
+                            <td class="py-3 px-3 text-center text-gray-500">--</td>
+                            <td class="py-3 px-3 text-right font-bold text-white">50</td>
+                        </tr>
+                        <tr class="hover:bg-white/5 transition">
+                            <td class="py-3 px-3 text-rose-400 font-bold">PUN-COMPL-101 / HCP-101</td>
+                            <td class="py-3 px-3 text-zinc-100 font-semibold tracking-tight">Punjabi Compulsory / History & Culture of Punjab</td>
+                            <td class="py-3 px-3 text-center">2</td>
+                            <td class="py-3 px-3 text-center">05</td>
+                            <td class="py-3 px-3 text-center">45</td>
+                            <td class="py-3 px-3 text-center text-gray-500">--</td>
+                            <td class="py-3 px-3 text-right font-bold text-white">50</td>
+                        </tr>
+                        <tr class="hover:bg-white/5 transition">
+                            <td class="py-3 px-3 text-teal-400 font-bold">CSA-MDC-101</td>
+                            <td class="py-3 px-3 text-zinc-100 font-semibold tracking-tight">E-Commerce & Digital Trends</td>
+                            <td class="py-3 px-3 text-center">3</td>
+                            <td class="py-3 px-3 text-center">05</td>
+                            <td class="py-3 px-3 text-center">70</td>
+                            <td class="py-3 px-3 text-center text-gray-500">--</td>
+                            <td class="py-3 px-3 text-right font-bold text-white">75</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
-        </section>
-
-    </main>
-
-    <!-- NOTES READER MODAL -->
-    <div id="notes-modal" class="modal-backdrop">
-        <div class="modal-dialog">
-            <div class="modal-header">
-                <div class="modal-title-wrap">
-                    <h3 id="modal-subject-title">Subject Notes</h3>
-                    <p id="modal-subject-code">BCA-101 • 4 Credits</p>
-                </div>
-                <div class="modal-controls">
-                    <button class="btn btn-secondary" onclick="window.print()" title="Print / Save PDF">
-                        <span class="symbol">print</span> Print
-                    </button>
-                    <button class="btn btn-secondary" onclick="toggleFullscreen()" title="Fullscreen">
-                        <span class="symbol" id="fullscreen-icon">open_in_full</span>
-                    </button>
-                    <button class="btn-icon" onclick="closeModal('notes-modal')">
-                        <span class="symbol">close</span>
-                    </button>
-                </div>
-            </div>
-            <div class="modal-body">
-                <div id="modal-units-nav" class="unit-nav-tabs"></div>
-                <div id="modal-content-area" class="reader-content"></div>
-            </div>
         </div>
+
     </div>
 
-    <!-- QBANK MODAL -->
-    <div id="qbank-modal" class="modal-backdrop">
-        <div class="modal-dialog">
-            <div class="modal-header">
-                <div class="modal-title-wrap">
-                    <h3 id="qbank-modal-title">Question Bank</h3>
-                    <p>High-Yield Examination Questions & PYQ Patterns</p>
+    <!-- ========================================================================= -->
+    <!-- VIEW 2: FULL SUBJECT WORKSPACE VIEW (Tabs & Topic Cards Grid)              -->
+    <!-- ========================================================================= -->
+    <div id="subject-workspace-view" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" style="display: none;">
+        
+        <!-- Breadcrumb & Back button -->
+        <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center gap-2 text-xs mono text-zinc-400">
+                <a href="#/" onclick="navigateToDashboard(event)" class="text-zinc-300 hover:underline">Academic Deck</a>
+                <span>/</span>
+                <span>Subjects</span>
+                <span>/</span>
+                <span class="text-white font-bold" id="ws-breadcrumb-title">Web Technologies</span>
+            </div>
+
+            <button onclick="navigateToDashboard(event)" class="px-3 py-1.5 rounded bg-white/5 hover:bg-white/10 border border-zinc-800 text-xs mono text-zinc-300 flex items-center gap-2 transition">
+                <span class="symbol mr-1">arrow_back</span>
+                <span>Back to Hub</span>
+            </button>
+        </div>
+
+        <!-- Subject Hero Card -->
+        <div class="workspace-hero p-5 sm:p-6 mb-6">
+            <div class="flex flex-wrap items-start justify-between gap-4 mb-3">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="px-2.5 py-0.5 rounded bg-zinc-800 border border-zinc-800 text-zinc-100 shadow-sm mono text-xs font-bold" id="ws-code-badge">BCA-DSC-101</span>
+                        <span class="text-xs mono text-zinc-400" id="ws-credit-badge">4 Credits • 30 Theory Hrs</span>
+                    </div>
+                    <h1 class="text-xl sm:text-2xl font-bold text-white mb-2" id="ws-subject-title">Subject Title</h1>
+                    <p class="text-xs sm:text-sm text-zinc-400 max-w-3xl leading-relaxed" id="ws-subject-desc">Subject Description</p>
                 </div>
-                <button class="btn-icon" onclick="closeModal('qbank-modal')">
-                    <span class="symbol">close</span>
+
+                <div class="flex items-center gap-2 no-print">
+                    <button onclick="window.print()" class="px-3 py-1.5 rounded bg-white/5 hover:bg-white/10 border border-zinc-800 text-xs mono text-zinc-300 flex items-center gap-2 transition">
+                        <span class="symbol mr-1">circle</span>
+                        <span>Print Syllabus</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Subject Topic Tags -->
+            <div class="flex flex-wrap gap-1.5 pt-3 border-t border-zinc-800" id="ws-tags-row"></div>
+        </div>
+
+        <!-- 4 WORKSPACE TABS -->
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-6 border-b border-zinc-800 pb-4">
+            <div class="flex items-center gap-2 overflow-x-auto">
+                <button onclick="switchWorkspaceTab('notes')" id="ws-tab-btn-notes" class="tab-btn active">
+                    <span class="symbol mr-1">description</span>
+                    <span>01. Notes View</span>
+                </button>
+                <button onclick="switchWorkspaceTab('questions')" id="ws-tab-btn-questions" class="tab-btn">
+                    <span class="symbol mr-1">circle</span>
+                    <span>02. Question Bank</span>
+                </button>
+                <button onclick="switchWorkspaceTab('solutions')" id="ws-tab-btn-solutions" class="tab-btn">
+                    <span class="symbol mr-1">lightbulb</span>
+                    <span>03. Verified Solutions</span>
+                </button>
+                <button onclick="switchWorkspaceTab('units')" id="ws-tab-btn-units" class="tab-btn">
+                    <span class="symbol mr-1">circle</span>
+                    <span>04. Syllabus Units</span>
                 </button>
             </div>
-            <div class="modal-body" id="qbank-content-area"></div>
+
+            <!-- Unit Filters Bar -->
+            <div class="flex items-center gap-1.5 overflow-x-auto" id="ws-unit-filters"></div>
         </div>
+
+        <!-- Workspace Dynamic Content Panes -->
+        <div id="ws-pane-notes" class="workspace-pane">
+            <!-- Topic Cards Grid will render here -->
+            <div id="ws-notes-stream" class="grid grid-cols-1 md:grid-cols-2 gap-5"></div>
+        </div>
+        <div id="ws-pane-questions" class="workspace-pane" style="display: none;">
+            <div id="ws-questions-stream" class="space-y-4"></div>
+        </div>
+        <div id="ws-pane-solutions" class="workspace-pane" style="display: none;">
+            <div id="ws-solutions-stream" class="space-y-5"></div>
+        </div>
+        <div id="ws-pane-units" class="workspace-pane" style="display: none;">
+            <div id="ws-units-stream" class="space-y-5"></div>
+        </div>
+
     </div>
 
-    <!-- SOLUTIONS MODAL -->
-    <div id="sol-modal" class="modal-backdrop">
-        <div class="modal-dialog">
-            <div class="modal-header">
-                <div class="modal-title-wrap">
-                    <h3 id="sol-modal-title">Verified Solutions & Code</h3>
-                    <p>Step-by-Step Model Answers and Executable Programs</p>
-                </div>
-                <button class="btn-icon" onclick="closeModal('sol-modal')">
-                    <span class="symbol">close</span>
+    <!-- ========================================================================= -->
+    <!-- VIEW 3: DEDICATED FULL-SCREEN NOTE READER VIEW                            -->
+    <!-- ========================================================================= -->
+    <div id="note-reader-view" class="max-w-4xl mx-auto px-4 sm:px-6 py-6" style="display: none;">
+        
+        <!-- Reader Sticky Top Bar -->
+        <div class="sticky top-16 z-30 mb-6 p-3 rounded-xl bg-[#0b0d14]/90 backdrop-blur-md border border-zinc-800 flex flex-wrap items-center justify-between gap-3 shadow-2xl">
+            <button onclick="backToSubjectWorkspace()" class="px-3 py-1.5 rounded bg-white/5 hover:bg-white/10 border border-zinc-800 text-xs mono text-zinc-300 flex items-center gap-2 transition">
+                <span class="symbol mr-1">arrow_back</span>
+                <span>Back to Topics</span>
+            </button>
+
+            <div class="flex items-center gap-2">
+                <!-- Jump to other note selector -->
+                <select id="reader-topic-select" onchange="jumpToNoteFromSelect(this.value)" class="bg-zinc-900 border border-zinc-800 rounded px-2.5 py-1 text-xs mono text-zinc-300 outline-none max-w-[180px] sm:max-w-[260px] truncate">
+                    <!-- Populated dynamically -->
+                </select>
+
+                <!-- Paper White / Pure Dark Mode Toggle -->
+                <button onclick="toggleReaderPaperMode()" id="reader-paper-toggle-btn" class="px-2.5 py-1.5 rounded bg-white/5 hover:bg-white/10 border border-zinc-800 text-xs mono text-zinc-300 transition flex items-center gap-1.5" title="Switch between Pitch Dark & Paper White Mode">
+                    <span class="symbol mr-1">description</span>
+                    <span class="hidden sm:inline" id="reader-paper-label">Paper Docs</span>
+                </button>
+
+                <!-- Full Width / Expand Toggle -->
+                <button onclick="toggleReaderWidth()" id="reader-width-toggle-btn" class="px-2.5 py-1.5 rounded bg-white/5 hover:bg-white/10 border border-zinc-800 text-xs mono text-zinc-300 transition flex items-center gap-1.5" title="Toggle Full Width Reading">
+                    <span class="symbol mr-1">open_in_full</span>
+                    <span class="hidden sm:inline" id="reader-width-label">Expand</span>
+                </button>
+
+                <!-- Copy Note -->
+                <button onclick="copyCurrentNoteContent()" class="px-2.5 py-1.5 rounded bg-white/5 hover:bg-white/10 border border-zinc-800 text-xs mono text-zinc-300 transition flex items-center gap-1.5" title="Copy Complete Note">
+                    <span class="symbol mr-1">content_copy</span>
+                    <span class="hidden sm:inline">Copy Note</span>
+                </button>
+
+                <!-- Print Note -->
+                <button onclick="window.print()" class="px-2.5 py-1.5 rounded bg-white/5 hover:bg-white/10 border border-zinc-800 text-xs mono text-zinc-300 transition" title="Print Note / Save PDF">
+                    <span class="symbol mr-1">circle</span>
                 </button>
             </div>
-            <div class="modal-body reader-content" id="sol-content-area"></div>
+        </div>
+
+        <!-- Note Article Body Container -->
+        <article class="p-6 sm:p-10 rounded-2xl bg-[#0e111a] border border-zinc-800 shadow-2xl relative" id="reader-article-box">
+            <div class="flex items-center gap-2 mb-3">
+                <span class="px-2.5 py-0.5 rounded bg-zinc-800 border border-zinc-800 text-zinc-100 shadow-sm mono text-xs font-bold" id="reader-unit-badge">Unit I</span>
+                <span class="text-xs mono text-zinc-400" id="reader-time-badge">7 min read</span>
+                <span class="text-xs mono text-gray-500">• Panjab University Academic Series</span>
+            </div>
+
+            <h1 class="text-2xl sm:text-3xl font-bold text-white mb-6 tracking-tight leading-snug" id="reader-note-title">Note Title</h1>
+
+            <div class="text-sm sm:text-base leading-relaxed space-y-4" id="reader-note-body">
+                <!-- Formatted Markdown content rendered here -->
+            </div>
+
+            <!-- Bottom Note Navigation Controls -->
+            <div class="flex flex-wrap items-center justify-between gap-4 mt-12 pt-6 border-t border-zinc-800 no-print">
+                <button id="reader-prev-btn" onclick="navigateNote(-1)" class="px-4 py-2 rounded bg-white/5 hover:bg-white/10 border border-zinc-800 text-xs mono text-zinc-300 flex items-center gap-2 transition">
+                    <span class="symbol mr-1">chevron_left</span>
+                    <span>Previous Topic</span>
+                </button>
+                <button onclick="window.scrollTo({top:0, behavior:'smooth'})" class="text-xs mono text-zinc-400 hover:text-white flex items-center gap-1.5">
+                    <span class="symbol mr-1">circle</span> Back to Top
+                </button>
+                <button id="reader-next-btn" onclick="navigateNote(1)" class="px-4 py-2 rounded bg-white/5 hover:bg-white/10 border border-zinc-800 text-xs mono text-zinc-300 flex items-center gap-2 transition">
+                    <span>Next Topic</span>
+                    <span class="symbol mr-1">chevron_right</span>
+                </button>
+            </div>
+        </article>
+
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- GLOBAL SEARCH MODAL (⌘K)                                                 -->
+    <!-- ========================================================================= -->
+    <div id="search-modal" onclick="handleSearchOverlayClick(event)">
+        <div class="search-box" onclick="event.stopPropagation()">
+            <div class="p-4 border-b border-zinc-800 flex items-center gap-3">
+                <span class="symbol mr-1">search</span>
+                <input type="text" id="global-search-input" oninput="executeSearch(this.value)" placeholder="Type topic or question (e.g. Pointers, Bisection, HTML Forms, RAM)..." class="bg-transparent border-none outline-none text-white font-mono text-sm w-full placeholder-gray-500">
+                <button onclick="closeSearchModal()" class="text-zinc-400 hover:text-white text-xs mono px-2 py-1 rounded bg-white/5">ESC</button>
+            </div>
+            <div id="search-results-box" class="max-h-96 overflow-y-auto p-3 divide-y divide-white/5">
+                <p class="text-xs mono text-gray-500 text-center py-6">Type above to search across all 7 subjects, notes, and question banks.</p>
+            </div>
         </div>
     </div>
 
     <!-- FOOTER -->
-    <footer class="footer">
-        <div class="container footer-inner">
-            <div>
-                <strong>Panjab University BCA 1st Semester Hub</strong>
-                <p style="margin-top:4px;">Maintained for academic excellence & student revision. Auto-synced with Git repository.</p>
-            </div>
-            <div style="display:flex; gap:16px; align-items:center;">
-                <a href="#subjects" style="color:var(--text-secondary); text-decoration:none;">Subjects</a>
-                <a href="#scheme" style="color:var(--text-secondary); text-decoration:none;">Scheme</a>
-                <a href="mcp-admin.html" style="color:var(--accent-text); text-decoration:none; font-weight:600;">Admin Deck →</a>
-            </div>
-        </div>
+    <footer class="border-t border-zinc-800 py-6 text-center text-xs mono text-gray-500 mt-12">
+        <p>Panjab University BCA 1st Semester Academic Terminal • Precision Engineering</p>
     </footer>
 
-    <!-- JAVASCRIPT APPLICATION LOGIC -->
+    <!-- LOAD DATASET MODULES -->
+    <script src="data-web.js?v=2.5"></script>
+    <script src="data-c.js?v=2.5"></script>
+    <script src="data-math.js?v=2.5"></script>
+    <script src="data-hardware.js?v=2.5"></script>
+    <script src="data-english.js?v=2.5"></script>
+    <script src="data-punjabi.js?v=2.5"></script>
+    <script src="data-ecommerce.js?v=2.5"></script>
+    <script src="syllabus-data.js?t=1"></script>
+    <script src="visuals-engine.js?v=2.5"></script>
+
     <script>
-        let currentSubjectId = null;
-        let isFullscreen = false;
-
-        // Theme management
-        function toggleTheme() {
-            const current = document.documentElement.getAttribute('data-theme');
-            const target = current === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', target);
-            document.getElementById('theme-icon').innerText = target === 'dark' ? 'light_mode' : 'dark_mode';
-            localStorage.setItem('pu_bca_theme', target);
+        // --- 0. HTML ESCAPER UTILITY ---
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
         }
 
-        // Initialize Theme
-        const savedTheme = localStorage.getItem('pu_bca_theme') || 'light';
-        document.documentElement.setAttribute('data-theme', savedTheme);
-        document.getElementById('theme-icon').innerText = savedTheme === 'dark' ? 'light_mode' : 'dark_mode';
+        // --- 1. INTRO TYPING ANIMATION WITH INSTANT SKIP ---
+        const textToType = "Kive A Singhh...";
+        let charIndex = 0;
+        let introDismissed = false;
 
-        // Markdown Formatter for Advanced Notes
-        function markdownToHtml(md) {
-            if (!md) return '';
-            let html = md
-                .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
-                // Headings
-                .replace(/^#### (.*$)/gim, '<h4>$1</h4>')
-                .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-                .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-                .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-                // Code Blocks
-                .replace(/```([a-z]*)\n([\s\S]*?)\n```/gim, (match, lang, code) => {
-                    return `<pre><button class="copy-code-btn" onclick="copyCode(this)">Copy</button><code>${code}</code></pre>`;
-                })
-                // Inline Code
-                .replace(/`([^`]+)`/gim, '<code>$1</code>')
-                // Bold & Italic
-                .replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>')
-                .replace(/\*(.*?)\*/gim, '<em>$1</em>')
-                // Blockquote
-                .replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>')
-                // Lists
-                .replace(/^\s*[-*+] (.*$)/gim, '<li>$1</li>')
-                // Paragraphs & Line Breaks
-                .replace(/\n\n+/g, '</p><p>')
-                .replace(/\n/g, '<br>');
-
-            return '<p>' + html + '</p>';
+        function typeText() {
+            if (introDismissed) return;
+            const typingEl = document.getElementById('typing-text');
+            if (!typingEl) {
+                dismissIntro();
+                return;
+            }
+            if (charIndex < textToType.length) {
+                typingEl.textContent += textToType.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeText, 40);
+            } else {
+                setTimeout(dismissIntro, 350);
+            }
         }
 
-        function copyCode(btn) {
-            const pre = btn.parentElement;
-            const code = pre.querySelector('code').innerText;
-            navigator.clipboard.writeText(code).then(() => {
-                const orig = btn.innerText;
-                btn.innerText = 'Copied!';
-                setTimeout(() => btn.innerText = orig, 1500);
-            });
+        function dismissIntro() {
+            if (introDismissed) return;
+            introDismissed = true;
+            const overlay = document.getElementById('intro-overlay');
+            if (overlay) {
+                overlay.style.opacity = '0';
+                overlay.style.pointerEvents = 'none';
+                setTimeout(() => { overlay.style.display = 'none'; }, 600);
+            }
+            document.body.style.overflow = 'auto';
         }
 
-        function getSyllabusData() {
-            return window.BCA_1ST_SEM_DATA || window.syllabusData || { subjects: [], marksScheme: [] };
+        const overlayEl = document.getElementById('intro-overlay');
+        if (overlayEl) overlayEl.addEventListener('click', dismissIntro);
+        window.addEventListener('keydown', (e) => {
+            if (!introDismissed && (e.key === 'Escape' || e.key === ' ' || e.key === 'Enter')) {
+                dismissIntro();
+            }
+        });
+        setTimeout(dismissIntro, 1800); // Failsafe
+
+        // --- 2. LIVE IST CLOCK ---
+        function startLiveClock() {
+            setInterval(() => {
+                const now = new Date();
+                const clockEl = document.getElementById('terminal-clock');
+                if (clockEl) {
+                    clockEl.textContent = now.toLocaleTimeString('en-US', {
+                        timeZone: 'Asia/Kolkata',
+                        hour12: true,
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        second: '2-digit'
+                    }) + ' IST';
+                }
+            }, 1000);
         }
 
-        // Render Subjects Grid
-        function renderSubjects(filter = '') {
-            const data = getSyllabusData();
+        function toggleScanlines() {
+            const scan = document.getElementById('scanlines-layer');
+            if (scan) scan.style.display = scan.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // --- 3. DASHBOARD SUBJECT CARDS RENDERING (Classy & Minimal) ---
+        let currentSubjectId = 'web-tech';
+        let currentWorkspaceTab = 'notes';
+        let currentUnitFilter = 'all';
+        let currentNoteIndex = 0;
+        let isReaderExpanded = false;
+
+        const subjectThemes = {
+            'web-tech': { color: 'zinc', border: 'border-zinc-800', bg: 'bg-zinc-900', text: 'text-zinc-100', glow: 'hover:border-zinc-600' },
+            'hardware': { color: 'zinc', border: 'border-zinc-800', bg: 'bg-zinc-900', text: 'text-zinc-100', glow: 'hover:border-zinc-600' },
+            'c-lang': { color: 'zinc', border: 'border-zinc-800', bg: 'bg-zinc-900', text: 'text-zinc-100', glow: 'hover:border-zinc-600' },
+            'english': { color: 'zinc', border: 'border-zinc-800', bg: 'bg-zinc-900', text: 'text-zinc-100', glow: 'hover:border-zinc-600' },
+            'punjabi': { color: 'zinc', border: 'border-zinc-800', bg: 'bg-zinc-900', text: 'text-zinc-100', glow: 'hover:border-zinc-600' },
+            'math': { color: 'zinc', border: 'border-zinc-800', bg: 'bg-zinc-900', text: 'text-zinc-100', glow: 'hover:border-zinc-600' },
+            'env-edu': { color: 'teal', border: 'border-teal-500/30', bg: 'bg-teal-500/10', text: 'text-teal-400', glow: 'hover:border-teal-500/50' }
+        };
+
+        function renderSubjectCards() {
             const container = document.getElementById('subjects-grid');
+            if (!container || typeof BCA_1ST_SEM_DATA === 'undefined') return;
+
+            container.innerHTML = BCA_1ST_SEM_DATA.subjects.map(s => {
+                const theme = subjectThemes[s.id] || { color: 'zinc', border: 'border-zinc-800', bg: 'bg-zinc-900', text: 'text-zinc-100', glow: 'hover:border-zinc-600' };
+                const topicCount = (s.notes || []).length;
+                const quesCount = (s.questions || []).length;
+
+                return `
+                    <div class="terminal-card cursor-pointer p-5 flex flex-col justify-between transition-all duration-200 hover:-translate-y-1 ${theme.glow}" onclick="navigateToSubject('${s.id}', 'notes')">
+                        <div>
+                            <!-- Top Metadata -->
+                            <div class="flex items-start justify-between mb-3">
+                                <div>
+                                    <span class="mono text-[11px] px-2.5 py-0.5 rounded ${theme.bg} ${theme.border} ${theme.text} font-bold inline-block mb-1">
+                                        ${escapeHtml(s.code)}
+                                    </span>
+                                    <div class="text-[11px] mono text-zinc-400 flex items-center gap-2">
+                                        <span>${s.credits} Credits</span>
+                                        <span>•</span>
+                                        <span>${escapeHtml(s.type || 'Core')}</span>
+                                    </div>
+                                </div>
+                                <div class="w-10 h-10 rounded-xl flex items-center justify-center text-base ${theme.bg} border ${theme.border} ${theme.text} shadow-sm">
+                                    <span class="symbol mr-1">menu_book</span>
+                                </div>
+                            </div>
+
+                            <!-- Title & Description -->
+                            <h3 class="text-base font-bold text-white mb-2 tracking-tight">${escapeHtml(s.title)}</h3>
+                            <p class="text-xs text-zinc-400 line-clamp-2 leading-relaxed mb-4">${escapeHtml(s.description)}</p>
+                            
+                            <!-- Stats badges -->
+                            <div class="flex items-center gap-2 mb-4">
+                                <span class="text-[10px] mono px-2 py-0.5 rounded bg-white/5 text-zinc-400 border border-white/5">
+                                    <span class="symbol mr-1">circle</span>${topicCount} Topics
+                                </span>
+                                <span class="text-[10px] mono px-2 py-0.5 rounded bg-white/5 text-zinc-400 border border-white/5">
+                                    <span class="symbol mr-1">help</span>${quesCount} Questions
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Single Action Button -->
+                        <button onclick="event.stopPropagation(); navigateToSubject('${s.id}', 'notes')" class="w-full py-2.5 rounded-lg ${theme.bg} hover:bg-white/10 border ${theme.border} text-xs mono ${theme.text} flex items-center justify-center gap-2 transition font-bold">
+                            <span>Open Subject Workspace</span>
+                            <span class="symbol mr-1">arrow_forward</span>
+                        </button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // --- 4. NAVIGATION CONTROLLER ---
+        function navigateToSubject(subjectId, tab = 'notes') {
+            window.location.hash = `#/subject/${subjectId}/${tab}`;
+            renderSubjectWorkspace(subjectId, tab);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function navigateToDashboard(e) {
+            if (e && e.preventDefault) e.preventDefault();
+            window.location.hash = '#/';
+            const dash = document.getElementById('dashboard-view');
+            const ws = document.getElementById('subject-workspace-view');
+            const reader = document.getElementById('note-reader-view');
+            if (dash) dash.style.display = 'block';
+            if (ws) ws.style.display = 'none';
+            if (reader) reader.style.display = 'none';
+            renderSubjectCards();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function backToSubjectWorkspace() {
+            window.location.hash = `#/subject/${currentSubjectId}/notes`;
+            const dash = document.getElementById('dashboard-view');
+            const ws = document.getElementById('subject-workspace-view');
+            const reader = document.getElementById('note-reader-view');
+            if (dash) dash.style.display = 'none';
+            if (ws) ws.style.display = 'block';
+            if (reader) reader.style.display = 'none';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function handleHashRouting() {
+            const hash = window.location.hash || '#/';
+            if (hash.startsWith('#/subject/')) {
+                const parts = hash.replace('#/subject/', '').split('/');
+                const subId = parts[0];
+                if (parts[1] === 'note' && parts[2] !== undefined) {
+                    openNoteReader(subId, parseInt(parts[2], 10));
+                } else {
+                    const tab = parts[1] || 'notes';
+                    renderSubjectWorkspace(subId, tab);
+                }
+            } else {
+                navigateToDashboard();
+            }
+        }
+
+        // --- 5. WORKSPACE RENDERING ---
+        function renderSubjectWorkspace(subjectId, tab = 'notes') {
+            if (typeof BCA_1ST_SEM_DATA === 'undefined') return;
+            const subject = BCA_1ST_SEM_DATA.subjects.find(s => s.id === subjectId) || BCA_1ST_SEM_DATA.subjects[0];
+            
+            currentSubjectId = subject.id;
+            currentWorkspaceTab = tab;
+            currentUnitFilter = 'all';
+
+            const dash = document.getElementById('dashboard-view');
+            const ws = document.getElementById('subject-workspace-view');
+            const reader = document.getElementById('note-reader-view');
+            if (dash) dash.style.display = 'none';
+            if (ws) ws.style.display = 'block';
+            if (reader) reader.style.display = 'none';
+
+            // Populate Hero
+            document.getElementById('ws-breadcrumb-title').textContent = subject.title;
+            document.getElementById('ws-code-badge').textContent = subject.code;
+            document.getElementById('ws-credit-badge').textContent = `${subject.credits} Credits • ${subject.theoryHours || 30} Theory Hrs`;
+            document.getElementById('ws-subject-title').textContent = subject.title;
+            document.getElementById('ws-subject-desc').textContent = subject.description;
+
+            // Tags
+            const tagsBox = document.getElementById('ws-tags-row');
+            tagsBox.innerHTML = (subject.tags || []).map(t => `<span class="topic-pill text-zinc-300 border-[#565656]">${escapeHtml(t)}</span>`).join('');
+
+            // Unit Filters
+            const filterBox = document.getElementById('ws-unit-filters');
+            let filterHtml = `<button onclick="filterWorkspaceUnit('all', this)" class="unit-chip active">All Units</button>`;
+            subject.units.forEach(u => {
+                filterHtml += `<button onclick="filterWorkspaceUnit('${u.unitNumber}', this)" class="unit-chip">${escapeHtml(u.unitNumber)}</button>`;
+            });
+            filterBox.innerHTML = filterHtml;
+
+            // Render All Content Panes
+            renderNotesPane(subject);
+            renderQuestionsPane(subject);
+            renderSolutionsPane(subject);
+            renderUnitsPane(subject);
+
+            // Switch to requested tab
+            switchWorkspaceTab(tab);
+        }
+
+        function switchWorkspaceTab(tabName) {
+            currentWorkspaceTab = tabName;
+
+            // Highlight Tab Buttons
+            ['notes', 'questions', 'solutions', 'units'].forEach(t => {
+                const btn = document.getElementById(`ws-tab-btn-${t}`);
+                if (btn) btn.classList.toggle('active', t === tabName);
+                
+                const pane = document.getElementById(`ws-pane-${t}`);
+                if (pane) pane.style.display = (t === tabName) ? 'block' : 'none';
+            });
+
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                window.MathJax.typesetPromise();
+            }
+        }
+
+        function filterWorkspaceUnit(unitNum, btn) {
+            currentUnitFilter = unitNum;
+            document.querySelectorAll('#ws-unit-filters button').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+
+            const subject = BCA_1ST_SEM_DATA.subjects.find(s => s.id === currentSubjectId);
+            if (subject) {
+                renderNotesPane(subject);
+                renderQuestionsPane(subject);
+                renderSolutionsPane(subject);
+            }
+
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                window.MathJax.typesetPromise();
+            }
+        }
+
+        // Pane 1: Notes (Clean Topic Cards Grid)
+        function renderNotesPane(subject) {
+            const container = document.getElementById('ws-notes-stream');
             if (!container) return;
 
-            let html = '';
-            const subjects = data.subjects || [];
-            
-            const filtered = subjects.filter(s => {
-                if (!filter) return true;
-                const f = filter.toLowerCase();
-                const title = (s.title || s.name || '').toLowerCase();
-                const code = (s.code || '').toLowerCase();
-                const desc = (s.description || '').toLowerCase();
-                const hasTopic = (s.units || []).some(u => (u.topics || []).some(t => t.toLowerCase().includes(f)));
-                return title.includes(f) || code.includes(f) || desc.includes(f) || hasTopic;
-            });
+            const allNotes = subject.notes || [];
+            const notes = allNotes.map((n, originalIndex) => ({ ...n, originalIndex }))
+                                  .filter(n => currentUnitFilter === 'all' || (n.unit && n.unit.includes(currentUnitFilter)));
 
-            if (filtered.length === 0) {
-                container.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding:48px; background:var(--bg-surface); border:1px solid var(--border-color); border-radius:var(--radius-lg);">
-                    <span class="symbol" style="font-size:48px; color:var(--text-muted);">search_off</span>
-                    <h3 style="margin-top:12px;">No subjects or topics found</h3>
-                    <p style="color:var(--text-muted);">Try searching for terms like 'HTML', 'Pointers', 'Mean', 'Hardware', or 'PU'.</p>
-                </div>`;
+            if (notes.length === 0) {
+                container.className = 'block';
+                container.innerHTML = `<div class="p-8 text-center text-gray-500 mono text-sm border border-dashed border-zinc-800 rounded-xl">No notes found for ${escapeHtml(currentUnitFilter)}.</div>`;
                 return;
             }
 
-            filtered.forEach(s => {
-                const title = s.title || s.name || '';
-                const units = s.units || [];
-                const solutionsCount = (s.solutions || []).length;
-                const qbankCount = (s.qbank || []).length;
-
-                let unitListHtml = '';
-                units.forEach((u, i) => {
-                    const utitle = u.title || `Unit ${u.unitNumber || i+1}`;
-                    unitListHtml += `
-                    <div class="card-unit-row" onclick="openNotes('${s.id}', ${i})">
-                        <span class="unit-tag">${u.unitNumber || 'Unit ' + (i+1)}</span>
-                        <span style="color:var(--text-secondary);">${utitle.length > 34 ? utitle.substring(0, 34) + '...' : utitle}</span>
-                        <span class="symbol" style="font-size:16px; color:var(--accent-primary);">arrow_forward</span>
-                    </div>`;
-                });
-
-                html += `
-                <div class="subject-card">
-                    <div class="card-top">
-                        <span class="badge badge-blue">${s.code || 'BCA'}</span>
-                        <span class="badge badge-green">${s.credits || 4} Credits</span>
-                    </div>
-                    <h3 class="card-title">${title}</h3>
-                    <p class="card-desc">${s.description || 'Comprehensive Panjab University NEP syllabus unit study manual with verified solutions.'}</p>
-                    
-                    <div class="card-units">
-                        ${unitListHtml || '<div style="color:var(--text-muted); font-size:0.85rem;">4 Comprehensive Units</div>'}
-                    </div>
-
-                    <div class="card-actions">
-                        <button class="btn btn-primary" onclick="openNotes('${s.id}')">
-                            <span class="symbol">menu_book</span> Read Unit Notes
-                        </button>
-                        <div class="btn-row">
-                            <button class="btn btn-secondary" style="flex:1;" onclick="openQBank('${s.id}')">
-                                <span class="symbol">quiz</span> Question Bank
-                            </button>
-                            <button class="btn btn-secondary" style="flex:1;" onclick="openSolutions('${s.id}')">
-                                <span class="symbol">check_circle</span> Solutions ${solutionsCount > 0 ? `(${solutionsCount})` : ''}
-                            </button>
+            container.className = 'grid grid-cols-1 md:grid-cols-2 gap-5';
+            container.innerHTML = notes.map(n => {
+                const previewText = n.content.replace(/[#*`>-]/g, '').slice(0, 140).trim() + '...';
+                return `
+                    <div class="terminal-card cursor-pointer p-5 flex flex-col justify-between hover:border-[#6a6a6a] transition group" onclick="openNoteReader('${subject.id}', ${n.originalIndex})">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="px-2.5 py-0.5 rounded bg-zinc-800 border border-zinc-800 text-zinc-100 shadow-sm mono text-xs font-bold">${escapeHtml(n.unit)}</span>
+                                <span class="text-xs mono text-zinc-400 flex items-center gap-1">
+                                    <span class="symbol mr-1">schedule</span> ${escapeHtml(n.readTime || '7 min read')}
+                                </span>
+                            </div>
+                            <h3 class="text-base font-bold text-white mb-2 leading-snug group-hover:text-zinc-100 transition">${escapeHtml(n.title)}</h3>
+                            <p class="text-xs text-zinc-400 line-clamp-3 leading-relaxed mb-4">${escapeHtml(previewText)}</p>
+                        </div>
+                        <div class="flex items-center justify-between pt-3 border-t border-white/5 text-xs mono text-zinc-300 font-semibold">
+                            <span>Read Full Note</span>
+                            <span class="group-hover:translate-x-1 transition-transform">→</span>
                         </div>
                     </div>
-                </div>`;
-            });
-
-            container.innerHTML = html;
+                `;
+            }).join('');
         }
 
-        // Render Marks Scheme Table
-        function renderMarksScheme() {
-            const data = getSyllabusData();
-            const tbody = document.getElementById('marks-table-body');
-            if (!tbody || !data.marksScheme) return;
+        // Dedicated Full-Page Note Reader
+        function openNoteReader(subjectId, noteIndex) {
+            const subject = BCA_1ST_SEM_DATA.subjects.find(s => s.id === subjectId);
+            if (!subject) return;
 
-            let html = '';
-            data.marksScheme.forEach(m => {
-                html += `
-                <tr>
-                    <td><span class="badge badge-blue">${m.code}</span></td>
-                    <td><strong>${m.name}</strong></td>
-                    <td>${m.credits}</td>
-                    <td>${m.internal}</td>
-                    <td>${m.external}</td>
-                    <td>${m.practical}</td>
-                    <td><strong>${m.total}</strong></td>
-                </tr>`;
-            });
-            tbody.innerHTML = html;
-        }
+            const notes = subject.notes || [];
+            if (noteIndex < 0 || noteIndex >= notes.length) return;
 
-        // Filter Function for Search
-        function filterSubjects() {
-            const val = document.getElementById('searchInput').value;
-            renderSubjects(val);
-        }
+            currentSubjectId = subject.id;
+            currentNoteIndex = noteIndex;
+            const note = notes[noteIndex];
+            if (!note) return;
 
-        // Open Notes Reader Modal
-        function openNotes(subjectId, targetUnitIdx = 0) {
-            const data = getSyllabusData();
-            const s = (data.subjects || []).find(sub => sub.id === subjectId);
-            if (!s) return;
-            currentSubjectId = subjectId;
+            window.location.hash = `#/subject/${subject.id}/note/${noteIndex}`;
 
-            document.getElementById('modal-subject-title').innerText = s.title || s.name;
-            document.getElementById('modal-subject-code').innerText = `${s.code || 'BCA'} • ${s.credits || 4} Credits • Panjab University`;
-
-            const nav = document.getElementById('modal-units-nav');
-            nav.innerHTML = '';
-
-            const units = s.units || [];
-            if (units.length > 0) {
-                units.forEach((u, idx) => {
-                    const btn = document.createElement('button');
-                    btn.className = `tab-btn ${idx === targetUnitIdx ? 'active' : ''}`;
-                    btn.innerText = u.unitNumber ? `${u.unitNumber}: ${u.title}` : `Unit ${idx+1}: ${u.title}`;
-                    btn.onclick = () => {
-                        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                        btn.classList.add('active');
-                        renderUnitContent(s, u);
-                    };
-                    nav.appendChild(btn);
-                });
-                renderUnitContent(s, units[targetUnitIdx]);
-            } else {
-                document.getElementById('modal-content-area').innerHTML = '<p>Unit syllabus manual is ready.</p>';
-            }
-
-            document.getElementById('notes-modal').classList.add('open');
-        }
-
-        function renderUnitContent(subject, unit) {
-            const area = document.getElementById('modal-content-area');
-            if (!unit) return;
-
-            let md = `# ${subject.title || subject.name}\n`;
-            md += `## ${unit.unitNumber || 'Unit'}: ${unit.title}\n\n`;
-            md += `> **Panjab University Academic Guide** • Official NEP 2026–27 Syllabus Breakdown.\n\n`;
-
-            if (unit.content) {
-                md += unit.content;
-            } else if (unit.topics && unit.topics.length > 0) {
-                md += `### Unit Syllabus & Core Topics\n\n`;
-                unit.topics.forEach((t, i) => {
-                    md += `#### ${i+1}. ${t}\n`;
-                    md += `- **Concept Analysis**: Master theoretical foundations, algorithmic steps, standard syntax, and architectural diagrams.\n`;
-                    md += `- **Examination Relevance**: High-probability exam questions from Panjab University past year papers focus heavily on comparisons, derivations, and practical code.\n\n`;
-                });
-                md += `\n### 💡 Examination Tips & High-Yield Strategy\n`;
-                md += `1. **Short Answers (2 Marks)**: Provide sharp, formal definitions with examples.\n`;
-                md += `2. **Long Answers (8 Marks)**: Always draw clear, labeled block diagrams or flowchart representations.\n`;
-                md += `3. **Practical Code**: Write error-free, standard C / HTML / CSS / JS with comments.\n`;
-            }
-
-            area.innerHTML = markdownToHtml(md);
-
-            if (window.MathJax && window.MathJax.typesetPromise) {
-                window.MathJax.typesetPromise();
-            }
-        }
-
-        // Open Question Bank Modal
-        function openQBank(subjectId) {
-            const data = getSyllabusData();
-            const s = (data.subjects || []).find(sub => sub.id === subjectId);
-            if (!s) return;
-
-            document.getElementById('qbank-modal-title').innerText = `${s.title || s.name} — Question Bank`;
-            const area = document.getElementById('qbank-content-area');
-
-            const qbank = s.qbank || [];
-            if (qbank.length > 0) {
-                let html = '<div style="display:flex; flex-direction:column; gap:16px;">';
-                qbank.forEach(q => {
-                    html += `
-                    <div style="background:var(--bg-surface-alt); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:20px;">
-                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-                            <span class="badge badge-blue">${q.type ? q.type.toUpperCase() : 'EXAM QUESTION'}</span>
-                            ${q.year ? `<span class="badge badge-red">PYQ ${q.year}</span>` : ''}
-                        </div>
-                        <div style="font-size:1.05rem; font-weight:600; color:var(--text-primary); margin-bottom:10px;">${q.question}</div>
-                        ${q.hint ? `<div style="background:var(--bg-surface); padding:12px; border-radius:var(--radius-sm); border:1px solid var(--border-color); font-size:0.9rem; color:var(--text-secondary);"><span class="symbol" style="font-size:18px; color:var(--accent-amber); vertical-align:text-bottom;">lightbulb</span> <strong>Hint:</strong> ${q.hint}</div>` : ''}
-                    </div>`;
-                });
-                html += '</div>';
-                area.innerHTML = html;
-            } else {
-                area.innerHTML = `
-                <div style="text-align:center; padding:40px; color:var(--text-secondary);">
-                    <span class="symbol" style="font-size:48px; color:var(--accent-primary); margin-bottom:12px;">quiz</span>
-                    <h3 style="font-size:1.2rem; margin-bottom:8px;">Curated High-Yield Question Bank Ready</h3>
-                    <p style="margin-bottom:20px;">Unit 1–4 standard long and short answer questions are mapped to the comprehensive study notes.</p>
-                    <button class="btn btn-primary" onclick="closeModal('qbank-modal'); openNotes('${subjectId}')">
-                        <span class="symbol">menu_book</span> Open Study Notes
-                    </button>
-                </div>`;
-            }
-
-            document.getElementById('qbank-modal').classList.add('open');
-        }
-
-        // Open Solutions Modal
-        function openSolutions(subjectId) {
-            const data = getSyllabusData();
-            const s = (data.subjects || []).find(sub => sub.id === subjectId);
-            if (!s) return;
-
-            document.getElementById('sol-modal-title').innerText = `${s.title || s.name} — Verified Solutions & Code`;
-            const area = document.getElementById('sol-content-area');
-
-            const solutions = s.solutions || [];
-            if (solutions.length > 0) {
-                let html = '<div style="display:flex; flex-direction:column; gap:24px;">';
-                solutions.forEach((sol, i) => {
-                    html += `
-                    <div style="background:var(--bg-surface-alt); border:1px solid var(--border-color); border-radius:var(--radius-md); padding:24px;">
-                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-                            <span class="badge badge-green">${sol.unit || 'Solution ' + (i+1)}</span>
-                            ${sol.type ? `<span class="badge badge-blue">${sol.type}</span>` : ''}
-                        </div>
-                        <h4 style="font-size:1.15rem; font-weight:600; margin-bottom:12px;">${sol.title || sol.question || 'Practical Problem Solution'}</h4>
-                        <div style="font-size:0.95rem; line-height:1.7;">${markdownToHtml(sol.content || sol.solution || '')}</div>
-                        ${sol.code ? `<pre><button class="copy-code-btn" onclick="copyCode(this)">Copy</button><code>${sol.code}</code></pre>` : ''}
-                    </div>`;
-                });
-                html += '</div>';
-                area.innerHTML = html;
-            } else {
-                area.innerHTML = `
-                <div style="text-align:center; padding:40px; color:var(--text-secondary);">
-                    <span class="symbol" style="font-size:48px; color:var(--accent-green); margin-bottom:12px;">check_circle</span>
-                    <h3 style="font-size:1.2rem; margin-bottom:8px;">Verified Step-by-Step Solutions Integrated</h3>
-                    <p style="margin-bottom:20px;">All practical programs, code examples, and mathematical derivations are accessible inside the subject notes reader.</p>
-                    <button class="btn btn-primary" onclick="closeModal('sol-modal'); openNotes('${subjectId}')">
-                        <span class="symbol">menu_book</span> Explore Subject Notes
-                    </button>
-                </div>`;
-            }
-
-            document.getElementById('sol-modal').classList.add('open');
-            if (window.MathJax && window.MathJax.typesetPromise) {
-                window.MathJax.typesetPromise();
-            }
-        }
-
-        function closeModal(id) {
-            const m = document.getElementById(id);
-            if (m) m.classList.remove('open');
-        }
-
-        // Close on backdrop click
-        document.querySelectorAll('.modal-backdrop').forEach(modal => {
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) modal.classList.remove('open');
-            });
-        });
-
-        // Toggle Fullscreen
-        function toggleFullscreen() {
-            const modal = document.getElementById('notes-modal');
-            const dialog = modal.querySelector('.modal-dialog');
-            const icon = document.getElementById('fullscreen-icon');
-
-            if (!isFullscreen) {
-                dialog.style.maxWidth = '98vw';
-                dialog.style.maxHeight = '96vh';
-                icon.innerText = 'close_fullscreen';
-                isFullscreen = true;
-            } else {
-                dialog.style.maxWidth = '980px';
-                dialog.style.maxHeight = '90vh';
-                icon.innerText = 'open_in_full';
-                isFullscreen = false;
-            }
-        }
-
-        // Check MCP Sync Status
-        async function checkMcpStatus() {
-            try {
-                const res = await fetch('http://localhost:8080/health', { method: 'GET' });
-                if (res.ok) {
-                    const badge = document.getElementById('mcp-status');
-                    badge.className = 'badge badge-green';
-                    badge.innerHTML = '<span class="symbol" style="font-size:14px;">cloud_sync</span> Live Synced';
+            const dash = document.getElementById('dashboard-view');
+            const ws = document.getElementById('subject-workspace-view');
+            const reader = document.getElementById('note-reader-view');
+            if (dash) dash.style.display = 'none';
+            if (ws) ws.style.display = 'none';
+            if (reader) {
+                reader.style.display = 'block';
+                if (isReaderExpanded) {
+                    reader.classList.remove('max-w-4xl');
+                    reader.classList.add('max-w-7xl', 'w-full');
+                } else {
+                    reader.classList.remove('max-w-7xl', 'w-full');
+                    reader.classList.add('max-w-4xl');
                 }
-            } catch(e) {
-                const badge = document.getElementById('mcp-status');
-                badge.className = 'badge badge-amber';
-                badge.innerHTML = '<span class="symbol" style="font-size:14px;">cloud_off</span> Local Mode';
+            }
+
+            // Populate Top Selector Dropdown
+            const selectEl = document.getElementById('reader-topic-select');
+            if (selectEl) {
+                selectEl.innerHTML = notes.map((n, idx) => `
+                    <option value="${idx}" ${idx === noteIndex ? 'selected' : ''}>
+                        ${escapeHtml(n.unit)}: ${escapeHtml(n.title.split('. ')[1] || n.title)}
+                    </option>
+                `).join('');
+            }
+
+            // Populate Note Content
+            document.getElementById('reader-unit-badge').textContent = note.unit;
+            document.getElementById('reader-time-badge').textContent = note.readTime || '7 min read';
+            document.getElementById('reader-note-title').textContent = note.title;
+            document.getElementById('reader-note-body').innerHTML = formatMarkdown(note.content);
+
+            if (window.mountVisualEngines) {
+                window.mountVisualEngines(document.getElementById('reader-note-body'));
+            }
+
+            // Previous / Next Buttons
+            const prevBtn = document.getElementById('reader-prev-btn');
+            const nextBtn = document.getElementById('reader-next-btn');
+            if (prevBtn) prevBtn.style.visibility = (noteIndex > 0) ? 'visible' : 'hidden';
+            if (nextBtn) nextBtn.style.visibility = (noteIndex < notes.length - 1) ? 'visible' : 'hidden';
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                window.MathJax.typesetPromise();
             }
         }
 
-        // Initialize on load
-        document.addEventListener('DOMContentLoaded', () => {
-            renderSubjects();
-            renderMarksScheme();
-            checkMcpStatus();
-            setInterval(checkMcpStatus, 15000);
+        function jumpToNoteFromSelect(val) {
+            openNoteReader(currentSubjectId, parseInt(val, 10));
+        }
+
+        function navigateNote(delta) {
+            openNoteReader(currentSubjectId, currentNoteIndex + delta);
+        }
+
+        let isReaderPaperMode = false;
+        function toggleReaderPaperMode() {
+            isReaderPaperMode = !isReaderPaperMode;
+            const article = document.getElementById('reader-article-box');
+            const label = document.getElementById('reader-paper-label');
+            if (article) {
+                if (isReaderPaperMode) {
+                    article.classList.add('paper-mode');
+                    document.body.classList.add('paper-theme-active');
+                    if (label) label.textContent = 'Pitch Dark';
+                } else {
+                    article.classList.remove('paper-mode');
+                    document.body.classList.remove('paper-theme-active');
+                    if (label) label.textContent = 'Paper Docs';
+                }
+            }
+        }
+
+        function copyCurrentNoteContent() {
+            const body = document.getElementById('reader-note-body');
+            const title = document.getElementById('reader-note-title');
+            if (!body) return;
+            navigator.clipboard.writeText(`${title.innerText}\n\n${body.innerText}`).then(() => {
+                alert('Note copied to clipboard!');
+            });
+        }
+
+        // Pane 2: Questions
+        function renderQuestionsPane(subject) {
+            const container = document.getElementById('ws-questions-stream');
+            if (!container) return;
+
+            const qs = (subject.questions || []).filter(q => currentUnitFilter === 'all' || (q.unit && q.unit.includes(currentUnitFilter)));
+            if (qs.length === 0) {
+                container.innerHTML = `<div class="p-8 text-center text-gray-500 mono text-sm border border-dashed border-zinc-800 rounded-xl">No questions found for ${escapeHtml(currentUnitFilter)}.</div>`;
+                return;
+            }
+
+            container.innerHTML = qs.map((q, idx) => `
+                <div class="qbank-row">
+                    <div class="flex items-center justify-between mb-2 flex-wrap gap-2">
+                        <div class="flex items-center gap-2">
+                            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-800 text-zinc-100 shadow-sm mono text-xs font-bold">${escapeHtml(q.unit)}</span>
+                            <span class="text-xs mono text-zinc-400">${escapeHtml(q.marks ? q.marks + ' Marks' : '')}</span>
+                        </div>
+                        <span class="px-2 py-0.5 rounded bg-red-500/10 text-red-400 mono text-xs font-bold border border-red-500/20">
+                            🔥 ${escapeHtml(q.probability || 'High Probability')}
+                        </span>
+                    </div>
+                    <p class="text-base font-semibold text-white mt-1">Q${idx + 1}. ${escapeHtml(q.question)}</p>
+                    ${q.examFrequency ? `<p class="text-xs mono text-zinc-300/80 mt-1.5"><span class="symbol mr-1">history</span>${escapeHtml(q.examFrequency)}</p>` : ''}
+                </div>
+            `).join('');
+        }
+
+        // Pane 3: Solutions
+        function renderSolutionsPane(subject) {
+            const container = document.getElementById('ws-solutions-stream');
+            if (!container) return;
+
+            const sols = (subject.solutions || []).filter(s => currentUnitFilter === 'all' || (s.unit && s.unit.includes(currentUnitFilter)));
+            if (sols.length === 0) {
+                container.innerHTML = `<div class="p-8 text-center text-gray-500 mono text-sm border border-dashed border-zinc-800 rounded-xl">No solutions found for ${escapeHtml(currentUnitFilter)}.</div>`;
+                return;
+            }
+
+            container.innerHTML = sols.map(sol => `
+                <div class="solution-row">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="px-2.5 py-0.5 rounded bg-zinc-800 border border-zinc-800 text-zinc-100 shadow-sm mono text-xs font-bold">${escapeHtml(sol.unit)}</span>
+                        <button onclick="copyContent(this)" class="px-2.5 py-1 rounded bg-white/5 hover:bg-white/10 text-xs mono text-zinc-100 transition">
+                            <span class="symbol mr-1">content_copy</span> Copy Answer
+                        </button>
+                    </div>
+                    <h3 class="text-base font-bold text-zinc-100 mb-3">Q: ${escapeHtml(sol.question)}</h3>
+                    <div class="text-sm text-zinc-300 leading-relaxed space-y-3">
+                        ${formatMarkdown(sol.solution)}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Pane 4: Units (Clean, Separated, and Fully Escaped)
+        function renderUnitsPane(subject) {
+            const container = document.getElementById('ws-units-stream');
+            if (!container) return;
+
+            container.innerHTML = (subject.units || []).map(u => `
+                <div class="article-card border-l-4 border-l-zinc-500 mb-5">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-lg font-bold text-zinc-300 mono">${escapeHtml(u.unitNumber)}: ${escapeHtml(u.title)}</h3>
+                        <span class="text-xs mono text-zinc-400">${(u.topics || []).length} Core Topics</span>
+                    </div>
+                    <ul class="space-y-2 text-sm text-zinc-300 pl-2">
+                        ${(u.topics || []).map(t => `
+                            <li class="flex items-start gap-2.5">
+                                <span class="text-zinc-300 mt-1 text-xs">•</span>
+                                <span class="leading-relaxed">${escapeHtml(t)}</span>
+                            </li>
+                        `).join('')}
+                    </ul>
+                </div>
+            `).join('');
+        }
+
+        // --- 6. MINIMALIST PURE DOCS NOTE PARSER (CLEAN & SYMBOL-FREE) ---
+        function formatMarkdown(text) {
+            if (!text) return '';
+
+            // Step 1: Normalize Line Breaks & Strip AI Search Citations
+            let processed = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+            processed = processed.replace(/[\uE000-\uF8FF]|cite.*?|【.*?】|\[cite:.*?\]/g, '');
+
+            // Step 2: Visual Simulation Tags
+            processed = processed.replace(/\[visual:([a-zA-Z0-9\-_]+)\]/gi, '<div data-visual-engine="$1" class="my-6"></div>');
+
+            // Step 3: Fenced Code Blocks & ASCII Diagrams (Clean Minimal Box)
+            const codeBlocks = [];
+            processed = processed.replace(/```([a-zA-Z0-9_-]*)\n([\s\S]*?)```/g, (match, lang, code) => {
+                const index = codeBlocks.length;
+                const langName = (lang || 'code').toLowerCase();
+                const escaped = escapeHtml(code.trimEnd());
+                codeBlocks.push(`
+                    <div class="code-container my-5 rounded-lg overflow-hidden border border-neutral-800 bg-[#0d1117] text-neutral-100 shadow-sm">
+                        <div class="code-header px-4 py-2 bg-[#161b22] border-b border-neutral-800 flex items-center justify-between text-xs font-mono text-neutral-400">
+                            <span class="font-semibold uppercase tracking-wider">${langName}</span>
+                            <button class="px-2 py-0.5 rounded hover:bg-white/10 text-neutral-400 hover:text-white transition text-xs font-mono" onclick="copyCodeSnippet(this)">
+                                Copy
+                            </button>
+                        </div>
+                        <pre class="p-4 text-xs sm:text-[13px] font-mono leading-relaxed text-neutral-200 overflow-x-auto"><code>${escaped}</code></pre>
+                    </div>
+                `);
+                return `__CODE_BLOCK_${index}__`;
+            });
+
+            // Step 4: Tables (Clean & Standard)
+            processed = processed.replace(/\|(.+)\|\n\|[\s\-:|]+\|\n((?:\|.+\|\n?)+)/g, (match, headerLine, rows) => {
+                const headers = headerLine.split('|').filter(h => h.trim() !== '').map(h => `<th class="p-3 text-left font-semibold text-xs uppercase tracking-wider border-b border-neutral-700 bg-neutral-900/60">${h.trim()}</th>`).join('');
+                const rowHtml = rows.trim().split('\n').map(row => {
+                    const cols = row.split('|').filter(c => c.trim() !== '').map(c => `<td class="p-3 text-sm text-neutral-300 border-b border-neutral-800/80 font-mono">${c.trim()}</td>`).join('');
+                    return `<tr>${cols}</tr>`;
+                }).join('');
+                return `<div class="table-wrap my-6 rounded-lg border border-neutral-800 overflow-x-auto bg-[#0a0c10]"><table class="w-full text-left border-collapse"><thead><tr>${headers}</tr></thead><tbody>${rowHtml}</tbody></table></div>`;
+            });
+
+            // Step 5: Horizontal Dividers (Clean 1px Hairline)
+            processed = processed.replace(/^(\s*[-*_]\s*){3,}$/gm, '<hr class="my-8 border-0 border-t border-neutral-800">');
+
+            // Step 6: Blockquotes (Clean Classic Editorial Line)
+            processed = processed.replace(/(?:^>[ \t]*(.+)(?:\r?\n|$))+/gm, (match) => {
+                const inner = match.split('\n').map(l => l.replace(/^>[ \t]*/, '').trim()).filter(Boolean).join(' ');
+                return `<blockquote class="my-5 pl-4 py-1 border-l-2 border-neutral-500 text-neutral-300 text-sm sm:text-base italic leading-relaxed">${inner}</blockquote>`;
+            });
+
+            // Step 7: Headings (Standard, Pure, Clean Typography - ZERO SYMBOLS)
+            processed = processed
+                .replace(/^#### (.*$)/gim, '<h4 class="text-sm sm:text-base font-semibold text-white mt-6 mb-2 tracking-tight">$1</h4>')
+                .replace(/^### (.*$)/gim, '<h3 class="text-base sm:text-lg font-semibold text-white mt-7 mb-2.5 tracking-tight">$1</h3>')
+                .replace(/^## (.*$)/gim, '<h2 class="text-lg sm:text-xl font-bold text-white mt-9 mb-3 tracking-tight pb-1 border-b border-neutral-800">$1</h2>')
+                .replace(/^# (.*$)/gim, '<h1 class="text-xl sm:text-2xl font-bold text-white mt-6 mb-4 tracking-tight pb-2 border-b border-neutral-800">$1</h1>');
+
+            // Step 8: Lists (Clean Bullets & Numbers)
+            processed = processed.replace(/(?:^[ \t]*[-*][ \t]+(.+)(?:\r?\n|$))+/gm, (match) => {
+                const items = match.trim().split('\n').map(line => {
+                    const clean = line.replace(/^[ \t]*[-*][ \t]+/, '');
+                    return `<li class="my-1.5 text-sm sm:text-[15px] leading-relaxed text-neutral-300">${clean}</li>`;
+                }).join('');
+                return `<ul class="my-4 list-disc pl-6 space-y-1">${items}</ul>`;
+            });
+
+            processed = processed.replace(/(?:^[ \t]*\d+\.[ \t]+(.+)(?:\r?\n|$))+/gm, (match) => {
+                const items = match.trim().split('\n').map(line => {
+                    const clean = line.replace(/^[ \t]*\d+\.[ \t]+/, '');
+                    return `<li class="my-1.5 text-sm sm:text-[15px] leading-relaxed text-neutral-300">${clean}</li>`;
+                }).join('');
+                return `<ol class="my-4 list-decimal pl-6 space-y-1">${items}</ol>`;
+            });
+
+            // Step 9: Inline Formatting (Bold, Italic, Inline Code)
+            processed = processed
+                .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-white">$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em class="italic text-neutral-300">$1</em>')
+                .replace(/`([^`]+)`/g, (match, code) => `<code class="px-1.5 py-0.5 rounded bg-neutral-800 text-neutral-200 font-mono text-xs border border-neutral-700">${escapeHtml(code)}</code>`);
+
+            // Step 10: Paragraph Breaks
+            processed = processed.replace(/\n\n/g, '<div class="my-4"></div>');
+
+            // Step 11: Restore Code Blocks
+            codeBlocks.forEach((block, idx) => {
+                processed = processed.replace(`__CODE_BLOCK_${idx}__`, block);
+            });
+
+            return processed;
+        }
+
+        function copyCodeSnippet(btn) {
+            const pre = btn.closest('.code-container').querySelector('pre');
+            if (!pre) return;
+            navigator.clipboard.writeText(pre.innerText).then(() => {
+                const oldHtml = btn.innerHTML;
+                btn.innerHTML = '<span class="symbol mr-1">check_circle</span>Copied!';
+                setTimeout(() => { btn.innerHTML = oldHtml; }, 1800);
+            });
+        }
+
+        function copyContent(btn) {
+            const card = btn.closest('.article-card') || btn.closest('.solution-row');
+            if (!card) return;
+            navigator.clipboard.writeText(card.innerText).then(() => {
+                const oldHtml = btn.innerHTML;
+                btn.innerHTML = '<span class="symbol mr-1">check_circle</span> Copied!';
+                setTimeout(() => { btn.innerHTML = oldHtml; }, 1800);
+            });
+        }
+
+        // Toggle Reader Width (Full Width vs Centered)
+        function toggleReaderWidth() {
+            isReaderExpanded = !isReaderExpanded;
+            const readerView = document.getElementById('note-reader-view');
+            const toggleBtnIcon = document.querySelector('#reader-width-toggle-btn i');
+            const toggleBtnLabel = document.getElementById('reader-width-label');
+            if (readerView) {
+                if (isReaderExpanded) {
+                    readerView.classList.remove('max-w-4xl');
+                    readerView.classList.add('max-w-7xl', 'w-full');
+                    if (toggleBtnIcon) toggleBtnIcon.className = 'fas fa-compress text-zinc-300';
+                    if (toggleBtnLabel) toggleBtnLabel.textContent = 'Collapse';
+                } else {
+                    readerView.classList.remove('max-w-7xl', 'w-full');
+                    readerView.classList.add('max-w-4xl');
+                    if (toggleBtnIcon) toggleBtnIcon.className = 'fas fa-expand text-zinc-300';
+                    if (toggleBtnLabel) toggleBtnLabel.textContent = 'Expand';
+                }
+            }
+        }
+
+        // --- 7. SEARCH MODAL (⌘K) ---
+        function openSearchModal() {
+            const modal = document.getElementById('search-modal');
+            if (modal) {
+                modal.style.display = 'flex';
+                const input = document.getElementById('global-search-input');
+                if (input) {
+                    input.value = '';
+                    input.focus();
+                    executeSearch('');
+                }
+            }
+        }
+
+        function closeSearchModal() {
+            const modal = document.getElementById('search-modal');
+            if (modal) modal.style.display = 'none';
+        }
+
+        function handleSearchOverlayClick(e) {
+            if (e.target.id === 'search-modal') closeSearchModal();
+        }
+
+        function executeSearch(query) {
+            const resultsBox = document.getElementById('search-results-box');
+            if (!resultsBox || typeof BCA_1ST_SEM_DATA === 'undefined') return;
+
+            const q = query.trim().toLowerCase();
+            if (!q) {
+                resultsBox.innerHTML = `<p class="text-xs mono text-gray-500 text-center py-6">Type above to search across all 7 subjects, notes, and question banks.</p>`;
+                return;
+            }
+
+            let matches = [];
+            BCA_1ST_SEM_DATA.subjects.forEach(s => {
+                if (s.title.toLowerCase().includes(q) || s.code.toLowerCase().includes(q)) {
+                    matches.push({ subject: s, title: s.title, subtitle: `${s.code} • Subject Deck`, tab: 'notes', noteIndex: 0 });
+                }
+                (s.notes || []).forEach((n, idx) => {
+                    if (n.title.toLowerCase().includes(q) || n.content.toLowerCase().includes(q)) {
+                        matches.push({ subject: s, title: n.title, subtitle: `${s.title} • Topic Note (${n.unit})`, tab: 'notes', noteIndex: idx });
+                    }
+                });
+                (s.questions || []).forEach(ques => {
+                    if (ques.question.toLowerCase().includes(q)) {
+                        matches.push({ subject: s, title: ques.question, subtitle: `${s.title} • Question Bank`, tab: 'questions', noteIndex: null });
+                    }
+                });
+                (s.solutions || []).forEach(sol => {
+                    if (sol.question.toLowerCase().includes(q) || sol.solution.toLowerCase().includes(q)) {
+                        matches.push({ subject: s, title: sol.question, subtitle: `${s.title} • Solution`, tab: 'solutions', noteIndex: null });
+                    }
+                });
+            });
+
+            if (matches.length === 0) {
+                resultsBox.innerHTML = `<p class="text-xs mono text-red-400 text-center py-6">No matching results found for "${escapeHtml(query)}".</p>`;
+                return;
+            }
+
+            resultsBox.innerHTML = matches.slice(0, 12).map(m => `
+                <div onclick="selectSearchResult('${m.subject.id}', '${m.tab}', ${m.noteIndex !== null ? m.noteIndex : 'null'})" class="p-3 hover:bg-white/5 cursor-pointer rounded-lg transition flex items-center justify-between group">
+                    <div class="pr-2">
+                        <div class="text-sm font-semibold text-white group-hover:text-zinc-100 transition">${escapeHtml(m.title)}</div>
+                        <div class="text-xs mono text-zinc-300/80">${escapeHtml(m.subtitle)}</div>
+                    </div>
+                    <span class="text-[10px] mono text-zinc-400 uppercase px-2 py-1 rounded bg-white/5 border border-white/5 shrink-0">${m.tab}</span>
+                </div>
+            `).join('');
+        }
+
+        function selectSearchResult(subjectId, tab, noteIndex) {
+            closeSearchModal();
+            if (tab === 'notes' && noteIndex !== null && noteIndex !== undefined) {
+                openNoteReader(subjectId, noteIndex);
+            } else {
+                navigateToSubject(subjectId, tab);
+            }
+        }
+
+        // Global Keybindings
+        window.addEventListener('keydown', (e) => {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault();
+                openSearchModal();
+            }
+            if (e.key === 'Escape') {
+                closeSearchModal();
+            }
         });
+
+        window.addEventListener('hashchange', handleHashRouting);
+
+        // Initialization
+        window.onload = () => {
+            typeText();
+            startLiveClock();
+            handleHashRouting();
+        };
     </script>
 </body>
+
 </html>
