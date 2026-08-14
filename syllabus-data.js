@@ -268,6 +268,14 @@ const BCA_1ST_SEM_DATA = {
           "question": "Explain HTML forms and client-side validation. Discuss form attributes, input types, radio/checkbox, select/option and why server-side validation is still necessary.",
           "marks": 8,
           "probability": "High Probability (PU Exam)"
+        },
+        {
+          "id": "web-tech-q-1786729213949",
+          "unit": "Unit II",
+          "type": "2-mark",
+          "question": "What is semantic HTML? Give four examples of semantic elements.",
+          "marks": 2,
+          "probability": "High Probability (PU Exam)"
         }
       ],
       "solutions": [
@@ -388,6 +396,16 @@ const BCA_1ST_SEM_DATA = {
           "unit": "Unit II",
           "type": "8-mark",
           "solution": "Model Answer:\\nDefine form as a mechanism for collecting user input. Explain action, method, name, required and other useful attributes. Cover text, email, password, number, date, checkbox, radio, textarea, select and option. Explain radio for one choice in a group and checkbox for independent/multiple choices. Show a complete registration form. Explain browser constraint validation such as required, type=email, min/max, minlength/maxlength. Critical point: client validation can be bypassed; server must validate, authorize and sanitize/handle input again.",
+          "code": "",
+          "formula": ""
+        },
+        {
+          "id": "sol-web-tech-q-1786729213949",
+          "questionId": "web-tech-q-1786729213949",
+          "question": "What is semantic HTML? Give four examples of semantic elements.",
+          "unit": "Unit II",
+          "type": "2-mark",
+          "solution": "Semantic HTML uses elements whose names communicate the meaning or role of their content. Examples: header, nav, main, article, section and footer.",
           "code": "",
           "formula": ""
         }
