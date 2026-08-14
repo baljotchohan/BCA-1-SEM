@@ -1,0 +1,27 @@
+{
+  "name": "bca-1st-sem-mcp",
+  "version": "2.0.0",
+  "description": "Official Model Context Protocol (MCP) Server for Panjab University BCA 1st Semester Academic Portal",
+  "main": "index.js",
+  "bin": {
+    "bca-1st-sem-mcp": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "http": "node index.js --http --port=8080",
+    "dev": "node index.js"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "chatgpt",
+    "claude",
+    "cursor",
+    "gemini",
+    "antigravity",
+    "bca",
+    "panjab-university"
+  ],
+  "author": "Baljot Chohan",
+  "license": "MIT"
+}

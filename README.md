@@ -41,8 +41,20 @@ A clean, high-yield academic study dashboard and exam preparation suite for **Pa
 
 ## 🚀 Running Locally
 
-To run the local server:
+### Academic Portal Web App:
 ```bash
 python3 -m http.server 8080
 ```
 Then visit [`http://localhost:8080`](http://localhost:8080) in your browser.
+
+### 🧠 Model Context Protocol (MCP) Server:
+To connect your local AI (ChatGPT, Claude Desktop, Cursor, Antigravity) directly to the 1st Sem Academic Hub:
+
+```bash
+# Stdio Mode (for Claude / Cursor / Antigravity):
+./run-mcp.sh
+
+# HTTP Mode (for ChatGPT Actions / REST API):
+./run-mcp.sh --http 8080
+```
+See the full setup guide in [`mcp-server/README.md`](file:///Users/baljotchohan/Desktop/BCA%20I/BCA-1-SEM/mcp-server/README.md).

@@ -1,0 +1,65 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Panjab University BCA 1st Semester Academic API",
+    "description": "Official Academic Assistant API for Panjab University BCA 1st Semester students. Provides syllabus topics, unit breakdown, exam question banks, model answers, and full-text search across all 7 subjects.",
+    "version": "2.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Local BCA 1st Sem MCP HTTP Server"
+    }
+  ],
+  "paths": {
+    "/api/subjects": {
+      "get": {
+        "operationId": "getSubjectList",
+        "summary": "Get all 7 official BCA 1st Semester subjects",
+        "description": "Returns list of subjects with codes, credit breakdown, internal/external exam marks, and total units.",
+        "responses": {
+          "200": {
+            "description": "Subject list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/search": {
+      "get": {
+        "operationId": "searchAcademicDeck",
+        "summary": "Search syllabus, questions, solutions and notes",
+        "description": "Performs keyword search across all 1st sem subjects, units, questions, and notes.",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": true,
+            "description": "Search query keyword (e.g. 'Bayes', 'Flexbox', 'malloc', 'BIOS')",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Search results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

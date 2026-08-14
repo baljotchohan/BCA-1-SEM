@@ -852,6 +852,7 @@
     <script src="data-punjabi.js"></script>
     <script src="data-ecommerce.js"></script>
     <script src="syllabus-data.js"></script>
+    <script src="visuals-engine.js"></script>
 
     <script>
         // --- 0. HTML ESCAPER UTILITY ---
@@ -1212,6 +1213,10 @@
             document.getElementById('reader-note-title').textContent = note.title;
             document.getElementById('reader-note-body').innerHTML = formatMarkdown(note.content);
 
+            if (window.mountVisualEngines) {
+                window.mountVisualEngines(document.getElementById('reader-note-body'));
+            }
+
             // Previous / Next Buttons
             const prevBtn = document.getElementById('reader-prev-btn');
             const nextBtn = document.getElementById('reader-next-btn');
@@ -1324,9 +1329,12 @@
         function formatMarkdown(text) {
             if (!text) return '';
 
+            // Step 0: Visual Simulation Tags
+            let processed = text.replace(/\[visual:([a-zA-Z0-9\-_]+)\]/g, '<div data-visual-engine="$1" class="my-4"></div>');
+
             // Step 1: Extract and preserve Code Blocks
             const codeBlocks = [];
-            let processed = text.replace(/```(c|html|javascript|bash|text|css|json)?\n([\s\S]*?)```/g, (match, lang, code) => {
+            processed = processed.replace(/```(c|html|javascript|bash|text|css|json)?\n([\s\S]*?)```/g, (match, lang, code) => {
                 const index = codeBlocks.length;
                 const langName = lang || 'code';
                 const escaped = escapeHtml(code);
