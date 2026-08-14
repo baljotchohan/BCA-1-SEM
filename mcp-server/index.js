@@ -74,7 +74,22 @@ function loadLiveSyllabusData() {
   return { session: "2026-2027", university: "Panjab University, Chandigarh", subjects: [] };
 }
 
-function saveLiveSyllabusData(data) {
+const { exec } = require('child_process');
+
+function autoPushToLiveSite(actionDesc = "Auto-publish to live site via MCP") {
+  const repoDir = path.join(__dirname, '..');
+  const cleanMsg = actionDesc.replace(/"/g, "'");
+  const cmd = `git add "${SYLLABUS_FILE_PATH}" && git commit -m "${cleanMsg}" && git push origin main`;
+  exec(cmd, { cwd: repoDir }, (error, stdout, stderr) => {
+    if (error) {
+      console.error('[MCP Auto-Push] Error:', error.message);
+    } else {
+      console.log('[MCP Auto-Push] Successfully synced changes live to GitHub origin/main!');
+    }
+  });
+}
+
+function saveLiveSyllabusData(data, actionDesc = "Update syllabus-data via MCP") {
   try {
     const fileContent = `/**
  * Panjab University BCA 1st Semester — Comprehensive Academic Study Notes & Curriculum Manual
@@ -89,6 +104,8 @@ if (typeof module !== 'undefined' && module.exports) {
 }
 `;
     fs.writeFileSync(SYLLABUS_FILE_PATH, fileContent, 'utf8');
+    // Auto-push to live GitHub site
+    autoPushToLiveSite(actionDesc);
     return true;
   } catch (err) {
     console.error('[MCP Data Engine] Error saving syllabus-data.js:', err.message);
@@ -355,6 +372,16 @@ const TOOLS = [
     inputSchema: {
       type: "object",
       properties: {}
+    }
+  },
+  {
+    name: "push_to_live_site",
+    description: "Explicitly commits and pushes all local website files (syllabus-data.js) to the live GitHub repository (origin/main) to update the production website.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        commit_message: { type: "string", description: "Optional custom commit message", default: "Update live site from MCP" }
+      }
     }
   },
   {
@@ -879,6 +906,16 @@ async function executeTool(name, args = {}) {
         success: true,
         message: `🗑️ Entire academic deck wiped clean! Removed ${notesRemoved} notes and ${questionsRemoved} questions/solutions from live files. Ready for new AI generation.`,
         status: "EMPTY_AND_LIVE"
+      };
+    }
+
+    case "push_to_live_site": {
+      const commitMsg = args.commit_message || "Manual push from MCP";
+      autoPushToLiveSite(commitMsg);
+      return {
+        success: true,
+        message: `🚀 Changes are being pushed live to GitHub origin/main! Production website will update within seconds.`,
+        commitMessage: commitMsg
       };
     }
 
