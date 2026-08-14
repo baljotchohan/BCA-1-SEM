@@ -348,6 +348,14 @@ const BCA_1ST_SEM_DATA = {
           "question": "Differentiate margin and padding.",
           "marks": 2,
           "probability": "High Probability (PU Exam)"
+        },
+        {
+          "id": "web-tech-q-1786729250265",
+          "unit": "Unit III",
+          "type": "2-mark",
+          "question": "What is Flexbox? Name four container properties.",
+          "marks": 2,
+          "probability": "High Probability (PU Exam)"
         }
       ],
       "solutions": [
@@ -568,6 +576,16 @@ const BCA_1ST_SEM_DATA = {
           "unit": "Unit III",
           "type": "2-mark",
           "solution": "Padding is space inside an element between its content and border. Margin is space outside the border that separates the element from neighbouring elements.",
+          "code": "",
+          "formula": ""
+        },
+        {
+          "id": "sol-web-tech-q-1786729250265",
+          "questionId": "web-tech-q-1786729250265",
+          "question": "What is Flexbox? Name four container properties.",
+          "unit": "Unit III",
+          "type": "2-mark",
+          "solution": "Flexbox is a one-dimensional CSS layout system for arranging and distributing items along main and cross axes. Four container properties are flex-direction, justify-content, align-items and flex-wrap; gap is also commonly used.",
           "code": "",
           "formula": ""
         }
