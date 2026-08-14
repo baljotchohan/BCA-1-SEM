@@ -220,6 +220,14 @@ const BCA_1ST_SEM_DATA = {
           "question": "What is a URL? Name its major components.",
           "marks": 2,
           "probability": "High Probability (PU Exam)"
+        },
+        {
+          "id": "web-tech-q-1786729191545",
+          "unit": "Unit I",
+          "type": "2-mark",
+          "question": "What is MIME type? Give four examples.",
+          "marks": 2,
+          "probability": "High Probability (PU Exam)"
         }
       ],
       "solutions": [
@@ -280,6 +288,16 @@ const BCA_1ST_SEM_DATA = {
           "unit": "Unit I",
           "type": "2-mark",
           "solution": "A URL (Uniform Resource Locator) identifies how and where a resource can be accessed. Major components can include scheme, host/domain, port, path, query and fragment. Example: https://example.com:443/products?id=10#reviews.",
+          "code": "",
+          "formula": ""
+        },
+        {
+          "id": "sol-web-tech-q-1786729191545",
+          "questionId": "web-tech-q-1786729191545",
+          "question": "What is MIME type? Give four examples.",
+          "unit": "Unit I",
+          "type": "2-mark",
+          "solution": "A MIME type identifies the media/content type of a resource so the receiving software can interpret it correctly. Examples: text/html, text/css, application/json, image/png.",
           "code": "",
           "formula": ""
         }
