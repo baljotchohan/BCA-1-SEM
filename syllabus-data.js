@@ -276,6 +276,14 @@ const BCA_1ST_SEM_DATA = {
           "question": "What is semantic HTML? Give four examples of semantic elements.",
           "marks": 2,
           "probability": "High Probability (PU Exam)"
+        },
+        {
+          "id": "web-tech-q-1786729216406",
+          "unit": "Unit II",
+          "type": "2-mark",
+          "question": "Differentiate absolute and relative URLs.",
+          "marks": 2,
+          "probability": "High Probability (PU Exam)"
         }
       ],
       "solutions": [
@@ -406,6 +414,16 @@ const BCA_1ST_SEM_DATA = {
           "unit": "Unit II",
           "type": "2-mark",
           "solution": "Semantic HTML uses elements whose names communicate the meaning or role of their content. Examples: header, nav, main, article, section and footer.",
+          "code": "",
+          "formula": ""
+        },
+        {
+          "id": "sol-web-tech-q-1786729216406",
+          "questionId": "web-tech-q-1786729216406",
+          "question": "Differentiate absolute and relative URLs.",
+          "unit": "Unit II",
+          "type": "2-mark",
+          "solution": "An absolute URL gives the complete destination including scheme and host, such as https://example.com/about. A relative URL is resolved against the current document/base URL, such as /about or images/logo.png.",
           "code": "",
           "formula": ""
         }
