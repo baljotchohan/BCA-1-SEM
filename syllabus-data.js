@@ -252,6 +252,14 @@ const BCA_1ST_SEM_DATA = {
           "question": "Explain semantic HTML5. Describe header, nav, main, article, section and footer with a realistic webpage diagram and discuss accessibility benefits.",
           "marks": 8,
           "probability": "High Probability (PU Exam)"
+        },
+        {
+          "id": "web-tech-q-1786729207445",
+          "unit": "Unit II",
+          "type": "8-mark",
+          "question": "Explain hyperlinks in HTML. Differentiate absolute, relative and internal links, and explain the security purpose of rel=\"noopener noreferrer\" with examples.",
+          "marks": 8,
+          "probability": "High Probability (PU Exam)"
         }
       ],
       "solutions": [
@@ -352,6 +360,16 @@ const BCA_1ST_SEM_DATA = {
           "unit": "Unit II",
           "type": "8-mark",
           "solution": "Model Answer:\\nSemantic HTML uses elements that communicate meaning. Explain header, nav, main, article, section and footer. Diagram: header -> nav -> main -> article -> section; aside/footer as appropriate. Explain that semantic landmarks improve screen-reader navigation, maintainability and machine understanding. State that native semantic HTML should be preferred over unnecessary ARIA roles. Punjabi: semantic tags webpage ਦੇ parts ਦਾ purpose واضح ਕਰਦੇ ਹਨ.",
+          "code": "",
+          "formula": ""
+        },
+        {
+          "id": "sol-web-tech-q-1786729207445",
+          "questionId": "web-tech-q-1786729207445",
+          "question": "Explain hyperlinks in HTML. Differentiate absolute, relative and internal links, and explain the security purpose of rel=\"noopener noreferrer\" with examples.",
+          "unit": "Unit II",
+          "type": "8-mark",
+          "solution": "Model Answer:\\nExplain anchor element and href. Absolute link contains a complete URL; relative link is resolved relative to the current document/base URL; internal fragment link points to an element in the same document using an ID. Example code for each. Explain target=\"_blank\" creates a new browsing context and rel=\"noopener\" prevents opener access; noreferrer controls referrer information. Add real-life examples such as navigation menu, documentation links and page-section navigation.",
           "code": "",
           "formula": ""
         }
