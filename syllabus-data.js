@@ -380,6 +380,14 @@ const BCA_1ST_SEM_DATA = {
           "question": "Explain JavaScript functions in detail. Differentiate function declarations, function expressions and arrow functions with syntax, examples and important behavioural differences.",
           "marks": 8,
           "probability": "High Probability (PU Exam)"
+        },
+        {
+          "id": "web-tech-q-1786729261602",
+          "unit": "Unit IV",
+          "type": "8-mark",
+          "question": "What is the DOM? Explain DOM tree traversal, element selection and dynamic modification of text, attributes and classes with a complete example.",
+          "marks": 8,
+          "probability": "High Probability (PU Exam)"
         }
       ],
       "solutions": [
@@ -640,6 +648,16 @@ const BCA_1ST_SEM_DATA = {
           "unit": "Unit IV",
           "type": "8-mark",
           "solution": "Model Answer:\\nDefine a function as reusable logic. Function declaration: function add(a,b){return a+b;} Function expression: const add=function(a,b){return a+b;}; Arrow: const add=(a,b)=>a+b;. Explain parameters/arguments and return. Discuss that declarations have different hoisting behaviour from expressions. Arrow functions have lexical this and do not have their own arguments object/prototype semantics. Use cases: reusable calculations, event handlers and data transformations.",
+          "code": "",
+          "formula": ""
+        },
+        {
+          "id": "sol-web-tech-q-1786729261602",
+          "questionId": "web-tech-q-1786729261602",
+          "question": "What is the DOM? Explain DOM tree traversal, element selection and dynamic modification of text, attributes and classes with a complete example.",
+          "unit": "Unit IV",
+          "type": "8-mark",
+          "solution": "Model Answer:\\nDOM is the browser's object/tree representation of an HTML document. Draw Document -> html -> head/body -> elements. Explain getElementById, querySelector and querySelectorAll. Show textContent for text, setAttribute for attributes and classList add/remove/toggle for classes. Complete example: select a heading and button, register click, change heading text and add a class. Explain that DOM manipulation changes the document model and the browser updates the rendered page.",
           "code": "",
           "formula": ""
         }
