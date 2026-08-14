@@ -284,6 +284,14 @@ const BCA_1ST_SEM_DATA = {
           "question": "Differentiate absolute and relative URLs.",
           "marks": 2,
           "probability": "High Probability (PU Exam)"
+        },
+        {
+          "id": "web-tech-q-1786729218908",
+          "unit": "Unit II",
+          "type": "2-mark",
+          "question": "What is the difference between rowspan and colspan in an HTML table?",
+          "marks": 2,
+          "probability": "High Probability (PU Exam)"
         }
       ],
       "solutions": [
@@ -424,6 +432,16 @@ const BCA_1ST_SEM_DATA = {
           "unit": "Unit II",
           "type": "2-mark",
           "solution": "An absolute URL gives the complete destination including scheme and host, such as https://example.com/about. A relative URL is resolved against the current document/base URL, such as /about or images/logo.png.",
+          "code": "",
+          "formula": ""
+        },
+        {
+          "id": "sol-web-tech-q-1786729218908",
+          "questionId": "web-tech-q-1786729218908",
+          "question": "What is the difference between rowspan and colspan in an HTML table?",
+          "unit": "Unit II",
+          "type": "2-mark",
+          "solution": "rowspan makes a table cell span multiple rows vertically. colspan makes a cell span multiple columns horizontally.",
           "code": "",
           "formula": ""
         }
