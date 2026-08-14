@@ -388,6 +388,14 @@ const BCA_1ST_SEM_DATA = {
           "question": "What is the DOM? Explain DOM tree traversal, element selection and dynamic modification of text, attributes and classes with a complete example.",
           "marks": 8,
           "probability": "High Probability (PU Exam)"
+        },
+        {
+          "id": "web-tech-q-1786729264942",
+          "unit": "Unit IV",
+          "type": "8-mark",
+          "question": "Explain the JavaScript event handling lifecycle: capturing, target and bubbling. Demonstrate addEventListener and event delegation with a practical example.",
+          "marks": 8,
+          "probability": "High Probability (PU Exam)"
         }
       ],
       "solutions": [
@@ -658,6 +666,16 @@ const BCA_1ST_SEM_DATA = {
           "unit": "Unit IV",
           "type": "8-mark",
           "solution": "Model Answer:\\nDOM is the browser's object/tree representation of an HTML document. Draw Document -> html -> head/body -> elements. Explain getElementById, querySelector and querySelectorAll. Show textContent for text, setAttribute for attributes and classList add/remove/toggle for classes. Complete example: select a heading and button, register click, change heading text and add a class. Explain that DOM manipulation changes the document model and the browser updates the rendered page.",
+          "code": "",
+          "formula": ""
+        },
+        {
+          "id": "sol-web-tech-q-1786729264942",
+          "questionId": "web-tech-q-1786729264942",
+          "question": "Explain the JavaScript event handling lifecycle: capturing, target and bubbling. Demonstrate addEventListener and event delegation with a practical example.",
+          "unit": "Unit IV",
+          "type": "8-mark",
+          "solution": "Model Answer:\\nDefine event as a signal of an action such as click or submit. Explain event propagation: capturing travels from ancestor toward target; target phase is the actual event target; bubbling travels from target toward ancestors. Show diagram Window/ancestor -> capture -> target -> bubble -> ancestor. Demonstrate button.addEventListener('click', handler). For delegation, attach one listener to a parent list and use event.target/closest to identify the clicked child. Explain benefits for dynamic lists and reduced listener count.",
           "code": "",
           "formula": ""
         }
