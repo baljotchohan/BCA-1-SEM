@@ -121,6 +121,22 @@
             --card-bg: var(--bg-card); --card-hover: var(--bg-card-hover); --card-border: var(--border-light);
         }
         
+        
+        /* Theme Utility Classes */
+        .text-main { color: var(--text-main) !important; }
+        .text-muted { color: var(--text-muted) !important; }
+        .bg-panel { background-color: var(--bg-panel) !important; }
+        .border-light { border-color: var(--border-light) !important; }
+        
+        .card-icon-box {
+            background: rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-light);
+            color: var(--text-main);
+        }
+        .light-mode .card-icon-box {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
         .accent-pill {
             background: var(--accent-bg);
             border: 1px solid var(--accent-border);
@@ -615,21 +631,21 @@
         <div class="flex items-center gap-3">
             <a href="#/" onclick="navigateToDashboard(event)" class="flex items-center gap-2 text-decoration-none">
                 <div class="w-2.5 h-2.5 rounded-full bg-zinc-900merald-400 animate-pulse"></div>
-                <span class="mono font-bold text-sm tracking-wider text-zinc-100 font-semibold tracking-tight">BCA Hub (Beta)</span>
+                <span class="mono font-bold text-sm tracking-wider text-main font-semibold tracking-tight">BCA Hub (Beta)</span>
             </a>
-            <span class="hidden md:inline-block px-2 py-0.5 text-xs mono rounded bg-zinc-900 text-zinc-300 border border-[#565656]">PU 2026-27</span>
+            <span class="hidden md:inline-block px-2 py-0.5 text-xs mono rounded bg-zinc-900 text-main border border-[#565656]">PU 2026-27</span>
         </div>
 
         <div class="flex items-center gap-3">
             <!-- Global Search Trigger -->
-            <button onclick="openSearchModal()" class="flex items-center gap-2 px-3 py-1.5 rounded bg-white/5 hover:bg-white/10 border border-zinc-800 text-xs mono text-zinc-300 transition">
+            <button onclick="openSearchModal()" class="flex items-center gap-2 px-3 py-1.5 rounded bg-white/5 hover:bg-white/10 border border-zinc-800 text-xs mono text-main transition">
                 <span class="symbol mr-1">search</span>
                 <span class="hidden sm:inline">Search bank...</span>
-                <kbd class="px-1 py-0.5 rounded bg-zinc-950lack/50 text-[10px] text-zinc-400 border border-zinc-800">⌘K</kbd>
+                <kbd class="px-1 py-0.5 rounded bg-zinc-950lack/50 text-[10px] text-muted border border-zinc-800">⌘K</kbd>
             </button>
 
             <!-- Live Clock -->
-            <div class="flex items-center gap-2 px-3 py-1.5 rounded bg-zinc-900 border border-zinc-800 mono text-xs text-zinc-300">
+            <div class="flex items-center gap-2 px-3 py-1.5 rounded bg-zinc-900 border border-zinc-800 mono text-xs text-main">
                 <span class="symbol mr-1">schedule</span>
                 <span id="terminal-clock">--:--:-- IST</span>
             </div>
@@ -645,29 +661,29 @@
         <div class="mb-8 p-6 sm:p-7 rounded-xl bg-zinc-900 border border-zinc-800 shadow-lg relative overflow-hidden">
             <div class="flex flex-wrap items-center justify-between gap-4">
                 <div>
-                    <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-zinc-800 border border-zinc-800 text-zinc-100 shadow-sm text-xs mono mb-3">
+                    <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-zinc-800 border border-zinc-800 text-main shadow-sm text-xs mono mb-3">
                         <span class="symbol mr-1">circle</span> PANJAB UNIVERSITY • BCA 1ST SEMESTER
                     </div>
                     <h1 class="text-2xl sm:text-3xl font-bold font-sans tracking-tight text-white mb-2">
-                        Academic Command Deck <span class="text-zinc-100 font-semibold tracking-tight">[NEP 2026-27]</span>
+                        Academic Command Deck <span class="text-main font-semibold tracking-tight">[NEP 2026-27]</span>
                     </h1>
-                    <p class="text-xs sm:text-sm text-zinc-400 max-w-2xl leading-relaxed">
+                    <p class="text-xs sm:text-sm text-muted max-w-2xl leading-relaxed">
                         Curated subject workspaces with deep unit notes, exam question banks, and complete verified solutions.
                     </p>
                 </div>
 
                 <div class="flex items-center gap-3 font-mono text-xs">
                     <div class="p-2.5 sm:p-3 rounded-lg bg-zinc-900 border border-zinc-800 text-center min-w-[70px]">
-                        <div class="text-zinc-300 font-bold text-base">7</div>
-                        <div class="text-zinc-400 text-[10px]">Subjects</div>
+                        <div class="text-main font-bold text-base">7</div>
+                        <div class="text-muted text-[10px]">Subjects</div>
                     </div>
                     <div class="p-2.5 sm:p-3 rounded-lg bg-zinc-900 border border-zinc-800 text-center min-w-[70px]">
-                        <div class="text-zinc-300 font-bold text-base">28</div>
-                        <div class="text-zinc-400 text-[10px]">Units</div>
+                        <div class="text-main font-bold text-base">28</div>
+                        <div class="text-muted text-[10px]">Units</div>
                     </div>
                     <div class="p-2.5 sm:p-3 rounded-lg bg-zinc-900 border border-zinc-800 text-center min-w-[70px]">
-                        <div class="text-zinc-300 font-bold text-base">100%</div>
-                        <div class="text-zinc-400 text-[10px]">PU Aligned</div>
+                        <div class="text-main font-bold text-base">100%</div>
+                        <div class="text-muted text-[10px]">PU Aligned</div>
                     </div>
                 </div>
             </div>
@@ -682,21 +698,21 @@
         <div class="terminal-card p-6 border border-zinc-800">
             <div class="flex items-center justify-between mb-4 border-b border-zinc-800 pb-3">
                 <div class="flex items-center gap-2.5">
-                    <div class="w-8 h-8 rounded-lg bg-zinc-800 border border-zinc-800 text-zinc-100 shadow-sm flex items-center justify-center text-sm">
+                    <div class="w-8 h-8 rounded-lg bg-zinc-800 border border-zinc-800 text-main shadow-sm flex items-center justify-center text-sm">
                         <span class="symbol mr-1">circle</span>
                     </div>
                     <div>
                         <h2 class="text-base font-bold text-white tracking-tight">Panjab University BCA 1st Semester Marks & Assessment Scheme</h2>
-                        <p class="text-xs text-zinc-400 mono">Official National Education Policy (NEP 2026-27) Framework</p>
+                        <p class="text-xs text-muted mono">Official National Education Policy (NEP 2026-27) Framework</p>
                     </div>
                 </div>
-                <span class="px-2.5 py-1 rounded bg-white/5 border border-zinc-800 text-xs mono text-zinc-300 font-bold hidden sm:inline-block">Total Credits: 21</span>
+                <span class="px-2.5 py-1 rounded bg-white/5 border border-zinc-800 text-xs mono text-main font-bold hidden sm:inline-block">Total Credits: 21</span>
             </div>
 
             <div class="table-wrap overflow-x-auto">
                 <table class="w-full text-left text-xs mono">
                     <thead>
-                        <tr class="bg-zinc-900 text-zinc-400 border-b border-zinc-800">
+                        <tr class="bg-zinc-900 text-muted border-b border-zinc-800">
                             <th class="py-3 px-3">Course Code</th>
                             <th class="py-3 px-3">Course Title</th>
                             <th class="py-3 px-3 text-center">Credits</th>
@@ -706,10 +722,10 @@
                             <th class="py-3 px-3 text-right">Total Marks</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-white/5 text-zinc-300">
+                    <tbody class="divide-y divide-white/5 text-main">
                         <tr class="hover:bg-white/5 transition">
-                            <td class="py-3 px-3 text-zinc-300 font-bold">BCA-DSC-1(Maj)-101A</td>
-                            <td class="py-3 px-3 text-zinc-100 font-semibold tracking-tight">Introduction to Web Technologies</td>
+                            <td class="py-3 px-3 text-main font-bold">BCA-DSC-1(Maj)-101A</td>
+                            <td class="py-3 px-3 text-main font-semibold tracking-tight">Introduction to Web Technologies</td>
                             <td class="py-3 px-3 text-center">4</td>
                             <td class="py-3 px-3 text-center">05</td>
                             <td class="py-3 px-3 text-center">45</td>
@@ -718,7 +734,7 @@
                         </tr>
                         <tr class="hover:bg-white/5 transition">
                             <td class="py-3 px-3 text-indigo-400 font-bold">BCA-DSC-1(Min)-103</td>
-                            <td class="py-3 px-3 text-zinc-100 font-semibold tracking-tight">Problem Solving Through C</td>
+                            <td class="py-3 px-3 text-main font-semibold tracking-tight">Problem Solving Through C</td>
                             <td class="py-3 px-3 text-center">4</td>
                             <td class="py-3 px-3 text-center">05</td>
                             <td class="py-3 px-3 text-center">45</td>
@@ -726,8 +742,8 @@
                             <td class="py-3 px-3 text-right font-bold text-white">100</td>
                         </tr>
                         <tr class="hover:bg-white/5 transition">
-                            <td class="py-3 px-3 text-zinc-300 font-bold">BCA-DSC-1(Maj)-102</td>
-                            <td class="py-3 px-3 text-zinc-100 font-semibold tracking-tight">Fundamentals of Mathematical Statistics</td>
+                            <td class="py-3 px-3 text-main font-bold">BCA-DSC-1(Maj)-102</td>
+                            <td class="py-3 px-3 text-main font-semibold tracking-tight">Fundamentals of Mathematical Statistics</td>
                             <td class="py-3 px-3 text-center">4</td>
                             <td class="py-3 px-3 text-center">10</td>
                             <td class="py-3 px-3 text-center">90</td>
@@ -735,8 +751,8 @@
                             <td class="py-3 px-3 text-right font-bold text-white">100</td>
                         </tr>
                         <tr class="hover:bg-white/5 transition">
-                            <td class="py-3 px-3 text-zinc-300 font-bold">CSA-VAC-102</td>
-                            <td class="py-3 px-3 text-zinc-100 font-semibold tracking-tight">Introduction to Computer Hardware</td>
+                            <td class="py-3 px-3 text-main font-bold">CSA-VAC-102</td>
+                            <td class="py-3 px-3 text-main font-semibold tracking-tight">Introduction to Computer Hardware</td>
                             <td class="py-3 px-3 text-center">2</td>
                             <td class="py-3 px-3 text-center">05</td>
                             <td class="py-3 px-3 text-center">45</td>
@@ -744,8 +760,8 @@
                             <td class="py-3 px-3 text-right font-bold text-white">50</td>
                         </tr>
                         <tr class="hover:bg-white/5 transition">
-                            <td class="py-3 px-3 text-zinc-300 font-bold">AEC-1-101</td>
-                            <td class="py-3 px-3 text-zinc-100 font-semibold tracking-tight">English-1 (Communication Skills)</td>
+                            <td class="py-3 px-3 text-main font-bold">AEC-1-101</td>
+                            <td class="py-3 px-3 text-main font-semibold tracking-tight">English-1 (Communication Skills)</td>
                             <td class="py-3 px-3 text-center">2</td>
                             <td class="py-3 px-3 text-center">05</td>
                             <td class="py-3 px-3 text-center">45</td>
@@ -754,7 +770,7 @@
                         </tr>
                         <tr class="hover:bg-white/5 transition">
                             <td class="py-3 px-3 text-rose-400 font-bold">PUN-COMPL-101 / HCP-101</td>
-                            <td class="py-3 px-3 text-zinc-100 font-semibold tracking-tight">Punjabi Compulsory / History & Culture of Punjab</td>
+                            <td class="py-3 px-3 text-main font-semibold tracking-tight">Punjabi Compulsory / History & Culture of Punjab</td>
                             <td class="py-3 px-3 text-center">2</td>
                             <td class="py-3 px-3 text-center">05</td>
                             <td class="py-3 px-3 text-center">45</td>
@@ -763,7 +779,7 @@
                         </tr>
                         <tr class="hover:bg-white/5 transition">
                             <td class="py-3 px-3 text-teal-400 font-bold">CSA-MDC-101</td>
-                            <td class="py-3 px-3 text-zinc-100 font-semibold tracking-tight">E-Commerce & Digital Trends</td>
+                            <td class="py-3 px-3 text-main font-semibold tracking-tight">E-Commerce & Digital Trends</td>
                             <td class="py-3 px-3 text-center">3</td>
                             <td class="py-3 px-3 text-center">05</td>
                             <td class="py-3 px-3 text-center">70</td>
@@ -784,15 +800,15 @@
         
         <!-- Breadcrumb & Back button -->
         <div class="flex items-center justify-between mb-6">
-            <div class="flex items-center gap-2 text-xs mono text-zinc-400">
-                <a href="#/" onclick="navigateToDashboard(event)" class="text-zinc-300 hover:underline">Academic Deck</a>
+            <div class="flex items-center gap-2 text-xs mono text-muted">
+                <a href="#/" onclick="navigateToDashboard(event)" class="text-main hover:underline">Academic Deck</a>
                 <span>/</span>
                 <span>Subjects</span>
                 <span>/</span>
                 <span class="text-white font-bold" id="ws-breadcrumb-title">Web Technologies</span>
             </div>
 
-            <button onclick="navigateToDashboard(event)" class="px-3 py-1.5 rounded bg-white/5 hover:bg-white/10 border border-zinc-800 text-xs mono text-zinc-300 flex items-center gap-2 transition">
+            <button onclick="navigateToDashboard(event)" class="px-3 py-1.5 rounded bg-white/5 hover:bg-white/10 border border-zinc-800 text-xs mono text-main flex items-center gap-2 transition">
                 <span class="symbol mr-1">arrow_back</span>
                 <span>Back to Hub</span>
             </button>
@@ -803,15 +819,15 @@
             <div class="flex flex-wrap items-start justify-between gap-4 mb-3">
                 <div>
                     <div class="flex items-center gap-2 mb-2">
-                        <span class="px-2.5 py-0.5 rounded bg-zinc-800 border border-zinc-800 text-zinc-100 shadow-sm mono text-xs font-bold" id="ws-code-badge">BCA-DSC-101</span>
-                        <span class="text-xs mono text-zinc-400" id="ws-credit-badge">4 Credits • 30 Theory Hrs</span>
+                        <span class="px-2.5 py-0.5 rounded bg-zinc-800 border border-zinc-800 text-main shadow-sm mono text-xs font-bold" id="ws-code-badge">BCA-DSC-101</span>
+                        <span class="text-xs mono text-muted" id="ws-credit-badge">4 Credits • 30 Theory Hrs</span>
                     </div>
                     <h1 class="text-xl sm:text-2xl font-bold text-white mb-2" id="ws-subject-title">Subject Title</h1>
-                    <p class="text-xs sm:text-sm text-zinc-400 max-w-3xl leading-relaxed" id="ws-subject-desc">Subject Description</p>
+                    <p class="text-xs sm:text-sm text-muted max-w-3xl leading-relaxed" id="ws-subject-desc" class="text-xs sm:text-sm text-muted max-w-3xl leading-relaxed">Subject Description</p>
                 </div>
 
                 <div class="flex items-center gap-2 no-print">
-                    <button onclick="window.print()" class="px-3 py-1.5 rounded bg-white/5 hover:bg-white/10 border border-zinc-800 text-xs mono text-zinc-300 flex items-center gap-2 transition">
+                    <button onclick="window.print()" class="px-3 py-1.5 rounded bg-white/5 hover:bg-white/10 border border-zinc-800 text-xs mono text-main flex items-center gap-2 transition">
                         <span class="symbol mr-1">circle</span>
                         <span>Print Syllabus</span>
                     </button>
@@ -871,37 +887,37 @@
         
         <!-- Reader Sticky Top Bar -->
         <div class="sticky top-16 z-30 mb-6 p-3 rounded-xl bg-[#0b0d14]/90 backdrop-blur-md border border-zinc-800 flex flex-wrap items-center justify-between gap-3 shadow-2xl">
-            <button onclick="backToSubjectWorkspace()" class="px-3 py-1.5 rounded bg-white/5 hover:bg-white/10 border border-zinc-800 text-xs mono text-zinc-300 flex items-center gap-2 transition">
+            <button onclick="backToSubjectWorkspace()" class="px-3 py-1.5 rounded bg-white/5 hover:bg-white/10 border border-zinc-800 text-xs mono text-main flex items-center gap-2 transition">
                 <span class="symbol mr-1">arrow_back</span>
                 <span>Back to Topics</span>
             </button>
 
             <div class="flex items-center gap-2">
                 <!-- Jump to other note selector -->
-                <select id="reader-topic-select" onchange="jumpToNoteFromSelect(this.value)" class="bg-zinc-900 border border-zinc-800 rounded px-2.5 py-1 text-xs mono text-zinc-300 outline-none max-w-[180px] sm:max-w-[260px] truncate">
+                <select id="reader-topic-select" onchange="jumpToNoteFromSelect(this.value)" class="bg-zinc-900 border border-zinc-800 rounded px-2.5 py-1 text-xs mono text-main outline-none max-w-[180px] sm:max-w-[260px] truncate">
                     <!-- Populated dynamically -->
                 </select>
 
                 <!-- Paper White / Pure Dark Mode Toggle -->
-                <button onclick="toggleReaderPaperMode()" id="reader-paper-toggle-btn" class="px-2.5 py-1.5 rounded bg-white/5 hover:bg-white/10 border border-zinc-800 text-xs mono text-zinc-300 transition flex items-center gap-1.5" title="Switch between Pitch Dark & Paper White Mode">
+                <button onclick="toggleReaderPaperMode()" id="reader-paper-toggle-btn" class="px-2.5 py-1.5 rounded bg-white/5 hover:bg-white/10 border border-zinc-800 text-xs mono text-main transition flex items-center gap-1.5" title="Switch between Pitch Dark & Paper White Mode">
                     <span class="symbol mr-1">description</span>
                     <span class="hidden sm:inline" id="reader-paper-label">Paper Docs</span>
                 </button>
 
                 <!-- Full Width / Expand Toggle -->
-                <button onclick="toggleReaderWidth()" id="reader-width-toggle-btn" class="px-2.5 py-1.5 rounded bg-white/5 hover:bg-white/10 border border-zinc-800 text-xs mono text-zinc-300 transition flex items-center gap-1.5" title="Toggle Full Width Reading">
+                <button onclick="toggleReaderWidth()" id="reader-width-toggle-btn" class="px-2.5 py-1.5 rounded bg-white/5 hover:bg-white/10 border border-zinc-800 text-xs mono text-main transition flex items-center gap-1.5" title="Toggle Full Width Reading">
                     <span class="symbol mr-1">open_in_full</span>
                     <span class="hidden sm:inline" id="reader-width-label">Expand</span>
                 </button>
 
                 <!-- Copy Note -->
-                <button onclick="copyCurrentNoteContent()" class="px-2.5 py-1.5 rounded bg-white/5 hover:bg-white/10 border border-zinc-800 text-xs mono text-zinc-300 transition flex items-center gap-1.5" title="Copy Complete Note">
+                <button onclick="copyCurrentNoteContent()" class="px-2.5 py-1.5 rounded bg-white/5 hover:bg-white/10 border border-zinc-800 text-xs mono text-main transition flex items-center gap-1.5" title="Copy Complete Note">
                     <span class="symbol mr-1">content_copy</span>
                     <span class="hidden sm:inline">Copy Note</span>
                 </button>
 
                 <!-- Print Note -->
-                <button onclick="window.print()" class="px-2.5 py-1.5 rounded bg-white/5 hover:bg-white/10 border border-zinc-800 text-xs mono text-zinc-300 transition" title="Print Note / Save PDF">
+                <button onclick="window.print()" class="px-2.5 py-1.5 rounded bg-white/5 hover:bg-white/10 border border-zinc-800 text-xs mono text-main transition" title="Print Note / Save PDF">
                     <span class="symbol mr-1">circle</span>
                 </button>
             </div>
@@ -910,8 +926,8 @@
         <!-- Note Article Body Container -->
         <article class="p-6 sm:p-10 rounded-2xl bg-[#0e111a] border border-zinc-800 shadow-2xl relative" id="reader-article-box">
             <div class="flex items-center gap-2 mb-3">
-                <span class="px-2.5 py-0.5 rounded bg-zinc-800 border border-zinc-800 text-zinc-100 shadow-sm mono text-xs font-bold" id="reader-unit-badge">Unit I</span>
-                <span class="text-xs mono text-zinc-400" id="reader-time-badge">7 min read</span>
+                <span class="px-2.5 py-0.5 rounded bg-zinc-800 border border-zinc-800 text-main shadow-sm mono text-xs font-bold" id="reader-unit-badge">Unit I</span>
+                <span class="text-xs mono text-muted" id="reader-time-badge">7 min read</span>
                 <span class="text-xs mono text-gray-500">• Panjab University Academic Series</span>
             </div>
 
@@ -923,14 +939,14 @@
 
             <!-- Bottom Note Navigation Controls -->
             <div class="flex flex-wrap items-center justify-between gap-4 mt-12 pt-6 border-t border-zinc-800 no-print">
-                <button id="reader-prev-btn" onclick="navigateNote(-1)" class="px-4 py-2 rounded bg-white/5 hover:bg-white/10 border border-zinc-800 text-xs mono text-zinc-300 flex items-center gap-2 transition">
+                <button id="reader-prev-btn" onclick="navigateNote(-1)" class="px-4 py-2 rounded bg-white/5 hover:bg-white/10 border border-zinc-800 text-xs mono text-main flex items-center gap-2 transition">
                     <span class="symbol mr-1">chevron_left</span>
                     <span>Previous Topic</span>
                 </button>
-                <button onclick="window.scrollTo({top:0, behavior:'smooth'})" class="text-xs mono text-zinc-400 hover:text-white flex items-center gap-1.5">
+                <button onclick="window.scrollTo({top:0, behavior:'smooth'})" class="text-xs mono text-muted hover:text-white flex items-center gap-1.5">
                     <span class="symbol mr-1">circle</span> Back to Top
                 </button>
-                <button id="reader-next-btn" onclick="navigateNote(1)" class="px-4 py-2 rounded bg-white/5 hover:bg-white/10 border border-zinc-800 text-xs mono text-zinc-300 flex items-center gap-2 transition">
+                <button id="reader-next-btn" onclick="navigateNote(1)" class="px-4 py-2 rounded bg-white/5 hover:bg-white/10 border border-zinc-800 text-xs mono text-main flex items-center gap-2 transition">
                     <span>Next Topic</span>
                     <span class="symbol mr-1">chevron_right</span>
                 </button>
@@ -947,7 +963,7 @@
             <div class="p-4 border-b border-zinc-800 flex items-center gap-3">
                 <span class="symbol mr-1">search</span>
                 <input type="text" id="global-search-input" oninput="executeSearch(this.value)" placeholder="Type topic or question (e.g. Pointers, Bisection, HTML Forms, RAM)..." class="bg-transparent border-none outline-none text-white font-mono text-sm w-full placeholder-gray-500">
-                <button onclick="closeSearchModal()" class="text-zinc-400 hover:text-white text-xs mono px-2 py-1 rounded bg-white/5">ESC</button>
+                <button onclick="closeSearchModal()" class="text-muted hover:text-white text-xs mono px-2 py-1 rounded bg-white/5">ESC</button>
             </div>
             <div id="search-results-box" class="max-h-96 overflow-y-auto p-3 divide-y divide-white/5">
                 <p class="text-xs mono text-gray-500 text-center py-6">Type above to search across all 7 subjects, notes, and question banks.</p>
@@ -1083,7 +1099,7 @@
                                     <span class="mono text-[11px] px-2.5 py-0.5 rounded accent-pill font-bold inline-block mb-1">
                                         ${escapeHtml(s.code)}
                                     </span>
-                                    <div class="text-[11px] mono text-zinc-400 flex items-center gap-2">
+                                    <div class="text-[11px] mono text-muted flex items-center gap-2">
                                         <span>${s.credits} Credits</span>
                                         <span>•</span>
                                         <span>${escapeHtml(s.type || 'Core')}</span>
@@ -1096,14 +1112,14 @@
 
                             <!-- Title & Description -->
                             <h3 class="text-base font-bold text-white mb-2 tracking-tight">${escapeHtml(s.title)}</h3>
-                            <p class="text-xs text-zinc-400 line-clamp-2 leading-relaxed mb-4">${escapeHtml(s.description)}</p>
+                            <p class="text-xs text-muted line-clamp-2 leading-relaxed mb-4">${escapeHtml(s.description)}</p>
                             
                             <!-- Stats badges -->
                             <div class="flex items-center gap-2 mb-4">
-                                <span class="text-[10px] mono px-2 py-0.5 rounded bg-white/5 text-zinc-400 border border-white/5">
+                                <span class="text-[10px] mono px-2 py-0.5 rounded bg-white/5 text-muted border border-white/5">
                                     <span class="symbol mr-1">circle</span>${topicCount} Topics
                                 </span>
-                                <span class="text-[10px] mono px-2 py-0.5 rounded bg-white/5 text-zinc-400 border border-white/5">
+                                <span class="text-[10px] mono px-2 py-0.5 rounded bg-white/5 text-muted border border-white/5">
                                     <span class="symbol mr-1">help</span>${quesCount} Questions
                                 </span>
                             </div>
@@ -1191,7 +1207,7 @@
 
             // Tags
             const tagsBox = document.getElementById('ws-tags-row');
-            tagsBox.innerHTML = (subject.tags || []).map(t => `<span class="topic-pill text-zinc-300 border-[#565656]">${escapeHtml(t)}</span>`).join('');
+            tagsBox.innerHTML = (subject.tags || []).map(t => `<span class="topic-pill text-main border-[#565656]">${escapeHtml(t)}</span>`).join('');
 
             // Unit Filters
             const filterBox = document.getElementById('ws-unit-filters');
@@ -1267,15 +1283,15 @@
                     <div class="terminal-card cursor-pointer p-5 flex flex-col justify-between hover:border-[#6a6a6a] transition group" onclick="openNoteReader('${subject.id}', ${n.originalIndex})">
                         <div>
                             <div class="flex items-center justify-between mb-3">
-                                <span class="px-2.5 py-0.5 rounded bg-zinc-800 border border-zinc-800 text-zinc-100 shadow-sm mono text-xs font-bold">${escapeHtml(n.unit)}</span>
-                                <span class="text-xs mono text-zinc-400 flex items-center gap-1">
+                                <span class="px-2.5 py-0.5 rounded bg-zinc-800 border border-zinc-800 text-main shadow-sm mono text-xs font-bold">${escapeHtml(n.unit)}</span>
+                                <span class="text-xs mono text-muted flex items-center gap-1">
                                     <span class="symbol mr-1">schedule</span> ${escapeHtml(n.readTime || '7 min read')}
                                 </span>
                             </div>
-                            <h3 class="text-base font-bold text-white mb-2 leading-snug group-hover:text-zinc-100 transition">${escapeHtml(n.title)}</h3>
-                            <p class="text-xs text-zinc-400 line-clamp-3 leading-relaxed mb-4">${escapeHtml(previewText)}</p>
+                            <h3 class="text-base font-bold text-white mb-2 leading-snug group-hover:text-main transition">${escapeHtml(n.title)}</h3>
+                            <p class="text-xs text-muted line-clamp-3 leading-relaxed mb-4">${escapeHtml(previewText)}</p>
                         </div>
-                        <div class="flex items-center justify-between pt-3 border-t border-white/5 text-xs mono text-zinc-300 font-semibold">
+                        <div class="flex items-center justify-between pt-3 border-t border-white/5 text-xs mono text-main font-semibold">
                             <span>Read Full Note</span>
                             <span class="group-hover:translate-x-1 transition-transform">→</span>
                         </div>
@@ -1398,15 +1414,15 @@
                 <div class="qbank-row">
                     <div class="flex items-center justify-between mb-2 flex-wrap gap-2">
                         <div class="flex items-center gap-2">
-                            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-800 text-zinc-100 shadow-sm mono text-xs font-bold">${escapeHtml(q.unit)}</span>
-                            <span class="text-xs mono text-zinc-400">${escapeHtml(q.marks ? q.marks + ' Marks' : '')}</span>
+                            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-800 text-main shadow-sm mono text-xs font-bold">${escapeHtml(q.unit)}</span>
+                            <span class="text-xs mono text-muted">${escapeHtml(q.marks ? q.marks + ' Marks' : '')}</span>
                         </div>
                         <span class="px-2 py-0.5 rounded bg-red-500/10 text-red-400 mono text-xs font-bold border border-red-500/20">
                             🔥 ${escapeHtml(q.probability || 'High Probability')}
                         </span>
                     </div>
                     <p class="text-base font-semibold text-white mt-1">Q${idx + 1}. ${escapeHtml(q.question)}</p>
-                    ${q.examFrequency ? `<p class="text-xs mono text-zinc-300/80 mt-1.5"><span class="symbol mr-1">history</span>${escapeHtml(q.examFrequency)}</p>` : ''}
+                    ${q.examFrequency ? `<p class="text-xs mono text-main/80 mt-1.5"><span class="symbol mr-1">history</span>${escapeHtml(q.examFrequency)}</p>` : ''}
                 </div>
             `).join('');
         }
@@ -1425,13 +1441,13 @@
             container.innerHTML = sols.map(sol => `
                 <div class="solution-row">
                     <div class="flex items-center justify-between mb-3">
-                        <span class="px-2.5 py-0.5 rounded bg-zinc-800 border border-zinc-800 text-zinc-100 shadow-sm mono text-xs font-bold">${escapeHtml(sol.unit)}</span>
-                        <button onclick="copyContent(this)" class="px-2.5 py-1 rounded bg-white/5 hover:bg-white/10 text-xs mono text-zinc-100 transition">
+                        <span class="px-2.5 py-0.5 rounded bg-zinc-800 border border-zinc-800 text-main shadow-sm mono text-xs font-bold">${escapeHtml(sol.unit)}</span>
+                        <button onclick="copyContent(this)" class="px-2.5 py-1 rounded bg-white/5 hover:bg-white/10 text-xs mono text-main transition">
                             <span class="symbol mr-1">content_copy</span> Copy Answer
                         </button>
                     </div>
-                    <h3 class="text-base font-bold text-zinc-100 mb-3">Q: ${escapeHtml(sol.question)}</h3>
-                    <div class="text-sm text-zinc-300 leading-relaxed space-y-3">
+                    <h3 class="text-base font-bold text-main mb-3">Q: ${escapeHtml(sol.question)}</h3>
+                    <div class="text-sm text-main leading-relaxed space-y-3">
                         ${formatMarkdown(sol.solution)}
                     </div>
                 </div>
@@ -1446,13 +1462,13 @@
             container.innerHTML = (subject.units || []).map(u => `
                 <div class="article-card border-l-4 border-l-zinc-500 mb-5">
                     <div class="flex items-center justify-between mb-3">
-                        <h3 class="text-lg font-bold text-zinc-300 mono">${escapeHtml(u.unitNumber)}: ${escapeHtml(u.title)}</h3>
-                        <span class="text-xs mono text-zinc-400">${(u.topics || []).length} Core Topics</span>
+                        <h3 class="text-lg font-bold text-main mono">${escapeHtml(u.unitNumber)}: ${escapeHtml(u.title)}</h3>
+                        <span class="text-xs mono text-muted">${(u.topics || []).length} Core Topics</span>
                     </div>
-                    <ul class="space-y-2 text-sm text-zinc-300 pl-2">
+                    <ul class="space-y-2 text-sm text-muted pl-2">
                         ${(u.topics || []).map(t => `
                             <li class="flex items-start gap-2.5">
-                                <span class="text-zinc-300 mt-1 text-xs">•</span>
+                                <span class="text-main mt-1 text-xs">•</span>
                                 <span class="leading-relaxed">${escapeHtml(t)}</span>
                             </li>
                         `).join('')}
@@ -1582,12 +1598,12 @@
                 if (isReaderExpanded) {
                     readerView.classList.remove('max-w-4xl');
                     readerView.classList.add('max-w-7xl', 'w-full');
-                    if (toggleBtnIcon) toggleBtnIcon.className = 'fas fa-compress text-zinc-300';
+                    if (toggleBtnIcon) toggleBtnIcon.className = 'fas fa-compress text-main';
                     if (toggleBtnLabel) toggleBtnLabel.textContent = 'Collapse';
                 } else {
                     readerView.classList.remove('max-w-7xl', 'w-full');
                     readerView.classList.add('max-w-4xl');
-                    if (toggleBtnIcon) toggleBtnIcon.className = 'fas fa-expand text-zinc-300';
+                    if (toggleBtnIcon) toggleBtnIcon.className = 'fas fa-expand text-main';
                     if (toggleBtnLabel) toggleBtnLabel.textContent = 'Expand';
                 }
             }
@@ -1656,10 +1672,10 @@
             resultsBox.innerHTML = matches.slice(0, 12).map(m => `
                 <div onclick="selectSearchResult('${m.subject.id}', '${m.tab}', ${m.noteIndex !== null ? m.noteIndex : 'null'})" class="p-3 hover:bg-white/5 cursor-pointer rounded-lg transition flex items-center justify-between group">
                     <div class="pr-2">
-                        <div class="text-sm font-semibold text-white group-hover:text-zinc-100 transition">${escapeHtml(m.title)}</div>
-                        <div class="text-xs mono text-zinc-300/80">${escapeHtml(m.subtitle)}</div>
+                        <div class="text-sm font-semibold text-white group-hover:text-main transition">${escapeHtml(m.title)}</div>
+                        <div class="text-xs mono text-main/80">${escapeHtml(m.subtitle)}</div>
                     </div>
-                    <span class="text-[10px] mono text-zinc-400 uppercase px-2 py-1 rounded bg-white/5 border border-white/5 shrink-0">${m.tab}</span>
+                    <span class="text-[10px] mono text-muted uppercase px-2 py-1 rounded bg-white/5 border border-white/5 shrink-0">${m.tab}</span>
                 </div>
             `).join('');
         }
@@ -1707,11 +1723,11 @@
             // Update nav button hover states based on theme
             const toggleBtn = document.getElementById('theme-toggle-btn');
             if (isLight) {
-                toggleBtn.classList.remove('text-zinc-400', 'hover:text-zinc-100', 'hover:bg-white/10');
+                toggleBtn.classList.remove('text-muted', 'hover:text-main', 'hover:bg-white/10');
                 toggleBtn.classList.add('text-slate-600', 'hover:text-slate-900', 'hover:bg-black/5');
             } else {
                 toggleBtn.classList.remove('text-slate-600', 'hover:text-slate-900', 'hover:bg-black/5');
-                toggleBtn.classList.add('text-zinc-400', 'hover:text-zinc-100', 'hover:bg-white/10');
+                toggleBtn.classList.add('text-muted', 'hover:text-main', 'hover:bg-white/10');
             }
         }
 
