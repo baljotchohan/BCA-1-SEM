@@ -180,6 +180,14 @@ const BCA_1ST_SEM_DATA = {
           "question": "Explain client-server architecture in detail. Compare 2-tier and 3-tier web architectures with labelled diagrams and suitable real-life examples.",
           "marks": 8,
           "probability": "High Probability (PU Exam)"
+        },
+        {
+          "id": "web-tech-q-1786729176865",
+          "unit": "Unit I",
+          "type": "8-mark",
+          "question": "Explain the complete journey of opening an HTTPS website, including URL parsing, DNS resolution, TCP connection, TLS handshake, HTTP request/response and browser rendering.",
+          "marks": 8,
+          "probability": "High Probability (PU Exam)"
         }
       ],
       "solutions": [
@@ -190,6 +198,16 @@ const BCA_1ST_SEM_DATA = {
           "unit": "Unit I",
           "type": "8-mark",
           "solution": "Model Answer:\\n1. Define client-server architecture: a client requests resources/services and a server processes requests and returns responses.\\n2. Explain 2-tier: client communicates directly with server/data service. Diagram: Client <-> Server/Database. Advantages: simplicity and low initial complexity. Limitations: tighter coupling and weaker separation of concerns.\\n3. Explain 3-tier: Presentation tier -> Application/Business tier -> Data tier. Presentation handles UI; application handles business rules/APIs; data tier stores/retrieves data.\\n4. Draw labelled diagram: Browser -> Web/Application Server -> Database.\\n5. Explain real-life example: college portal where browser displays UI, application server checks login/attendance rules, database stores students and records.\\n6. Compare on separation, scalability, maintenance, security and deployment.\\n7. Conclusion: 3-tier is generally more maintainable and scalable for complex applications.",
+          "code": "",
+          "formula": ""
+        },
+        {
+          "id": "sol-web-tech-q-1786729176865",
+          "questionId": "web-tech-q-1786729176865",
+          "question": "Explain the complete journey of opening an HTTPS website, including URL parsing, DNS resolution, TCP connection, TLS handshake, HTTP request/response and browser rendering.",
+          "unit": "Unit I",
+          "type": "8-mark",
+          "solution": "Model Answer:\\n1. URL is parsed into scheme, host, port, path, query and fragment.\\n2. DNS resolution finds the relevant IP/DNS record, commonly through local cache, recursive resolver, root, TLD and authoritative server when cache is unavailable.\\n3. Client establishes a transport connection to the server; for conventional HTTPS this includes TCP before TLS.\\n4. TLS handshake authenticates the server through certificates and establishes cryptographic keys.\\n5. Browser sends an HTTP request over the protected connection.\\n6. Server/application processes it and may access files, APIs or databases.\\n7. Server returns status, headers such as Content-Type and response body.\\n8. Browser parses HTML, builds DOM/CSS-related structures, executes JavaScript, calculates layout and paints the page.\\nDiagram: URL -> DNS -> TCP -> TLS -> HTTP request -> Server/App/DB -> HTTP response -> HTML/CSS/JS parsing -> Layout/Paint -> Screen.\\nPunjabi: Browser ਪਹਿਲਾਂ address ਸਮਝਦਾ ਹੈ, DNS ਨਾਲ server ਲੱਭਦਾ ਹੈ, HTTPS ਲਈ TLS security ਬਣਾਉਂਦਾ ਹੈ, request ਭੇਜਦਾ ਹੈ ਅਤੇ response ਨੂੰ page ਵਿੱਚ render ਕਰਦਾ ਹੈ.",
           "code": "",
           "formula": ""
         }
