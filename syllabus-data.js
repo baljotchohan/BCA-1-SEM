@@ -420,6 +420,14 @@ const BCA_1ST_SEM_DATA = {
           "question": "Differentiate var, let and const.",
           "marks": 2,
           "probability": "High Probability (PU Exam)"
+        },
+        {
+          "id": "web-tech-q-1786729278135",
+          "unit": "Unit IV",
+          "type": "2-mark",
+          "question": "What is event bubbling?",
+          "marks": 2,
+          "probability": "High Probability (PU Exam)"
         }
       ],
       "solutions": [
@@ -730,6 +738,16 @@ const BCA_1ST_SEM_DATA = {
           "unit": "Unit IV",
           "type": "2-mark",
           "solution": "var is function-scoped and can be redeclared/reassigned. let is block-scoped and can be reassigned but not redeclared in the same scope. const is block-scoped and its binding cannot be reassigned after initialization.",
+          "code": "",
+          "formula": ""
+        },
+        {
+          "id": "sol-web-tech-q-1786729278135",
+          "questionId": "web-tech-q-1786729278135",
+          "question": "What is event bubbling?",
+          "unit": "Unit IV",
+          "type": "2-mark",
+          "solution": "Event bubbling is the phase in which an event propagates from the target element upward through its ancestors. It allows parent elements to observe events that originated in descendants.",
           "code": "",
           "formula": ""
         }
