@@ -204,6 +204,14 @@ const BCA_1ST_SEM_DATA = {
           "question": "Differentiate HTTP and HTTPS. Explain the purpose of TLS, certificates, confidentiality, integrity and authentication with a handshake diagram.",
           "marks": 8,
           "probability": "High Probability (PU Exam)"
+        },
+        {
+          "id": "web-tech-q-1786729186164",
+          "unit": "Unit I",
+          "type": "2-mark",
+          "question": "Define Internet and World Wide Web. State one difference.",
+          "marks": 2,
+          "probability": "High Probability (PU Exam)"
         }
       ],
       "solutions": [
@@ -244,6 +252,16 @@ const BCA_1ST_SEM_DATA = {
           "unit": "Unit I",
           "type": "8-mark",
           "solution": "Model Answer:\\nHTTP is the web application protocol; HTTPS is HTTP protected by TLS. Explain that HTTPS provides confidentiality, integrity and server authentication when certificate validation succeeds. Handshake diagram: ClientHello -> ServerHello/certificate/key agreement -> handshake confirmation -> encrypted HTTP data. Explain why certificates matter: they bind a public key to an identity through a trust chain. Explain that encryption alone is not the same as identity authentication. Real-life example: online banking login. Punjabi: HTTPS login/payment data ਨੂੰ network ਉੱਤੇ protected communication ਦਿੰਦਾ ਹੈ, ਪਰ application-level security ਵੀ separately required ਹੈ.",
+          "code": "",
+          "formula": ""
+        },
+        {
+          "id": "sol-web-tech-q-1786729186164",
+          "questionId": "web-tech-q-1786729186164",
+          "question": "Define Internet and World Wide Web. State one difference.",
+          "unit": "Unit I",
+          "type": "2-mark",
+          "solution": "Internet is the global network infrastructure connecting networks and devices. The World Wide Web is a service running over the Internet using technologies such as URLs, HTTP/HTTPS and browsers. Difference: the Internet is the underlying network; the Web is one service/application system built on it.",
           "code": "",
           "formula": ""
         }
