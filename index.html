@@ -494,6 +494,15 @@
             border-color: #2b2d35 !important;
         }
 
+        /* Global overrides for Paper Mode */
+        body.paper-theme-active {
+            background-image: none !important;
+            background-color: #f3f4f6 !important;
+        }
+        body.paper-theme-active .scanlines {
+            display: none !important;
+        }
+
         /* Q-Bank & Solution Styling */
         .qbank-row {
             background: var(--bg-card);
@@ -881,7 +890,7 @@
 
             <h1 class="text-2xl sm:text-3xl font-bold text-white mb-6 tracking-tight leading-snug" id="reader-note-title">Note Title</h1>
 
-            <div class="text-sm sm:text-base text-gray-200 leading-relaxed space-y-4" id="reader-note-body">
+            <div class="text-sm sm:text-base leading-relaxed space-y-4" id="reader-note-body">
                 <!-- Formatted Markdown content rendered here -->
             </div>
 
@@ -1327,9 +1336,11 @@
             if (article) {
                 if (isReaderPaperMode) {
                     article.classList.add('paper-mode');
+                    document.body.classList.add('paper-theme-active');
                     if (label) label.textContent = 'Pitch Dark';
                 } else {
                     article.classList.remove('paper-mode');
+                    document.body.classList.remove('paper-theme-active');
                     if (label) label.textContent = 'Paper Docs';
                 }
             }
