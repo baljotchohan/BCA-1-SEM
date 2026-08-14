@@ -292,6 +292,14 @@ const BCA_1ST_SEM_DATA = {
           "question": "What is the difference between rowspan and colspan in an HTML table?",
           "marks": 2,
           "probability": "High Probability (PU Exam)"
+        },
+        {
+          "id": "web-tech-q-1786729224670",
+          "unit": "Unit II",
+          "type": "2-mark",
+          "question": "Why is client-side validation not sufficient for security?",
+          "marks": 2,
+          "probability": "High Probability (PU Exam)"
         }
       ],
       "solutions": [
@@ -442,6 +450,16 @@ const BCA_1ST_SEM_DATA = {
           "unit": "Unit II",
           "type": "2-mark",
           "solution": "rowspan makes a table cell span multiple rows vertically. colspan makes a cell span multiple columns horizontally.",
+          "code": "",
+          "formula": ""
+        },
+        {
+          "id": "sol-web-tech-q-1786729224670",
+          "questionId": "web-tech-q-1786729224670",
+          "question": "Why is client-side validation not sufficient for security?",
+          "unit": "Unit II",
+          "type": "2-mark",
+          "solution": "Client-side validation runs in an environment controlled by the user and can be bypassed or replaced by crafted requests. The server must validate and authorize submitted data independently before processing or storing it.",
           "code": "",
           "formula": ""
         }
