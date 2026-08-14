@@ -260,6 +260,14 @@ const BCA_1ST_SEM_DATA = {
           "question": "Explain hyperlinks in HTML. Differentiate absolute, relative and internal links, and explain the security purpose of rel=\"noopener noreferrer\" with examples.",
           "marks": 8,
           "probability": "High Probability (PU Exam)"
+        },
+        {
+          "id": "web-tech-q-1786729210502",
+          "unit": "Unit II",
+          "type": "8-mark",
+          "question": "Explain HTML forms and client-side validation. Discuss form attributes, input types, radio/checkbox, select/option and why server-side validation is still necessary.",
+          "marks": 8,
+          "probability": "High Probability (PU Exam)"
         }
       ],
       "solutions": [
@@ -370,6 +378,16 @@ const BCA_1ST_SEM_DATA = {
           "unit": "Unit II",
           "type": "8-mark",
           "solution": "Model Answer:\\nExplain anchor element and href. Absolute link contains a complete URL; relative link is resolved relative to the current document/base URL; internal fragment link points to an element in the same document using an ID. Example code for each. Explain target=\"_blank\" creates a new browsing context and rel=\"noopener\" prevents opener access; noreferrer controls referrer information. Add real-life examples such as navigation menu, documentation links and page-section navigation.",
+          "code": "",
+          "formula": ""
+        },
+        {
+          "id": "sol-web-tech-q-1786729210502",
+          "questionId": "web-tech-q-1786729210502",
+          "question": "Explain HTML forms and client-side validation. Discuss form attributes, input types, radio/checkbox, select/option and why server-side validation is still necessary.",
+          "unit": "Unit II",
+          "type": "8-mark",
+          "solution": "Model Answer:\\nDefine form as a mechanism for collecting user input. Explain action, method, name, required and other useful attributes. Cover text, email, password, number, date, checkbox, radio, textarea, select and option. Explain radio for one choice in a group and checkbox for independent/multiple choices. Show a complete registration form. Explain browser constraint validation such as required, type=email, min/max, minlength/maxlength. Critical point: client validation can be bypassed; server must validate, authorize and sanitize/handle input again.",
           "code": "",
           "formula": ""
         }
