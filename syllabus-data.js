@@ -324,6 +324,14 @@ const BCA_1ST_SEM_DATA = {
           "question": "Explain all five CSS positioning modes: static, relative, absolute, fixed and sticky. Compare their effect on normal document flow and give real-life examples.",
           "marks": 8,
           "probability": "High Probability (PU Exam)"
+        },
+        {
+          "id": "web-tech-q-1786729238999",
+          "unit": "Unit III",
+          "type": "8-mark",
+          "question": "Explain Flexbox and responsive web design. Discuss main/cross axes, important Flexbox properties, media queries and mobile-first design with a practical layout example.",
+          "marks": 8,
+          "probability": "High Probability (PU Exam)"
         }
       ],
       "solutions": [
@@ -514,6 +522,16 @@ const BCA_1ST_SEM_DATA = {
           "unit": "Unit III",
           "type": "8-mark",
           "solution": "Model Answer:\\nStatic: default normal flow. Relative: remains in flow and can be visually offset. Absolute: removed from normal flow and positioned relative to its containing block, commonly a positioned ancestor. Fixed: positioned relative to viewport and normally stays while scrolling. Sticky: participates in normal flow and becomes stuck after a threshold within its scroll container. Give diagram and examples: relative badge adjustment, absolute notification badge, fixed support button, sticky navigation.",
+          "code": "",
+          "formula": ""
+        },
+        {
+          "id": "sol-web-tech-q-1786729238999",
+          "questionId": "web-tech-q-1786729238999",
+          "question": "Explain Flexbox and responsive web design. Discuss main/cross axes, important Flexbox properties, media queries and mobile-first design with a practical layout example.",
+          "unit": "Unit III",
+          "type": "8-mark",
+          "solution": "Model Answer:\\nDefine Flexbox as a one-dimensional layout model. Explain main axis and cross axis. Container properties: display:flex, flex-direction, justify-content, align-items, flex-wrap, gap. Item properties: flex-grow, flex-shrink, flex-basis, flex, align-self, order. Then define responsive design and mobile-first approach. Show base mobile layout and media query for larger screens. Example: college dashboard cards that stack on mobile and become multiple columns on desktop. Explain why responsive design improves usability across devices.",
           "code": "",
           "formula": ""
         }
