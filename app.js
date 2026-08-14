@@ -444,28 +444,84 @@ function renderSubjectUnits(subject) {
   `).join('');
 }
 
-// --- 7. UTILITIES & PARSERS ---
+// --- 7. ADVANCED INDUSTRIAL MARKDOWN & NOTE PARSER ---
 function formatMarkdown(text) {
   if (!text) return '';
-  let html = text
-    .replace(/### (.*)/g, '<h4 class="doc-subheading serif">$1</h4>')
-    .replace(/## (.*)/g, '<h3 class="doc-heading serif">$1</h3>')
-    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.*?)\*/g, '<em>$1</em>');
 
-  // Code blocks
-  html = html.replace(/```(c|html|javascript|text)?\n([\s\S]*?)```/g, (match, lang, code) => {
-    const escaped = code.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-    return `<pre><code class="language-${lang || 'text'}">${escaped}</code></pre>`;
+  let processed = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+  processed = processed.replace(/[\uE000-\uF8FF]|cite.*?|【.*?】|\[cite:.*?\]/g, '');
+  processed = processed.replace(/\[visual:([a-zA-Z0-9\-_]+)\]/gi, '<div data-visual-engine="$1" class="my-6"></div>');
+
+  const codeBlocks = [];
+  processed = processed.replace(/```([a-zA-Z0-9_-]*)\n([\s\S]*?)```/g, (match, lang, code) => {
+    const idx = codeBlocks.length;
+    const langName = (lang || 'ascii').toLowerCase();
+    const escaped = code.replace(/</g, '&lt;').replace(/>/g, '&gt;').trimEnd();
+    codeBlocks.push(`
+      <div class="code-container my-5 rounded-xl overflow-hidden border border-white/10 bg-[#07090e] shadow-2xl">
+        <div class="code-header px-4 py-2.5 bg-white/[0.04] border-b border-white/5 flex items-center justify-between text-xs font-mono text-gray-400">
+          <span class="flex items-center gap-2"><i class="fas fa-terminal text-emerald-400"></i><strong class="text-gray-300 font-semibold uppercase tracking-wider">${langName}</strong></span>
+          <button class="code-copy-btn px-2.5 py-1 rounded bg-white/5 hover:bg-emerald-500/20 text-gray-300 hover:text-emerald-400 transition-colors border border-white/10 hover:border-emerald-500/30 text-xs font-mono" onclick="copyCardContent(this)">
+            <i class="far fa-copy mr-1"></i>Copy
+          </button>
+        </div>
+        <pre class="p-4 text-xs sm:text-[13px] font-mono leading-relaxed text-emerald-300/90 overflow-x-auto selection:bg-emerald-500/30"><code>${escaped}</code></pre>
+      </div>
+    `);
+    return `__CODE_BLOCK_${idx}__`;
   });
 
-  // Inline code
-  html = html.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>');
+  processed = processed.replace(/^(\s*[-*_]\s*){3,}$/gm, '<hr class="my-8 border-0 h-px bg-gradient-to-r from-transparent via-emerald-500/40 to-transparent">');
 
-  // Line breaks
-  html = html.replace(/\n\n/g, '<br><br>');
+  processed = processed.replace(/(?:\*\*Punjabi:\*\*|Punjabi:)\s*(.+?)(?=\n\n|\n[#>-]|$)/gis, (match, pText) => {
+    return `\n<div class="my-5 p-4 rounded-xl bg-amber-950/20 border border-amber-500/30 text-amber-200/95 text-sm leading-relaxed shadow-lg backdrop-blur-sm"><div class="flex items-center gap-2 mb-2"><span class="px-2 py-0.5 rounded bg-amber-500/20 border border-amber-500/40 text-amber-300 font-mono text-[11px] font-bold tracking-wider uppercase flex items-center gap-1.5"><i class="fas fa-language"></i> ਪੰਜਾਬੀ ਸਰਲ ਅਰਥ</span></div><div class="text-amber-100/90 leading-relaxed font-sans">${pText.trim()}</div></div>\n`;
+  });
 
-  return html;
+  processed = processed.replace(/(?:^>[ \t]*(.+)(?:\r?\n|$))+/gm, (match) => {
+    const inner = match.split('\n').map(l => l.replace(/^>[ \t]*/, '').trim()).filter(Boolean).join(' ');
+    const isExam = /exam|master note|important|pu|syllabus/i.test(inner);
+    const borderColor = isExam ? 'border-emerald-400 bg-emerald-950/20 text-emerald-200' : 'border-indigo-400 bg-indigo-950/20 text-indigo-200';
+    const icon = isExam ? 'fa-graduation-cap' : 'fa-lightbulb';
+    return `<div class="p-4 my-5 rounded-xl border-l-4 ${borderColor} text-sm leading-relaxed shadow-md backdrop-blur-sm flex items-start gap-3"><i class="fas ${icon} mt-1 text-base shrink-0"></i><div>${inner}</div></div>`;
+  });
+
+  processed = processed
+    .replace(/^#### (.*$)/gim, '<h5 class="text-xs sm:text-sm font-mono font-bold text-gray-300 uppercase tracking-wider mt-5 mb-2 flex items-center gap-2"><i class="fas fa-angle-right text-emerald-400"></i> $1</h5>')
+    .replace(/^### (.*$)/gim, '<h4 class="text-sm sm:text-base font-bold text-emerald-400 mt-6 mb-2 flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-emerald-400/70"></i> $1</h4>')
+    .replace(/^## (.*$)/gim, '<h3 class="text-base sm:text-lg font-bold text-white mt-8 mb-3 pt-3 border-t border-white/10 flex items-center gap-2.5 text-emerald-300"><span class="px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs font-bold">§</span> $1</h3>')
+    .replace(/^# (.*$)/gim, '<h2 class="text-xl sm:text-2xl font-black text-white mt-8 mb-4 tracking-tight border-b-2 border-emerald-500/40 pb-3 flex items-center gap-2.5"><span class="text-emerald-400 font-mono text-base">▶</span> $1</h2>');
+
+  processed = processed.replace(/(?:^[ \t]*[-*][ \t]+(.+)(?:\r?\n|$))+/gm, (match) => {
+    const items = match.trim().split('\n').map(line => {
+      const clean = line.replace(/^[ \t]*[-*][ \t]+/, '');
+      return `<li class="flex items-start gap-2.5 my-1.5"><span class="text-emerald-400 text-sm mt-0.5 shrink-0">•</span><span class="leading-relaxed text-gray-300 text-sm">${clean}</span></li>`;
+    }).join('');
+    return `<ul class="my-4 space-y-1 pl-1">${items}</ul>`;
+  });
+
+  processed = processed.replace(/(?:^[ \t]*\d+\.[ \t]+(.+)(?:\r?\n|$))+/gm, (match) => {
+    let index = 1;
+    const items = match.trim().split('\n').map(line => {
+      const clean = line.replace(/^[ \t]*\d+\.[ \t]+/, '');
+      const li = `<li class="flex items-start gap-2.5 my-2"><span class="px-2 py-0.5 rounded bg-white/5 text-emerald-400 font-mono text-xs font-bold border border-white/10 shrink-0">${index}.</span><span class="leading-relaxed text-gray-300 text-sm">${clean}</span></li>`;
+      index++;
+      return li;
+    }).join('');
+    return `<ol class="my-4 space-y-2 pl-1">${items}</ol>`;
+  });
+
+  processed = processed
+    .replace(/\*\*(.*?)\*\*/g, '<strong class="text-white font-semibold">$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em class="text-emerald-200/90 font-serif italic">$1</em>')
+    .replace(/`([^`]+)`/g, (match, code) => `<code class="inline-code px-1.5 py-0.5 rounded bg-white/10 text-emerald-300 font-mono text-xs border border-white/10">${code.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code>`);
+
+  processed = processed.replace(/\n\n/g, '<div class="my-4"></div>');
+
+  codeBlocks.forEach((block, idx) => {
+    processed = processed.replace(`__CODE_BLOCK_${idx}__`, block);
+  });
+
+  return processed;
 }
 
 function copyCardContent(btn) {
