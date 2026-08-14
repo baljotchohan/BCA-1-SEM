@@ -428,6 +428,14 @@ const BCA_1ST_SEM_DATA = {
           "question": "What is event bubbling?",
           "marks": 2,
           "probability": "High Probability (PU Exam)"
+        },
+        {
+          "id": "web-tech-q-1786729281385",
+          "unit": "Unit IV",
+          "type": "2-mark",
+          "question": "Differentiate == and === in JavaScript.",
+          "marks": 2,
+          "probability": "High Probability (PU Exam)"
         }
       ],
       "solutions": [
@@ -748,6 +756,16 @@ const BCA_1ST_SEM_DATA = {
           "unit": "Unit IV",
           "type": "2-mark",
           "solution": "Event bubbling is the phase in which an event propagates from the target element upward through its ancestors. It allows parent elements to observe events that originated in descendants.",
+          "code": "",
+          "formula": ""
+        },
+        {
+          "id": "sol-web-tech-q-1786729281385",
+          "questionId": "web-tech-q-1786729281385",
+          "question": "Differentiate == and === in JavaScript.",
+          "unit": "Unit IV",
+          "type": "2-mark",
+          "solution": "== performs equality comparison with type coercion when necessary. === is strict equality and does not coerce the operands to the same type. Example: 5 == '5' is true, while 5 === '5' is false.",
           "code": "",
           "formula": ""
         }
