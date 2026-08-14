@@ -396,6 +396,14 @@ const BCA_1ST_SEM_DATA = {
           "question": "Explain the JavaScript event handling lifecycle: capturing, target and bubbling. Demonstrate addEventListener and event delegation with a practical example.",
           "marks": 8,
           "probability": "High Probability (PU Exam)"
+        },
+        {
+          "id": "web-tech-q-1786729268440",
+          "unit": "Unit IV",
+          "type": "8-mark",
+          "question": "Explain form validation using JavaScript. Build the logic for validating a registration form and explain why validation must also be performed on the server.",
+          "marks": 8,
+          "probability": "High Probability (PU Exam)"
         }
       ],
       "solutions": [
@@ -676,6 +684,16 @@ const BCA_1ST_SEM_DATA = {
           "unit": "Unit IV",
           "type": "8-mark",
           "solution": "Model Answer:\\nDefine event as a signal of an action such as click or submit. Explain event propagation: capturing travels from ancestor toward target; target phase is the actual event target; bubbling travels from target toward ancestors. Show diagram Window/ancestor -> capture -> target -> bubble -> ancestor. Demonstrate button.addEventListener('click', handler). For delegation, attach one listener to a parent list and use event.target/closest to identify the clicked child. Explain benefits for dynamic lists and reduced listener count.",
+          "code": "",
+          "formula": ""
+        },
+        {
+          "id": "sol-web-tech-q-1786729268440",
+          "questionId": "web-tech-q-1786729268440",
+          "question": "Explain form validation using JavaScript. Build the logic for validating a registration form and explain why validation must also be performed on the server.",
+          "unit": "Unit IV",
+          "type": "8-mark",
+          "solution": "Model Answer:\\n1. Define validation and its purpose. 2. Use HTML constraints such as required and type=email for basic checks. 3. Select form/input elements through DOM APIs. 4. Listen for submit using addEventListener. 5. Check custom rules such as empty values, length or application-specific requirements. 6. Use event.preventDefault() when the input is invalid. 7. Show a user-friendly error. 8. Explain server-side validation because client code can be bypassed and attackers can send crafted requests. Diagram: user -> browser validation -> HTTP request -> server validation -> application/database. Punjabi: client validation UX ਲਈ, server validation trust/security ਲਈ.",
           "code": "",
           "formula": ""
         }
