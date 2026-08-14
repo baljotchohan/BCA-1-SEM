@@ -228,6 +228,14 @@ const BCA_1ST_SEM_DATA = {
           "question": "What is MIME type? Give four examples.",
           "marks": 2,
           "probability": "High Probability (PU Exam)"
+        },
+        {
+          "id": "web-tech-q-1786729195625",
+          "unit": "Unit I",
+          "type": "2-mark",
+          "question": "Differentiate static and dynamic websites.",
+          "marks": 2,
+          "probability": "High Probability (PU Exam)"
         }
       ],
       "solutions": [
@@ -298,6 +306,16 @@ const BCA_1ST_SEM_DATA = {
           "unit": "Unit I",
           "type": "2-mark",
           "solution": "A MIME type identifies the media/content type of a resource so the receiving software can interpret it correctly. Examples: text/html, text/css, application/json, image/png.",
+          "code": "",
+          "formula": ""
+        },
+        {
+          "id": "sol-web-tech-q-1786729195625",
+          "questionId": "web-tech-q-1786729195625",
+          "question": "Differentiate static and dynamic websites.",
+          "unit": "Unit I",
+          "type": "2-mark",
+          "solution": "A static website mainly serves pre-existing files such as HTML, CSS and images. A dynamic website generates or retrieves content at request time using application logic, APIs or databases. Example: a simple portfolio can be static; a personalized shopping dashboard is dynamic.",
           "code": "",
           "formula": ""
         }
