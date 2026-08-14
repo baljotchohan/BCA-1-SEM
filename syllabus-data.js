@@ -316,6 +316,14 @@ const BCA_1ST_SEM_DATA = {
           "question": "Explain the CSS box model with a labelled diagram. Differentiate content-box and border-box and solve a numerical width example.",
           "marks": 8,
           "probability": "High Probability (PU Exam)"
+        },
+        {
+          "id": "web-tech-q-1786729235686",
+          "unit": "Unit III",
+          "type": "8-mark",
+          "question": "Explain all five CSS positioning modes: static, relative, absolute, fixed and sticky. Compare their effect on normal document flow and give real-life examples.",
+          "marks": 8,
+          "probability": "High Probability (PU Exam)"
         }
       ],
       "solutions": [
@@ -496,6 +504,16 @@ const BCA_1ST_SEM_DATA = {
           "unit": "Unit III",
           "type": "8-mark",
           "solution": "Model Answer:\\nDraw: margin -> border -> padding -> content. Define each component. Example: width=200px, padding=20px each side, border=5px each side. With content-box total outer width = 200+40+10=250px. With border-box, declared 200px includes content, padding and border, so outer width remains 200px. Explain box-sizing and give the common global rule. Punjabi: content-box ਵਿੱਚ width content ਦੀ; border-box ਵਿੱਚ width content+padding+border ਦੀ outer boundary ਨੂੰ represent ਕਰਦੀ ਹੈ.",
+          "code": "",
+          "formula": ""
+        },
+        {
+          "id": "sol-web-tech-q-1786729235686",
+          "questionId": "web-tech-q-1786729235686",
+          "question": "Explain all five CSS positioning modes: static, relative, absolute, fixed and sticky. Compare their effect on normal document flow and give real-life examples.",
+          "unit": "Unit III",
+          "type": "8-mark",
+          "solution": "Model Answer:\\nStatic: default normal flow. Relative: remains in flow and can be visually offset. Absolute: removed from normal flow and positioned relative to its containing block, commonly a positioned ancestor. Fixed: positioned relative to viewport and normally stays while scrolling. Sticky: participates in normal flow and becomes stuck after a threshold within its scroll container. Give diagram and examples: relative badge adjustment, absolute notification badge, fixed support button, sticky navigation.",
           "code": "",
           "formula": ""
         }
