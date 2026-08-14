@@ -196,6 +196,14 @@ const BCA_1ST_SEM_DATA = {
           "question": "What is DNS? Explain the six-step DNS resolution pipeline, DNS hierarchy, caching and the role of recursive and authoritative servers.",
           "marks": 8,
           "probability": "High Probability (PU Exam)"
+        },
+        {
+          "id": "web-tech-q-1786729182666",
+          "unit": "Unit I",
+          "type": "8-mark",
+          "question": "Differentiate HTTP and HTTPS. Explain the purpose of TLS, certificates, confidentiality, integrity and authentication with a handshake diagram.",
+          "marks": 8,
+          "probability": "High Probability (PU Exam)"
         }
       ],
       "solutions": [
@@ -226,6 +234,16 @@ const BCA_1ST_SEM_DATA = {
           "unit": "Unit I",
           "type": "8-mark",
           "solution": "Model Answer:\\nDNS (Domain Name System) maps domain names to DNS records such as IP addresses. Explain: 1) browser/local cache check; 2) OS/resolver cache; 3) recursive resolver; 4) root server identifies TLD; 5) TLD server identifies authoritative server; 6) authoritative server supplies the answer. Explain that caching can make the resolver skip upstream queries. Distinguish recursive resolver from authoritative server. Give example: resolving www.example.com. Diagram: Browser -> Local cache -> Recursive resolver -> Root -> TLD -> Authoritative -> Answer. Punjabi: DNS Internet ਦੀ phonebook ਵਰਗਾ ਹੈ, ਪਰ technically it is a distributed hierarchical naming system, not simply a single database.",
+          "code": "",
+          "formula": ""
+        },
+        {
+          "id": "sol-web-tech-q-1786729182666",
+          "questionId": "web-tech-q-1786729182666",
+          "question": "Differentiate HTTP and HTTPS. Explain the purpose of TLS, certificates, confidentiality, integrity and authentication with a handshake diagram.",
+          "unit": "Unit I",
+          "type": "8-mark",
+          "solution": "Model Answer:\\nHTTP is the web application protocol; HTTPS is HTTP protected by TLS. Explain that HTTPS provides confidentiality, integrity and server authentication when certificate validation succeeds. Handshake diagram: ClientHello -> ServerHello/certificate/key agreement -> handshake confirmation -> encrypted HTTP data. Explain why certificates matter: they bind a public key to an identity through a trust chain. Explain that encryption alone is not the same as identity authentication. Real-life example: online banking login. Punjabi: HTTPS login/payment data ਨੂੰ network ਉੱਤੇ protected communication ਦਿੰਦਾ ਹੈ, ਪਰ application-level security ਵੀ separately required ਹੈ.",
           "code": "",
           "formula": ""
         }
