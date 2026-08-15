@@ -1175,18 +1175,43 @@ if (isHttp) {
       return res.end();
     }
 
-    if (req.method === 'GET' && (req.url === '/' || req.url === '/status')) {
-      const stats = await executeTool('get_hub_stats');
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      return res.end(JSON.stringify({
-        status: "online",
-        name: "bca-1st-sem-mcp",
-        version: "2.0.0",
-        author: DEFAULT_AUTHOR,
-        protocolVersion: PROTOCOL_VERSION,
-        toolsCount: TOOLS.length,
-        liveStats: stats
-      }, null, 2));
+    // Static file server fallback for web portal assets (index.html, syllabus-data.js, etc.)
+    if (req.method === 'GET') {
+      if (req.url === '/status' || req.url === '/mcp-status') {
+        const stats = await executeTool('get_hub_stats');
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        return res.end(JSON.stringify({
+          status: "online",
+          name: "bca-1st-sem-mcp",
+          version: "2.0.0",
+          author: DEFAULT_AUTHOR,
+          protocolVersion: PROTOCOL_VERSION,
+          toolsCount: TOOLS.length,
+          liveStats: stats
+        }, null, 2));
+      }
+
+      // Parse clean pathname
+      let reqPath = req.url.split('?')[0];
+      if (reqPath === '/' || reqPath === '') reqPath = '/index.html';
+      
+      const filePath = path.join(__dirname, '..', reqPath);
+      if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
+        const ext = path.extname(filePath).toLowerCase();
+        const mimeTypes = {
+          '.html': 'text/html; charset=utf-8',
+          '.js': 'text/javascript; charset=utf-8',
+          '.css': 'text/css; charset=utf-8',
+          '.json': 'application/json; charset=utf-8',
+          '.png': 'image/png',
+          '.jpg': 'image/jpeg',
+          '.svg': 'image/svg+xml',
+          '.ico': 'image/x-icon'
+        };
+        const contentType = mimeTypes[ext] || 'application/octet-stream';
+        res.writeHead(200, { 'Content-Type': contentType });
+        return fs.createReadStream(filePath).pipe(res);
+      }
     }
 
     if (req.method === 'POST') {
@@ -1207,7 +1232,7 @@ if (isHttp) {
     }
 
     res.writeHead(404, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ error: "Endpoint not found" }));
+    res.end(JSON.stringify({ error: "File not found" }));
   });
 
   server.listen(PORT, () => {
